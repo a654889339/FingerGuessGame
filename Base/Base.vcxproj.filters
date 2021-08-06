@@ -39,6 +39,9 @@
     <ClInclude Include="TcpClient.h">
       <Filter>Network\TcpClient</Filter>
     </ClInclude>
+    <ClInclude Include="MathStd.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MySTL.cpp">

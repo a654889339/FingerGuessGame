@@ -19,7 +19,13 @@
 #endif
 
 #include <locale.h>
+#include <stdio.h>
+#include <iostream>
+#include <stdlib.h>
+#include <algorithm>
+
 #include "CodeStd.h"
+#include "MathStd.h"
 #include "GlobalDef.h"
 
 #endif  //_STD_AFX_H_

@@ -1,7 +1,7 @@
 #ifndef _MYSTL_H_
 #define _MYSTL_H_
 
-template <typename T, int nQueueLen>
+template <typename T, size_t uQueueLen>
 class CycleQueue
 {
 public:
@@ -17,8 +17,8 @@ private:
     bool pop(size_t uPopSize);
     int m_nBegin;
     int m_nEnd;
-    int m_nQueueLen;
-    T m_Queue[nQueueLen];
+    size_t m_uQueueLen;
+    T m_Queue[uQueueLen];
 };
 
 

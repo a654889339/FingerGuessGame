@@ -1,16 +1,17 @@
-#include "stdafx"
+#include "stdafx.h"
 #include "MySTL.h"
 
-template <typename T, int nQueueLen>
-CycleQueue<T,nQueueLen>::CycleQueue()
+template <typename T, size_t uQueueLen>
+CycleQueue<T,uQueueLen>::CycleQueue()
 {
+    assert(uQueueLen);
     m_nBegin = 0;
     m_nEnd = 0;
-    m_nQueueLen = nQueueLen;
+    m_uQueueLen = uQueueLen;
 }
 
-template <typename T, int nQueueLen>
-bool CycleQueue<T, nQueueLen>::push(T* pszData, size_t uDataLen)
+template <typename T, size_t uQueueLen>
+bool CycleQueue<T, uQueueLen>::push(T* pszData, size_t uDataLen)
 {
     bool bResult = false;
     int nEnd = 0;
@@ -18,13 +19,13 @@ bool CycleQueue<T, nQueueLen>::push(T* pszData, size_t uDataLen)
 
     JYLOG_PROCESS_ERROR(pszData);
     JYLOG_PROCESS_ERROR(uDataLen);
-    JYLOG_PROCESS_ERROR(uDataLen + size() < m_nQueueLen);
+    JYLOG_PROCESS_ERROR(uDataLen + size() < m_uQueueLen);
 
-    nEnd = min(m_nEnd + uDataLen, m_nQueueLen);
+    nEnd = min(m_nEnd + uDataLen, m_uQueueLen);
     nCopyNum = nEnd - m_nEnd;
 
     memcpy(&m_Queue[m_nEnd], pszData, sizeof(T) * nCopyNum);
-    m_nEnd = (m_nEnd + uDataLen) % m_nQueueLen;
+    m_nEnd = (m_nEnd + uDataLen) % m_uQueueLen;
 
     uDataLen -= nCopyNum;
     JY_PROCESS_SUCCESS(uDataLen == 0);
@@ -37,8 +38,8 @@ Exit0:
     return bResult;
 }
 
-template <typename T, int nQueueLen>
-bool CycleQueue<T, nQueueLen>::pop(size_t uPopSize, T* pszData)
+template <typename T, size_t uQueueLen>
+bool CycleQueue<T, uQueueLen>::pop(size_t uPopSize, T* pszData)
 {
     bool bResult = false;
     bool bRetCode = false;
@@ -54,18 +55,18 @@ Exit0:
     return bResult;
 }
 
-template <typename T, int nQueueLen>
-bool CycleQueue<T, nQueueLen>::get(size_t uGetSize, T* pszData)
+template <typename T, size_t uQueueLen>
+bool CycleQueue<T, uQueueLen>::get(size_t uGetSize, T* pszData)
 {
     bool bResult = false;
     int nEnd = 0;
     int nCopyNum = 0;
 
     JYLOG_PROCESS_ERROR(pszData);
-    JYLOG_PROCESS_ERROR(uDataLen);
+    JYLOG_PROCESS_ERROR(uGetSize);
     JYLOG_PROCESS_ERROR(uGetSize <= size());
 
-    nEnd = min(m_nEnd + uGetSize, m_nQueueLen);
+    nEnd = min(m_nEnd + uGetSize, m_uQueueLen);
     nCopyNum = nEnd - m_nEnd;
     memcpy(pszData, &m_Queue[m_nEnd], sizeof(T) * nCopyNum);
 
@@ -80,25 +81,25 @@ Exit0:
     return bResult;
 }
 
-template <typename T, int nQueueLen>
-void CycleQueue<T, nQueueLen>::clear()
+template <typename T, size_t uQueueLen>
+void CycleQueue<T, uQueueLen>::clear()
 {
     m_nBegin = m_nEnd = 0;
 }
 
-template <typename T, int nQueueLen>
-size_t CycleQueue<T, nQueueLen>::size()
+template <typename T, size_t uQueueLen>
+size_t CycleQueue<T, uQueueLen>::size()
 {
     return m_nEnd - m_nBegin;
 }
 
-template <typename T, int nQueueLen>
-bool CycleQueue<T, nQueueLen>::pop(size_t uPopSize)
+template <typename T, size_t uQueueLen>
+bool CycleQueue<T, uQueueLen>::pop(size_t uPopSize)
 {
     bool bResult = false;
 
     JYLOG_PROCESS_ERROR(uPopSize <= size());
-    m_nEnd = (m_nEnd + uPopSize) % m_nQueueLen;
+    m_nEnd = (m_nEnd + uPopSize) % m_uQueueLen;
 
     bResult = true;
 Exit0:
