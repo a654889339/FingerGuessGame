@@ -143,6 +143,7 @@
     <ClInclude Include="GlobalDef.h" />
     <ClInclude Include="MathStd.h" />
     <ClInclude Include="MySTL.h" />
+    <ClInclude Include="NetworkBase.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="TcpClient.h" />
     <ClInclude Include="TcpServer.h" />

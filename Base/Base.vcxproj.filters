@@ -42,6 +42,9 @@
     <ClInclude Include="MathStd.h">
       <Filter>Engine</Filter>
     </ClInclude>
+    <ClInclude Include="NetworkBase.h">
+      <Filter>Network</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MySTL.cpp">

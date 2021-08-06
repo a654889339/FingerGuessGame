@@ -16,6 +16,7 @@
 
 #ifdef WIN32
 #include <conio.h>
+#include <windows.h>
 #endif
 
 #include <locale.h>
@@ -27,5 +28,6 @@
 #include "CodeStd.h"
 #include "MathStd.h"
 #include "GlobalDef.h"
+#include "MySTL.h"
 
 #endif  //_STD_AFX_H_

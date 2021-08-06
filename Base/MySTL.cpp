@@ -90,9 +90,17 @@ void CycleQueue<T, uQueueLen>::clear()
 template <typename T, size_t uQueueLen>
 size_t CycleQueue<T, uQueueLen>::size()
 {
-    return m_nEnd - m_nBegin;
+    if (m_nBegin <= m_nEnd)
+        return m_nEnd - m_nBegin;
+    else
+        return m_uQueueLen - m_nBegin + m_nEnd;
 }
 
+template <typename T, size_t uQueueLen>
+size_t CycleQueue<T, uQueueLen>::res_size()
+{
+    return m_uQueueLen - size() - 1;
+}
 template <typename T, size_t uQueueLen>
 bool CycleQueue<T, uQueueLen>::pop(size_t uPopSize)
 {

@@ -12,6 +12,7 @@ public:
     bool get(size_t uGetSize, T* pszData);
     void clear();
     size_t size();
+    size_t res_size();
 
 private:
     bool pop(size_t uPopSize);

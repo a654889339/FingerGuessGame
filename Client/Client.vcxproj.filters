@@ -21,10 +21,16 @@
     <ClCompile Include="ClientWorld.cpp">
       <Filter>Main</Filter>
     </ClCompile>
+    <ClCompile Include="ClientConnection.h.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ClientWorld.h">
       <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientConnection.h">
+      <Filter>Network</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
