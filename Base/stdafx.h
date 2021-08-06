@@ -19,6 +19,7 @@
 #endif
 
 #include <locale.h>
+#include "CodeStd.h"
 #include "GlobalDef.h"
 
 #endif  //_STD_AFX_H_

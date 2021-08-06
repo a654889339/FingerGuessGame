@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CodeStd.h" />
     <ClInclude Include="GlobalDef.h" />
     <ClInclude Include="MySTL.h" />
     <ClInclude Include="stdafx.h" />

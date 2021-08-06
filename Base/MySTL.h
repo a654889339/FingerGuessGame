@@ -9,8 +9,9 @@ public:
 
     bool push(T* pszData, size_t uDataLen);
     bool pop(size_t uPopSize, T* pszData);
-    bool get(size_t uPopSize, T* pszData);
+    bool get(size_t uGetSize, T* pszData);
     void clear();
+    size_t size();
 
 private:
     bool pop(size_t uPopSize);

@@ -30,6 +30,9 @@
     <ClInclude Include="stdafx.h">
       <Filter>Engine</Filter>
     </ClInclude>
+    <ClInclude Include="CodeStd.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MySTL.cpp">
