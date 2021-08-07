@@ -28,6 +28,6 @@
 #include "CodeStd.h"
 #include "MathStd.h"
 #include "GlobalDef.h"
-#include "MySTL.h"
+#include "CycleQueue.h"
 
 #endif  //_STD_AFX_H_

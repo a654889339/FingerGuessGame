@@ -1,7 +1,7 @@
 #ifndef _NETWORK_BASE_H_
 #define _NETWORK_BASE_H_
 
-#include "MySTL.h"
+#include "stdafx.h"
 
 #define MAX_ACCEPT_CONNECTION 105
 #define MAX_RECV_BUFFER_SIZE 65536
@@ -29,10 +29,8 @@ Exit0:
     return bResult;
 }
 
-static bool UnInitNetwork()
+static void UnInitNetwork()
 {
-    bool bResult = false;
-
     _dwNetwork_Init_Count--;
 
     if (_dwNetwork_Init_Count == 0)
@@ -41,10 +39,6 @@ static bool UnInitNetwork()
         WSACleanup();
 #endif
     }
-
-    bResult = true;
-Exit0:
-    return bResult;
 }
 
 static inline int SocketCanRestore()

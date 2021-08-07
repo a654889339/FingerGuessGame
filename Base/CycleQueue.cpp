@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "MySTL.h"
+#include "CycleQueue.h"
 
 template <typename T, size_t uQueueLen>
 CycleQueue<T,uQueueLen>::CycleQueue()

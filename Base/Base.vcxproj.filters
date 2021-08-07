@@ -21,9 +21,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MySTL.h">
-      <Filter>STL</Filter>
-    </ClInclude>
     <ClInclude Include="GlobalDef.h">
       <Filter>Engine</Filter>
     </ClInclude>
@@ -48,11 +45,17 @@
     <ClInclude Include="Protocol.h">
       <Filter>Network</Filter>
     </ClInclude>
+    <ClInclude Include="CycleQueue.h">
+      <Filter>STL</Filter>
+    </ClInclude>
+    <ClInclude Include="SplayTree.h">
+      <Filter>STL</Filter>
+    </ClInclude>
+    <ClInclude Include="SplayTree.cpp">
+      <Filter>STL</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MySTL.cpp">
-      <Filter>STL</Filter>
-    </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
@@ -61,6 +64,9 @@
     </ClCompile>
     <ClCompile Include="TcpClient.cpp">
       <Filter>Network\TcpClient</Filter>
+    </ClCompile>
+    <ClCompile Include="CycleQueue.cpp">
+      <Filter>STL</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

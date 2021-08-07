@@ -1,5 +1,5 @@
-#ifndef _MYSTL_H_
-#define _MYSTL_H_
+#ifndef _CYCLE_QUEUE_H_
+#define _CYCLE_QUEUE_H_
 
 template <typename T, size_t uQueueLen>
 class CycleQueue

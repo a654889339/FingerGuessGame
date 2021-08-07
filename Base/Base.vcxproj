@@ -142,15 +142,17 @@
     <ClInclude Include="CodeStd.h" />
     <ClInclude Include="GlobalDef.h" />
     <ClInclude Include="MathStd.h" />
-    <ClInclude Include="MySTL.h" />
+    <ClInclude Include="CycleQueue.h" />
     <ClInclude Include="NetworkBase.h" />
     <ClInclude Include="Protocol.h" />
+    <ClInclude Include="SplayTree.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="TcpClient.h" />
     <ClInclude Include="TcpServer.h" />
+    <ClInclude Include="SplayTree.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MySTL.cpp" />
+    <ClCompile Include="CycleQueue.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="TcpClient.cpp" />
     <ClCompile Include="TcpServer.cpp" />

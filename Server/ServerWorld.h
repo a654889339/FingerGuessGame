@@ -1,6 +1,7 @@
 #ifndef _SERVER_WORLD_H_
 #define _SERVER_WORLD_H_
 
+#include "PlayerManager.h"
 #include "ServerConnection.h"
 
 class ServerWorld
@@ -19,6 +20,7 @@ private:
     bool LoadConfig();
 
 public:
+    PlayerManager    m_PlayerManager;
     ServerConnection m_Connection;
 
 private:
@@ -27,5 +29,5 @@ private:
     bool m_bQuitFlag;
 };
 
-
+extern ServerWorld* g_pServer;
 #endif

@@ -64,6 +64,10 @@ void ServerWorld::Quit()
 
 bool ServerWorld::LoadConfig()
 {
+    bool bResult = false;
+
     strcpy(m_szIP, "127.0.0.1");
     m_nPort = 5566;
+
+    JY_STD_BOOL_END
 }
