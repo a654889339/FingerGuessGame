@@ -109,7 +109,7 @@ static inline int CanRecv(int nSocket, const timeval* pTimeout)
 }
 
 // Process recv buffer
-typedef CycleQueue<char, MAX_RECV_BUFFER_SIZE> RECV_QUEUE;
+typedef CycleQueue<char> RECV_QUEUE;
 struct RecvFD
 {
     bool bHaveProtoSize;
@@ -120,6 +120,7 @@ struct RecvFD
     RecvFD()
     {
         Clear();
+        RecvQueue.init(MAX_RECV_BUFFER_SIZE);
     }
 
     void Clear()

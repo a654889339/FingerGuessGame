@@ -30,6 +30,9 @@
     <ClCompile Include="Player.cpp">
       <Filter>PlayerManager</Filter>
     </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ServerWorld.h">
@@ -43,6 +46,9 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>PlayerManager</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Main</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

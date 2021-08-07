@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "ClientConnection.h"
+#include "ClientWorld.h"
 
 #define REGISTER_EXTERNAL_FUNC(ProtocolID, FuncName, ProtocolSize)  \
 {m_ProcessProtocolFuns[ProtocolID] = FuncName;                  \
@@ -65,8 +66,19 @@ bool ClientConnection::DoS2CHandshakeRequest()
 // Private
 void ClientConnection::OnS2CHandshakeRespond(BYTE* pbyData, size_t uSize)
 {
-    JYLOG_PROCESS_ERROR(pbyData);
+    S2C_HANDSHAKE_RESPOND* pRespond = (S2C_HANDSHAKE_RESPOND*)pbyData;
 
+    JYLOG_PROCESS_ERROR(pRespond);
+
+    if (pRespond->bSuccess)
+    {
+
+    }
+    else
+    {
+        Close();
+        g_pClient->Quit();
+    }
 
     JY_STD_VOID_END
 }

@@ -15,6 +15,8 @@ public:
 
     void Active();
 
+    bool DoS2CHandshakeRespond(int nConnIndex, bool bSuccess);
+
 private:
     void OnC2SHandshakeRequest(int nConnIndex, byte* pbyData, size_t uDataLen);
 

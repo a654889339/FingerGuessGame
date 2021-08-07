@@ -29,13 +29,13 @@ struct PROTOCOL_HEADER
 //////////////////////////////////////////////////////////////////////////
 struct C2S_HANDSHAKE_REQUEST : PROTOCOL_HEADER
 {
-
+    char szName[_NAME_LEN];
 };
 
 //////////////////////////////////////////////////////////////////////////
 struct S2C_HANDSHAKE_RESPOND : PROTOCOL_HEADER
 {
-
+    bool bSuccess;
 };
 
 #endif

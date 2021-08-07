@@ -3,6 +3,10 @@
 
 #include "NetworkBase.h"
 
+#if defined (_MSC_VER) && (_MSC_VER >= 1020)
+#pragma once
+#endif
+
 class TcpServer
 {
 public:
@@ -12,6 +16,7 @@ public:
     virtual bool Bind(const char szIP[], int nPort) final;
 
     virtual void ProcessNetwork() final;
+    virtual bool Send(int nConnIndex, void* pbyData, size_t uDataLen) final;
 
     virtual void ProcessPackage(int nConnIndex, byte* pbyData, size_t uDataLen) = 0;
     virtual void NewConnection(int nConnIndex, const char szIP[], int nPort) = 0;
@@ -28,5 +33,4 @@ private:
     char m_szRecvBuffer[MAX_RECV_BUFFER_SIZE];
     RecvFD m_szRecvFD[MAX_ACCEPT_CONNECTION];
 };
-
 #endif

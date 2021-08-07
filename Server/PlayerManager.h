@@ -15,7 +15,10 @@ public:
     bool AddPlayer(int nConnIndex, const char szName[]);
 
 private:
-    typedef SplayTree<int,Player> PLAYER_MANAGER_MAP;
+    DWORD GetPlayerID(const char szName[]);
+
+private:
+    typedef SplayTree<DWORD, Player> PLAYER_MANAGER_MAP;
     PLAYER_MANAGER_MAP m_PlayerManager;
 };
 

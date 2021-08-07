@@ -15,7 +15,7 @@ BOOL WINAPI ConsoleHandlerRoutine(DWORD dwCtrlType)
 }
 #endif
 
-bool Main(int argc, char* argv[])
+int main(int argc, char* argv[])
 {
     bool    bResult = false;
     BOOL    bRetCode = false;
@@ -44,5 +44,5 @@ Exit0:
         g_pClient = NULL;
     }
 
-    return bResult;
+    return 0;
 }

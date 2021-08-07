@@ -7,13 +7,12 @@ public:
     Player();
     virtual ~Player();
 
-    bool Init(int nConnIndex, const char szName[]);
+    bool Init(DWORD dwPlayerID, int nConnIndex, const char szName[]);
     void UnInit();
 
 public:
+    DWORD m_dwPlayerID;
     int m_nConnIndex;
-
-private:
     char m_szName[_NAME_LEN];
 };
 

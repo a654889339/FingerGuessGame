@@ -62,8 +62,5 @@
     <ClCompile Include="TcpClient.cpp">
       <Filter>Network\TcpClient</Filter>
     </ClCompile>
-    <ClCompile Include="CycleQueue.cpp">
-      <Filter>STL</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>

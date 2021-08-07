@@ -11,8 +11,9 @@ public:
 
     virtual bool Connect(const char szIP[], int nPort) final ;
     virtual void ProcessNetwork() final;
-    virtual bool Send(byte* pbyData, size_t uDataLen) final;
+    virtual bool Send(void* pbyData, size_t uDataLen) final;
     virtual bool IsEnable() final;
+    virtual void Close() final;
 
 protected:
     virtual void ProcessPackage(byte* pbyData, size_t uDataLen) = 0;

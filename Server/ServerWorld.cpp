@@ -49,7 +49,6 @@ void ServerWorld::Run()
 {
     while(true)
     {
-
         m_Connection.Active();
         Sleep(10);
     }

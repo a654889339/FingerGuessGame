@@ -3,6 +3,7 @@
 
 Player::Player()
 {
+    m_dwPlayerID = ERROR_ID;
     m_nConnIndex = 0;
     memset(m_szName, 0, sizeof(m_szName));
 }
@@ -12,10 +13,11 @@ Player::~Player()
 
 }
 
-bool Player::Init(int nConnIndex, const char szName[])
+bool Player::Init(DWORD dwPlayerID, int nConnIndex, const char szName[])
 {
     bool bResult = false;
 
+    m_dwPlayerID = dwPlayerID;
     m_nConnIndex = nConnIndex;
 
     strncpy(m_szName, szName, sizeof(m_szName));
@@ -23,6 +25,7 @@ bool Player::Init(int nConnIndex, const char szName[])
 
     JY_STD_BOOL_END
 }
+
 void Player::UnInit()
 {
 

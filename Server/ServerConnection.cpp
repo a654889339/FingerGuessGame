@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "ServerConnection.h"
+#include "ServerWorld.h"
 
 #define REGISTER_EXTERNAL_FUNC(ProtocolID, FuncName, ProtocolSize)  \
 {m_ProcessProtocolFuns[ProtocolID] = FuncName;                  \
@@ -39,11 +40,37 @@ void ServerConnection::Active()
 
 }
 
+bool ServerConnection::DoS2CHandshakeRespond(int nConnIndex, bool bSuccess)
+{
+    bool bResult = false;
+    bool bRetCode = false;
+    S2C_HANDSHAKE_RESPOND Respond;
+
+    Respond.wProtocolID = s2c_handshake_respond;
+    Respond.bSuccess = bSuccess;
+
+    bRetCode = Send(nConnIndex, &Respond, sizeof(Respond));
+    JYLOG_PROCESS_ERROR(bRetCode);
+
+    JY_STD_BOOL_END
+}
+
 //////////////////////////////////////////////////////////////////////////
 
 void ServerConnection::OnC2SHandshakeRequest(int nConnIndex, byte* pbyData, size_t uDataLen)
 {
+    bool                   bResult = false;
+    bool                   bRetCode = false;
+    C2S_HANDSHAKE_REQUEST* pRequest = (C2S_HANDSHAKE_REQUEST*)pbyData;
 
+    bRetCode = bRetCode = g_pServer->m_PlayerManager.AddPlayer(nConnIndex, pRequest->szName);
+    JY_PROCESS_ERROR(bRetCode);
+
+    
+    bResult = true;
+Exit0:
+    DoS2CHandshakeRespond(nConnIndex, bResult);
+    return;
 }
 
 void ServerConnection::ProcessPackage(int nConnIndex, byte* pbyData, size_t uDataLen)

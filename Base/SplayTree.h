@@ -27,8 +27,7 @@ class SplayTree
         }
     };
 
-    Node* m_pRoot;
-
+public:
     SplayTree()
     {
         m_pRoot = NULL;
@@ -36,13 +35,15 @@ class SplayTree
 
     ~SplayTree()
     {
-        
+        Clear();
     }
 
-    STValue* NewNode(STKey Key)
+    STValue* Add(STKey Key)
     {
         STValue* pResult = NULL;
         Node* pNode = NULL;
+
+        JY_PROCESS_ERROR(Find(Key) == NULL);
 
         pNode = new Node();
         JYLOG_PROCESS_ERROR(pNode);
@@ -50,10 +51,14 @@ class SplayTree
 
         pNode->Key = Key;
 
-        Insert(pNode);
+        JY_PROCESS_ERROR(Insert(pNode));
 
         pResult = pNode->pValue;
     Exit0:
+        if (!pResult && pNode)
+        {
+            delete pNode;
+        }
         return pResult;
     }
 
@@ -128,59 +133,16 @@ class SplayTree
         return pResult;
     }
 
-    bool Insert(Node* pNode)
-    {
-        bool bResult = false;
-        Node* pLower = NULL;
-        Node* pUpper = NULL;
-
-        if (m_pRoot == NULL)
-        {
-            m_pRoot = pNode;
-            goto Exit0;
-        }
-
-        JY_PROCESS_ERROR(Find(pNode) == NULL);
-
-        pLower = LowerBound(pNode->Key);
-        pUpper = UpperBound(pNode->Key);
-
-        if (pLower == NULL)
-        {
-            Splay(pUpper, NULL);
-            Link(pUpper, 0, pNode);
-        }
-        else
-        {
-            Splay(pLower, NULL);
-            if (pUpper == NULL)
-            {
-                Link(pLower, 1, pNode);
-            }
-            else
-            {
-                Splay(pUpper, pLower);
-                Link(pUpper, 0, pNode);
-            }
-        }
-
-        Splay(pNode, NULL);
-
-        bResult = true;
-    Exit0:
-        return bResult;
-    }
-
-    bool Erase(Node* pNode)
+    bool Remove(STKey Key)
     {
         bool bResult = false;
         Node* pIter = NULL;
         Node* pUpper = NULL;
 
-        pIter = Find(pNode->Key);
+        pIter = Find(Key);
         JY_PROCESS_SUCCESS(pIter == NULL);
 
-        pUpper = UpperBound(pNode->Key);
+        pUpper = UpperBound(Key);
         if (pUpper)
         {
             Splay(pIter, NULL);
@@ -192,7 +154,7 @@ class SplayTree
         }
         else
         {
-            Remove(pIter);
+            Erase(pIter);
         }
 
         delete pIter;
@@ -206,6 +168,7 @@ class SplayTree
     void Clear()
     {
         DFS_Clear(m_pRoot);
+        m_pRoot = NULL;
     }
 
 private:
@@ -269,7 +232,48 @@ private:
         pB->par = pA;
     }
 
-    void Remove(Node* pNode)
+    bool Insert(Node* pNode)
+    {
+        bool bResult = false;
+        Node* pLower = NULL;
+        Node* pUpper = NULL;
+
+        if (m_pRoot == NULL)
+        {
+            m_pRoot = pNode;
+            goto Exit0;
+        }
+
+        pLower = LowerBound(pNode->Key);
+        pUpper = UpperBound(pNode->Key);
+
+        if (pLower == NULL)
+        {
+            Splay(pUpper, NULL);
+            Link(pUpper, 0, pNode);
+        }
+        else
+        {
+            Splay(pLower, NULL);
+            if (pUpper == NULL)
+            {
+                Link(pLower, 1, pNode);
+            }
+            else
+            {
+                Splay(pUpper, pLower);
+                Link(pUpper, 0, pNode);
+            }
+        }
+
+        Splay(pNode, NULL);
+
+        bResult = true;
+    Exit0:
+        return bResult;
+    }
+
+    void Erase(Node* pNode)
     {
         Node* pParent = NULL;
         int nParentSon = 0;
@@ -294,7 +298,7 @@ private:
             }
             else
                 m_pRoot = NULL;
-            goto Exit0;
+            return;
         }
 
         pParent = pNode->par;
@@ -319,6 +323,10 @@ private:
 
         delete pNode;
     }
+
+private:
+    Node* m_pRoot;
+
 };
 
 #endif

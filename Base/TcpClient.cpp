@@ -81,10 +81,11 @@ Exit0:
     return;
 }
 
-bool TcpClient::Send(byte* pbyData, size_t uDataLen)
+bool TcpClient::Send(void* pbyData, size_t uDataLen)
 {
     bool bResult = false;
     int nRetCode = 0;
+    char* pOffset = (char*)pbyData;
     timeval timeout{0, 0};
 
     JY_PROCESS_ERROR(m_bRunFlag);
@@ -100,7 +101,7 @@ bool TcpClient::Send(byte* pbyData, size_t uDataLen)
             goto Exit0;
         }
 
-        nRetCode = send(m_Socket, (char*)pbyData, uDataLen, 0);
+        nRetCode = send(m_Socket, pOffset, uDataLen, 0);
         JYLOG_PROCESS_ERROR(nRetCode != 0);
 
         if (nRetCode < 0)
@@ -109,7 +110,7 @@ bool TcpClient::Send(byte* pbyData, size_t uDataLen)
             goto Exit0;
         }
 
-        pbyData += nRetCode;
+        pOffset += nRetCode;
         uDataLen -= nRetCode;
     }
 
@@ -122,7 +123,17 @@ Exit0:
     }
     return bResult;
 }
+
 bool TcpClient::IsEnable()
 {
     return m_bRunFlag;
+}
+
+void TcpClient::Close()
+{
+    if (m_bRunFlag)
+    {
+        m_bRunFlag = false;
+    }
+    
 }

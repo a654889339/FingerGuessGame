@@ -29,4 +29,5 @@ private:
     bool m_bQuitFlag;
 };
 
+extern ClientWorld* g_pClient;
 #endif
