@@ -149,7 +149,6 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="TcpClient.h" />
     <ClInclude Include="TcpServer.h" />
-    <ClInclude Include="SplayTree.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CycleQueue.cpp" />

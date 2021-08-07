@@ -51,9 +51,6 @@
     <ClInclude Include="SplayTree.h">
       <Filter>STL</Filter>
     </ClInclude>
-    <ClInclude Include="SplayTree.cpp">
-      <Filter>STL</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

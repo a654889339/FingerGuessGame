@@ -29,5 +29,6 @@
 #include "MathStd.h"
 #include "GlobalDef.h"
 #include "CycleQueue.h"
+#include "SplayTree.h"
 
 #endif  //_STD_AFX_H_

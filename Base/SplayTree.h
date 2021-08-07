@@ -1,86 +1,243 @@
 #ifndef _SPLAY_TREE_H_
 #define _SPLAY_TREE_H_
 
+#include <cassert>
+
 template <typename STKey, typename STValue>
 class SplayTree
 {
+    struct Node
+    {
+        STKey Key;
+        STValue* pValue;
+        Node* par, *ch[2];
+
+        Node()
+        {
+            pValue = new STValue();
+            par = NULL;
+            ch[0] = NULL;
+            ch[1] = NULL;
+        }
+
+        ~Node()
+        {
+            assert(pValue);
+            delete pValue;
+        }
+    };
+
+    Node* m_pRoot;
+
+    SplayTree()
+    {
+        m_pRoot = NULL;
+    }
+
+    ~SplayTree()
+    {
+        
+    }
+
     STValue* NewNode(STKey Key)
     {
-        Node* x = Ind[tot++];
-        x->val = x->sum = x->max = x->mls = x->mrs = val;
-        x->siz = 1;
-        x->par = par;
-        x->rev = x->sm = false;
-        if (x->ch[0] != null) Ind[--tot] = x->ch[0];
-        if (x->ch[1] != null) Ind[--tot] = x->ch[1];
-        x->ch[0] = x->ch[1] = null;
-        return x;
+        STValue* pResult = NULL;
+        Node* pNode = NULL;
+
+        pNode = new Node();
+        JYLOG_PROCESS_ERROR(pNode);
+        JYLOG_PROCESS_ERROR(pNode->pValue);
+
+        pNode->Key = Key;
+
+        Insert(pNode);
+
+        pResult = pNode->pValue;
+    Exit0:
+        return pResult;
     }
 
-    void Modify(Node* x, int d)
+    Node* Find(STKey Key)
     {
-        if (x == null) return;
-        x->val = x->d = d;
-        x->sm = true;
-        x->sum = x->siz * d;
-        x->mls = x->mrs = x->max = max(x->sum, d);
-        x->rev = false;
-    }
+        Node* pResult = NULL;
+        Node* pIter = m_pRoot;
 
-    void Reverse(Node* x)
-    {
-        if (x == null) return;
-        x->rev ^= true;
-        swap(x->mls, x->mrs);
-        swap(x->ch[0], x->ch[1]);
-    }
+        while (pIter) {
+            PushDown(pIter);
+            if (pIter->Key == Key)
+            {
+                pResult = pIter;
+                break;
+            }
 
-    void PushDown(Node* x)
-    {
-        if (x == null) return;
-        if (x->sm) {
-            Modify(x->ch[0], x->d);
-            Modify(x->ch[1], x->d);
-            x->sm = false;
+            pIter = pIter->ch[Key < pIter->Key];
         }
-        if (x->rev) {
-            Reverse(x->ch[0]);
-            Reverse(x->ch[1]);
-            x->rev = false;
-        }
+
+        if (pIter)
+            Splay(pIter, NULL);
+
+        return pResult;
     }
-    void PushUp(Node* x)
+
+    Node* LowerBound(STKey Key)
     {
-        if (x == null) return;
-        x->siz = x->ch[0]->siz + x->ch[1]->siz + 1;
-        x->sum = x->ch[0]->sum + x->ch[1]->sum + x->val;
-        x->mls = max(x->ch[0]->mls, x->ch[0]->sum + x->val + max(0, x->ch[1]->mls));
-        x->mrs = max(x->ch[1]->mrs, x->ch[1]->sum + x->val + max(0, x->ch[0]->mrs));
-        x->max = max(x->ch[0]->max, x->ch[1]->max);
-        x->max = max(x->max, max(x->ch[0]->mrs, 0) + x->val + max(x->ch[1]->mls, 0));
-        return;
+        Node* pResult = NULL;
+        Node* pIter = m_pRoot;
+
+        while (pIter) {
+            PushDown(pIter);
+            if (pIter->Key < Key)
+            {
+                if (!pResult || pResult->Key > pIter->Key)
+                    pResult = pIter;
+            }
+            else if (pIter->Key == Key)
+            {
+                pResult = pIter;
+                break;
+            }
+
+            pIter = pIter->ch[Key < pIter->Key];
+        }
+
+        if (pIter)
+            Splay(pIter, m_pRoot);
+
+        return pResult;
     }
+
+    Node* UpperBound(STKey Key)
+    {
+        Node* pResult = NULL;
+        Node* pIter = m_pRoot;
+
+        while (pIter) {
+            PushDown(pIter);
+            if (pIter->Key > Key)
+            {
+                if (!pResult || pResult->Key < pIter->Key)
+                    pResult = pIter;
+            }
+
+            pIter = pIter->ch[Key < pIter->Key];
+        }
+
+        if (pIter)
+            Splay(pIter, m_pRoot);
+
+        return pResult;
+    }
+
+    bool Insert(Node* pNode)
+    {
+        bool bResult = false;
+        Node* pLower = NULL;
+        Node* pUpper = NULL;
+
+        if (m_pRoot == NULL)
+        {
+            m_pRoot = pNode;
+            goto Exit0;
+        }
+
+        JY_PROCESS_ERROR(Find(pNode) == NULL);
+
+        pLower = LowerBound(pNode->Key);
+        pUpper = UpperBound(pNode->Key);
+
+        if (pLower == NULL)
+        {
+            Splay(pUpper, NULL);
+            Link(pUpper, 0, pNode);
+        }
+        else
+        {
+            Splay(pLower, NULL);
+            if (pUpper == NULL)
+            {
+                Link(pLower, 1, pNode);
+            }
+            else
+            {
+                Splay(pUpper, pLower);
+                Link(pUpper, 0, pNode);
+            }
+        }
+
+        Splay(pNode, NULL);
+
+        bResult = true;
+    Exit0:
+        return bResult;
+    }
+
+    bool Erase(Node* pNode)
+    {
+        bool bResult = false;
+        Node* pIter = NULL;
+        Node* pUpper = NULL;
+
+        pIter = Find(pNode->Key);
+        JY_PROCESS_SUCCESS(pIter == NULL);
+
+        pUpper = UpperBound(pNode->Key);
+        if (pUpper)
+        {
+            Splay(pIter, NULL);
+            Splay(pUpper, m_pRoot);
+            m_pRoot = pUpper;
+            pUpper->ch[0] = pIter->ch[0];
+            if (pIter->ch[0])
+                pIter->ch[0]->par = pUpper;
+        }
+        else
+        {
+            Remove(pIter);
+        }
+
+        delete pIter;
+
+    Exit1:
+        bResult = true;
+    Exit0:
+        return bResult;
+    }
+
+    void Clear()
+    {
+        DFS_Clear(m_pRoot);
+    }
+
+private:
+    void PushDown(Node* x){}
+    void PushUp(Node* x){}
+
     void Rotate(Node* x, int c)
     {
         Node* y = x->par;
         PushDown(y);
         PushDown(x);
         y->ch[!c] = x->ch[c];
-        if (x->ch[c] != null) x->ch[c]->par = y;
+        if (x->ch[c] != NULL) x->ch[c]->par = y;
         x->par = y->par;
-        if (y->par != null) {
+        if (y->par != NULL) {
             if (y->par->ch[0] == y) y->par->ch[0] = x;
             else y->par->ch[1] = x;
         }
         x->ch[c] = y;
         y->par = x;
         PushUp(y);
-        if (y == root) root = x;
+        if (y == m_pRoot) m_pRoot= x;
     }
+
     void Splay(Node* x, Node* f)
     {
-        Node* y, * z;
-        for (PushDown(x); x->par != f; ) {
+        Node* y = NULL;
+        Node* z = NULL;
+
+        JY_PROCESS_ERROR(x);
+
+        for (PushDown(x); x->par && x->par != f; ) {
             y = x->par, z = y->par;
             if (z == f) {
                 if (y->ch[0] == x) Rotate(x, 1);
@@ -97,94 +254,70 @@ class SplayTree
                 }
             }
         }
-        PushUp(x);
-    }
-    void Select(int k, Node* f)
-    {
-        Node* cur = root;
-        int temp;
-        while (1) {
-            PushDown(cur);
-            temp = cur->ch[0]->siz;
-            if (k == temp) break;
-            if (k < temp) cur = cur->ch[0];
-            else {
-                k -= (temp + 1);
-                cur = cur->ch[1];
-            }
-        }
-        Splay(cur, f);
-    }
-    Node* Build(int L, int R, Node* par)
-    {
 
-        if (L > R) return null;
-        int mid = (L + R) / 2;
-        Node* x = NewNode(number[mid], par);
-        x->ch[0] = Build(L, mid - 1, x);
-        x->ch[1] = Build(mid + 1, R, x);
         PushUp(x);
-        return x;
+
+        JY_STD_VOID_END
     }
-    void Insert(int pos, int L, int R)
+
+    void Link(Node* pA, int nASon, Node* pB)
     {
-        Select(pos, null);
-        Select(pos + 1, root);
-        root->ch[1]->ch[0] = Build(L, R, root->ch[1]);
-        PushUp(root->ch[1]);
-        Splay(root->ch[1]->ch[0], null);
+        assert(pA);
+        assert(pB);
+        
+        pA->ch[nASon] = pB;
+        pB->par = pA;
     }
-    Node* Delete(int L, int R)
+
+    void Remove(Node* pNode)
     {
-        Node* ret;
-        Select(L - 1, null);
-        Select(R + 1, root);
-        ret = root->ch[1]->ch[0];
-        root->ch[1]->ch[0] = null;
-        PushUp(root->ch[1]);
-        Splay(root->ch[1], null);
-        return ret;
-    }
-    void Init()
-    {
-        null = &nod[0];
-        null->siz = null->sum = 0;
-        null->val = null->mls = null->mrs = null->max = -inf;
-        tot = 1;
-        for (int i = 0; i != maxn; i++) {
-            Ind[i] = &nod[i];
-            nod[i].ch[0] = nod[i].ch[1] = null;
+        Node* pParent = NULL;
+        int nParentSon = 0;
+        int nNodeChild = -1;
+
+        assert(pNode);
+
+        if (pNode->ch[0])
+            nNodeChild = 0;
+        if (pNode->ch[1])
+        {
+            assert(nNodeChild == -1);
+            nNodeChild = 1;
+        }
+
+        if (m_pRoot == pNode)
+        {
+            if (nNodeChild != -1)
+            {
+                m_pRoot = pNode->ch[nNodeChild];
+                m_pRoot->par = NULL;
+            }
+            else
+                m_pRoot = NULL;
+            goto Exit0;
+        }
+
+        pParent = pNode->par;
+        assert(pParent);
+
+        nParentSon = pParent->ch[1] == pNode;
+
+        if (nNodeChild != -1)
+        {
+            pParent->ch[nParentSon] = pNode->ch[nNodeChild];
+            pNode->ch[nNodeChild]->par = pParent;
         }
     }
-    void Modify(int L, int R, int d)
+
+    void DFS_Clear(Node* pNode)
     {
-        Select(L - 1, null);
-        Select(R + 1, root);
-        Modify(root->ch[1]->ch[0], d);
-        Splay(root->ch[1]->ch[0], null);
-    }
-    void Reverse(int L, int R)
-    {
-        Select(L - 1, null);
-        Select(R + 1, root);
-        Reverse(root->ch[1]->ch[0]);
-        Splay(root->ch[1]->ch[0], null);
-    }
-    int Sum(int L, int R)
-    {
-        Select(L - 1, null);
-        Select(R + 1, root);
-        return root->ch[1]->ch[0]->sum;
-    }
-    void Print()
-    {
-        Select(1, null);
-        printf("%d", root->val);
-        for (int i = 2; i <= root->siz - 2; i++) {
-            Select(i, null);
-            printf(" %d", root->val);
-        }
-        printf("\n");
+        if (pNode == NULL)
+            return;
+
+        for (int i = 0; i < 2; i++)
+            DFS_Clear(pNode->ch[i]);
+
+        delete pNode;
     }
 };
 

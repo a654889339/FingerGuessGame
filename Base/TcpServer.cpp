@@ -57,7 +57,7 @@ void TcpServer::ProcessNetwork()
         int nRetCode = select(0, &CheckFD, nullptr, nullptr, &timeout);
         JY_PROCESS_CONTINUE(nRetCode == SOCKET_ERROR);
 
-        for (int i = 0; i < CheckFD.fd_count; i++)
+        for (int i = 0; i < (int)CheckFD.fd_count; i++)
         {
             pszRecvFD = GetRecvFD(i);
             JYLOG_PROCESS_CONTINUE(pszRecvFD);
