@@ -16,18 +16,13 @@ protected:
     virtual void ProcessPackage(byte* pbyData, size_t uDataLen) = 0;
     virtual void DisConnection() = 0;
 
-    bool HaveFullPackage();
-
+private:
 private:
     bool m_bRunFlag;
     SOCKET m_Socket;
-
-    typedef CycleQueue<char, MAX_RECV_BUFFER_SIZE> RECV_QUEUE;
-    RECV_QUEUE  m_RecvQueue;
+    RecvFD m_RecvFD;
 
     char m_szRecvBuffer[MAX_RECV_BUFFER_SIZE];
-    bool m_bHaveProtoSize;
-    size_t m_uProtoSize;
 };
 
 #endif

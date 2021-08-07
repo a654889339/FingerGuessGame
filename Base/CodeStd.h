@@ -1,6 +1,18 @@
 #ifndef _CODE_STD_H_
 #define _CODE_STD_H_
 
+// Function std
+#define JY_STD_BOOL_END \
+    bResult = true; \
+Exit0: \
+    return bResult;
+
+#define JY_STD_VOID_END \
+Exit0: \
+    return ;
+
+
+// Process exception
 #ifdef _MSC_VER
 #define TEMP_DISABLE_WARNING(warningCode, expression)   \
         __pragma(warning(push))                             \
@@ -41,6 +53,23 @@
             goto Exit1;         \
     } WHILE_FALSE_NO_WARNING
 
+#define JY_PROCESS_CONTINUE(Condition) \
+    do  \
+    {   \
+        if (!(Condition))       \
+            continue;         \
+    } WHILE_FALSE_NO_WARNING
 
+#define JYLOG_PROCESS_CONTINUE(Condition) \
+    do  \
+    {   \
+        if (!(Condition))       \
+        {                       \
+            printf(        \
+                "JYLOG_PROCESS_CONTINUE(%s) at line %d in %s\n", #Condition, __LINE__, __FUNCTION__  \
+            );                  \
+            continue;         \
+        }                       \
+    } WHILE_FALSE_NO_WARNING
 
 #endif

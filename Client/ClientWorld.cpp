@@ -20,9 +20,7 @@ bool ClientWorld::Init()
     bRetCode = LoadConfig();
     JYLOG_PROCESS_ERROR(bRetCode);
 
-    bResult = true;
-Exit0:
-    return bResult;
+    JY_STD_BOOL_END
 }
 
 void ClientWorld::UnInit()
@@ -37,7 +35,6 @@ bool ClientWorld::LoadConfig()
 
     strcpy(m_szIP, "127.0.0.1");
     m_nPort = 5566;
-    bResult = true;
-Exit0:
-    return bResult;
+
+    JY_STD_BOOL_END
 }

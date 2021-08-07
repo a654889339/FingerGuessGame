@@ -1,9 +1,33 @@
 #ifndef _NETWORK_BASE_H_
 #define _NETWORK_BASE_H_
 
+#include "MySTL.h"
+
+#define MAX_ACCEPT_CONNECTION 105
 #define MAX_RECV_BUFFER_SIZE 65536
 
 
+typedef CycleQueue<char, MAX_RECV_BUFFER_SIZE> RECV_QUEUE;
+struct RecvFD
+{
+    bool bHaveProtoSize;
+    size_t uProtoSize;
+    bool bConnFlag;
+    RECV_QUEUE RecvQueue;
+
+    RecvFD()
+    {
+        Clear();
+    }
+
+    void Clear()
+    {
+        bHaveProtoSize = false;
+        uProtoSize = 0;
+        bConnFlag = false;
+        RecvQueue.clear();
+    }
+};
 
 
 
@@ -49,4 +73,36 @@ Exit0:
     return bResult;
 }
 
+static bool GetFullPackage(RecvFD* pRecvFD, char* pszRecvBuffer)
+{
+    bool bResult = false;
+    bool bRetCode = false;
+
+    JYLOG_PROCESS_ERROR(pRecvFD);
+    JYLOG_PROCESS_ERROR(pszRecvBuffer);
+
+    if (pRecvFD->bHaveProtoSize)
+    {
+        JY_PROCESS_ERROR(pRecvFD->RecvQueue.size() >= pRecvFD->uProtoSize);
+
+        bRetCode = pRecvFD->RecvQueue.pop(pRecvFD->uProtoSize, pszRecvBuffer);
+        JYLOG_PROCESS_ERROR(bRetCode);
+
+        pRecvFD->bHaveProtoSize = false;
+    }
+    else
+    {
+        JY_PROCESS_ERROR(pRecvFD->RecvQueue.size() >= 2);
+        pRecvFD->bHaveProtoSize = true;
+
+        bRetCode = pRecvFD->RecvQueue.pop(2, pszRecvBuffer);
+        JYLOG_PROCESS_ERROR(bRetCode);
+
+        pRecvFD->uProtoSize = pszRecvBuffer[0] << 8 | pszRecvBuffer[1];
+    }
+
+    bResult = true;
+Exit0:
+    return bResult;
+}
 #endif

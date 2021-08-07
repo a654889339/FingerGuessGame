@@ -60,15 +60,15 @@ void TcpClient::ProcessNetwork()
 
     while (true)
     {
-        int ret = recv(m_Socket, m_szRecvBuffer, min(m_RecvQueue.res_size(), sizeof(m_szRecvBuffer)), 0);
-        if (ret > 0)
+        int nRecvSize = recv(m_Socket, m_szRecvBuffer, min(m_RecvFD.RecvQueue.res_size(), sizeof(m_szRecvBuffer)), 0);
+        if (nRecvSize > 0)
         {
-            bRetCode = m_RecvQueue.push(m_szRecvBuffer, ret);
+            bRetCode = m_RecvFD.RecvQueue.push(m_szRecvBuffer, nRecvSize);
             JYLOG_PROCESS_ERROR(bRetCode);
 
-            if (HaveFullPackage())
+            if (GetFullPackage(&m_RecvFD, m_szRecvBuffer))
             {
-                ProcessPackage((byte*)m_szRecvBuffer, m_uProtoSize);
+                ProcessPackage((byte*)m_szRecvBuffer, m_RecvFD.uProtoSize);
             }
         }
     }
@@ -83,33 +83,3 @@ Exit0:
     return;
 }
 
-
-bool TcpClient::HaveFullPackage()
-{
-    bool bResult = false;
-    bool bRetCode = false;
-
-    JY_PROCESS_ERROR(m_bRunFlag);
-
-    if (m_bHaveProtoSize)
-    {
-        JY_PROCESS_ERROR(m_RecvQueue.size() >= m_uProtoSize);
-
-        bRetCode = m_RecvQueue.pop(m_uProtoSize, m_szRecvBuffer);
-        JYLOG_PROCESS_ERROR(bRetCode);
-    }
-    else
-    {
-        JY_PROCESS_ERROR(m_RecvQueue.size() >= 2);
-        m_bHaveProtoSize = true;
-
-        bRetCode = m_RecvQueue.pop(2, m_szRecvBuffer);
-        JYLOG_PROCESS_ERROR(bRetCode);
-
-        m_uProtoSize = m_szRecvBuffer[0] << 8 | m_szRecvBuffer[1];
-    }
-
-    bResult = true;
-Exit0:
-    return bResult;
-}
