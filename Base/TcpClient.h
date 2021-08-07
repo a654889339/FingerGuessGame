@@ -10,11 +10,13 @@ public:
     virtual ~TcpClient();
 
     virtual bool Connect(const char szIP[], int nPort) final ;
-    virtual void ProcessNetwork();
+    virtual void ProcessNetwork() final;
+    virtual bool Send(byte* pbyData, size_t uDataLen) final;
+    virtual bool IsEnable() final;
 
 protected:
     virtual void ProcessPackage(byte* pbyData, size_t uDataLen) = 0;
-    virtual void DisConnection() = 0;
+    virtual void ConnectionLost() = 0;
 
 private:
 private:

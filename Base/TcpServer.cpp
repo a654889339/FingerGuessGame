@@ -43,6 +43,7 @@ bool TcpServer::Bind(const char szIP[], int nPort)
 
 void TcpServer::ProcessNetwork()
 {
+    int nRetCode = 0;
     RecvFD* pszRecvFD = NULL;
     timeval timeout{ 0,0 };
     FD_SET CheckFD;
@@ -53,9 +54,8 @@ void TcpServer::ProcessNetwork()
         FD_ZERO(&CheckFD);
         CheckFD = m_SocketReadSet;
 
-
-        int total = select(0, &CheckFD, nullptr, nullptr, &timeout);
-        JY_PROCESS_CONTINUE(total != SOCKET_ERROR);
+        int nRetCode = select(0, &CheckFD, nullptr, nullptr, &timeout);
+        JY_PROCESS_CONTINUE(nRetCode == SOCKET_ERROR);
 
         for (int i = 0; i < CheckFD.fd_count; i++)
         {
@@ -81,8 +81,8 @@ void TcpServer::ProcessNetwork()
             }
             else
             {
-                int ret = recv(CheckSocket, m_szRecvBuffer, sizeof(m_szRecvBuffer), 0);
-                if (ret == SOCKET_ERROR || ret == 0)
+                int nRetCode = recv(CheckSocket, m_szRecvBuffer, sizeof(m_szRecvBuffer), 0);
+                if (nRetCode == SOCKET_ERROR || nRetCode == 0)
                 {
                     pszRecvFD->bConnFlag = false;
                     DisConnection(i);
@@ -91,7 +91,8 @@ void TcpServer::ProcessNetwork()
                 }
                 else
                 {
-                    ProcessPackage(i, m_szRecvBuffer, )
+                    if (GetFullPackage(pszRecvFD, m_szRecvBuffer))
+                        ProcessPackage(i, (byte*)m_szRecvBuffer, pszRecvFD->uProtoSize);
                 }
             }
         }
@@ -104,7 +105,7 @@ RecvFD* TcpServer::GetRecvFD(int nConnIndex)
 {
     RecvFD* pResult = NULL;
 
-    JY_PROCESS_CONTINUE(nConnIndex >= 0 && nConnIndex < MAX_ACCEPT_CONNECTION);
+    JY_PROCESS_ERROR(nConnIndex >= 0 && nConnIndex < MAX_ACCEPT_CONNECTION);
 
     pResult = &m_szRecvFD[nConnIndex];
 Exit0:

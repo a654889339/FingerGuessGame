@@ -144,6 +144,7 @@
     <ClInclude Include="MathStd.h" />
     <ClInclude Include="MySTL.h" />
     <ClInclude Include="NetworkBase.h" />
+    <ClInclude Include="Protocol.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="TcpClient.h" />
     <ClInclude Include="TcpServer.h" />

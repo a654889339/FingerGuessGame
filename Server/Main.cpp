@@ -1,15 +1,15 @@
 #include "stdafx.h"
-#include "ClientWorld.h"
+#include "ServerWorld.h"
 
-ClientWorld* g_pClient = NULL;
+ServerWorld* g_pServer = NULL;
 
 #ifdef WIN32
 BOOL WINAPI ConsoleHandlerRoutine(DWORD dwCtrlType)
 {
-    if (g_pClient)
+    if (g_pServer)
     {
         printf("Receive quit signal from console !\n");
-        g_pClient->Quit();
+        g_pServer->Quit();
     }
     return true;
 }
@@ -21,27 +21,27 @@ bool Main(int argc, char* argv[])
     BOOL    bRetCode = false;
     BOOL    bClientInitFlag = false;
 
-    g_pClient = new ClientWorld();
-    JYLOG_PROCESS_ERROR(g_pClient);
+    g_pServer = new ServerWorld();
+    JYLOG_PROCESS_ERROR(g_pServer);
 
-    bRetCode = g_pClient->Init();
+    bRetCode = g_pServer->Init();
     JYLOG_PROCESS_ERROR(bRetCode);
     bClientInitFlag = true;
 
-    g_pClient->Run();
+    g_pServer->Run();
 
     bResult = true;
 Exit0:
     if (bClientInitFlag)
     {
-        g_pClient->UnInit();
+        g_pServer->UnInit();
         bClientInitFlag = false;
     }
 
-    if (g_pClient)
+    if (g_pServer)
     {
-        delete g_pClient;
-        g_pClient = NULL;
+        delete g_pServer;
+        g_pServer = NULL;
     }
 
     return bResult;

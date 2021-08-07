@@ -1,19 +1,20 @@
 #include "stdafx.h"
-#include "ClientWorld.h"
+#include "ServerWorld.h"
 
-ClientWorld::ClientWorld()
+ServerWorld::ServerWorld()
 {
     m_nPort = 0;
     m_bQuitFlag = false;
+
     memset(m_szIP, 0, sizeof(m_szIP));
 }
 
-ClientWorld::~ClientWorld()
+ServerWorld::~ServerWorld()
 {
 
 }
 
-bool ClientWorld::Init()
+bool ServerWorld::Init()
 {
     bool bResult = false;
     bool bRetCode = false;
@@ -39,48 +40,30 @@ Exit0:
     return bResult;
 }
 
-void ClientWorld::UnInit()
+void ServerWorld::UnInit()
 {
     m_Connection.UnInit();
-
 }
 
-void ClientWorld::Run()
+void ServerWorld::Run()
 {
-    while (true)
+    while(true)
     {
-        JY_PROCESS_BREAK(!CheckQuitComplete());
 
         m_Connection.Active();
-
         Sleep(10);
     }
 }
 
-
-void ClientWorld::Quit()
+void ServerWorld::Quit()
 {
     m_bQuitFlag = true;
-    m_Connection.DisConnect();
 }
 
+//////////////////////////////////////////////////////////////////////////
 
-bool ClientWorld::CheckQuitComplete()
+bool ServerWorld::LoadConfig()
 {
-    bool bResult = false;
-
-    JY_PROCESS_ERROR(m_bQuitFlag);
-    JY_PROCESS_ERROR(!m_Connection.IsEnable());
-
-    JY_STD_BOOL_END;
-}
-
-bool ClientWorld::LoadConfig()
-{
-    bool bResult = false;
-
     strcpy(m_szIP, "127.0.0.1");
     m_nPort = 5566;
-
-    JY_STD_BOOL_END
 }

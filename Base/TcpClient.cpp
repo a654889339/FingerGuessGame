@@ -4,8 +4,6 @@
 TcpClient::TcpClient()
 {
     m_bRunFlag = false;
-    m_bHaveProtoSize = false;
-    m_uProtoSize = 0;
     m_Socket = INVALID_SOCKET;
     InitNetwork();
 
@@ -78,8 +76,53 @@ Exit0:
     if (!bResult && m_bRunFlag)
     {
         m_bRunFlag = false;
-        DisConnection();
+        ConnectionLost();
     }
     return;
 }
 
+bool TcpClient::Send(byte* pbyData, size_t uDataLen)
+{
+    bool bResult = false;
+    int nRetCode = 0;
+    timeval timeout{0, 0};
+
+    JY_PROCESS_ERROR(m_bRunFlag);
+    JYLOG_PROCESS_ERROR(pbyData);
+
+    while (uDataLen > 0)
+    {
+        nRetCode = CanSend(m_Socket, &timeout);
+        JYLOG_PROCESS_ERROR(nRetCode != 0);
+        if (nRetCode < 0)
+        {
+            JY_PROCESS_CONTINUE(SocketCanRestore());
+            goto Exit0;
+        }
+
+        nRetCode = send(m_Socket, (char*)pbyData, uDataLen, 0);
+        JYLOG_PROCESS_ERROR(nRetCode != 0);
+
+        if (nRetCode < 0)
+        {
+            JY_PROCESS_CONTINUE(SocketCanRestore());
+            goto Exit0;
+        }
+
+        pbyData += nRetCode;
+        uDataLen -= nRetCode;
+    }
+
+    bResult = true;
+Exit0:
+    if (!bResult && m_bRunFlag)
+    {
+        m_bRunFlag = false;
+        ConnectionLost();
+    }
+    return bResult;
+}
+bool TcpClient::IsEnable()
+{
+    return m_bRunFlag;
+}

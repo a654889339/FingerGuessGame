@@ -54,15 +54,10 @@ Exit0: \
     } WHILE_FALSE_NO_WARNING
 
 #define JY_PROCESS_CONTINUE(Condition) \
-    do  \
-    {   \
-        if (!(Condition))       \
+        if ((Condition))       \
             continue;         \
-    } WHILE_FALSE_NO_WARNING
 
 #define JYLOG_PROCESS_CONTINUE(Condition) \
-    do  \
-    {   \
         if (!(Condition))       \
         {                       \
             printf(        \
@@ -70,6 +65,9 @@ Exit0: \
             );                  \
             continue;         \
         }                       \
-    } WHILE_FALSE_NO_WARNING
+
+#define JY_PROCESS_BREAK(Condition) \
+        if (!(Condition))       \
+            break;         \
 
 #endif
