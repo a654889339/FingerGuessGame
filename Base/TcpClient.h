@@ -26,6 +26,7 @@ private:
     RecvFD m_RecvFD;
 
     char m_szRecvBuffer[MAX_RECV_BUFFER_SIZE];
+    char m_szSendBuffer[MAX_RECV_BUFFER_SIZE];
 };
 
 #endif

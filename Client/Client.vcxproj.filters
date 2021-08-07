@@ -21,7 +21,7 @@
     <ClCompile Include="ClientWorld.cpp">
       <Filter>Main</Filter>
     </ClCompile>
-    <ClCompile Include="ClientConnection.h.cpp">
+    <ClCompile Include="ClientConnection.cpp">
       <Filter>Network</Filter>
     </ClCompile>
   </ItemGroup>

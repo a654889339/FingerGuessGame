@@ -21,6 +21,8 @@ enum SERVER_CLIENT_PROTOCOL_CODE
     s2c_end
 };
 
+#pragma pack(1)
+
 struct PROTOCOL_HEADER
 {
     WORD wProtocolID;
@@ -37,5 +39,7 @@ struct S2C_HANDSHAKE_RESPOND : PROTOCOL_HEADER
 {
     bool bSuccess;
 };
+
+#pragma pack()
 
 #endif

@@ -142,7 +142,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ClientConnection.h.cpp" />
+    <ClCompile Include="ClientConnection.cpp" />
     <ClCompile Include="ClientWorld.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>

@@ -37,7 +37,7 @@ void ServerConnection::UnInit()
 
 void ServerConnection::Active()
 {
-
+    ProcessNetwork();
 }
 
 bool ServerConnection::DoS2CHandshakeRespond(int nConnIndex, bool bSuccess)

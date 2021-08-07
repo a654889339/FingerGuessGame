@@ -43,7 +43,7 @@ public:
         STValue* pResult = NULL;
         Node* pNode = NULL;
 
-        JY_PROCESS_ERROR(Find(Key) == NULL);
+        JY_PROCESS_ERROR(FindNode(Key) == NULL);
 
         pNode = new Node();
         JYLOG_PROCESS_ERROR(pNode);
@@ -62,75 +62,14 @@ public:
         return pResult;
     }
 
-    Node* Find(STKey Key)
+    STValue* Find(STKey Key)
     {
         Node* pResult = NULL;
-        Node* pIter = m_pRoot;
 
-        while (pIter) {
-            PushDown(pIter);
-            if (pIter->Key == Key)
-            {
-                pResult = pIter;
-                break;
-            }
-
-            pIter = pIter->ch[Key < pIter->Key];
-        }
-
-        if (pIter)
-            Splay(pIter, NULL);
-
-        return pResult;
-    }
-
-    Node* LowerBound(STKey Key)
-    {
-        Node* pResult = NULL;
-        Node* pIter = m_pRoot;
-
-        while (pIter) {
-            PushDown(pIter);
-            if (pIter->Key < Key)
-            {
-                if (!pResult || pResult->Key > pIter->Key)
-                    pResult = pIter;
-            }
-            else if (pIter->Key == Key)
-            {
-                pResult = pIter;
-                break;
-            }
-
-            pIter = pIter->ch[Key < pIter->Key];
-        }
-
-        if (pIter)
-            Splay(pIter, m_pRoot);
-
-        return pResult;
-    }
-
-    Node* UpperBound(STKey Key)
-    {
-        Node* pResult = NULL;
-        Node* pIter = m_pRoot;
-
-        while (pIter) {
-            PushDown(pIter);
-            if (pIter->Key > Key)
-            {
-                if (!pResult || pResult->Key < pIter->Key)
-                    pResult = pIter;
-            }
-
-            pIter = pIter->ch[Key < pIter->Key];
-        }
-
-        if (pIter)
-            Splay(pIter, m_pRoot);
-
-        return pResult;
+        pResult = FindNode(Key);
+        if (pResult)
+            return pResult->pValue;
+        return NULL;
     }
 
     bool Remove(STKey Key)
@@ -139,7 +78,7 @@ public:
         Node* pIter = NULL;
         Node* pUpper = NULL;
 
-        pIter = Find(Key);
+        pIter = FindNode(Key);
         JY_PROCESS_SUCCESS(pIter == NULL);
 
         pUpper = UpperBound(Key);
@@ -230,6 +169,77 @@ private:
         
         pA->ch[nASon] = pB;
         pB->par = pA;
+    }
+
+    Node* FindNode(STKey Key)
+    {
+        Node* pResult = NULL;
+        Node* pIter = m_pRoot;
+
+        while (pIter) {
+            PushDown(pIter);
+            if (pIter->Key == Key)
+            {
+                pResult = pIter;
+                break;
+            }
+
+            pIter = pIter->ch[Key < pIter->Key];
+        }
+
+        if (pIter)
+            Splay(pIter, NULL);
+
+        return pResult;
+    }
+
+    Node* LowerBound(STKey Key)
+    {
+        Node* pResult = NULL;
+        Node* pIter = m_pRoot;
+
+        while (pIter) {
+            PushDown(pIter);
+            if (pIter->Key < Key)
+            {
+                if (!pResult || pResult->Key > pIter->Key)
+                    pResult = pIter;
+            }
+            else if (pIter->Key == Key)
+            {
+                pResult = pIter;
+                break;
+            }
+
+            pIter = pIter->ch[Key < pIter->Key];
+        }
+
+        if (pIter)
+            Splay(pIter, m_pRoot);
+
+        return pResult;
+    }
+
+    Node* UpperBound(STKey Key)
+    {
+        Node* pResult = NULL;
+        Node* pIter = m_pRoot;
+
+        while (pIter) {
+            PushDown(pIter);
+            if (pIter->Key > Key)
+            {
+                if (!pResult || pResult->Key < pIter->Key)
+                    pResult = pIter;
+            }
+
+            pIter = pIter->ch[Key < pIter->Key];
+        }
+
+        if (pIter)
+            Splay(pIter, m_pRoot);
+
+        return pResult;
     }
 
     bool Insert(Node* pNode)

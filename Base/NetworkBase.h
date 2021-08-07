@@ -77,6 +77,43 @@ static inline int CanSend(int nSocket, const timeval* pTimeout)
     return -1;
 }
 
+static bool _Send(SOCKET Socket, void* pbyData, size_t uDataLen)
+{
+    bool bResult = false;
+    int nRetCode = 0;
+    char* pOffset = (char*)pbyData;
+    timeval timeout{ 0, 0 };
+
+    JYLOG_PROCESS_ERROR(pbyData);
+
+    while (uDataLen > 0)
+    {
+        nRetCode = CanSend(Socket, &timeout);
+        JYLOG_PROCESS_ERROR(nRetCode != 0);
+        if (nRetCode < 0)
+        {
+            JY_PROCESS_CONTINUE(SocketCanRestore());
+            goto Exit0;
+        }
+
+        nRetCode = send(Socket, pOffset, uDataLen, 0);
+        JYLOG_PROCESS_ERROR(nRetCode != 0);
+
+        if (nRetCode < 0)
+        {
+            JY_PROCESS_CONTINUE(SocketCanRestore());
+            goto Exit0;
+        }
+
+        pOffset += nRetCode;
+        uDataLen -= nRetCode;
+    }
+
+    bResult = true;
+Exit0:
+    return bResult;
+}
+
 // Recv
 // return -1: error, 0: timeout, 1: success
 static inline int CanRecv(int nSocket, const timeval* pTimeout)

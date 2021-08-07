@@ -12,6 +12,7 @@ TcpClient::TcpClient()
 
 TcpClient::~TcpClient()
 {
+    Close();
     UnInitNetwork();
 }
 
@@ -36,6 +37,8 @@ bool TcpClient::Connect(const char szIP[], int nPort)
     nRetCode = connect(m_Socket, (sockaddr*)&serAddr, sizeof(serAddr));
     JYLOG_PROCESS_ERROR(nRetCode != SOCKET_ERROR);
 
+    m_bRunFlag = true;
+
     bResult = true;
 Exit0:
     if (!bResult)
@@ -53,29 +56,27 @@ void TcpClient::ProcessNetwork()
 {
     bool bResult = false;
     bool bRetCode = false;
+    int  nRetCode = 0;
 
-    JY_PROCESS_ERROR(m_bRunFlag);
+    JY_PROCESS_SUCCESS(!m_bRunFlag);
 
-    while (true)
-    {
-        int nRecvSize = recv(m_Socket, m_szRecvBuffer, min(m_RecvFD.RecvQueue.res_size(), sizeof(m_szRecvBuffer)), 0);
-        if (nRecvSize > 0)
-        {
-            bRetCode = m_RecvFD.RecvQueue.push(m_szRecvBuffer, nRecvSize);
-            JYLOG_PROCESS_ERROR(bRetCode);
+    nRetCode = recv(m_Socket, m_szRecvBuffer, min(m_RecvFD.RecvQueue.res_size(), sizeof(m_szRecvBuffer)), 0);
+    JY_PROCESS_SUCCESS(nRetCode <= 0);
 
-            if (GetFullPackage(&m_RecvFD, m_szRecvBuffer))
-            {
-                ProcessPackage((byte*)m_szRecvBuffer, m_RecvFD.uProtoSize);
-            }
-        }
-    }
+    bRetCode = m_RecvFD.RecvQueue.push(m_szRecvBuffer, nRetCode);
+    JYLOG_PROCESS_ERROR(bRetCode);
 
+    bRetCode = GetFullPackage(&m_RecvFD, m_szRecvBuffer);
+    JY_PROCESS_SUCCESS(!bRetCode);
+
+    ProcessPackage((byte*)m_szRecvBuffer, m_RecvFD.uProtoSize);
+
+Exit1:
     bResult = true;
 Exit0:
-    if (!bResult && m_bRunFlag)
+    if (!bResult)
     {
-        m_bRunFlag = false;
+        Close();
         ConnectionLost();
     }
     return;
@@ -84,41 +85,26 @@ Exit0:
 bool TcpClient::Send(void* pbyData, size_t uDataLen)
 {
     bool bResult = false;
-    int nRetCode = 0;
-    char* pOffset = (char*)pbyData;
-    timeval timeout{0, 0};
+    bool bRetCode = false;
 
-    JY_PROCESS_ERROR(m_bRunFlag);
+    JY_PROCESS_SUCCESS(!m_bRunFlag);
     JYLOG_PROCESS_ERROR(pbyData);
 
-    while (uDataLen > 0)
-    {
-        nRetCode = CanSend(m_Socket, &timeout);
-        JYLOG_PROCESS_ERROR(nRetCode != 0);
-        if (nRetCode < 0)
-        {
-            JY_PROCESS_CONTINUE(SocketCanRestore());
-            goto Exit0;
-        }
+    // Async
+    JYLOG_PROCESS_ERROR(uDataLen + 2 < sizeof(m_szSendBuffer));
 
-        nRetCode = send(m_Socket, pOffset, uDataLen, 0);
-        JYLOG_PROCESS_ERROR(nRetCode != 0);
+    *(WORD*)m_szSendBuffer = (WORD)uDataLen;
+    memcpy(m_szSendBuffer + 2, pbyData, uDataLen);
 
-        if (nRetCode < 0)
-        {
-            JY_PROCESS_CONTINUE(SocketCanRestore());
-            goto Exit0;
-        }
+    bRetCode = _Send(m_Socket, m_szSendBuffer, uDataLen + 2);
+    JYLOG_PROCESS_ERROR(bRetCode);
 
-        pOffset += nRetCode;
-        uDataLen -= nRetCode;
-    }
-
+Exit1:
     bResult = true;
 Exit0:
-    if (!bResult && m_bRunFlag)
+    if (!bResult)
     {
-        m_bRunFlag = false;
+        Close();
         ConnectionLost();
     }
     return bResult;
@@ -134,6 +120,6 @@ void TcpClient::Close()
     if (m_bRunFlag)
     {
         m_bRunFlag = false;
+        closesocket(m_Socket);
     }
-    
 }
