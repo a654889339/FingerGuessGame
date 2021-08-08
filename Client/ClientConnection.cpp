@@ -30,7 +30,7 @@ bool ClientConnection::Init(const char szIP[], int nPort)
     bRetCode = Connect(szIP, nPort);
     JYLOG_PROCESS_ERROR(bRetCode);
 
-    bRetCode = DoS2CHandshakeRequest();
+    bRetCode = DoC2SHandshakeRequest();
     JYLOG_PROCESS_ERROR(bRetCode);
 
     JY_STD_BOOL_END
@@ -48,14 +48,16 @@ void ClientConnection::Active()
 
 void ClientConnection::DisConnect()
 {
-
+    Close();
 }
 
-bool ClientConnection::DoS2CHandshakeRequest()
+bool ClientConnection::DoC2SHandshakeRequest()
 {
     bool bResult = false;
     bool bRetCode = false;
     C2S_HANDSHAKE_REQUEST Request;
+
+    Request.wProtocolID = c2s_handshake_request;
 
     bRetCode = Send((byte*)&Request, sizeof(Request));
     JYLOG_PROCESS_ERROR(bRetCode);
@@ -92,7 +94,6 @@ void ClientConnection::ProcessPackage(byte* pbyData, size_t uDataLen)
     JYLOG_PROCESS_ERROR(uDataLen >= sizeof(PROTOCOL_HEADER));
     JYLOG_PROCESS_ERROR(s2c_begin < pHeader->wProtocolID && pHeader->wProtocolID < s2c_end);
 
-    uDataLen -= sizeof(PROTOCOL_HEADER);
     if (m_nProtocolSize[pHeader->wProtocolID] != UNDEFINED_PROTOCOL_SIZE)
     {
         JYLOG_PROCESS_ERROR(uDataLen == m_nProtocolSize[pHeader->wProtocolID]);
@@ -108,5 +109,5 @@ void ClientConnection::ProcessPackage(byte* pbyData, size_t uDataLen)
 
 void ClientConnection::ConnectionLost()
 {
-
+    g_pClient->Quit();
 }

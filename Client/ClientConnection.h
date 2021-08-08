@@ -16,7 +16,7 @@ public:
     void Active();
     void DisConnect();
 
-    bool DoS2CHandshakeRequest();
+    bool DoC2SHandshakeRequest();
 
 private:
     void OnS2CHandshakeRespond(BYTE* pbyData, size_t uSize);

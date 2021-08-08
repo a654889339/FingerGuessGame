@@ -82,7 +82,6 @@ void ServerConnection::ProcessPackage(int nConnIndex, byte* pbyData, size_t uDat
     JYLOG_PROCESS_ERROR(uDataLen >= sizeof(PROTOCOL_HEADER));
     JYLOG_PROCESS_ERROR(c2s_begin < pHeader->wProtocolID && pHeader->wProtocolID < c2s_end);
 
-    uDataLen -= sizeof(PROTOCOL_HEADER);
     if (m_nProtocolSize[pHeader->wProtocolID] != UNDEFINED_PROTOCOL_SIZE)
     {
         JYLOG_PROCESS_ERROR(uDataLen == m_nProtocolSize[pHeader->wProtocolID]);

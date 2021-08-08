@@ -7,8 +7,8 @@ class CycleQueue
 public:
     CycleQueue()
     {
-        m_nBegin = 0;
-        m_nEnd = 0;
+        m_uBegin = 0;
+        m_uEnd = 0;
         m_uQueueLen = 0;
         m_pQueue = NULL;
     }
@@ -38,23 +38,23 @@ public:
     bool push(T* pszData, size_t uDataLen)
     {
         bool bResult = false;
-        int nEnd = 0;
-        int nCopyNum = 0;
+        size_t uEnd = 0;
+        size_t uCopyNum = 0;
 
         JYLOG_PROCESS_ERROR(pszData);
         JYLOG_PROCESS_ERROR(uDataLen);
         JYLOG_PROCESS_ERROR(uDataLen + size() < m_uQueueLen);
 
-        nEnd = min(m_nEnd + uDataLen, m_uQueueLen);
-        nCopyNum = nEnd - m_nEnd;
+        uEnd = min(m_uEnd + uDataLen, m_uQueueLen);
+        uCopyNum = uEnd - m_uEnd;
 
-        memcpy(m_pQueue + m_nEnd, pszData, sizeof(T) * nCopyNum);
-        m_nEnd = (m_nEnd + uDataLen) % m_uQueueLen;
+        memcpy(m_pQueue + m_uEnd, pszData, sizeof(T) * uCopyNum);
+        m_uEnd = (m_uEnd + uDataLen) % m_uQueueLen;
 
-        uDataLen -= nCopyNum;
+        uDataLen -= uCopyNum;
         JY_PROCESS_SUCCESS(uDataLen == 0);
 
-        memcpy(m_pQueue, pszData + nCopyNum, sizeof(T) * uDataLen);
+        memcpy(m_pQueue, pszData + uCopyNum, sizeof(T) * uDataLen);
 
     Exit1:
         bResult = true;
@@ -81,21 +81,21 @@ public:
     bool get(size_t uGetSize, T* pszData)
     {
         bool bResult = false;
-        int nEnd = 0;
-        int nCopyNum = 0;
+        size_t uEnd = 0;
+        size_t uCopyNum = 0;
 
         JYLOG_PROCESS_ERROR(pszData);
         JYLOG_PROCESS_ERROR(uGetSize);
         JYLOG_PROCESS_ERROR(uGetSize <= size());
 
-        nEnd = min(m_nEnd + uGetSize, m_uQueueLen);
-        nCopyNum = nEnd - m_nEnd;
-        memcpy(pszData, m_pQueue + m_nEnd, sizeof(T) * nCopyNum);
+        uEnd = min(m_uBegin + uGetSize, m_uQueueLen);
+        uCopyNum = uEnd - m_uBegin;
+        memcpy(pszData, m_pQueue + m_uBegin, sizeof(T) * uCopyNum);
 
-        uGetSize -= nCopyNum;
+        uGetSize -= uCopyNum;
         JY_PROCESS_SUCCESS(uGetSize == 0);
 
-        memcpy(pszData + nCopyNum, m_pQueue, sizeof(T) * uGetSize);
+        memcpy(pszData + uCopyNum, m_pQueue, sizeof(T) * uGetSize);
 
     Exit1:
         bResult = true;
@@ -105,12 +105,12 @@ public:
 
     void clear()
     {
-        m_nBegin = m_nEnd = 0;
+        m_uBegin = m_uEnd = 0;
     }
 
     size_t size()
     {
-        return m_nBegin <= m_nEnd ? m_nEnd - m_nBegin : m_uQueueLen - m_nBegin + m_nEnd;
+        return m_uBegin <= m_uEnd ? m_uEnd - m_uBegin : m_uQueueLen - m_uBegin + m_uEnd;
     }
 
     size_t res_size(){return m_uQueueLen - size() - 1;}
@@ -121,14 +121,14 @@ private:
         bool bResult = false;
 
         JYLOG_PROCESS_ERROR(uPopSize <= size());
-        m_nEnd = (m_nEnd + uPopSize) % m_uQueueLen;
+        m_uBegin = (m_uBegin + uPopSize) % m_uQueueLen;
 
         bResult = true;
     Exit0:
         return bResult;
     };
-    int m_nBegin;
-    int m_nEnd;
+    size_t m_uBegin;
+    size_t m_uEnd;
     size_t m_uQueueLen;
     T* m_pQueue;
 };

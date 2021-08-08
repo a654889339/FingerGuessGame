@@ -5,7 +5,7 @@ TcpClient::TcpClient()
 {
     m_bRunFlag = false;
     m_Socket = INVALID_SOCKET;
-    InitNetwork();
+    _InitNetwork();
 
     memset(m_szRecvBuffer, 0, sizeof(m_szRecvBuffer));
 }
@@ -13,7 +13,7 @@ TcpClient::TcpClient()
 TcpClient::~TcpClient()
 {
     Close();
-    UnInitNetwork();
+    _UnInitNetwork();
 }
 
 bool TcpClient::Connect(const char szIP[], int nPort)
@@ -56,17 +56,35 @@ void TcpClient::ProcessNetwork()
 {
     bool bResult = false;
     bool bRetCode = false;
-    int  nRetCode = 0;
+    int nRetCode = 0;
 
     JY_PROCESS_SUCCESS(!m_bRunFlag);
 
+    nRetCode = _CanRecv(m_Socket);
+    JY_PROCESS_SUCCESS(nRetCode == 0);
+    if (nRetCode < 0)
+    {
+        nRetCode = _SocketCanRestore();
+        JY_PROCESS_SUCCESS(nRetCode);
+
+        goto Exit0;
+    }
+
     nRetCode = recv(m_Socket, m_szRecvBuffer, min(m_RecvFD.RecvQueue.res_size(), sizeof(m_szRecvBuffer)), 0);
-    JY_PROCESS_SUCCESS(nRetCode <= 0);
+    JY_PROCESS_SUCCESS(nRetCode == 0);
+
+    if (nRetCode < 0)
+    {
+        nRetCode = _SocketCanRestore();
+        JY_PROCESS_SUCCESS(nRetCode);
+
+        goto Exit0;
+    }
 
     bRetCode = m_RecvFD.RecvQueue.push(m_szRecvBuffer, nRetCode);
     JYLOG_PROCESS_ERROR(bRetCode);
 
-    bRetCode = GetFullPackage(&m_RecvFD, m_szRecvBuffer);
+    bRetCode = _GetFullPackage(&m_RecvFD, m_szRecvBuffer);
     JY_PROCESS_SUCCESS(!bRetCode);
 
     ProcessPackage((byte*)m_szRecvBuffer, m_RecvFD.uProtoSize);
@@ -90,7 +108,7 @@ bool TcpClient::Send(void* pbyData, size_t uDataLen)
     JY_PROCESS_SUCCESS(!m_bRunFlag);
     JYLOG_PROCESS_ERROR(pbyData);
 
-    // Async
+    // Async + encrypt + Compress
     JYLOG_PROCESS_ERROR(uDataLen + 2 < sizeof(m_szSendBuffer));
 
     *(WORD*)m_szSendBuffer = (WORD)uDataLen;

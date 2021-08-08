@@ -150,14 +150,12 @@
     <ClCompile Include="PlayerManager.cpp" />
     <ClCompile Include="ServerConnection.cpp" />
     <ClCompile Include="ServerWorld.cpp" />
-    <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerManager.h" />
     <ClInclude Include="ServerConnection.h" />
     <ClInclude Include="ServerWorld.h" />
-    <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

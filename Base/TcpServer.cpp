@@ -5,16 +5,17 @@ TcpServer::TcpServer()
 {
     m_Socket = INVALID_SOCKET;
     m_bRunFlag = false;
-    InitNetwork();
+    _InitNetwork();
     FD_ZERO(&m_SocketReadSet);
 
-    memset(m_szRecvBuffer, 0, sizeof(m_szRecvBuffer));
+    for (int i = 0; i < MAX_ACCEPT_CONNECTION; i++)
+        m_nConnecFlag[i] = INVALID_SOCKET;
 }
 
 TcpServer::~TcpServer()
 {
     Close();
-    UnInitNetwork();
+    _UnInitNetwork();
 }
 
 bool TcpServer::Bind(const char szIP[], int nPort)
@@ -46,6 +47,7 @@ bool TcpServer::Bind(const char szIP[], int nPort)
 void TcpServer::ProcessNetwork()
 {
     bool bResult = false;
+    bool bRetCode = false;
     int nRetCode = 0;
     RecvFD* pszRecvFD = NULL;
     timeval timeout{ 0,0 };
@@ -56,44 +58,48 @@ void TcpServer::ProcessNetwork()
     CheckFD = m_SocketReadSet;
 
     nRetCode = select(0, &CheckFD, nullptr, nullptr, &timeout);
-    JY_PROCESS_ERROR(nRetCode != SOCKET_ERROR);
+    JYLOG_PROCESS_ERROR(nRetCode != SOCKET_ERROR);
 
     for (int i = 0; i < (int)CheckFD.fd_count; i++)
     {
-        pszRecvFD = GetRecvFD(i);
-        JYLOG_PROCESS_CONTINUE(pszRecvFD);
-
-        SOCKET CheckSocket = CheckFD.fd_array[i];
-        if (CheckSocket == m_Socket)
+        SOCKET ClientSocket = CheckFD.fd_array[i];
+        if (ClientSocket == m_Socket)
         {
-            SOCKET NewClient;
-            sockaddr_in remoteAddr;
-            int nAddrlen = sizeof(remoteAddr);
+            JYLOG_PROCESS_CONTINUE(m_SocketReadSet.fd_count < MAX_ACCEPT_CONNECTION);
 
-            NewClient = accept(m_Socket, (SOCKADDR*)&remoteAddr, &nAddrlen);
-            JYLOG_PROCESS_CONTINUE(NewClient != INVALID_SOCKET);
-            FD_SET(NewClient, &m_SocketReadSet);
-
-            pszRecvFD->Clear();
-            pszRecvFD->bConnFlag = true;
-
-            NewConnection(i, inet_ntoa(remoteAddr.sin_addr), remoteAddr.sin_port);
+            AcceptConnection();
         }
         else
         {
-            nRetCode = recv(CheckSocket, m_szRecvBuffer, sizeof(m_szRecvBuffer), 0);
-            if (nRetCode == SOCKET_ERROR || nRetCode == 0)
+            pszRecvFD = m_ClientManager.Find(ClientSocket);
+            JYLOG_PROCESS_CONTINUE(pszRecvFD);
+
+            nRetCode = _CanRecv(ClientSocket);
+            JY_TRUE_CONTINUE(nRetCode == 0);
+            if (nRetCode < 0)
             {
-                pszRecvFD->bConnFlag = false;
-                closesocket(CheckSocket);
-                FD_CLR(CheckSocket, &m_SocketReadSet);
-                DisConnection(i);
+                JY_TRUE_CONTINUE(_SocketCanRestore());
+
+                Shutdown(pszRecvFD->nConnIndex);
+                continue;
             }
-            else
+
+            nRetCode = recv(ClientSocket, m_szRecvBuffer, sizeof(m_szRecvBuffer), 0);
+            JY_TRUE_CONTINUE(nRetCode == 0);
+
+            if (nRetCode < 0)
             {
-                if (GetFullPackage(pszRecvFD, m_szRecvBuffer))
-                    ProcessPackage(i, (byte*)m_szRecvBuffer, pszRecvFD->uProtoSize);
+                JY_TRUE_CONTINUE(_SocketCanRestore());
+
+                Shutdown(pszRecvFD->nConnIndex);
+                continue;
             }
+
+            bRetCode = pszRecvFD->RecvQueue.push(m_szRecvBuffer, (size_t)nRetCode);
+            if (!bRetCode)
+                Shutdown(pszRecvFD->nConnIndex);
+            else if (_GetFullPackage(pszRecvFD, m_szRecvBuffer))
+                ProcessPackage(pszRecvFD->nConnIndex, (byte*)m_szRecvBuffer, pszRecvFD->uProtoSize);
         }
     }
 
@@ -117,13 +123,16 @@ bool TcpServer::Send(int nConnIndex, void* pbyData, size_t uDataLen)
     JYLOG_PROCESS_ERROR(IsAlive(nConnIndex));
     JYLOG_PROCESS_ERROR(pbyData);
 
-    // Async
+    ClientSocket = GetClientSocket(nConnIndex);
+    JY_PROCESS_ERROR(ClientSocket != INVALID_SOCKET);
+
+    // Async + encrypt + Compress
     JYLOG_PROCESS_ERROR(uDataLen + 2 < sizeof(m_szSendBuffer));
 
     *(WORD*)m_szSendBuffer = (WORD)uDataLen;
     memcpy(m_szSendBuffer + 2, pbyData, uDataLen);
 
-    bRetCode = _Send(m_SocketReadSet.fd_array[nConnIndex], m_szSendBuffer, uDataLen + 2);
+    bRetCode = _Send(ClientSocket, m_szSendBuffer, uDataLen + 2);
     JYLOG_PROCESS_ERROR(bRetCode);
 
     bResult = true;
@@ -137,35 +146,96 @@ Exit0:
 
 void TcpServer::Close()
 {
-    if (m_bRunFlag)
-    {
-        m_bRunFlag = false;
-        closesocket(m_Socket);
-        FD_ZERO(&m_SocketReadSet);
-    }
+    JY_PROCESS_ERROR(m_bRunFlag);
+
+    m_bRunFlag = false;
+    closesocket(m_Socket);
+    FD_ZERO(&m_SocketReadSet);
+
+    JY_STD_VOID_END
+}
+
+void TcpServer::Shutdown(int nConnIndex)
+{
+    SOCKET ClientSocket = INVALID_SOCKET;
+
+    JY_PROCESS_ERROR(m_bRunFlag);
+
+    ClientSocket = GetClientSocket(nConnIndex);
+    JY_PROCESS_ERROR(ClientSocket != INVALID_SOCKET);
+
+    m_ClientManager.Remove(ClientSocket);
+    closesocket(ClientSocket);
+    FD_CLR(ClientSocket, &m_SocketReadSet);
+
+    DisConnection(nConnIndex);
+
+    JY_STD_VOID_END
 }
 //////////////////////////////////////////////////////////////////////////
-RecvFD* TcpServer::GetRecvFD(int nConnIndex)
+void TcpServer::AcceptConnection()
+{
+    int nConnIndex = INVALID_CONNINDEX;
+    int nAddrlen = 0;
+    RecvFD* pszRecvFD = NULL;
+    SOCKET NewClient = INVALID_SOCKET;
+    sockaddr_in remoteAddr;
+
+    for (int i = 0; i < MAX_ACCEPT_CONNECTION; i++)
+    {
+        if (m_nConnecFlag[i] == INVALID_SOCKET)
+        {
+            nConnIndex = i;
+            break;
+        }
+    }
+    JYLOG_PROCESS_ERROR(nConnIndex != INVALID_CONNINDEX);
+
+    NewClient = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+    nAddrlen = sizeof(remoteAddr);
+
+    NewClient = accept(m_Socket, (SOCKADDR*)&remoteAddr, &nAddrlen);
+    JYLOG_PROCESS_ERROR(NewClient != INVALID_SOCKET);
+
+
+    pszRecvFD = m_ClientManager.Add(NewClient);
+    JYLOG_PROCESS_ERROR(pszRecvFD);
+
+    pszRecvFD->Connect(NewClient, nConnIndex);
+
+    m_nConnecFlag[nConnIndex] = NewClient;
+    FD_SET(NewClient, &m_SocketReadSet);
+
+    NewConnection(nConnIndex, inet_ntoa(remoteAddr.sin_addr), remoteAddr.sin_port);
+
+    JY_STD_VOID_END
+}
+
+RecvFD* TcpServer::GetClientFD(int nConnIndex)
 {
     RecvFD* pResult = NULL;
+    SOCKET ClientSocket = INVALID_SOCKET;
 
-    JYLOG_PROCESS_ERROR(nConnIndex >= 0 && nConnIndex < MAX_ACCEPT_CONNECTION);
+    ClientSocket = GetClientSocket(nConnIndex);
+    JY_PROCESS_ERROR(ClientSocket != INVALID_SOCKET);
 
-    pResult = &m_szRecvFD[nConnIndex];
+    pResult = m_ClientManager.Find(ClientSocket);
 Exit0:
     return pResult;
 }
 
+SOCKET TcpServer::GetClientSocket(int nConnIndex)
+{
+    SOCKET Result = INVALID_SOCKET;
+
+    JYLOG_PROCESS_ERROR(nConnIndex >= 0 && nConnIndex < MAX_ACCEPT_CONNECTION);
+
+    Result = m_nConnecFlag[nConnIndex];
+Exit0:
+    return Result;
+}
+
 bool TcpServer::IsAlive(int nConnIndex)
 {
-    bool bResult = false;
-    RecvFD* pClientFD = NULL;
-
-    pClientFD = GetRecvFD(nConnIndex);
-    JY_PROCESS_ERROR(pClientFD);
-    JY_PROCESS_ERROR(pClientFD->bConnFlag);
-
-    bResult = true;
-Exit0:
-    return bResult;
+    return GetClientSocket(nConnIndex) != INVALID_SOCKET;
 }

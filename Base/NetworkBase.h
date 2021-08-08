@@ -5,11 +5,11 @@
 
 #define MAX_ACCEPT_CONNECTION 105
 #define MAX_RECV_BUFFER_SIZE 65536
-
+#define INVALID_CONNINDEX - 1
 // Network
 static DWORD _dwNetwork_Init_Count = 0;
 
-static bool InitNetwork()
+static bool _InitNetwork()
 {
     bool bResult = false;
 
@@ -29,7 +29,7 @@ Exit0:
     return bResult;
 }
 
-static void UnInitNetwork()
+static void _UnInitNetwork()
 {
     _dwNetwork_Init_Count--;
 
@@ -41,32 +41,25 @@ static void UnInitNetwork()
     }
 }
 
-static inline int SocketCanRestore()
+static inline int _SocketCanRestore()
 {
     return (WSAGetLastError() == EINTR);
 }
 
 // Send
 // return -1: error, 0: timeout, 1: success
-static inline int CanSend(int nSocket, const timeval* pTimeout)
+static inline int _CanSend(SOCKET Socket)
 {
     fd_set FDSet;
-    timeval TempTimeout;
-    timeval* pTempTimeout = NULL;
+    timeval timeout{ 0, 0 };
 
-    if (nSocket < 0)
+    if (Socket < 0)
         return -1;
 
     FD_ZERO(&FDSet);
-    FD_SET(nSocket, &FDSet);
+    FD_SET(Socket, &FDSet);
 
-    if (pTimeout)
-    {
-        TempTimeout = *pTimeout;
-        pTempTimeout = &TempTimeout;
-    }
-
-    int nRetCode = select(nSocket + 1, NULL, &FDSet, NULL, pTempTimeout);
+    int nRetCode = select(Socket + 1, NULL, &FDSet, NULL, &timeout);
 
     if (nRetCode == 0)
         return 0;
@@ -82,17 +75,16 @@ static bool _Send(SOCKET Socket, void* pbyData, size_t uDataLen)
     bool bResult = false;
     int nRetCode = 0;
     char* pOffset = (char*)pbyData;
-    timeval timeout{ 0, 0 };
 
     JYLOG_PROCESS_ERROR(pbyData);
 
     while (uDataLen > 0)
     {
-        nRetCode = CanSend(Socket, &timeout);
+        nRetCode = _CanSend(Socket);
         JYLOG_PROCESS_ERROR(nRetCode != 0);
         if (nRetCode < 0)
         {
-            JY_PROCESS_CONTINUE(SocketCanRestore());
+            JY_TRUE_CONTINUE(_SocketCanRestore());
             goto Exit0;
         }
 
@@ -101,7 +93,7 @@ static bool _Send(SOCKET Socket, void* pbyData, size_t uDataLen)
 
         if (nRetCode < 0)
         {
-            JY_PROCESS_CONTINUE(SocketCanRestore());
+            JY_TRUE_CONTINUE(_SocketCanRestore());
             goto Exit0;
         }
 
@@ -116,25 +108,18 @@ Exit0:
 
 // Recv
 // return -1: error, 0: timeout, 1: success
-static inline int CanRecv(int nSocket, const timeval* pTimeout)
+static inline int _CanRecv(SOCKET Socket)
 {
     fd_set FDSet;
-    timeval TempTimeout;
-    timeval* pTempTimeout = NULL;
+    timeval timeout{ 0, 0 };
 
-    if (nSocket < 0)
+    if (Socket < 0)
         return -1;
 
     FD_ZERO(&FDSet);
-    FD_SET(nSocket, &FDSet);
+    FD_SET(Socket, &FDSet);
 
-    if (pTimeout)
-    {
-        TempTimeout = *pTimeout;
-        pTempTimeout = &TempTimeout;
-    }
-
-    int nRetCode = select(nSocket + 1, &FDSet, NULL, NULL, pTempTimeout);
+    int nRetCode = select(Socket + 1, &FDSet, NULL, NULL, &timeout);
 
     if (nRetCode == 0)
         return 0;
@@ -149,6 +134,8 @@ static inline int CanRecv(int nSocket, const timeval* pTimeout)
 typedef CycleQueue<char> RECV_QUEUE;
 struct RecvFD
 {
+    SOCKET Socket;
+    int nConnIndex;
     bool bHaveProtoSize;
     size_t uProtoSize;
     bool bConnFlag;
@@ -162,14 +149,24 @@ struct RecvFD
 
     void Clear()
     {
+        Socket = INVALID_SOCKET;
+        nConnIndex = INVALID_CONNINDEX;
         bHaveProtoSize = false;
         uProtoSize = 0;
         bConnFlag = false;
         RecvQueue.clear();
     }
+
+    void Connect(SOCKET _Socket, int _nConnIndex)
+    {
+        Clear();
+        Socket = _Socket;
+        nConnIndex = _nConnIndex;
+        bConnFlag = true;
+    }
 };
 
-static bool GetFullPackage(RecvFD* pRecvFD, char* pszRecvBuffer)
+static bool _GetFullPackage(RecvFD* pRecvFD, char* pszRecvBuffer)
 {
     bool bResult = false;
     bool bRetCode = false;
@@ -177,16 +174,7 @@ static bool GetFullPackage(RecvFD* pRecvFD, char* pszRecvBuffer)
     JYLOG_PROCESS_ERROR(pRecvFD);
     JYLOG_PROCESS_ERROR(pszRecvBuffer);
 
-    if (pRecvFD->bHaveProtoSize)
-    {
-        JY_PROCESS_ERROR(pRecvFD->RecvQueue.size() >= pRecvFD->uProtoSize);
-
-        bRetCode = pRecvFD->RecvQueue.pop(pRecvFD->uProtoSize, pszRecvBuffer);
-        JYLOG_PROCESS_ERROR(bRetCode);
-
-        pRecvFD->bHaveProtoSize = false;
-    }
-    else
+    if (!pRecvFD->bHaveProtoSize)
     {
         JY_PROCESS_ERROR(pRecvFD->RecvQueue.size() >= 2);
         pRecvFD->bHaveProtoSize = true;
@@ -194,8 +182,16 @@ static bool GetFullPackage(RecvFD* pRecvFD, char* pszRecvBuffer)
         bRetCode = pRecvFD->RecvQueue.pop(2, pszRecvBuffer);
         JYLOG_PROCESS_ERROR(bRetCode);
 
-        pRecvFD->uProtoSize = pszRecvBuffer[0] << 8 | pszRecvBuffer[1];
+        pRecvFD->uProtoSize = *(WORD*)pszRecvBuffer;
     }
+
+    JY_PROCESS_ERROR(pRecvFD->bHaveProtoSize);
+    JY_PROCESS_ERROR(pRecvFD->RecvQueue.size() >= pRecvFD->uProtoSize);
+
+    bRetCode = pRecvFD->RecvQueue.pop(pRecvFD->uProtoSize, pszRecvBuffer);
+    JYLOG_PROCESS_ERROR(bRetCode);
+
+    pRecvFD->bHaveProtoSize = false;
 
     bResult = true;
 Exit0:

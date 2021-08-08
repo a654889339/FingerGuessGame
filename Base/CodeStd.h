@@ -7,6 +7,12 @@
 Exit0: \
     return bResult;
 
+#define JY_STD_BOOL_SUCCESS_END \
+Exit1: \
+    bResult = true; \
+Exit0: \
+    return bResult;
+
 #define JY_STD_VOID_END \
 Exit0: \
     return ;
@@ -53,7 +59,7 @@ Exit0: \
             goto Exit1;         \
     } WHILE_FALSE_NO_WARNING
 
-#define JY_PROCESS_CONTINUE(Condition) \
+#define JY_TRUE_CONTINUE(Condition) \
         if ((Condition))       \
             continue;         \
 

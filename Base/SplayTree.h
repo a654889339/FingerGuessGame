@@ -251,7 +251,7 @@ private:
         if (m_pRoot == NULL)
         {
             m_pRoot = pNode;
-            goto Exit0;
+            goto Exit1;
         }
 
         pLower = LowerBound(pNode->Key);
@@ -278,9 +278,7 @@ private:
 
         Splay(pNode, NULL);
 
-        bResult = true;
-    Exit0:
-        return bResult;
+        JY_STD_BOOL_SUCCESS_END
     }
 
     void Erase(Node* pNode)
