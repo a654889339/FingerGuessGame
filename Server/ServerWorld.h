@@ -3,6 +3,7 @@
 
 #include "PlayerManager.h"
 #include "ServerConnection.h"
+#include "DBManager.h"
 
 class ServerWorld
 {
@@ -23,6 +24,7 @@ private:
 public:
     PlayerManager    m_PlayerManager;
     ServerConnection m_Connection;
+    DBManager        m_DB;
 
 private:
     char m_szIP[_NAME_LEN];

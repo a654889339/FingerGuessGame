@@ -88,7 +88,10 @@ void ServerConnection::OnC2SLoginRequest(int nConnIndex, byte* pbyData, size_t u
 
     bRetCode = bRetCode = g_pServer->m_PlayerManager.AddPlayer(nConnIndex, pRequest->szName);
     JY_PROCESS_ERROR(bRetCode);
-    
+
+    bRetCode = g_pServer->m_PlayerManager.SetPlayerState(nConnIndex, egame_state_idle);
+    JY_PROCESS_ERROR(bRetCode);
+
     nResult = pec_login_succeed;
 Exit0:
     DoS2CLoginRespond(nConnIndex, nResult);

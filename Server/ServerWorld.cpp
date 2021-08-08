@@ -18,14 +18,20 @@ bool ServerWorld::Init()
 {
     bool bResult = false;
     bool bRetCode = false;
+    bool bDBInitFlag = false;
     bool bConnInitFlag = false;
 
     bRetCode = LoadConfig();
     JYLOG_PROCESS_ERROR(bRetCode);
 
+    bRetCode = m_DB.Init();
+    JYLOG_PROCESS_ERROR(bRetCode);
+    bDBInitFlag = true;
+
     bRetCode = m_Connection.Init(m_szIP, m_nPort);
     JYLOG_PROCESS_ERROR(bRetCode);
     bConnInitFlag = true;
+
 
     bResult = true;
 Exit0:
@@ -36,6 +42,12 @@ Exit0:
             bConnInitFlag = false;
             m_Connection.UnInit();
         }
+
+        if (bDBInitFlag)
+        {
+            bDBInitFlag = false;
+            m_DB.UnInit();
+        }
     }
     return bResult;
 }
@@ -43,6 +55,7 @@ Exit0:
 void ServerWorld::UnInit()
 {
     m_Connection.UnInit();
+    m_DB.UnInit();
 }
 
 void ServerWorld::Run()
@@ -52,6 +65,7 @@ void ServerWorld::Run()
         JY_PROCESS_ERROR(!CheckQuitComplete());
 
         m_Connection.Active();
+
         Sleep(10);
     }
 
@@ -61,7 +75,8 @@ void ServerWorld::Run()
 void ServerWorld::Quit()
 {
     m_bQuitFlag = true;
-    m_Connection.Close();
+    m_Connection.Quit();
+    m_DB.Quit();
 }
 
 bool ServerWorld::CheckQuitComplete()
@@ -70,6 +85,7 @@ bool ServerWorld::CheckQuitComplete()
 
     JY_PROCESS_ERROR(m_bQuitFlag);
     JY_PROCESS_ERROR(!m_Connection.IsEnable());
+    JY_PROCESS_ERROR(!m_DB.IsEnable());
 
     JY_STD_BOOL_END;
 }

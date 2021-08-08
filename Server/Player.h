@@ -1,6 +1,7 @@
 #ifndef _PLAYER_H_
 #define _PLAYER_H_
 
+
 class Player
 {
 public:
@@ -14,6 +15,7 @@ public:
     DWORD m_dwPlayerID;
     int m_nConnIndex;
     char m_szName[_NAME_LEN];
+    GameState m_eState;
 };
 
 #endif

@@ -3,7 +3,14 @@
 
 #include "Player.h"
 
-class PlayerManager
+class PLAYER_STATE_WAITING : public PLAYER_STATE_TRIGGER
+{
+public:
+    void Enter(GameState eState, Player* pPlayer);
+    void Leave(GameState eState, Player* pInfo);
+};
+
+class PlayerManager : public PLAYER_STATE_MANAGER
 {
 public:
     PlayerManager();
@@ -12,13 +19,19 @@ public:
     bool Init();
     void UnInit();
 
+    // Add or Remove
     bool AddPlayer(int nConnIndex, const char szName[]);
     void RemovePlayer(int nConnIndex);
 
+    // Modify
+    bool SetPlayerState(int nConnIndex, GameState eState);
+
+    // Query
     bool IsOnline(const char szName[]);
 
-private:
-    DWORD LoadPlayerFromDB(const char szName[]);
+    Player* GetPlayer(DWORD dwPlayerID);
+    Player* GetPlayer(int nConnIndex);
+    Player* GetPlayer(const char szName[]);
 
 private:
     typedef SplayTree<DWORD, Player> PLAYER_MANAGER_MAP;
@@ -30,6 +43,7 @@ private:
     typedef SplayTree<int, DWORD> PLAYER_CONNINDEX_MAP;
     PLAYER_CONNINDEX_MAP m_ConnIndexManager;
 
+    PLAYER_STATE_WAITING m_PlayerStateWaiting;
 };
 
 #endif

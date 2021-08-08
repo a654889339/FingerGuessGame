@@ -6,6 +6,7 @@
 #define MAX_ACCEPT_CONNECTION 105
 #define MAX_RECV_BUFFER_SIZE 65536
 #define INVALID_CONNINDEX - 1
+#define CONNECTION_TIME_OUT 60
 // Network
 static DWORD _dwNetwork_Init_Count = 0;
 
@@ -138,6 +139,7 @@ struct RecvFD
     int nConnIndex;
     bool bHaveProtoSize;
     size_t uProtoSize;
+    time_t nActiveTime;
     bool bConnFlag;
     RECV_QUEUE RecvQueue;
 
@@ -153,6 +155,7 @@ struct RecvFD
         nConnIndex = INVALID_CONNINDEX;
         bHaveProtoSize = false;
         uProtoSize = 0;
+        nActiveTime = 0;
         bConnFlag = false;
         RecvQueue.clear();
     }
@@ -162,6 +165,7 @@ struct RecvFD
         Clear();
         Socket = _Socket;
         nConnIndex = _nConnIndex;
+        nActiveTime = time(NULL);
         bConnFlag = true;
     }
 };

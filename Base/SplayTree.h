@@ -215,7 +215,7 @@ private:
                 break;
             }
 
-            pIter = pIter->ch[Key < pIter->Key];
+            pIter = pIter->ch[pIter->Key < Key];
         }
 
         if (pIter)

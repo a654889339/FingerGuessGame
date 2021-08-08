@@ -13,7 +13,7 @@ public:
     virtual void ProcessNetwork() final;
     virtual bool Send(void* pbyData, size_t uDataLen) final;
     virtual bool IsEnable() final;
-    virtual void Close() final;
+    virtual void Quit() final;
 
 protected:
     virtual void ProcessPackage(byte* pbyData, size_t uDataLen) = 0;

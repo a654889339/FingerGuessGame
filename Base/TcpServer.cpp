@@ -14,7 +14,7 @@ TcpServer::TcpServer()
 
 TcpServer::~TcpServer()
 {
-    Close();
+    Quit();
     _UnInitNetwork();
 }
 
@@ -51,6 +51,7 @@ void TcpServer::ProcessNetwork()
     int nRetCode = 0;
     RecvFD* pszRecvFD = NULL;
     timeval timeout{ 0,0 };
+    time_t nTimeNow = time(NULL);
     FD_SET CheckFD;
 
     JY_PROCESS_SUCCESS(!m_bRunFlag);
@@ -74,6 +75,13 @@ void TcpServer::ProcessNetwork()
             pszRecvFD = m_ClientManager.Find(ClientSocket);
             JYLOG_PROCESS_CONTINUE(pszRecvFD);
 
+            if (pszRecvFD->nActiveTime + CONNECTION_TIME_OUT < nTimeNow)
+            {
+                printf("[ProcessNetwork] Timeout:%d.\n", pszRecvFD->nConnIndex);
+                Shutdown(pszRecvFD->nConnIndex);
+                continue;
+            }
+
             nRetCode = _CanRecv(ClientSocket);
             JY_TRUE_CONTINUE(nRetCode == 0);
             if (nRetCode < 0)
@@ -95,6 +103,7 @@ void TcpServer::ProcessNetwork()
                 continue;
             }
 
+            pszRecvFD->nActiveTime = nTimeNow;
             bRetCode = pszRecvFD->RecvQueue.push(m_szRecvBuffer, (size_t)nRetCode);
             if (!bRetCode)
                 Shutdown(pszRecvFD->nConnIndex);
@@ -108,7 +117,7 @@ Exit1:
 Exit0:
     if (!bResult)
     {
-        Close();
+        Quit();
     }
     return;
 }
@@ -149,7 +158,7 @@ bool TcpServer::IsEnable()
     return m_bRunFlag;
 }
 
-void TcpServer::Close()
+void TcpServer::Quit()
 {
     JY_PROCESS_ERROR(m_bRunFlag);
 

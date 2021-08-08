@@ -56,7 +56,7 @@ void ClientConnection::Active()
 
 void ClientConnection::DisConnect()
 {
-    Close();
+    Quit();
 }
 
 bool ClientConnection::DoC2SPingRequest()

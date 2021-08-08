@@ -12,7 +12,7 @@ TcpClient::TcpClient()
 
 TcpClient::~TcpClient()
 {
-    Close();
+    Quit();
     _UnInitNetwork();
 }
 
@@ -94,7 +94,7 @@ Exit1:
 Exit0:
     if (!bResult)
     {
-        Close();
+        Quit();
         ConnectionLost();
     }
     return;
@@ -122,7 +122,7 @@ Exit1:
 Exit0:
     if (!bResult)
     {
-        Close();
+        Quit();
         ConnectionLost();
     }
     return bResult;
@@ -133,7 +133,7 @@ bool TcpClient::IsEnable()
     return m_bRunFlag;
 }
 
-void TcpClient::Close()
+void TcpClient::Quit()
 {
     if (m_bRunFlag)
     {

@@ -5,6 +5,7 @@ Player::Player()
 {
     m_dwPlayerID = ERROR_ID;
     m_nConnIndex = 0;
+    m_eState = egame_state_login;
     memset(m_szName, 0, sizeof(m_szName));
 }
 

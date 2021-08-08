@@ -145,6 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DBManager.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerManager.cpp" />
@@ -152,6 +153,8 @@
     <ClCompile Include="ServerWorld.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DBBase.h" />
+    <ClInclude Include="DBManager.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerManager.h" />
     <ClInclude Include="ServerConnection.h" />
