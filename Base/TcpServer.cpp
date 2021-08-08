@@ -139,9 +139,14 @@ bool TcpServer::Send(int nConnIndex, void* pbyData, size_t uDataLen)
 Exit0:
     if (!bResult && m_bRunFlag)
     {
-        DisConnection(nConnIndex);
+        Shutdown(nConnIndex);
     }
     return bResult;
+}
+
+bool TcpServer::IsEnable()
+{
+    return m_bRunFlag;
 }
 
 void TcpServer::Close()
@@ -149,6 +154,13 @@ void TcpServer::Close()
     JY_PROCESS_ERROR(m_bRunFlag);
 
     m_bRunFlag = false;
+
+    m_ClientManager.Clear();
+
+    for (int i = 0; i < MAX_ACCEPT_CONNECTION; i++)
+        if (m_nConnecFlag[i] != INVALID_SOCKET)
+            closesocket(m_nConnecFlag[i]);
+
     closesocket(m_Socket);
     FD_ZERO(&m_SocketReadSet);
 
@@ -196,7 +208,6 @@ void TcpServer::AcceptConnection()
 
     NewClient = accept(m_Socket, (SOCKADDR*)&remoteAddr, &nAddrlen);
     JYLOG_PROCESS_ERROR(NewClient != INVALID_SOCKET);
-
 
     pszRecvFD = m_ClientManager.Add(NewClient);
     JYLOG_PROCESS_ERROR(pszRecvFD);

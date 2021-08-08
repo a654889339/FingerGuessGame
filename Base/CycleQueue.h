@@ -22,6 +22,8 @@ public:
     {
         bool bResult = false;
 
+        JYLOG_PROCESS_ERROR(uQueueSize > 1);
+
         if (m_pQueue)
         {
             m_uQueueLen = 0;
@@ -101,6 +103,39 @@ public:
         bResult = true;
     Exit0:
         return bResult;
+    }
+
+    int find(T _Match)
+    {
+        int nPos = -1;
+
+        if (m_uBegin <= m_uEnd)
+        {
+            for (size_t i = m_uBegin; i < m_uEnd; i++)
+                if (m_pQueue[i] == _Match)
+                {
+                    nPos = (int)(i - m_uBegin);
+                    break;
+                }
+        }
+        else
+        {
+            for (size_t i = m_uBegin; i < m_uQueueLen; i++)
+                if (m_pQueue[i] == _Match)
+                {
+                    nPos = (int)(i - m_uBegin);
+                    break;
+                }
+
+            for (size_t i = 0; i < m_uEnd; i++)
+                if (m_pQueue[i] == _Match)
+                {
+                    nPos = (int)(m_uQueueLen - m_uBegin + i);
+                    break;
+                }
+        }
+
+        return nPos;
     }
 
     void clear()

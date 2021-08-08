@@ -65,7 +65,6 @@ void ServerConnection::OnC2SHandshakeRequest(int nConnIndex, byte* pbyData, size
 
     bRetCode = bRetCode = g_pServer->m_PlayerManager.AddPlayer(nConnIndex, pRequest->szName);
     JY_PROCESS_ERROR(bRetCode);
-
     
     bResult = true;
 Exit0:
@@ -97,10 +96,10 @@ void ServerConnection::ProcessPackage(int nConnIndex, byte* pbyData, size_t uDat
 
 void ServerConnection::NewConnection(int nConnIndex, const char szIP[], int nPort)
 {
-
+    printf("[ServerConnection] New Client Connect: %s:%d, ConnIndex:%d\n", szIP, nPort, nConnIndex);
 }
 
 void ServerConnection::DisConnection(int nConnIndex)
 {
-
+    printf("[ServerConnection] Client Connect Lost: ConnIndex:%d\n", nConnIndex);
 }

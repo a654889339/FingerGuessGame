@@ -72,13 +72,13 @@ void ClientConnection::OnS2CHandshakeRespond(BYTE* pbyData, size_t uSize)
 
     JYLOG_PROCESS_ERROR(pRespond);
 
-    if (pRespond->bSuccess)
-    {
+    printf("[ClientConnection] Handshake to Server: %s:%d %s.\n", 
+        g_pClient->m_szIP, g_pClient->m_nPort, 
+        pRespond->bSuccess ? "Success" : "Fail"
+    );
 
-    }
-    else
+    if (!pRespond->bSuccess)
     {
-        Close();
         g_pClient->Quit();
     }
 

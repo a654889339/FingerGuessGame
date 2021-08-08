@@ -15,6 +15,7 @@ public:
 
     void Run();
     void Quit();
+    bool CheckQuitComplete();
 
 private:
     bool LoadConfig();

@@ -1,6 +1,7 @@
 #ifndef _CLIENT_WORLD_H_
 #define _CLIENT_WORLD_H_
 
+#include "ClientControl.h"
 #include "ClientConnection.h"
 
 class ClientWorld
@@ -21,11 +22,14 @@ private:
 
 
 public:
+    char m_szIP[_NAME_LEN];
+    int  m_nPort;
+
+public:
+    ClientControl    m_Control;
     ClientConnection m_Connection;
 
 private:
-    char m_szIP[_NAME_LEN];
-    int  m_nPort;
     bool m_bQuitFlag;
 };
 

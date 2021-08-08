@@ -4,7 +4,7 @@
 #include "TcpServer.h"
 #include "Protocol.h"
 
-class ServerConnection : TcpServer
+class ServerConnection : public TcpServer
 {
 public:
     ServerConnection();

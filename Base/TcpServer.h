@@ -17,6 +17,7 @@ public:
 
     virtual void ProcessNetwork() final;
     virtual bool Send(int nConnIndex, void* pbyData, size_t uDataLen) final;
+    virtual bool IsEnable() final;
     virtual void Close() final;
     virtual void Shutdown(int nConnIndex) final;
 

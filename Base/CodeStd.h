@@ -72,8 +72,4 @@ Exit0: \
             continue;         \
         }                       \
 
-#define JY_PROCESS_BREAK(Condition) \
-        if (!(Condition))       \
-            break;         \
-
 #endif

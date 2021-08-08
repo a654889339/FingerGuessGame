@@ -49,14 +49,29 @@ void ServerWorld::Run()
 {
     while(true)
     {
+        JY_PROCESS_ERROR(!CheckQuitComplete());
+
         m_Connection.Active();
         Sleep(10);
     }
+
+    JY_STD_VOID_END
 }
 
 void ServerWorld::Quit()
 {
     m_bQuitFlag = true;
+    m_Connection.Close();
+}
+
+bool ServerWorld::CheckQuitComplete()
+{
+    bool bResult = false;
+
+    JY_PROCESS_ERROR(m_bQuitFlag);
+    JY_PROCESS_ERROR(!m_Connection.IsEnable());
+
+    JY_STD_BOOL_END;
 }
 
 //////////////////////////////////////////////////////////////////////////
