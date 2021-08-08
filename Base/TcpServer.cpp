@@ -179,6 +179,7 @@ void TcpServer::Shutdown(int nConnIndex)
     m_ClientManager.Remove(ClientSocket);
     closesocket(ClientSocket);
     FD_CLR(ClientSocket, &m_SocketReadSet);
+    m_nConnecFlag[nConnIndex] = INVALID_SOCKET;
 
     DisConnection(nConnIndex);
 

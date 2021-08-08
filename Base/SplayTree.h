@@ -3,6 +3,26 @@
 
 #include <cassert>
 
+
+struct STString
+{
+    char szString[_NAME_LEN];
+    STString(){memset(szString, 0, sizeof(szString));}
+    STString(const char _szStr[])
+    {
+        strncpy(szString, _szStr, sizeof(szString));
+        szString[sizeof(szString) - 1] = '\0';
+    }
+    bool operator < (const STString& _Right) const 
+    {
+        return strcmp(szString, _Right.szString) < 0;
+    }
+    bool operator == (const STString& _Right) const
+    {
+        return strcmp(szString, _Right.szString) == 0;
+    }
+};
+
 template <typename STKey, typename STValue>
 class SplayTree
 {
@@ -60,6 +80,17 @@ public:
             delete pNode;
         }
         return pResult;
+    }
+
+    bool Add(STKey Key, STValue Value)
+    {
+        bool bResult = false;
+        STValue* pValue = Add(Key);
+
+        JY_PROCESS_ERROR(pValue);
+        *pValue = Value;
+
+        JY_STD_BOOL_END
     }
 
     STValue* Find(STKey Key)
@@ -202,7 +233,7 @@ private:
             PushDown(pIter);
             if (pIter->Key < Key)
             {
-                if (!pResult || pResult->Key > pIter->Key)
+                if (!pResult || pResult->Key < pIter->Key)
                     pResult = pIter;
             }
             else if (pIter->Key == Key)
@@ -227,9 +258,9 @@ private:
 
         while (pIter) {
             PushDown(pIter);
-            if (pIter->Key > Key)
+            if (Key < pIter->Key)
             {
-                if (!pResult || pResult->Key < pIter->Key)
+                if (!pResult || pIter->Key < pResult->Key)
                     pResult = pIter;
             }
 

@@ -15,10 +15,12 @@ public:
 
     void Active();
 
-    bool DoS2CHandshakeRespond(int nConnIndex, bool bSuccess);
+    bool DoS2CPingRespond(int nConnIndex);
+    bool DoS2CLoginRespond(int nConnIndex, int nRetCode);
 
 private:
-    void OnC2SHandshakeRequest(int nConnIndex, byte* pbyData, size_t uDataLen);
+    void OnC2SPingRequest(int nConnIndex, byte* pbyData, size_t uDataLen);
+    void OnC2SLoginRequest(int nConnIndex, byte* pbyData, size_t uDataLen);
 
     void ProcessPackage(int nConnIndex, byte* pbyData, size_t uDataLen);
     void NewConnection(int nConnIndex, const char szIP[], int nPort);

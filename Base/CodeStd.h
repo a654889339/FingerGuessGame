@@ -52,6 +52,16 @@ Exit0: \
             goto Exit0;         \
     } WHILE_FALSE_NO_WARNING
 
+#define JY_PROCESS_ERROR_RET_CODE(Condition, Code) \
+    do  \
+    {   \
+        if (!(Condition))       \
+        {   \
+            nResult = Code; \
+            goto Exit0;         \
+        } \
+    } WHILE_FALSE_NO_WARNING
+
 #define JY_PROCESS_SUCCESS(Condition) \
     do  \
     {   \

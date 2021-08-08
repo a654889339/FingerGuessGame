@@ -12,7 +12,8 @@ ServerConnection::ServerConnection()
     memset(m_ProcessProtocolFuns, 0, sizeof(m_ProcessProtocolFuns));
     memset(m_nProtocolSize, 0, sizeof(m_nProtocolSize));
 
-    REGISTER_EXTERNAL_FUNC(c2s_handshake_request, &ServerConnection::OnC2SHandshakeRequest, sizeof(C2S_HANDSHAKE_REQUEST));
+    REGISTER_EXTERNAL_FUNC(c2s_ping_request, &ServerConnection::OnC2SPingRequest, sizeof(C2S_PING_REQUEST));
+    REGISTER_EXTERNAL_FUNC(c2s_login_request, &ServerConnection::OnC2SLoginRequest, sizeof(C2S_LOGIN_REQUEST));
 }
 ServerConnection::~ServerConnection()
 {
@@ -40,14 +41,28 @@ void ServerConnection::Active()
     ProcessNetwork();
 }
 
-bool ServerConnection::DoS2CHandshakeRespond(int nConnIndex, bool bSuccess)
+bool ServerConnection::DoS2CPingRespond(int nConnIndex)
 {
     bool bResult = false;
     bool bRetCode = false;
-    S2C_HANDSHAKE_RESPOND Respond;
+    S2C_PING_RESPOND Respond;
 
-    Respond.wProtocolID = s2c_handshake_respond;
-    Respond.bSuccess = bSuccess;
+    Respond.wProtocolID = s2c_ping_respond;
+
+    bRetCode = Send(nConnIndex, &Respond, sizeof(Respond));
+    JYLOG_PROCESS_ERROR(bRetCode);
+
+    JY_STD_BOOL_END
+}
+
+bool ServerConnection::DoS2CLoginRespond(int nConnIndex, int nRetCode)
+{
+    bool bResult = false;
+    bool bRetCode = false;
+    S2C_LOGIN_RESPOND Respond;
+
+    Respond.wProtocolID = s2c_login_respond;
+    Respond.nRetCode = nRetCode;
 
     bRetCode = Send(nConnIndex, &Respond, sizeof(Respond));
     JYLOG_PROCESS_ERROR(bRetCode);
@@ -57,18 +72,30 @@ bool ServerConnection::DoS2CHandshakeRespond(int nConnIndex, bool bSuccess)
 
 //////////////////////////////////////////////////////////////////////////
 
-void ServerConnection::OnC2SHandshakeRequest(int nConnIndex, byte* pbyData, size_t uDataLen)
+void ServerConnection::OnC2SPingRequest(int nConnIndex, byte* pbyData, size_t uDataLen)
 {
-    bool                   bResult = false;
+    DoS2CPingRespond(nConnIndex);
+}
+
+void ServerConnection::OnC2SLoginRequest(int nConnIndex, byte* pbyData, size_t uDataLen)
+{
+    int                    nResult = pec_invalid;
     bool                   bRetCode = false;
-    C2S_HANDSHAKE_REQUEST* pRequest = (C2S_HANDSHAKE_REQUEST*)pbyData;
+    C2S_LOGIN_REQUEST* pRequest = (C2S_LOGIN_REQUEST*)pbyData;
+
+    bRetCode = g_pServer->m_PlayerManager.IsOnline(pRequest->szName);
+    JY_PROCESS_ERROR_RET_CODE(!bRetCode, pec_login_already_exist);
 
     bRetCode = bRetCode = g_pServer->m_PlayerManager.AddPlayer(nConnIndex, pRequest->szName);
     JY_PROCESS_ERROR(bRetCode);
     
-    bResult = true;
+    nResult = pec_login_succeed;
 Exit0:
-    DoS2CHandshakeRespond(nConnIndex, bResult);
+    DoS2CLoginRespond(nConnIndex, nResult);
+    if (nResult != pec_login_succeed)
+    {
+        Shutdown(nConnIndex);
+    }
     return;
 }
 
@@ -102,4 +129,5 @@ void ServerConnection::NewConnection(int nConnIndex, const char szIP[], int nPor
 void ServerConnection::DisConnection(int nConnIndex)
 {
     printf("[ServerConnection] Client Connect Lost: ConnIndex:%d\n", nConnIndex);
+    g_pServer->m_PlayerManager.RemovePlayer(nConnIndex);
 }

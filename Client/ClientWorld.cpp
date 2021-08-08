@@ -5,6 +5,9 @@ ClientWorld::ClientWorld()
 {
     m_nPort = 0;
     m_bQuitFlag = false;
+    m_nTimeNow = 0;
+    m_eGameState = egame_state_login;
+
     memset(m_szIP, 0, sizeof(m_szIP));
 }
 
@@ -19,6 +22,8 @@ bool ClientWorld::Init()
     bool bRetCode = false;
     bool bControlInitFlag = false;
     bool bConnInitFlag = false;
+
+    m_nTimeNow = time(NULL);
 
     bRetCode = LoadConfig();
     JYLOG_PROCESS_ERROR(bRetCode);
@@ -60,6 +65,8 @@ void ClientWorld::Run()
 {
     while (true)
     {
+        m_nTimeNow = time(NULL);
+
         JY_PROCESS_ERROR(!CheckQuitComplete());
 
         m_Control.Active();
@@ -93,6 +100,10 @@ bool ClientWorld::LoadConfig()
 
     strcpy(m_szIP, "127.0.0.1");
     m_nPort = 5566;
+
+    printf("[ClientWorld] Input your name:\n");
+    scanf("%s", m_szPlayerName);
+    m_szPlayerName[sizeof(m_szPlayerName) - 1] = '\0';
 
     JY_STD_BOOL_END
 }
