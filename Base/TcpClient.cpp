@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "TcpClient.h"
 
+#ifdef _CLIENT
 TcpClient::TcpClient()
 {
     m_bRunFlag = false;
@@ -141,3 +142,5 @@ void TcpClient::Quit()
         closesocket(m_Socket);
     }
 }
+
+#endif

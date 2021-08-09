@@ -1,12 +1,26 @@
 #include "stdafx.h"
 #include "ClientWorld.h"
 
+void PLAYER_STATE_IDLE::Enter(GameState eState, Player* pPlayer)
+{
+    puts(szStateContent[m_eState]);
+}
+
+void PLAYER_STATE_WAITING::Enter(GameState eState, Player* pPlayer)
+{
+    puts(szStateContent[m_eState]);
+}
+
+void PLAYER_STATE_WAITING::Leave(GameState eState, Player* pPlayer)
+{
+    puts(eState == egame_state_playing ? "匹配成功" : "匹配失败，离开房间");
+}
+
 ClientWorld::ClientWorld()
 {
     m_nPort = 0;
     m_bQuitFlag = false;
     m_nTimeNow = 0;
-    m_eGameState = egame_state_login;
 
     memset(m_szIP, 0, sizeof(m_szIP));
 }
@@ -84,6 +98,12 @@ void ClientWorld::Quit()
     m_Connection.DisConnect();
 }
 
+void ClientWorld::SetState(GameState eState)
+{
+    SetPlayerState(&m_Player, eState);
+}
+
+// Private
 bool ClientWorld::CheckQuitComplete()
 {
     bool bResult = false;

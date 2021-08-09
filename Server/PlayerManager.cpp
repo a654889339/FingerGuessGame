@@ -35,7 +35,7 @@ bool PlayerManager::Init()
 
 void PlayerManager::UnInit()
 {
-    m_PlayerManager.Clear();
+    m_PlayerManager.clear();
 }
 
 // Add or Remove
@@ -52,15 +52,15 @@ bool PlayerManager::AddPlayer(int nConnIndex, const char szName[])
     dwPlayerID = g_pServer->m_DB.LoadPlayerIDByName(szName);
     JYLOG_PROCESS_ERROR(dwPlayerID != ERROR_ID);
 
-    bRetCode = m_NameManager.Add(STString(szName), dwPlayerID);
+    bRetCode = m_NameManager.add(STString(szName), dwPlayerID);
     JYLOG_PROCESS_ERROR(bRetCode);
     bAddNameFlag = true;
 
-    bRetCode = m_ConnIndexManager.Add(nConnIndex, dwPlayerID);
+    bRetCode = m_ConnIndexManager.add(nConnIndex, dwPlayerID);
     JYLOG_PROCESS_ERROR(bRetCode);
     bAddConnIndexFlag = true;
 
-    pPlayer = m_PlayerManager.Add(dwPlayerID);
+    pPlayer = m_PlayerManager.add(dwPlayerID);
     JYLOG_PROCESS_ERROR(pPlayer);
     bAddPlayerFlag = true;
 
@@ -79,19 +79,19 @@ Exit0:
         if (bAddNameFlag)
         {
             bAddNameFlag = false;
-            m_NameManager.Remove(szName);
+            m_NameManager.remove(szName);
         }
 
         if (bAddConnIndexFlag)
         {
             bAddConnIndexFlag = false;
-            m_ConnIndexManager.Remove(nConnIndex);
+            m_ConnIndexManager.remove(nConnIndex);
         }
 
         if (bAddPlayerFlag)
         {
             bAddPlayerFlag = false;
-            m_PlayerManager.Remove(dwPlayerID);
+            m_PlayerManager.remove(dwPlayerID);
         }
     }
     return bResult;
@@ -105,56 +105,44 @@ void PlayerManager::RemovePlayer(int nConnIndex)
     pPlayer = GetPlayer(nConnIndex);
     JYLOG_PROCESS_ERROR(pPlayer);
 
-    bRetCode = m_NameManager.Remove(STString(pPlayer->m_szName));
+    bRetCode = m_NameManager.remove(STString(pPlayer->m_szName));
     JYLOG_PROCESS_ERROR(bRetCode);
 
     printf("[PlayerManager] Player %s Logout.\n", pPlayer->m_szName);
 
-    bRetCode = m_PlayerManager.Remove(pPlayer->m_dwPlayerID);
+    bRetCode = m_PlayerManager.remove(pPlayer->m_dwPlayerID);
     JYLOG_PROCESS_ERROR(bRetCode);
 
-    bRetCode = m_ConnIndexManager.Remove(nConnIndex);
+    bRetCode = m_ConnIndexManager.remove(nConnIndex);
     JYLOG_PROCESS_ERROR(bRetCode);
 
     JY_STD_VOID_END
 }
 
 // Modify
-bool PlayerManager::SetPlayerState(int nConnIndex, GameState eState)
+bool PlayerManager::SetState(int nConnIndex, GameState eState)
 {
     bool bResult = false;
+    bool bRetCode = false;
     Player* pPlayer = NULL;
-    PLAYER_STATE_TRIGGER* pTrigger = NULL;
-
-    JYLOG_PROCESS_ERROR(eState >= egame_state_begin && eState < egame_state_end);
 
     pPlayer = GetPlayer(nConnIndex);
-    JY_PROCESS_ERROR(pPlayer);
-    JYLOG_PROCESS_ERROR(pPlayer->m_eState >= egame_state_begin && pPlayer->m_eState < egame_state_end);
+    JYLOG_PROCESS_ERROR(pPlayer);
 
-    pTrigger = m_PlayerState[pPlayer->m_eState];
-    JYLOG_PROCESS_ERROR(pTrigger);
-
-    pTrigger->Leave(eState, pPlayer);
-
-    pTrigger = m_PlayerState[eState];
-    JYLOG_PROCESS_ERROR(pTrigger);
-
-    pTrigger->Enter(pPlayer->m_eState, pPlayer);
-    pPlayer->m_eState = eState;
+    bRetCode = SetPlayerState(pPlayer, eState);
+    JYLOG_PROCESS_ERROR(bRetCode);
 
     JY_STD_BOOL_END
 }
-
 // Query
 bool PlayerManager::IsOnline(const char szName[])
 {
-    return m_NameManager.Find(STString(szName)) != NULL;
+    return m_NameManager.find(STString(szName)) != NULL;
 }
 
 Player* PlayerManager::GetPlayer(DWORD dwPlayerID)
 {
-    return m_PlayerManager.Find(dwPlayerID);
+    return m_PlayerManager.find(dwPlayerID);
 }
 
 Player* PlayerManager::GetPlayer(int nConnIndex)
@@ -162,7 +150,7 @@ Player* PlayerManager::GetPlayer(int nConnIndex)
     Player* pResult = NULL;
     DWORD* pdwPlayerID = NULL;
 
-    pdwPlayerID = m_ConnIndexManager.Find(nConnIndex);
+    pdwPlayerID = m_ConnIndexManager.find(nConnIndex);
     JY_PROCESS_ERROR(pdwPlayerID);
 
     pResult = GetPlayer(*pdwPlayerID);
@@ -175,7 +163,7 @@ Player* PlayerManager::GetPlayer(const char szName[])
     Player* pResult = NULL;
     DWORD* pdwPlayerID = NULL;
 
-    pdwPlayerID = m_NameManager.Find(STString(szName));
+    pdwPlayerID = m_NameManager.find(STString(szName));
     JY_PROCESS_ERROR(pdwPlayerID);
 
     pResult = GetPlayer(*pdwPlayerID);

@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "TcpServer.h"
 
+#ifdef _SERVER
+
 TcpServer::TcpServer()
 {
     m_Socket = INVALID_SOCKET;
@@ -72,7 +74,7 @@ void TcpServer::ProcessNetwork()
         }
         else
         {
-            pszRecvFD = m_ClientManager.Find(ClientSocket);
+            pszRecvFD = m_ClientManager.find(ClientSocket);
             JYLOG_PROCESS_CONTINUE(pszRecvFD);
 
             if (pszRecvFD->nActiveTime + CONNECTION_TIME_OUT < nTimeNow)
@@ -164,7 +166,7 @@ void TcpServer::Quit()
 
     m_bRunFlag = false;
 
-    m_ClientManager.Clear();
+    m_ClientManager.clear();
 
     for (int i = 0; i < MAX_ACCEPT_CONNECTION; i++)
         if (m_nConnecFlag[i] != INVALID_SOCKET)
@@ -185,7 +187,7 @@ void TcpServer::Shutdown(int nConnIndex)
     ClientSocket = GetClientSocket(nConnIndex);
     JY_PROCESS_ERROR(ClientSocket != INVALID_SOCKET);
 
-    m_ClientManager.Remove(ClientSocket);
+    m_ClientManager.remove(ClientSocket);
     closesocket(ClientSocket);
     FD_CLR(ClientSocket, &m_SocketReadSet);
     m_nConnecFlag[nConnIndex] = INVALID_SOCKET;
@@ -219,7 +221,7 @@ void TcpServer::AcceptConnection()
     NewClient = accept(m_Socket, (SOCKADDR*)&remoteAddr, &nAddrlen);
     JYLOG_PROCESS_ERROR(NewClient != INVALID_SOCKET);
 
-    pszRecvFD = m_ClientManager.Add(NewClient);
+    pszRecvFD = m_ClientManager.add(NewClient);
     JYLOG_PROCESS_ERROR(pszRecvFD);
 
     pszRecvFD->Connect(NewClient, nConnIndex);
@@ -240,7 +242,7 @@ RecvFD* TcpServer::GetClientFD(int nConnIndex)
     ClientSocket = GetClientSocket(nConnIndex);
     JY_PROCESS_ERROR(ClientSocket != INVALID_SOCKET);
 
-    pResult = m_ClientManager.Find(ClientSocket);
+    pResult = m_ClientManager.find(ClientSocket);
 Exit0:
     return pResult;
 }
@@ -260,3 +262,5 @@ bool TcpServer::IsAlive(int nConnIndex)
 {
     return GetClientSocket(nConnIndex) != INVALID_SOCKET;
 }
+
+#endif

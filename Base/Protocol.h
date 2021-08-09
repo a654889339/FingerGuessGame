@@ -31,7 +31,6 @@ enum PROTOCOL_ERROR_CODE
     pec_login_succeed,
     pec_login_already_exist,
 
-
 };
 
 #pragma pack(1)

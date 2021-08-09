@@ -30,9 +30,6 @@
     <ClCompile Include="PlayerManager.cpp">
       <Filter>PlayerManager</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>PlayerManager</Filter>
-    </ClCompile>
     <ClCompile Include="DBManager.cpp">
       <Filter>DB</Filter>
     </ClCompile>
@@ -45,9 +42,6 @@
       <Filter>Network</Filter>
     </ClInclude>
     <ClInclude Include="PlayerManager.h">
-      <Filter>PlayerManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
       <Filter>PlayerManager</Filter>
     </ClInclude>
     <ClInclude Include="DBBase.h">

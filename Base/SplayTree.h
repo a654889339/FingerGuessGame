@@ -3,7 +3,6 @@
 
 #include <cassert>
 
-
 struct STString
 {
     char szString[_NAME_LEN];
@@ -42,8 +41,8 @@ class SplayTree
 
         ~Node()
         {
-            assert(pValue);
-            delete pValue;
+            if (pValue)
+                delete pValue;
         }
     };
 
@@ -55,10 +54,10 @@ public:
 
     ~SplayTree()
     {
-        Clear();
+        clear();
     }
 
-    STValue* Add(STKey Key)
+    STValue* add(STKey Key)
     {
         STValue* pResult = NULL;
         Node* pNode = NULL;
@@ -82,10 +81,10 @@ public:
         return pResult;
     }
 
-    bool Add(STKey Key, STValue Value)
+    bool add(STKey Key, STValue Value)
     {
         bool bResult = false;
-        STValue* pValue = Add(Key);
+        STValue* pValue = add(Key);
 
         JY_PROCESS_ERROR(pValue);
         *pValue = Value;
@@ -93,17 +92,15 @@ public:
         JY_STD_BOOL_END
     }
 
-    STValue* Find(STKey Key)
+    STValue* find(STKey Key)
     {
-        Node* pResult = NULL;
-
-        pResult = FindNode(Key);
+        Node* pResult = FindNode(Key);
         if (pResult)
             return pResult->pValue;
         return NULL;
     }
 
-    bool Remove(STKey Key)
+    bool remove(STKey Key)
     {
         bool bResult = false;
         Node* pIter = NULL;
@@ -135,7 +132,7 @@ public:
         return bResult;
     }
 
-    void Clear()
+    void clear()
     {
         DFS_Clear(m_pRoot);
         m_pRoot = NULL;

@@ -19,6 +19,9 @@
     <Filter Include="Engine">
       <UniqueIdentifier>{57bcedbd-45ce-460d-8248-34a9a19f870f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Player">
+      <UniqueIdentifier>{ed48b462-78f1-4889-b182-cd7752af4c75}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GlobalDef.h">
@@ -50,6 +53,9 @@
     </ClInclude>
     <ClInclude Include="SplayTree.h">
       <Filter>STL</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

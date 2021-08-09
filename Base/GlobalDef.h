@@ -7,7 +7,7 @@
 enum GameState
 {
     egame_state_begin = 0,
-    egame_state_login = egame_state_begin,
+    egame_state_login,
     egame_state_idle,
     egame_state_waiting,
     egame_state_playing,
@@ -15,30 +15,25 @@ enum GameState
     egame_state_end,
 };
 
-class Player;
-
-class PLAYER_STATE_TRIGGER
+const char szStateContent[egame_state_end][1024] = 
 {
-public:
-    virtual void Enter(GameState eState, Player* pPlayer) {};
-    virtual void Leave(GameState eState, Player* pPlayer) {};
+    // egame_state_begin
+    "",
+
+    // egame_state_login
+    "",
+
+    // egame_state_idle
+    "1.查看在线用户列表\n"
+    "2.开设战局\n"
+    "3.加入战局\n"
+    "4.退出游戏",
+
+    // egame_state_waiting
+    "等待其他人加入",
+
+    // egame_state_playing
+    "",
 };
 
-class PLAYER_STATE_MANAGER
-{
-public:
-    PLAYER_STATE_MANAGER()
-    {
-        for (int i = egame_state_login; i < egame_state_end; i++)
-        {
-            m_PlayerState[i] = &m_PlayerStateConst[i];
-        }
-    }
-
-public:
-    PLAYER_STATE_TRIGGER* m_PlayerState[egame_state_end];
-
-private:
-    PLAYER_STATE_TRIGGER m_PlayerStateConst[egame_state_end];
-};
 #endif

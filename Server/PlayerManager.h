@@ -24,7 +24,7 @@ public:
     void RemovePlayer(int nConnIndex);
 
     // Modify
-    bool SetPlayerState(int nConnIndex, GameState eState);
+    bool SetState(int nConnIndex, GameState eState);
 
     // Query
     bool IsOnline(const char szName[]);
