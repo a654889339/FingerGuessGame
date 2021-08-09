@@ -92,14 +92,6 @@ public:
         JY_STD_BOOL_END
     }
 
-    STValue* find(STKey Key)
-    {
-        Node* pResult = FindNode(Key);
-        if (pResult)
-            return pResult->pValue;
-        return NULL;
-    }
-
     bool remove(STKey Key)
     {
         bool bResult = false;
@@ -130,6 +122,20 @@ public:
         bResult = true;
     Exit0:
         return bResult;
+    }
+
+    STValue* find(STKey Key)
+    {
+        Node* pResult = FindNode(Key);
+        if (pResult)
+            return pResult->pValue;
+        return NULL;
+    }
+
+    template <typename STFunc>
+    bool traversal(STFunc& Func)
+    {
+        return DFS_Traversal(m_pRoot, Func);
     }
 
     void clear()
@@ -358,6 +364,28 @@ private:
             DFS_Clear(pNode->ch[i]);
 
         delete pNode;
+    }
+
+
+    template <typename STFunc>
+    bool DFS_Traversal(Node* pNode, STFunc& Func)
+    {
+        bool bResult = false;
+        bool bRetCode = false;
+
+        if (pNode == NULL)
+            return true;
+
+        for (int i = 0; i < 2; i++)
+        {
+            bRetCode = DFS_Traversal(pNode->ch[i], Func);
+            JY_PROCESS_ERROR(bRetCode);
+        }
+
+        bRetCode = Func(pNode->pValue);
+        JY_PROCESS_ERROR(bRetCode);
+
+        JY_STD_BOOL_END
     }
 
 private:

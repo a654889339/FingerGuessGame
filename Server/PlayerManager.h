@@ -33,10 +33,11 @@ public:
     Player* GetPlayer(int nConnIndex);
     Player* GetPlayer(const char szName[]);
 
-private:
+public:
     typedef SplayTree<DWORD, Player> PLAYER_MANAGER_MAP;
-    PLAYER_MANAGER_MAP m_PlayerManager;
+    PLAYER_MANAGER_MAP m_PlayerMap;
 
+private:
     typedef SplayTree<STString, DWORD> PLAYER_NAME_MANAGER;
     PLAYER_NAME_MANAGER m_NameManager;
 

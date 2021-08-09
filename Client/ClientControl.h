@@ -15,6 +15,9 @@ public:
     void Active();
 
 private:
+    void OnShow();
+    void OnCreate();
+    void OnJoin();
     void OnQuit();
 
     void Input();

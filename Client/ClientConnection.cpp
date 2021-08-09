@@ -15,6 +15,8 @@ ClientConnection::ClientConnection()
 
     REGISTER_EXTERNAL_FUNC(s2c_ping_respond, &ClientConnection::OnS2CPingRespond, sizeof(S2C_PING_RESPOND));
     REGISTER_EXTERNAL_FUNC(s2c_login_respond, &ClientConnection::OnS2CLoginRespond, sizeof(S2C_LOGIN_RESPOND));
+    REGISTER_EXTERNAL_FUNC(s2c_apply_all_player_respond, &ClientConnection::OnS2CApplyAllPlayerRespond, UNDEFINED_PROTOCOL_SIZE);
+    REGISTER_EXTERNAL_FUNC(s2c_create_game_respond, &ClientConnection::OnS2CCreateGameRespond, sizeof(S2C_CREATE_GAME_RESPOND));
 }
 
 ClientConnection::~ClientConnection()
@@ -90,6 +92,34 @@ bool ClientConnection::DoC2SLoginRequest()
     JY_STD_BOOL_END
 }
 
+bool ClientConnection::DoC2SApplyAllPlayerRequest()
+{
+    bool bResult = false;
+    bool bRetCode = false;
+    C2S_APPLY_ALL_PLAYER_REQUEST Request;
+
+    Request.wProtocolID = c2s_apply_all_player_request;
+
+    bRetCode = Send((byte*)&Request, sizeof(Request));
+    JYLOG_PROCESS_ERROR(bRetCode);
+
+    JY_STD_BOOL_END
+}
+
+bool ClientConnection::DoCreateGameRequest()
+{
+    bool bResult = false;
+    bool bRetCode = false;
+    C2S_CREATE_GAME_REQUEST Request;
+
+    Request.wProtocolID = c2s_create_game_request;
+
+    bRetCode = Send((byte*)&Request, sizeof(Request));
+    JYLOG_PROCESS_ERROR(bRetCode);
+
+    JY_STD_BOOL_END
+}
+
 // Private
 void ClientConnection::OnS2CPingRespond(BYTE* pbyData, size_t uSize)
 {
@@ -121,6 +151,41 @@ void ClientConnection::OnS2CLoginRespond(BYTE* pbyData, size_t uSize)
     }
 
     JY_STD_VOID_END
+}
+
+void ClientConnection::OnS2CApplyAllPlayerRespond(BYTE* pbyData, size_t uSize)
+{
+    S2C_APPLY_ALL_PLAYER_RESPOND* pRespond = (S2C_APPLY_ALL_PLAYER_RESPOND*)pbyData;
+    SHOW_PLAYER_INFO* pPlayerInfo = NULL;
+
+    JYLOG_PROCESS_ERROR(pRespond);
+
+    printf("在线人数: %d\n", pRespond->nCount);
+
+    pPlayerInfo = (SHOW_PLAYER_INFO*)pRespond->byData;
+    JYLOG_PROCESS_ERROR(pPlayerInfo);
+
+    for(int i = 0; i < pRespond->nCount; i++)
+    {
+        printf("%s %s\n", pPlayerInfo[i].szName, szGameState[(GameState)pPlayerInfo[i].nState]);
+    }
+
+    JY_STD_VOID_END
+}
+
+void ClientConnection::OnS2CCreateGameRespond(BYTE* pbyData, size_t uSize)
+{
+    S2C_CREATE_GAME_RESPOND *pRespond = (S2C_CREATE_GAME_RESPOND*) pbyData;
+    JYLOG_PROCESS_ERROR(pRespond);
+    if(pRespond->nRetCode == 1)
+    {
+        g_pClient->SetState(egame_state_waiting);
+    }
+    else
+    {
+        printf("%s", "创建失败");
+    }
+    JY_STD_VOID_END;
 }
 
 void ClientConnection::ProcessPackage(byte* pbyData, size_t uDataLen)

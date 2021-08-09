@@ -41,15 +41,16 @@ private:
 public:
     char m_szIP[_NAME_LEN];
     int  m_nPort;
-    time_t m_nTimeNow;
     char m_szPlayerName[_NAME_LEN];
-    Player m_Player;
 
-public:
+    Player m_Player;
+    time_t m_nTimeNow;
     ClientControl    m_Control;
     ClientConnection m_Connection;
 
 private:
+    PLAYER_STATE_IDLE    m_PlayerStateIdle;
+    PLAYER_STATE_WAITING m_PlayerStateWaiting;
     bool m_bQuitFlag;
 };
 

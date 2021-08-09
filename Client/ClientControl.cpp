@@ -12,6 +12,10 @@ ClientControl::ClientControl()
     memset(m_szInstruct, 0, sizeof(m_szInstruct));
     memset(m_ProcessProtocolFuns, 0, sizeof(m_ProcessProtocolFuns));
 
+
+    REGISTER_EXTERNAL_FUNC(cipc_show, &ClientControl::OnShow);
+    REGISTER_EXTERNAL_FUNC(cipc_create, &ClientControl::OnCreate);
+    REGISTER_EXTERNAL_FUNC(cipc_join, &ClientControl::OnJoin);
     REGISTER_EXTERNAL_FUNC(cipc_quit, &ClientControl::OnQuit);
 }
 
@@ -43,6 +47,22 @@ void ClientControl::Active()
 }
 
 //////////////////////////////////////////////////////////////////////////
+
+
+void ClientControl::OnShow()
+{
+    g_pClient->m_Connection.DoC2SApplyAllPlayerRequest();
+}
+
+void ClientControl::OnCreate()
+{
+    g_pClient->m_Connection.DoCreateGameRequest();
+}
+
+void ClientControl::OnJoin()
+{
+
+}
 
 void ClientControl::OnQuit()
 {

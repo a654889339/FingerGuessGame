@@ -18,11 +18,16 @@ bool ServerWorld::Init()
 {
     bool bResult = false;
     bool bRetCode = false;
+    bool bPlayerManagerInitFlag = false;
     bool bDBInitFlag = false;
     bool bConnInitFlag = false;
 
     bRetCode = LoadConfig();
     JYLOG_PROCESS_ERROR(bRetCode);
+
+    bRetCode = m_PlayerManager.Init();
+    JYLOG_PROCESS_ERROR(bRetCode);
+    bPlayerManagerInitFlag = true;
 
     bRetCode = m_DB.Init();
     JYLOG_PROCESS_ERROR(bRetCode);
@@ -32,11 +37,16 @@ bool ServerWorld::Init()
     JYLOG_PROCESS_ERROR(bRetCode);
     bConnInitFlag = true;
 
-
     bResult = true;
 Exit0:
     if (!bResult)
     {
+        if (bPlayerManagerInitFlag)
+        {
+            bPlayerManagerInitFlag = false;
+            m_PlayerManager.UnInit();
+        }
+
         if (bConnInitFlag)
         {
             bConnInitFlag = false;
@@ -54,6 +64,7 @@ Exit0:
 
 void ServerWorld::UnInit()
 {
+    m_PlayerManager.UnInit();
     m_Connection.UnInit();
     m_DB.UnInit();
 }
@@ -64,6 +75,7 @@ void ServerWorld::Run()
     {
         JY_PROCESS_ERROR(!CheckQuitComplete());
 
+        //m_DB.Active();
         m_Connection.Active();
 
         Sleep(10);

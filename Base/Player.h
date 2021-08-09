@@ -9,6 +9,7 @@ public:
     Player()
     {
         m_dwPlayerID = ERROR_ID;
+        m_nScore = 0;
         m_eState = egame_state_login;
         memset(m_szName, 0, sizeof(m_szName));
 #ifdef _SERVER
@@ -35,6 +36,7 @@ public:
 public:
     DWORD m_dwPlayerID;
     char m_szName[_NAME_LEN];
+    int m_nScore;
     GameState m_eState;
 #ifdef _SERVER
     int m_nConnIndex;

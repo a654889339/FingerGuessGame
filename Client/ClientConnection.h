@@ -18,10 +18,13 @@ public:
 
     bool DoC2SPingRequest();
     bool DoC2SLoginRequest();
-
+    bool DoC2SApplyAllPlayerRequest();
+    bool DoCreateGameRequest();
 private:
     void OnS2CPingRespond(BYTE* pbyData, size_t uSize);
     void OnS2CLoginRespond(BYTE* pbyData, size_t uSize);
+    void OnS2CApplyAllPlayerRespond(BYTE* pbyData, size_t uSize);
+    void OnS2CCreateGameRespond(BYTE* pbyData, size_t uSize);
 
     void ProcessPackage(byte* pbyData, size_t uDataLen);
     void ConnectionLost();

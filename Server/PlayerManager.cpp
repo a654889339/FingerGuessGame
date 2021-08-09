@@ -35,7 +35,7 @@ bool PlayerManager::Init()
 
 void PlayerManager::UnInit()
 {
-    m_PlayerManager.clear();
+    m_PlayerMap.clear();
 }
 
 // Add or Remove
@@ -60,7 +60,7 @@ bool PlayerManager::AddPlayer(int nConnIndex, const char szName[])
     JYLOG_PROCESS_ERROR(bRetCode);
     bAddConnIndexFlag = true;
 
-    pPlayer = m_PlayerManager.add(dwPlayerID);
+    pPlayer = m_PlayerMap.add(dwPlayerID);
     JYLOG_PROCESS_ERROR(pPlayer);
     bAddPlayerFlag = true;
 
@@ -91,7 +91,7 @@ Exit0:
         if (bAddPlayerFlag)
         {
             bAddPlayerFlag = false;
-            m_PlayerManager.remove(dwPlayerID);
+            m_PlayerMap.remove(dwPlayerID);
         }
     }
     return bResult;
@@ -110,7 +110,7 @@ void PlayerManager::RemovePlayer(int nConnIndex)
 
     printf("[PlayerManager] Player %s Logout.\n", pPlayer->m_szName);
 
-    bRetCode = m_PlayerManager.remove(pPlayer->m_dwPlayerID);
+    bRetCode = m_PlayerMap.remove(pPlayer->m_dwPlayerID);
     JYLOG_PROCESS_ERROR(bRetCode);
 
     bRetCode = m_ConnIndexManager.remove(nConnIndex);
@@ -142,7 +142,7 @@ bool PlayerManager::IsOnline(const char szName[])
 
 Player* PlayerManager::GetPlayer(DWORD dwPlayerID)
 {
-    return m_PlayerManager.find(dwPlayerID);
+    return m_PlayerMap.find(dwPlayerID);
 }
 
 Player* PlayerManager::GetPlayer(int nConnIndex)

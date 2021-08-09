@@ -15,25 +15,13 @@ enum GameState
     egame_state_end,
 };
 
-const char szStateContent[egame_state_end][1024] = 
+const char szGameState[egame_state_end][_NAME_LEN] = 
 {
-    // egame_state_begin
-    "",
-
-    // egame_state_login
-    "",
-
-    // egame_state_idle
-    "1.查看在线用户列表\n"
-    "2.开设战局\n"
-    "3.加入战局\n"
-    "4.退出游戏",
-
-    // egame_state_waiting
-    "等待其他人加入",
-
-    // egame_state_playing
-    "",
+    "失效",
+    "登录中",
+    "空闲",
+    "等待加入",
+    "正在游戏",
 };
 
 #endif
