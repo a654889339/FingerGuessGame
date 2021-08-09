@@ -16,9 +16,28 @@ void PLAYER_STATE_WAITING::Leave(GameState eState, Player* pPlayer)
     JY_STD_VOID_END
 }
 
+void PLAYER_STATE_PLAYING::Enter(GameState eState, Player* pPlayer)
+{
+    JYLOG_PROCESS_ERROR(pPlayer);
+
+    pPlayer->InitGame();
+
+    JY_STD_VOID_END
+}
+
+void PLAYER_STATE_PLAYING::Leave(GameState eState, Player* pPlayer)
+{
+    JYLOG_PROCESS_ERROR(pPlayer);
+
+    g_pServer->m_Connection.DoS2CGameResultNotify(pPlayer->m_nConnIndex, pPlayer->m_nScore, pPlayer->m_eGameResult);
+
+    JY_STD_VOID_END
+}
+
 PlayerManager::PlayerManager()
 {
     m_PlayerState[egame_state_waiting] = (PLAYER_STATE_TRIGGER*)&m_PlayerStateWaiting;
+    m_PlayerState[egame_state_playing] = (PLAYER_STATE_TRIGGER*)&m_PlayerStatePlaying;
 }
 
 PlayerManager::~PlayerManager()
@@ -134,6 +153,85 @@ bool PlayerManager::SetState(int nConnIndex, GameState eState)
 
     JY_STD_BOOL_END
 }
+
+bool PlayerManager::JoinGame(int nConnIndex, Player* pHost)
+{
+    bool bResult = false;
+    bool bRetCode = false;
+    Player* pGuest = NULL;
+
+    pGuest = GetPlayer(nConnIndex);
+    JYLOG_PROCESS_ERROR(pGuest);
+    JYLOG_PROCESS_ERROR(pHost->m_eState == egame_state_waiting);
+    JYLOG_PROCESS_ERROR(pGuest->m_eState == egame_state_idle);
+
+    pHost->m_dwFighterID = pGuest->m_dwPlayerID;
+    pGuest->m_dwFighterID = pHost->m_dwPlayerID;
+
+    SetPlayerState(pHost, egame_state_playing);
+    SetPlayerState(pGuest, egame_state_playing);
+
+    bRetCode = g_pServer->m_Connection.DoS2CPlayerJoinGameRespond(pHost->m_nConnIndex, pGuest->m_szName);
+    JYLOG_PROCESS_ERROR(bRetCode);
+
+    JY_STD_BOOL_END;
+}
+
+bool PlayerManager::TryEndGame(int nConnIndex)
+{
+    bool bResult = false;
+    Player* pA = NULL;
+    Player* pB = NULL;
+
+    pA = GetPlayer(nConnIndex);
+    JY_PROCESS_ERROR(pA);
+
+    pB = GetPlayer(pA->m_dwFighterID);
+    JY_PROCESS_ERROR(pB);
+
+    JY_PROCESS_SUCCESS(!pA->m_bOperate);
+    JY_PROCESS_SUCCESS(!pB->m_bOperate);
+
+    if (pA->m_eGameOperateCode == pB->m_eGameOperateCode)
+    {
+        pA->m_eGameResult = erc_draw;
+        pB->m_eGameResult = erc_draw;
+    }
+    else
+    {
+        if ((pA->m_eGameOperateCode + 1) % (int)egoc_total == pB->m_eGameOperateCode)
+        {
+            pA->m_eGameResult = erc_win;
+            pB->m_eGameResult = erc_lose;
+        }
+        else
+        {
+            pA->m_eGameResult = erc_lose;
+            pB->m_eGameResult = erc_win;
+        }
+    }
+
+    SetPlayerState(pA, egame_state_idle);
+    SetPlayerState(pB, egame_state_idle);
+
+Exit1:
+    bResult = true;
+Exit0:
+    if (!bResult)
+    {
+        if (pA)
+        {
+            SetPlayerState(pA, egame_state_idle);
+        }
+
+        if (pB)
+        {
+            SetPlayerState(pB, egame_state_idle);
+        }
+    }
+    return bResult;
+}
+
 // Query
 bool PlayerManager::IsOnline(const char szName[])
 {

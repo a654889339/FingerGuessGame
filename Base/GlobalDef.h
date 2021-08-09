@@ -24,4 +24,21 @@ const char szGameState[egame_state_end][_NAME_LEN] =
     "ÕıÔÚÓÎÏ·",
 };
 
+enum GameOperateCode
+{
+    egoc_rock = 0,
+    egoc_scissors,
+    egoc_paper,
+
+    egoc_total
+};
+
+enum GameResultCode
+{
+    erc_invalid,
+    erc_win,
+    erc_lose,
+    erc_draw,
+};
+
 #endif

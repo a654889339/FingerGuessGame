@@ -13,7 +13,9 @@ public:
         m_eState = egame_state_login;
         memset(m_szName, 0, sizeof(m_szName));
 #ifdef _SERVER
+        m_dwFighterID = ERROR_ID;
         m_nConnIndex = 0;
+        InitGame();
 #endif
     }
 
@@ -33,12 +35,25 @@ public:
 #endif
     void UnInit();
 
+#ifdef _SERVER
+    void InitGame()
+    {
+        m_eGameOperateCode = egoc_rock;
+        m_bOperate = false;
+        m_eGameResult = erc_invalid;
+    }
+#endif
+
 public:
     DWORD m_dwPlayerID;
     char m_szName[_NAME_LEN];
     int m_nScore;
     GameState m_eState;
 #ifdef _SERVER
+    DWORD m_dwFighterID;
+    GameOperateCode m_eGameOperateCode;
+    bool m_bOperate;
+    GameResultCode m_eGameResult;
     int m_nConnIndex;
 #endif
 };

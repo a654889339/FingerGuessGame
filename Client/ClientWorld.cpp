@@ -16,6 +16,17 @@ void PLAYER_STATE_WAITING::Leave(GameState eState, Player* pPlayer)
     puts(eState == egame_state_playing ? "匹配成功" : "回到大厅");
 }
 
+void PLAYER_STATE_PLAYING::Enter(GameState eState, Player* pPlayer)
+{
+    puts(szStateContent[m_eState]);
+}
+
+void PLAYER_STATE_PLAYING::Leave(GameState eState, Player* pPlayer)
+{
+    if (eState == egame_state_idle)
+        puts("回到大厅");
+}
+
 ClientWorld::ClientWorld()
 {
     m_nPort = 0;
@@ -24,6 +35,7 @@ ClientWorld::ClientWorld()
 
     m_PlayerState[egame_state_idle] = &m_PlayerStateIdle;
     m_PlayerState[egame_state_waiting] = &m_PlayerStateWaiting;
+    m_PlayerState[egame_state_playing] = &m_PlayerStatePlaying;
 
     memset(m_szIP, 0, sizeof(m_szIP));
 }
@@ -120,13 +132,24 @@ bool ClientWorld::CheckQuitComplete()
 bool ClientWorld::LoadConfig()
 {
     bool bResult = false;
+    bool bRetCode = false;
 
     strcpy(m_szIP, "127.0.0.1");
     m_nPort = 5566;
 
     printf("[ClientWorld] Input your name:\n");
-    scanf("%s", m_szPlayerName);
-    m_szPlayerName[sizeof(m_szPlayerName) - 1] = '\0';
+    while (true)
+    {
+        scanf("%s", m_szPlayerName);
+        m_szPlayerName[sizeof(m_szPlayerName) - 1] = '\0';
+        bRetCode = CheckNickName(m_szPlayerName);
+        if (bRetCode)
+        {
+            break;
+        }
+        else
+            puts("含有非法字符，请重新输入.");
+    }
 
     JY_STD_BOOL_END
 }

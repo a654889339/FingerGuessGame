@@ -82,6 +82,7 @@
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ClientBase.h" />
     <ClInclude Include="ClientConnection.h" />
     <ClInclude Include="ClientControl.h" />
     <ClInclude Include="ClientInputDef.h" />

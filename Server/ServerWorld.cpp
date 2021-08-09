@@ -101,7 +101,6 @@ bool ServerWorld::CheckQuitComplete()
 
     JY_STD_BOOL_END;
 }
-
 //////////////////////////////////////////////////////////////////////////
 
 bool ServerWorld::LoadConfig()

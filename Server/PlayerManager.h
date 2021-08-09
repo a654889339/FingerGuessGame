@@ -10,6 +10,13 @@ public:
     void Leave(GameState eState, Player* pInfo);
 };
 
+class PLAYER_STATE_PLAYING : public PLAYER_STATE_TRIGGER
+{
+public:
+    void Enter(GameState eState, Player* pPlayer);
+    void Leave(GameState eState, Player* pInfo);
+};
+
 class PlayerManager : public PLAYER_STATE_MANAGER
 {
 public:
@@ -25,6 +32,8 @@ public:
 
     // Modify
     bool SetState(int nConnIndex, GameState eState);
+    bool JoinGame(int nConnIndex, Player* pHost);
+    bool TryEndGame(int nConnIndex);
 
     // Query
     bool IsOnline(const char szName[]);
@@ -45,6 +54,7 @@ private:
     PLAYER_CONNINDEX_MAP m_ConnIndexManager;
 
     PLAYER_STATE_WAITING m_PlayerStateWaiting;
+    PLAYER_STATE_PLAYING m_PlayerStatePlaying;
 };
 
 #endif

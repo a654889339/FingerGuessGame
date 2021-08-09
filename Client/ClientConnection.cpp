@@ -17,6 +17,9 @@ ClientConnection::ClientConnection()
     REGISTER_EXTERNAL_FUNC(s2c_login_respond, &ClientConnection::OnS2CLoginRespond, sizeof(S2C_LOGIN_RESPOND));
     REGISTER_EXTERNAL_FUNC(s2c_apply_all_player_respond, &ClientConnection::OnS2CApplyAllPlayerRespond, UNDEFINED_PROTOCOL_SIZE);
     REGISTER_EXTERNAL_FUNC(s2c_create_game_respond, &ClientConnection::OnS2CCreateGameRespond, sizeof(S2C_CREATE_GAME_RESPOND));
+    REGISTER_EXTERNAL_FUNC(s2c_join_game_respond, &ClientConnection::OnS2CJoinGameRespond, sizeof(S2C_JOIN_GAME_RESPOND));
+    REGISTER_EXTERNAL_FUNC(s2c_player_join_game_respond, &ClientConnection::OnS2CPlayerJoinGameRespond, sizeof(S2C_PLAYER_JOIN_GAME_RESPOND));
+    REGISTER_EXTERNAL_FUNC(s2c_game_result_notify, &ClientConnection::OnS2CGameResultNotify, sizeof(S2C_GAME_RESULT_NOTIFY));
 }
 
 ClientConnection::~ClientConnection()
@@ -60,6 +63,8 @@ void ClientConnection::Active()
 
 void ClientConnection::DisConnect()
 {
+    DoC2SQuitNotify();
+    Sleep(100);
     Quit();
 }
 
@@ -72,6 +77,20 @@ bool ClientConnection::DoC2SPingRequest()
     Request.wProtocolID = c2s_ping_request;
 
     bRetCode = Send((byte*)&Request, sizeof(Request));
+    JYLOG_PROCESS_ERROR(bRetCode);
+
+    JY_STD_BOOL_END
+}
+
+bool ClientConnection::DoC2SQuitNotify()
+{
+    bool bResult = false;
+    bool bRetCode = false;
+    C2S_QUIT_NOTIFY Notify;
+
+    Notify.wProtocolID = c2s_quit_notify;
+
+    bRetCode = Send((byte*)&Notify, sizeof(Notify));
     JYLOG_PROCESS_ERROR(bRetCode);
 
     JY_STD_BOOL_END
@@ -120,6 +139,36 @@ bool ClientConnection::DoCreateGameRequest()
     JY_STD_BOOL_END
 }
 
+bool ClientConnection::DoJoinGameRequest(const char szName[])
+{
+    bool bResult = false;
+    bool bRetCode = false;
+    C2S_JOIN_GAME_REQUEST Request;
+
+    Request.wProtocolID = c2s_join_game_request;
+    strncpy(Request.szName, szName, sizeof(Request.szName));
+    Request.szName[sizeof(Request.szName) - 1] = '\0';
+
+    bRetCode = Send((byte*)&Request, sizeof(Request));
+    JYLOG_PROCESS_ERROR(bRetCode);
+
+    JY_STD_BOOL_END
+}
+
+bool ClientConnection::DoC2SPlayGameNotify(GameOperateCode eCode)
+{
+    bool bResult = false;
+    bool bRetCode = false;
+    C2S_PLAY_GAME_NOTIFY Notify;
+
+    Notify.wProtocolID = c2s_play_game_notify;
+    Notify.nGameOperateCode = (int)eCode;
+
+    bRetCode = Send((byte*)&Notify, sizeof(Notify));
+    JYLOG_PROCESS_ERROR(bRetCode);
+
+    JY_STD_BOOL_END
+}
 // Private
 void ClientConnection::OnS2CPingRespond(BYTE* pbyData, size_t uSize)
 {
@@ -147,7 +196,7 @@ void ClientConnection::OnS2CLoginRespond(BYTE* pbyData, size_t uSize)
         break;
 
     default:
-        g_pClient->Quit();
+        JYLOG_PROCESS_ERROR(false);
     }
 
     JY_STD_VOID_END
@@ -167,7 +216,7 @@ void ClientConnection::OnS2CApplyAllPlayerRespond(BYTE* pbyData, size_t uSize)
 
     for(int i = 0; i < pRespond->nCount; i++)
     {
-        printf("%s %s\n", pPlayerInfo[i].szName, szGameState[(GameState)pPlayerInfo[i].nState]);
+        printf("昵称:%s, 分数:%d, 状态:%s\n", pPlayerInfo[i].szName, pPlayerInfo[i].nScore, szGameState[(GameState)pPlayerInfo[i].nState]);
     }
 
     JY_STD_VOID_END
@@ -176,15 +225,96 @@ void ClientConnection::OnS2CApplyAllPlayerRespond(BYTE* pbyData, size_t uSize)
 void ClientConnection::OnS2CCreateGameRespond(BYTE* pbyData, size_t uSize)
 {
     S2C_CREATE_GAME_RESPOND *pRespond = (S2C_CREATE_GAME_RESPOND*) pbyData;
+
     JYLOG_PROCESS_ERROR(pRespond);
-    if(pRespond->nRetCode == 1)
+
+    switch (pRespond->nRetCode)
     {
+    case pec_create_round_succeed:
         g_pClient->SetState(egame_state_waiting);
+        break;
+
+    case pec_create_round_already:
+        puts("已在战局中");
+        break;
+
+    default:
+        JYLOG_PROCESS_ERROR(false);
     }
-    else
+
+    JY_STD_VOID_END;
+}
+
+void ClientConnection::OnS2CJoinGameRespond(BYTE* pbyData, size_t uSize)
+{
+    S2C_JOIN_GAME_RESPOND* pRespond = (S2C_JOIN_GAME_RESPOND*)pbyData;
+
+    JYLOG_PROCESS_ERROR(pRespond);
+
+    switch (pRespond->nRetCode)
     {
-        printf("%s", "创建失败");
+    case pec_join_game_succeed:
+        g_pClient->SetState(egame_state_playing);
+        break;
+
+    case pec_join_game_player_not_found:
+        puts("对方不在线");
+        g_pClient->SetState(egame_state_idle);
+        break;
+
+    case pec_join_game_not_found:
+        puts("对方未开启战局");
+        g_pClient->SetState(egame_state_idle);
+        break;
+
+    case pec_join_game_already_begun:
+        puts("对方已在战局中");
+        g_pClient->SetState(egame_state_idle);
+        break;
+
+    default:
+        JYLOG_PROCESS_ERROR(false);
     }
+
+    JY_STD_VOID_END;
+}
+
+void ClientConnection::OnS2CPlayerJoinGameRespond(BYTE* pbyData, size_t uSize)
+{
+    S2C_PLAYER_JOIN_GAME_RESPOND* pRespond = (S2C_PLAYER_JOIN_GAME_RESPOND*)pbyData;
+
+    JYLOG_PROCESS_ERROR(pRespond);
+
+    printf("玩家:%s 加入战局。\n", pRespond->szName);
+    g_pClient->SetState(egame_state_playing);
+
+    JY_STD_VOID_END;
+}
+
+void ClientConnection::OnS2CGameResultNotify(BYTE* pbyData, size_t uSize)
+{
+    S2C_GAME_RESULT_NOTIFY* pNotify = (S2C_GAME_RESULT_NOTIFY*)pbyData;
+
+    JYLOG_PROCESS_ERROR(pNotify);
+
+    switch ((GameResultCode)pNotify->nGameResult)
+    {
+    case erc_win:
+        printf("获胜，得分:%d。\n", pNotify->nScore);
+        break;
+    case erc_lose:
+        printf("战败，得分:%d。\n", pNotify->nScore);
+        break;
+    case erc_draw:
+        printf("平局，得分:%d。\n", pNotify->nScore);
+        break;
+    case erc_invalid:
+        printf("本局失效，得分:%d。\n", pNotify->nScore);
+        break;
+    }
+
+    g_pClient->SetState(egame_state_idle);
+
     JY_STD_VOID_END;
 }
 

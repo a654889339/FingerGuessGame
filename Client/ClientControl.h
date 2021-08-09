@@ -2,6 +2,7 @@
 #define _CLIENT_CONTROL_H_
 
 #include "ClientInputDef.h"
+#include "ClientBase.h"
 
 class ClientControl
 {
@@ -15,9 +16,15 @@ public:
     void Active();
 
 private:
+    bool CheckState(GameState eGameState);
+
     void OnShow();
     void OnCreate();
     void OnJoin();
+    void OnJoinInputName();
+    void OnRock();
+    void OnScissors();
+    void OnPaper();
     void OnQuit();
 
     void Input();
@@ -31,6 +38,7 @@ private:
     CLIENT_CONTROL_BUFFER m_Input;
 
     bool m_bCheckInput;
+    bool m_bJoinInputName;
     char m_szInstruct[MAX_INPUT_BUFFER_SIZE];
 };
 

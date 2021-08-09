@@ -4,6 +4,7 @@
 #include "ClientControl.h"
 #include "ClientConnection.h"
 #include "Player.h"
+#include "ClientBase.h"
 
 class PLAYER_STATE_IDLE : public PLAYER_STATE_TRIGGER
 {
@@ -16,6 +17,14 @@ class PLAYER_STATE_WAITING : public PLAYER_STATE_TRIGGER
 {
 public:
     PLAYER_STATE_WAITING() { m_eState = egame_state_waiting; }
+    void Enter(GameState eState, Player* pPlayer);
+    void Leave(GameState eState, Player* pPlayer);
+};
+
+class PLAYER_STATE_PLAYING : public PLAYER_STATE_TRIGGER
+{
+public:
+    PLAYER_STATE_PLAYING() { m_eState = egame_state_playing; }
     void Enter(GameState eState, Player* pPlayer);
     void Leave(GameState eState, Player* pPlayer);
 };
@@ -51,6 +60,7 @@ public:
 private:
     PLAYER_STATE_IDLE    m_PlayerStateIdle;
     PLAYER_STATE_WAITING m_PlayerStateWaiting;
+    PLAYER_STATE_PLAYING m_PlayerStatePlaying;
     bool m_bQuitFlag;
 };
 
