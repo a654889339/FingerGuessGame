@@ -45,6 +45,7 @@ enum PROTOCOL_ERROR_CODE
     pec_create_round_already,
 
     pec_join_game_succeed,
+    pec_join_game_self,
     pec_join_game_player_not_found,
     pec_join_game_not_found,
     pec_join_game_already_begun,

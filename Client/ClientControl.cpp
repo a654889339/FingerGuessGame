@@ -72,6 +72,8 @@ bool ClientControl::CheckState(GameState eGameState)
         break;
     }
 
+    goto Exit0;
+
     JY_STD_BOOL_SUCCESS_END
 }
 

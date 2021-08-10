@@ -257,6 +257,10 @@ void ClientConnection::OnS2CJoinGameRespond(BYTE* pbyData, size_t uSize)
         g_pClient->SetState(egame_state_playing);
         break;
 
+    case pec_join_game_self:
+        puts("不能加入自己的战局");
+        break;
+
     case pec_join_game_player_not_found:
         puts("对方不在线");
         g_pClient->SetState(egame_state_idle);

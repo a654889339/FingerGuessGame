@@ -20,6 +20,10 @@ struct STString
     {
         return strcmp(szString, _Right.szString) == 0;
     }
+    bool operator <= (const STString& _Right) const
+    {
+        return strcmp(szString, _Right.szString) <= 0;
+    }
 };
 
 template <typename STKey, typename STValue>
@@ -106,10 +110,8 @@ public:
         {
             Splay(pIter, NULL);
             Splay(pUpper, m_pRoot);
-            m_pRoot = pUpper;
-            pUpper->ch[0] = pIter->ch[0];
-            if (pIter->ch[0])
-                pIter->ch[0]->par = pUpper;
+            Link(pUpper, 0, pIter->ch[0]);
+            SetRoot(pUpper);
         }
         else
         {
@@ -141,7 +143,7 @@ public:
     void clear()
     {
         DFS_Clear(m_pRoot);
-        m_pRoot = NULL;
+        SetRoot(NULL);
     }
 
 private:
@@ -163,7 +165,8 @@ private:
         x->ch[c] = y;
         y->par = x;
         PushUp(y);
-        if (y == m_pRoot) m_pRoot= x;
+        if (y == m_pRoot)
+            SetRoot(x);
     }
 
     void Splay(Node* x, Node* f)
@@ -199,10 +202,10 @@ private:
     void Link(Node* pA, int nASon, Node* pB)
     {
         assert(pA);
-        assert(pB);
-        
+
         pA->ch[nASon] = pB;
-        pB->par = pA;
+        if (pB)
+            pB->par = pA;
     }
 
     Node* FindNode(STKey Key)
@@ -245,7 +248,7 @@ private:
                 break;
             }
 
-            pIter = pIter->ch[Key < pIter->Key];
+            pIter = pIter->ch[pIter->Key < Key];
         }
 
         if (pIter)
@@ -267,7 +270,7 @@ private:
                     pResult = pIter;
             }
 
-            pIter = pIter->ch[Key < pIter->Key];
+            pIter = pIter->ch[pIter->Key <= Key];
         }
 
         if (pIter)
@@ -284,7 +287,7 @@ private:
 
         if (m_pRoot == NULL)
         {
-            m_pRoot = pNode;
+            SetRoot(pNode);
             goto Exit1;
         }
 
@@ -315,6 +318,13 @@ private:
         JY_STD_BOOL_SUCCESS_END
     }
 
+    void SetRoot(Node* pNode)
+    {
+        m_pRoot = pNode;
+        if (m_pRoot)
+            m_pRoot->par = NULL;
+    }
+
     void Erase(Node* pNode)
     {
         Node* pParent = NULL;
@@ -334,12 +344,9 @@ private:
         if (m_pRoot == pNode)
         {
             if (nNodeChild != -1)
-            {
-                m_pRoot = pNode->ch[nNodeChild];
-                m_pRoot->par = NULL;
-            }
+                SetRoot(pNode->ch[nNodeChild]);
             else
-                m_pRoot = NULL;
+                SetRoot(NULL);
             return;
         }
 
@@ -365,7 +372,6 @@ private:
 
         delete pNode;
     }
-
 
     template <typename STFunc>
     bool DFS_Traversal(Node* pNode, STFunc& Func)

@@ -247,13 +247,14 @@ void ServerConnection::OnC2SJoinGameRequest(int nConnIndex, byte* pbyData, size_
     int nResult = pec_join_game_not_found;
     bool bRetCode = false;
     C2S_JOIN_GAME_REQUEST* pRequest = (C2S_JOIN_GAME_REQUEST*)pbyData;
-    Player* pPlayer = NULL;
+    Player* pHost = NULL;
 
-    pPlayer = g_pServer->m_PlayerManager.GetPlayer(pRequest->szName);
-    JY_PROCESS_ERROR_RET_CODE(pPlayer, pec_join_game_player_not_found);
-    JY_PROCESS_ERROR(pPlayer->m_eState == egame_state_waiting);
+    pHost = g_pServer->m_PlayerManager.GetPlayer(pRequest->szName);
+    JY_PROCESS_ERROR_RET_CODE(pHost, pec_join_game_player_not_found);
+    JY_PROCESS_ERROR_RET_CODE(pHost->m_nConnIndex != nConnIndex, pec_join_game_self);
+    JY_PROCESS_ERROR(pHost->m_eState == egame_state_waiting);
 
-    bRetCode = g_pServer->m_PlayerManager.JoinGame(nConnIndex, pPlayer);
+    bRetCode = g_pServer->m_PlayerManager.JoinGame(nConnIndex, pHost);
     JYLOG_PROCESS_ERROR(bRetCode);
 
     nResult = pec_join_game_succeed;
