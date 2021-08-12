@@ -9,6 +9,7 @@
 ClientConnection::ClientConnection()
 {
     m_nNextPingTime = 0;
+    m_nNextReconnectTime = 0;
 
     memset(m_ProcessProtocolFuns, 0, sizeof(m_ProcessProtocolFuns));
     memset(m_nProtocolSize, 0, sizeof(m_nProtocolSize));
@@ -52,13 +53,35 @@ void ClientConnection::UnInit()
 
 void ClientConnection::Active()
 {
+    bool bRetCode = false;
+
     ProcessNetwork();
 
-    if (IsEnable() && m_nNextPingTime < g_pClient->m_nTimeNow)
+    if(IsEnable())
     {
-        m_nNextPingTime = g_pClient->m_nTimeNow + PING_TIME_INTERVAL;
-        DoC2SPingRequest();
+        if (m_nNextPingTime < g_pClient->m_nTimeNow)
+        {
+            m_nNextPingTime = g_pClient->m_nTimeNow + PING_TIME_INTERVAL;
+            DoC2SPingRequest();
+        }
     }
+    else
+    {
+        if (m_nNextReconnectTime < g_pClient->m_nTimeNow)
+        {
+            m_nNextReconnectTime = g_pClient->m_nTimeNow + RECONNECT_TIME_INTERVAL;
+
+            bRetCode = Connect(g_pClient->m_szIP, g_pClient->m_nPort);
+            JYLOG_PROCESS_ERROR(bRetCode);
+
+            g_pClient->SetState(egame_state_login);
+
+            bRetCode = DoC2SLoginRequest();
+            JYLOG_PROCESS_ERROR(bRetCode);
+        }
+    }
+
+    JY_STD_VOID_END
 }
 
 void ClientConnection::DisConnect()
@@ -263,22 +286,22 @@ void ClientConnection::OnS2CJoinGameRespond(BYTE* pbyData, size_t uSize)
 
     case pec_join_game_player_not_found:
         puts("对方不在线");
-        g_pClient->SetState(egame_state_idle);
         break;
 
     case pec_join_game_not_found:
         puts("对方未开启战局");
-        g_pClient->SetState(egame_state_idle);
         break;
 
     case pec_join_game_already_begun:
         puts("对方已在战局中");
-        g_pClient->SetState(egame_state_idle);
         break;
 
     default:
         JYLOG_PROCESS_ERROR(false);
     }
+
+    if (g_pClient->m_Player.m_eState == egame_state_idle)
+        g_pClient->SetState(egame_state_idle);
 
     JY_STD_VOID_END;
 }

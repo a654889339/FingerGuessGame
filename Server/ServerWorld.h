@@ -30,6 +30,13 @@ private:
     char m_szIP[_NAME_LEN];
     int m_nPort;
     bool m_bQuitFlag;
+
+
+    char m_szDBIP[_NAME_LEN];
+    int m_nDBPort;
+    char m_szDBAccount[_NAME_LEN];
+    char m_szDBPassward[_NAME_LEN];
+    char m_szDBName[_NAME_LEN];
 };
 
 extern ServerWorld* g_pServer;

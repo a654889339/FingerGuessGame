@@ -36,6 +36,9 @@
     <ClCompile Include="DBManager.cpp">
       <Filter>DB</Filter>
     </ClCompile>
+    <ClCompile Include="DBBase.cpp">
+      <Filter>DB</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ServerWorld.h">
@@ -54,7 +57,7 @@
       <Filter>Include</Filter>
     </ClInclude>
     <ClInclude Include="DBBase.h">
-      <Filter>Include</Filter>
+      <Filter>DB</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

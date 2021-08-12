@@ -29,7 +29,7 @@ bool ServerWorld::Init()
     JYLOG_PROCESS_ERROR(bRetCode);
     bPlayerManagerInitFlag = true;
 
-    bRetCode = m_DB.Init();
+    bRetCode = m_DB.Init(m_szDBIP, m_nPort, m_szDBAccount, m_szDBPassward, m_szDBName);
     JYLOG_PROCESS_ERROR(bRetCode);
     bDBInitFlag = true;
 
@@ -109,6 +109,13 @@ bool ServerWorld::LoadConfig()
 
     strcpy(m_szIP, "127.0.0.1");
     m_nPort = 5566;
+
+
+    strcpy(m_szDBIP, "10.11.35.112");
+    m_nDBPort = 3306;
+    strcpy(m_szDBAccount, "");
+    strcpy(m_szDBPassward, "");
+    strcpy(m_szDBName, "lc_trunk");
 
     JY_STD_BOOL_END
 }

@@ -42,5 +42,6 @@ private:
     int                     m_nProtocolSize[s2c_end];
 
     time_t m_nNextPingTime;
+    time_t m_nNextReconnectTime;
 };
 #endif

@@ -25,8 +25,8 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{4751BA22-D1CA-4100-BE94-A05F906456FF}.Debug_Client|x64.ActiveCfg = Debug_Client|x64
 		{4751BA22-D1CA-4100-BE94-A05F906456FF}.Debug_Client|x64.Build.0 = Debug_Client|x64
-		{4751BA22-D1CA-4100-BE94-A05F906456FF}.Debug_Client|x86.ActiveCfg = Debug_Server|Win32
-		{4751BA22-D1CA-4100-BE94-A05F906456FF}.Debug_Client|x86.Build.0 = Debug_Server|Win32
+		{4751BA22-D1CA-4100-BE94-A05F906456FF}.Debug_Client|x86.ActiveCfg = Debug_Client|Win32
+		{4751BA22-D1CA-4100-BE94-A05F906456FF}.Debug_Client|x86.Build.0 = Debug_Client|Win32
 		{4751BA22-D1CA-4100-BE94-A05F906456FF}.Debug_Server|x64.ActiveCfg = Debug_Server|x64
 		{4751BA22-D1CA-4100-BE94-A05F906456FF}.Debug_Server|x64.Build.0 = Debug_Server|x64
 		{4751BA22-D1CA-4100-BE94-A05F906456FF}.Debug_Server|x86.ActiveCfg = Debug_Server|Win32
