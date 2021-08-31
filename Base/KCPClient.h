@@ -9,9 +9,10 @@ public:
     KCPClient();
     virtual ~KCPClient();
 
-    virtual bool Connect(const char szIP[], int nPort) final ;
+    //virtual bool Connect(const char szIP[], int nPort) final ;
     virtual void ProcessNetwork() final;
     virtual bool Send(void* pbyData, size_t uDataLen) final;
+    virtual bool Init(const char szIP[], int nPort);
 
 private:
     virtual void ProcessPackage(byte* pbyData, size_t uDataLen) = 0;

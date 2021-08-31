@@ -13,6 +13,6 @@ private:
     int m_nConnecFlag[MAX_ACCEPT_CONNECTION];
 
 };
-
+  
 
 #endif
