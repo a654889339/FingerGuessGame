@@ -22,6 +22,12 @@
     <Filter Include="Player">
       <UniqueIdentifier>{ed48b462-78f1-4889-b182-cd7752af4c75}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Network\KCPServer">
+      <UniqueIdentifier>{ee4ebc5c-c836-4812-baa4-67f967bb033b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Network\KCPClient">
+      <UniqueIdentifier>{87c0123f-2871-4561-a8d9-5c009e0501a3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GlobalDef.h">
@@ -57,6 +63,12 @@
     <ClInclude Include="Player.h">
       <Filter>Player</Filter>
     </ClInclude>
+    <ClInclude Include="KCPServer.h">
+      <Filter>Network\KCPServer</Filter>
+    </ClInclude>
+    <ClInclude Include="KCPClient.h">
+      <Filter>Network\KCPClient</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -67,6 +79,12 @@
     </ClCompile>
     <ClCompile Include="TcpClient.cpp">
       <Filter>Network\TcpClient</Filter>
+    </ClCompile>
+    <ClCompile Include="KCPServer.cpp">
+      <Filter>Network\KCPServer</Filter>
+    </ClCompile>
+    <ClCompile Include="KCPClient.cpp">
+      <Filter>Network\KCPClient</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

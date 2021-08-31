@@ -141,6 +141,8 @@ copy "$(TargetDir)$(TargetName).lib" ..\Lib\Debug_Client</Command>
   <ItemGroup>
     <ClInclude Include="CodeStd.h" />
     <ClInclude Include="GlobalDef.h" />
+    <ClInclude Include="KCPClient.h" />
+    <ClInclude Include="KCPServer.h" />
     <ClInclude Include="MathStd.h" />
     <ClInclude Include="CycleQueue.h" />
     <ClInclude Include="NetworkBase.h" />
@@ -152,6 +154,8 @@ copy "$(TargetDir)$(TargetName).lib" ..\Lib\Debug_Client</Command>
     <ClInclude Include="TcpServer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="KCPClient.cpp" />
+    <ClCompile Include="KCPServer.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="TcpClient.cpp" />
     <ClCompile Include="TcpServer.cpp" />
