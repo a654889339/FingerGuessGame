@@ -11,9 +11,6 @@ public:
 
 private:
     int m_nConnecFlag[MAX_ACCEPT_CONNECTION];
-    sdffgfgjj
 };
   
-
-
 #endif
