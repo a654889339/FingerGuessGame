@@ -1,14 +1,17 @@
 #include "stdafx.h"
 #include "KCPClient.h"
-#pragma comment(lib,"ws2_32.lib")
+//#pragma comment(lib,"ws2_32.lib")
 KCPClient::KCPClient()
 {
 	m_bRunFlag = false;
+	memset(m_szRecvBuffer, 0, sizeof(m_szRecvBuffer));
+	_InitNetwork();
 }
 
 KCPClient::~KCPClient()
 {
-
+	Quit();
+	_UnInitNetwork();
 }
 
 bool KCPClient::Init(const char szIP[], int nPort)
@@ -17,19 +20,12 @@ bool KCPClient::Init(const char szIP[], int nPort)
 	int nResCode = 0;
     JYLOG_PROCESS_ERROR(szIP);
     JYLOG_PROCESS_ERROR(nPort);
-	WSADATA wsaData;
-	//初始化Socket
-	nResCode = WSAStartup(MAKEWORD(2, 2), &wsaData);
-	JYLOG_PROCESS_ERROR(nResCode == 0);
-	//创建Socket对象
+
 	m_Socket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
-	//设置服务器地址
+	JYLOG_PROCESS_ERROR(m_Socket != INVALID_SOCKET);
 	m_SerAddr.sin_family = AF_INET;
 	m_SerAddr.sin_port = htons(nPort);
 	m_SerAddr.sin_addr.S_un.S_addr = inet_addr(szIP);
-	//向服务器发送数据报
-	//printf("Sending a datagram to the receiver...\n");
-	//sendto(m_Socket, SendBuf, BufLen, 0, (SOCKADDR*)&serAddr, sizeof(RecvAddr));
 
     bResult = true;
 Exit0:
@@ -49,7 +45,7 @@ bool KCPClient::Send(void* pbyData, size_t uDataLen)
 
 	*(WORD*)m_szSendBuffer = (WORD)uDataLen;
 	memcpy(m_szSendBuffer + 2, pbyData, uDataLen);
-	bRetCode = sendto(m_Socket, m_szSendBuffer, uDataLen + 2, 0, (SOCKADDR*)&m_SerAddr, sizeof(SOCKADDR));
+	bRetCode = sendto(m_Socket, m_szSendBuffer, uDataLen + 2, 0, (SOCKADDR*)&m_SerAddr, sizeof(m_SerAddr));
 	JYLOG_PROCESS_ERROR(bRetCode);
 Exit1:
 	bResult = true;
@@ -60,4 +56,39 @@ Exit0:
 		ConnectionLost();
 	}
 	return bResult;
+}
+
+void KCPClient::ProcessNetwork()
+{
+	bool bResult = false;
+	bool bRetCode = false;
+	int nRetCode = 0;
+	int nRecvLength = 0;
+	JY_PROCESS_SUCCESS(!m_bRunFlag);
+	nRetCode = recvfrom(m_Socket, m_szRecvBuffer, sizeof(m_szRecvBuffer), 0, (SOCKADDR*)&m_RecvAddr, &nRecvLength);
+
+	JY_PROCESS_SUCCESS(nRetCode != SOCKET_ERROR);
+Exit1:
+	bResult = true;
+Exit0:
+	if (!bResult)
+	{
+		Quit();
+		ConnectionLost();
+	}
+	return;
+}
+
+bool KCPClient::IsEnable()
+{
+	return m_bRunFlag;
+}
+
+void KCPClient::Quit()
+{
+	if (m_bRunFlag)
+	{
+		m_bRunFlag = false;
+		closesocket(m_Socket);
+	}
 }

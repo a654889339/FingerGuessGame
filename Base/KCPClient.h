@@ -24,6 +24,7 @@ private:
     bool m_bRunFlag;
     SOCKET m_Socket;
     sockaddr_in m_SerAddr;
+    sockaddr_in m_RecvAddr;
     char m_szRecvBuffer[MAX_RECV_BUFFER_SIZE];
     char m_szSendBuffer[MAX_RECV_BUFFER_SIZE];
 };

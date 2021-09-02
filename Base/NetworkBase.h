@@ -170,6 +170,41 @@ struct RecvFD
     }
 };
 
+struct KCPRecvFD
+{
+	int nConnIndex;
+	bool bHaveProtoSize;
+	size_t uProtoSize;
+	time_t nActiveTime;
+	bool bConnFlag;
+	RECV_QUEUE RecvQueue;
+
+    KCPRecvFD()
+	{
+		Clear();
+		RecvQueue.init(MAX_RECV_BUFFER_SIZE);
+	}
+
+	void Clear()
+	{
+		nConnIndex = INVALID_CONNINDEX;
+		bHaveProtoSize = false;
+		uProtoSize = 0;
+		nActiveTime = 0;
+		bConnFlag = false;
+		RecvQueue.clear();
+	}
+
+	void Connect(int _nConnIndex)
+	{
+		Clear();
+		nConnIndex = _nConnIndex;
+		nActiveTime = time(NULL);
+		bConnFlag = true;
+	}
+};
+
+
 static bool _GetFullPackage(RecvFD* pRecvFD, char* pszRecvBuffer)
 {
     bool bResult = false;

@@ -215,7 +215,6 @@ void TcpServer::AcceptConnection()
     }
     JYLOG_PROCESS_ERROR(nConnIndex != INVALID_CONNINDEX);
 
-    NewClient = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
     nAddrlen = sizeof(remoteAddr);
 
     NewClient = accept(m_Socket, (SOCKADDR*)&remoteAddr, &nAddrlen);
