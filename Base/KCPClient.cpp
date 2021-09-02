@@ -64,10 +64,13 @@ void KCPClient::ProcessNetwork()
 	bool bRetCode = false;
 	int nRetCode = 0;
 	int nRecvLength = 0;
-	JY_PROCESS_SUCCESS(!m_bRunFlag);
+	JYLOG_PROCESS_ERROR(!m_bRunFlag);
 	nRetCode = recvfrom(m_Socket, m_szRecvBuffer, sizeof(m_szRecvBuffer), 0, (SOCKADDR*)&m_RecvAddr, &nRecvLength);
-
-	JY_PROCESS_SUCCESS(nRetCode != SOCKET_ERROR);
+	JYLOG_PROCESS_ERROR(nRetCode != SOCKET_ERROR);
+	if (m_RecvAddr.sin_port == m_SerAddr.sin_port && m_RecvAddr.sin_addr.S_un.S_addr == m_SerAddr.sin_addr.S_un.S_addr && nRecvLength > 0)
+	{
+		ProcessPackage((byte*)m_szRecvBuffer, nRecvLength);
+	}
 Exit1:
 	bResult = true;
 Exit0:

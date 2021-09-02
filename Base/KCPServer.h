@@ -28,11 +28,13 @@ private:
 
 	SOCKET m_Socket;
 	bool m_bRunFlag;
-	FD_SET  m_SocketReadSet;
 	int m_nConnecFlag[MAX_ACCEPT_CONNECTION];
 
 	char m_szRecvBuffer[MAX_RECV_BUFFER_SIZE];
 	char m_szSendBuffer[MAX_RECV_BUFFER_SIZE];
+
+	typedef SplayTree<SOCKET, KCPRecvFD> CLIENT_INDEX_MANAGER;
+	CLIENT_INDEX_MANAGER m_ClientManager;
 };
   
 #endif
