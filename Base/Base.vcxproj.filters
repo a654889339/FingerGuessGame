@@ -28,6 +28,9 @@
     <Filter Include="Network\KCPClient">
       <UniqueIdentifier>{87c0123f-2871-4561-a8d9-5c009e0501a3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Doc">
+      <UniqueIdentifier>{90092e50-e0f0-4740-bd2e-bc145525cd36}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GlobalDef.h">
@@ -86,5 +89,22 @@
     <ClCompile Include="KCPClient.cpp">
       <Filter>Network\KCPClient</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Doc\BaseFrame.drawio">
+      <Filter>Doc</Filter>
+    </None>
+    <None Include="..\Doc\ECSFrame.drawio">
+      <Filter>Doc</Filter>
+    </None>
+    <None Include="..\Doc\GameCenterFrame.drawio">
+      <Filter>Doc</Filter>
+    </None>
+    <None Include="..\Doc\GameServerFrame.drawio">
+      <Filter>Doc</Filter>
+    </None>
+    <None Include="..\Doc\GateFrame.drawio">
+      <Filter>Doc</Filter>
+    </None>
   </ItemGroup>
 </Project>

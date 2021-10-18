@@ -160,6 +160,13 @@ copy "$(TargetDir)$(TargetName).lib" ..\Lib\Debug_Client</Command>
     <ClCompile Include="TcpClient.cpp" />
     <ClCompile Include="TcpServer.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Doc\BaseFrame.drawio" />
+    <None Include="..\Doc\ECSFrame.drawio" />
+    <None Include="..\Doc\GameCenterFrame.drawio" />
+    <None Include="..\Doc\GameServerFrame.drawio" />
+    <None Include="..\Doc\GateFrame.drawio" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
