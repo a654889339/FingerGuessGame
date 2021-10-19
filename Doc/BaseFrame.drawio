@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2021-10-19T06:07:07.147Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36" etag="dwrS0VSpNL8D9LBiq1UZ" version="15.5.5" type="github">
+<mxfile host="app.diagrams.net" modified="2021-10-19T06:08:01.253Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36" etag="O9BlfWUi8uHymkqluIDm" version="15.5.5" type="github">
   <diagram id="WGgWUmGZT2Jk0cvahEpU" name="Page-1">
-    <mxGraphModel dx="1996" dy="1194" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2823" dy="2363" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -95,7 +95,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="thyLyaAhH_RBEbwXxCyl-21" value="GC" style="rounded=0;whiteSpace=wrap;html=1;fontSize=25;" vertex="1" parent="1">
-          <mxGeometry x="570" y="50" width="120" height="60" as="geometry" />
+          <mxGeometry x="590" y="-30" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="thyLyaAhH_RBEbwXxCyl-22" value="" style="endArrow=none;html=1;rounded=0;fontSize=25;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="thyLyaAhH_RBEbwXxCyl-7" target="thyLyaAhH_RBEbwXxCyl-21">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -116,13 +116,13 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="thyLyaAhH_RBEbwXxCyl-26" value="Arena" style="rounded=0;whiteSpace=wrap;html=1;fontSize=25;" vertex="1" parent="1">
-          <mxGeometry x="260" y="50" width="120" height="60" as="geometry" />
+          <mxGeometry x="320" y="-30" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="thyLyaAhH_RBEbwXxCyl-27" value="Fellowship" style="rounded=0;whiteSpace=wrap;html=1;fontSize=25;" vertex="1" parent="1">
-          <mxGeometry x="70" y="50" width="120" height="60" as="geometry" />
+          <mxGeometry x="-80" y="-30" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="thyLyaAhH_RBEbwXxCyl-28" value="Rank" style="rounded=0;whiteSpace=wrap;html=1;fontSize=25;" vertex="1" parent="1">
-          <mxGeometry x="150" y="130" width="120" height="60" as="geometry" />
+          <mxGeometry x="130" y="-30" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
