@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-10-30T14:42:06.544Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36" etag="IIO-pp-Aa_A_9-O7vj8s" version="15.6.2" type="github" pages="4">
+<mxfile host="app.diagrams.net" modified="2021-10-30T14:43:26.377Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36" etag="Gb3MP9rDPhF6J--hGBGB" version="15.6.2" type="github" pages="5">
   <diagram id="WGgWUmGZT2Jk0cvahEpU" name="GameServer">
     <mxGraphModel dx="1993" dy="1194" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -207,6 +207,17 @@
         </mxCell>
         <mxCell id="azk29wdoNAcDGyPVJYtD-4" value="提供全局广播功能" style="ellipse;whiteSpace=wrap;html=1;fontSize=25;" vertex="1" parent="azk29wdoNAcDGyPVJYtD-1">
           <mxGeometry x="129" y="540" width="570" height="150" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="9_f7UP91wkGmhshZe5BG" name="GameCenter">
+    <mxGraphModel dx="1993" dy="1194" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="QAHNkfbSsgioDdO6vrNx-0" />
+        <mxCell id="QAHNkfbSsgioDdO6vrNx-1" parent="QAHNkfbSsgioDdO6vrNx-0" />
+        <mxCell id="QAHNkfbSsgioDdO6vrNx-2" value="角色数据的存储，与DB直连，是GS的管理者" style="ellipse;whiteSpace=wrap;html=1;fontSize=25;" vertex="1" parent="QAHNkfbSsgioDdO6vrNx-1">
+          <mxGeometry x="210" y="80" width="390" height="220" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
