@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-10-30T12:10:29.358Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36" etag="6BHt7PPffbgTLzUYeSOZ" version="15.5.6" type="github" pages="2">
+<mxfile host="app.diagrams.net" modified="2021-10-30T12:18:03.465Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36" etag="tKSlinRpqdCKT8gbuis-" version="15.5.6" type="github" pages="2">
   <diagram id="WGgWUmGZT2Jk0cvahEpU" name="GameServer">
     <mxGraphModel dx="1993" dy="1194" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -138,14 +138,14 @@
             <mxPoint x="1550" y="200" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="I8S6XLJ3EVu2pg4-RtFR-25" value="Arena" style="rounded=0;whiteSpace=wrap;html=1;fontSize=25;" vertex="1" parent="I8S6XLJ3EVu2pg4-RtFR-1">
-          <mxGeometry x="320" y="-30" width="120" height="60" as="geometry" />
+        <mxCell id="I8S6XLJ3EVu2pg4-RtFR-25" value="Arena&lt;br&gt;（不实现）" style="rounded=0;whiteSpace=wrap;html=1;fontSize=25;" vertex="1" parent="I8S6XLJ3EVu2pg4-RtFR-1">
+          <mxGeometry x="320" y="-30" width="140" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="I8S6XLJ3EVu2pg4-RtFR-26" value="Fellowship" style="rounded=0;whiteSpace=wrap;html=1;fontSize=25;" vertex="1" parent="I8S6XLJ3EVu2pg4-RtFR-1">
-          <mxGeometry x="-80" y="-30" width="120" height="60" as="geometry" />
+        <mxCell id="I8S6XLJ3EVu2pg4-RtFR-26" value="Fellowship（不实现）" style="rounded=0;whiteSpace=wrap;html=1;fontSize=25;" vertex="1" parent="I8S6XLJ3EVu2pg4-RtFR-1">
+          <mxGeometry x="-80" y="-30" width="150" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="I8S6XLJ3EVu2pg4-RtFR-27" value="Rank" style="rounded=0;whiteSpace=wrap;html=1;fontSize=25;" vertex="1" parent="I8S6XLJ3EVu2pg4-RtFR-1">
-          <mxGeometry x="130" y="-30" width="120" height="60" as="geometry" />
+        <mxCell id="I8S6XLJ3EVu2pg4-RtFR-27" value="Rank&lt;br&gt;（不实现）" style="rounded=0;whiteSpace=wrap;html=1;fontSize=25;" vertex="1" parent="I8S6XLJ3EVu2pg4-RtFR-1">
+          <mxGeometry x="130" y="-30" width="140" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
