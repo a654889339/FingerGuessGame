@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-10-30T14:20:16.505Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36" etag="oBxTPbaauVYnnuo8Ir0o" version="15.6.2" type="github" pages="3">
+<mxfile host="app.diagrams.net" modified="2021-10-30T14:28:22.733Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36" etag="AdGVyyrhuUaMeLU18x3X" version="15.6.2" type="github" pages="3">
   <diagram id="WGgWUmGZT2Jk0cvahEpU" name="GameServer">
     <mxGraphModel dx="1993" dy="1194" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -26,21 +26,21 @@
     </mxGraphModel>
   </diagram>
   <diagram id="YohwLOSvh4ewAdbJvnKw" name="Base">
-    <mxGraphModel dx="2820" dy="2363" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="3647" dy="2363" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="I8S6XLJ3EVu2pg4-RtFR-0" />
         <mxCell id="I8S6XLJ3EVu2pg4-RtFR-1" parent="I8S6XLJ3EVu2pg4-RtFR-0" />
         <mxCell id="I8S6XLJ3EVu2pg4-RtFR-2" value="" style="endArrow=none;html=1;rounded=0;" parent="I8S6XLJ3EVu2pg4-RtFR-1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="-210" y="760" as="sourcePoint" />
+            <mxPoint x="-901" y="760" as="sourcePoint" />
             <mxPoint x="1380" y="760" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="I8S6XLJ3EVu2pg4-RtFR-3" value="&lt;font style=&quot;font-size: 25px&quot;&gt;Client&lt;/font&gt;" style="shape=actor;whiteSpace=wrap;html=1;" parent="I8S6XLJ3EVu2pg4-RtFR-1" vertex="1">
-          <mxGeometry x="130" y="860" width="120" height="160" as="geometry" />
+          <mxGeometry x="80" y="930" width="120" height="160" as="geometry" />
         </mxCell>
         <mxCell id="I8S6XLJ3EVu2pg4-RtFR-4" value="&lt;font style=&quot;font-size: 25px&quot;&gt;Client&lt;/font&gt;" style="shape=actor;whiteSpace=wrap;html=1;" parent="I8S6XLJ3EVu2pg4-RtFR-1" vertex="1">
-          <mxGeometry x="410" y="860" width="120" height="160" as="geometry" />
+          <mxGeometry x="480" y="940" width="120" height="160" as="geometry" />
         </mxCell>
         <mxCell id="I8S6XLJ3EVu2pg4-RtFR-5" value="Gate" style="shape=ext;double=1;rounded=1;whiteSpace=wrap;html=1;fontSize=25;" parent="I8S6XLJ3EVu2pg4-RtFR-1" vertex="1">
           <mxGeometry x="440" y="600" width="120" height="80" as="geometry" />
@@ -151,10 +151,28 @@
           <mxGeometry x="130" y="-30" width="140" height="60" as="geometry" />
         </mxCell>
         <mxCell id="RaBOwgKpOiwF3AHPLdu5-0" value="KCP通信，支持断线重连，可靠连接" style="ellipse;whiteSpace=wrap;html=1;fontSize=25;" vertex="1" parent="I8S6XLJ3EVu2pg4-RtFR-1">
-          <mxGeometry x="510" y="770" width="470" height="80" as="geometry" />
+          <mxGeometry x="550" y="820" width="470" height="80" as="geometry" />
         </mxCell>
         <mxCell id="RaBOwgKpOiwF3AHPLdu5-1" value="传统TCP" style="ellipse;whiteSpace=wrap;html=1;fontSize=25;" vertex="1" parent="I8S6XLJ3EVu2pg4-RtFR-1">
-          <mxGeometry x="300" y="450" width="160" height="50" as="geometry" />
+          <mxGeometry x="280" y="460" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="RaBOwgKpOiwF3AHPLdu5-2" value="账号服务器选择角色，注册角色等&lt;br&gt;（不实现）" style="rounded=0;whiteSpace=wrap;html=1;fontSize=25;" vertex="1" parent="I8S6XLJ3EVu2pg4-RtFR-1">
+          <mxGeometry x="-360" y="360" width="370" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="RaBOwgKpOiwF3AHPLdu5-4" value="" style="endArrow=none;html=1;rounded=0;fontSize=25;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.586;exitY=-0.012;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="I8S6XLJ3EVu2pg4-RtFR-1" source="RaBOwgKpOiwF3AHPLdu5-2" target="I8S6XLJ3EVu2pg4-RtFR-21">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="470" y="250" as="sourcePoint" />
+            <mxPoint x="520" y="200" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="RaBOwgKpOiwF3AHPLdu5-5" value="" style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;rounded=0;fontSize=25;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="I8S6XLJ3EVu2pg4-RtFR-1" source="I8S6XLJ3EVu2pg4-RtFR-3" target="RaBOwgKpOiwF3AHPLdu5-2">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="470" y="550" as="sourcePoint" />
+            <mxPoint x="520" y="500" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="RaBOwgKpOiwF3AHPLdu5-7" value="先从这条连接选择角色，账号密码验证，然后切到右边的链接" style="ellipse;whiteSpace=wrap;html=1;fontSize=25;" vertex="1" parent="I8S6XLJ3EVu2pg4-RtFR-1">
+          <mxGeometry x="-470" y="800" width="520" height="160" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
