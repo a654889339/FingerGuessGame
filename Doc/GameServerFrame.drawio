@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-10-30T14:45:39.315Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36" etag="w26GTD2t0uM403DXqOt4" version="15.6.2" type="github" pages="5">
+<mxfile host="app.diagrams.net" modified="2021-10-31T17:33:56.011Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36" etag="YoWafA7zdurXi5fvfxr0" version="15.6.3" type="github" pages="5">
   <diagram id="YohwLOSvh4ewAdbJvnKw" name="Base">
     <mxGraphModel dx="3647" dy="2363" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -7,7 +7,7 @@
         <mxCell id="I8S6XLJ3EVu2pg4-RtFR-2" value="" style="endArrow=none;html=1;rounded=0;" parent="I8S6XLJ3EVu2pg4-RtFR-1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="-901" y="760" as="sourcePoint" />
-            <mxPoint x="1380" y="760" as="targetPoint" />
+            <mxPoint x="1550" y="760" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="I8S6XLJ3EVu2pg4-RtFR-3" value="&lt;font style=&quot;font-size: 25px&quot;&gt;Client&lt;/font&gt;" style="shape=actor;whiteSpace=wrap;html=1;" parent="I8S6XLJ3EVu2pg4-RtFR-1" vertex="1">
@@ -40,7 +40,7 @@
             <mxPoint x="440" y="650" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="I8S6XLJ3EVu2pg4-RtFR-12" value="" style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;rounded=0;fontSize=25;exitX=0.633;exitY=0.019;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="I8S6XLJ3EVu2pg4-RtFR-1" source="I8S6XLJ3EVu2pg4-RtFR-3" target="I8S6XLJ3EVu2pg4-RtFR-5" edge="1">
+        <mxCell id="I8S6XLJ3EVu2pg4-RtFR-12" value="" style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;rounded=0;fontSize=25;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="I8S6XLJ3EVu2pg4-RtFR-1" source="I8S6XLJ3EVu2pg4-RtFR-3" target="I8S6XLJ3EVu2pg4-RtFR-5" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="270" y="700" as="sourcePoint" />
             <mxPoint x="320" y="650" as="targetPoint" />
@@ -111,7 +111,7 @@
         </mxCell>
         <mxCell id="I8S6XLJ3EVu2pg4-RtFR-24" value="" style="endArrow=none;dashed=1;html=1;rounded=0;fontSize=25;" parent="I8S6XLJ3EVu2pg4-RtFR-1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="-200" y="200" as="sourcePoint" />
+            <mxPoint x="-500" y="200" as="sourcePoint" />
             <mxPoint x="1550" y="200" as="targetPoint" />
           </mxGeometry>
         </mxCell>
@@ -124,28 +124,28 @@
         <mxCell id="I8S6XLJ3EVu2pg4-RtFR-27" value="Rank&lt;br&gt;（不实现）" style="rounded=0;whiteSpace=wrap;html=1;fontSize=25;" parent="I8S6XLJ3EVu2pg4-RtFR-1" vertex="1">
           <mxGeometry x="130" y="-30" width="140" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="RaBOwgKpOiwF3AHPLdu5-0" value="KCP通信，支持断线重连，可靠连接" style="ellipse;whiteSpace=wrap;html=1;fontSize=25;" vertex="1" parent="I8S6XLJ3EVu2pg4-RtFR-1">
+        <mxCell id="RaBOwgKpOiwF3AHPLdu5-0" value="KCP通信，支持断线重连，可靠连接" style="ellipse;whiteSpace=wrap;html=1;fontSize=25;" parent="I8S6XLJ3EVu2pg4-RtFR-1" vertex="1">
           <mxGeometry x="550" y="820" width="470" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="RaBOwgKpOiwF3AHPLdu5-1" value="传统TCP" style="ellipse;whiteSpace=wrap;html=1;fontSize=25;" vertex="1" parent="I8S6XLJ3EVu2pg4-RtFR-1">
+        <mxCell id="RaBOwgKpOiwF3AHPLdu5-1" value="传统TCP" style="ellipse;whiteSpace=wrap;html=1;fontSize=25;" parent="I8S6XLJ3EVu2pg4-RtFR-1" vertex="1">
           <mxGeometry x="280" y="460" width="160" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="RaBOwgKpOiwF3AHPLdu5-2" value="账号服务器选择角色，注册角色等&lt;br&gt;（不实现）" style="rounded=0;whiteSpace=wrap;html=1;fontSize=25;" vertex="1" parent="I8S6XLJ3EVu2pg4-RtFR-1">
+        <mxCell id="RaBOwgKpOiwF3AHPLdu5-2" value="账号服务器选择角色，注册角色等&lt;br&gt;（不实现）" style="rounded=0;whiteSpace=wrap;html=1;fontSize=25;" parent="I8S6XLJ3EVu2pg4-RtFR-1" vertex="1">
           <mxGeometry x="-360" y="360" width="370" height="200" as="geometry" />
         </mxCell>
-        <mxCell id="RaBOwgKpOiwF3AHPLdu5-4" value="" style="endArrow=none;html=1;rounded=0;fontSize=25;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.586;exitY=-0.012;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="I8S6XLJ3EVu2pg4-RtFR-1" source="RaBOwgKpOiwF3AHPLdu5-2" target="I8S6XLJ3EVu2pg4-RtFR-21">
+        <mxCell id="RaBOwgKpOiwF3AHPLdu5-4" value="" style="endArrow=none;html=1;rounded=0;fontSize=25;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.586;exitY=-0.012;exitDx=0;exitDy=0;exitPerimeter=0;" parent="I8S6XLJ3EVu2pg4-RtFR-1" source="RaBOwgKpOiwF3AHPLdu5-2" target="I8S6XLJ3EVu2pg4-RtFR-21" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="470" y="250" as="sourcePoint" />
             <mxPoint x="520" y="200" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="RaBOwgKpOiwF3AHPLdu5-5" value="" style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;rounded=0;fontSize=25;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="I8S6XLJ3EVu2pg4-RtFR-1" source="I8S6XLJ3EVu2pg4-RtFR-3" target="RaBOwgKpOiwF3AHPLdu5-2">
+        <mxCell id="RaBOwgKpOiwF3AHPLdu5-5" value="" style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;rounded=0;fontSize=25;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="I8S6XLJ3EVu2pg4-RtFR-1" source="I8S6XLJ3EVu2pg4-RtFR-3" target="RaBOwgKpOiwF3AHPLdu5-2" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="470" y="550" as="sourcePoint" />
             <mxPoint x="520" y="500" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="RaBOwgKpOiwF3AHPLdu5-7" value="先从这条连接选择角色，账号密码验证，然后切到右边的链接&lt;br&gt;（不实现）" style="ellipse;whiteSpace=wrap;html=1;fontSize=25;" vertex="1" parent="I8S6XLJ3EVu2pg4-RtFR-1">
+        <mxCell id="RaBOwgKpOiwF3AHPLdu5-7" value="先从这条连接选择角色，账号密码验证，然后切到右边的链接&lt;br&gt;（不实现）" style="ellipse;whiteSpace=wrap;html=1;fontSize=25;" parent="I8S6XLJ3EVu2pg4-RtFR-1" vertex="1">
           <mxGeometry x="-470" y="800" width="520" height="160" as="geometry" />
         </mxCell>
       </root>
@@ -156,10 +156,10 @@
       <root>
         <mxCell id="QAHNkfbSsgioDdO6vrNx-0" />
         <mxCell id="QAHNkfbSsgioDdO6vrNx-1" parent="QAHNkfbSsgioDdO6vrNx-0" />
-        <mxCell id="QAHNkfbSsgioDdO6vrNx-2" value="角色数据的存储，与DB直连" style="ellipse;whiteSpace=wrap;html=1;fontSize=25;" vertex="1" parent="QAHNkfbSsgioDdO6vrNx-1">
+        <mxCell id="QAHNkfbSsgioDdO6vrNx-2" value="角色数据的存储，与DB直连" style="ellipse;whiteSpace=wrap;html=1;fontSize=25;" parent="QAHNkfbSsgioDdO6vrNx-1" vertex="1">
           <mxGeometry x="210" y="80" width="390" height="220" as="geometry" />
         </mxCell>
-        <mxCell id="QAHNkfbSsgioDdO6vrNx-3" value="&lt;span style=&quot;color: rgb(0 , 0 , 0) ; font-family: &amp;#34;helvetica&amp;#34; ; font-size: 25px ; font-style: normal ; font-weight: 400 ; letter-spacing: normal ; text-align: center ; text-indent: 0px ; text-transform: none ; word-spacing: 0px ; background-color: rgb(248 , 249 , 250) ; display: inline ; float: none&quot;&gt;GS的管理者，在启动时没有GC，在玩家进入一个新的坐标，若该坐标对应的GS没有启动，则拉一个起来&lt;/span&gt;" style="ellipse;whiteSpace=wrap;html=1;fontSize=25;" vertex="1" parent="QAHNkfbSsgioDdO6vrNx-1">
+        <mxCell id="QAHNkfbSsgioDdO6vrNx-3" value="&lt;span style=&quot;color: rgb(0 , 0 , 0) ; font-family: &amp;#34;helvetica&amp;#34; ; font-size: 25px ; font-style: normal ; font-weight: 400 ; letter-spacing: normal ; text-align: center ; text-indent: 0px ; text-transform: none ; word-spacing: 0px ; background-color: rgb(248 , 249 , 250) ; display: inline ; float: none&quot;&gt;GS的管理者，在启动时没有GC，在玩家进入一个新的坐标，若该坐标对应的GS没有启动，则拉一个起来&lt;/span&gt;" style="ellipse;whiteSpace=wrap;html=1;fontSize=25;" parent="QAHNkfbSsgioDdO6vrNx-1" vertex="1">
           <mxGeometry x="144" y="350" width="606" height="250" as="geometry" />
         </mxCell>
       </root>
@@ -182,24 +182,24 @@
         <mxCell id="456YiPM5CASM9Ew9QdIp-7" value="把进入锚点附近的玩家数据同步给锚点归属的ECS。" style="rounded=0;whiteSpace=wrap;html=1;fontSize=25;" parent="1" vertex="1">
           <mxGeometry x="840" y="640" width="300" height="120" as="geometry" />
         </mxCell>
-        <mxCell id="528WkUA1Saa7MWPKtCSN-1" value="&lt;font style=&quot;font-size: 25px&quot;&gt;首个角色释放技能时，以该玩家坐标为中心创建一个锚点，并把周围玩家指派给一个空闲ECS，进入战斗流程（针对密集型区域，有卡顿的风险）&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="528WkUA1Saa7MWPKtCSN-1" value="&lt;font style=&quot;font-size: 25px&quot;&gt;首个角色释放技能时，以该玩家坐标为中心创建一个锚点，并把周围玩家指派给一个空闲ECS，进入战斗流程（针对密集型区域，有卡顿的风险）&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="740" y="435" width="560" height="150" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
   <diagram id="J4DBg7q5RkwfKyQZduWk" name="ECS">
-    <mxGraphModel dx="1661" dy="995" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1993" dy="1194" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="-5-OwtmHQlWJf8rLd1HS-0" />
         <mxCell id="-5-OwtmHQlWJf8rLd1HS-1" parent="-5-OwtmHQlWJf8rLd1HS-0" />
         <mxCell id="-5-OwtmHQlWJf8rLd1HS-3" value="&amp;nbsp; &amp;nbsp;只缓存和维护战斗中玩家的移动系统和战斗系统（也就是GS发过来的玩家，没发过来就拉倒）" style="ellipse;whiteSpace=wrap;html=1;fontSize=20;" parent="-5-OwtmHQlWJf8rLd1HS-1" vertex="1">
           <mxGeometry x="171" y="120" width="486" height="190" as="geometry" />
         </mxCell>
-        <mxCell id="5cFxXiBTy2LKR_IudGsT-0" value="&lt;br&gt;&lt;br&gt;&lt;span style=&quot;color: rgb(0 , 0 , 0) ; font-family: &amp;#34;helvetica&amp;#34; ; font-size: 20px ; font-style: normal ; font-weight: 400 ; letter-spacing: normal ; text-align: center ; text-indent: 0px ; text-transform: none ; word-spacing: 0px ; background-color: rgb(248 , 249 , 250) ; display: inline ; float: none&quot;&gt;若战斗技能击中了非本ECS拥有的玩家，就算了。（本方案的BUG）&lt;/span&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="-5-OwtmHQlWJf8rLd1HS-1">
+        <mxCell id="5cFxXiBTy2LKR_IudGsT-0" value="&lt;br&gt;&lt;br&gt;&lt;span style=&quot;color: rgb(0 , 0 , 0) ; font-family: &amp;#34;helvetica&amp;#34; ; font-size: 20px ; font-style: normal ; font-weight: 400 ; letter-spacing: normal ; text-align: center ; text-indent: 0px ; text-transform: none ; word-spacing: 0px ; background-color: rgb(248 , 249 , 250) ; display: inline ; float: none&quot;&gt;若战斗技能击中了非本ECS拥有的玩家，就算了。（本方案的BUG）&lt;/span&gt;" style="ellipse;whiteSpace=wrap;html=1;" parent="-5-OwtmHQlWJf8rLd1HS-1" vertex="1">
           <mxGeometry x="189" y="350" width="450" height="180" as="geometry" />
         </mxCell>
-        <mxCell id="V99LEdM72ELUVmh--Cle-0" value="使用ECS编程，内存友好，对多线程进行支持" style="rounded=0;whiteSpace=wrap;html=1;fontSize=25;" vertex="1" parent="-5-OwtmHQlWJf8rLd1HS-1">
+        <mxCell id="V99LEdM72ELUVmh--Cle-0" value="使用ECS编程，内存友好，对多线程进行支持" style="rounded=0;whiteSpace=wrap;html=1;fontSize=25;" parent="-5-OwtmHQlWJf8rLd1HS-1" vertex="1">
           <mxGeometry x="192" y="660" width="447" height="160" as="geometry" />
         </mxCell>
       </root>
@@ -210,13 +210,13 @@
       <root>
         <mxCell id="azk29wdoNAcDGyPVJYtD-0" />
         <mxCell id="azk29wdoNAcDGyPVJYtD-1" parent="azk29wdoNAcDGyPVJYtD-0" />
-        <mxCell id="azk29wdoNAcDGyPVJYtD-2" value="与Client直连，缓存协议，协议分级，断线重连等。" style="ellipse;whiteSpace=wrap;html=1;fontSize=25;" vertex="1" parent="azk29wdoNAcDGyPVJYtD-1">
+        <mxCell id="azk29wdoNAcDGyPVJYtD-2" value="与Client直连，缓存协议，协议分级，断线重连等。" style="ellipse;whiteSpace=wrap;html=1;fontSize=25;" parent="azk29wdoNAcDGyPVJYtD-1" vertex="1">
           <mxGeometry x="140" y="100" width="570" height="150" as="geometry" />
         </mxCell>
-        <mxCell id="azk29wdoNAcDGyPVJYtD-3" value="与GS直连，与ECS直连，传输Client的操作指令" style="ellipse;whiteSpace=wrap;html=1;fontSize=25;" vertex="1" parent="azk29wdoNAcDGyPVJYtD-1">
+        <mxCell id="azk29wdoNAcDGyPVJYtD-3" value="与GS直连，与ECS直连，传输Client的操作指令" style="ellipse;whiteSpace=wrap;html=1;fontSize=25;" parent="azk29wdoNAcDGyPVJYtD-1" vertex="1">
           <mxGeometry x="140" y="320" width="570" height="150" as="geometry" />
         </mxCell>
-        <mxCell id="azk29wdoNAcDGyPVJYtD-4" value="提供全局广播功能" style="ellipse;whiteSpace=wrap;html=1;fontSize=25;" vertex="1" parent="azk29wdoNAcDGyPVJYtD-1">
+        <mxCell id="azk29wdoNAcDGyPVJYtD-4" value="提供全局广播功能" style="ellipse;whiteSpace=wrap;html=1;fontSize=25;" parent="azk29wdoNAcDGyPVJYtD-1" vertex="1">
           <mxGeometry x="129" y="540" width="570" height="150" as="geometry" />
         </mxCell>
       </root>
