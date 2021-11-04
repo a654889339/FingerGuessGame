@@ -1,6 +1,8 @@
 #ifndef _ECS_COMPONENT_LIS T_H_
 #define _ECS_COMPONENT_LIST_H_
 
+#include "ECSDef.h"
+
 #include <vector>
 
 template <typename Component>
@@ -14,24 +16,10 @@ class ComponentList
     //    return child;
     //}
 public:
-    int_eid Add(Component* pComponent)
-    {
-        int_eid nResult = ERROR_EID;
+    int_eid Add(Component* pComponent);
 
-        JYLOG_PROCESS_ERROR(pComponent);
-
-
-
-
-        nResult = true;
-    Exit0:
-        return nResult;
-    }
-
-    Component* GetNewOne()
-    {
-
-    }
+    Component* GetNewOne();
+    Component* GetComponent(int_eid nEntityID);
 
 private:
     std::vector<Component> m_Manager;

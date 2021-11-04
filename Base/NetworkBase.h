@@ -71,7 +71,7 @@ static inline int _CanSend(SOCKET Socket)
     return -1;
 }
 
-static bool _Send(SOCKET Socket, void* pbyData, size_t uDataLen)
+static bool _Send(SOCKET& Socket, sockaddr_in& DestAddr, KCPRecvFD* pKCP, void* pbyData, size_t uDataLen)
 {
     bool bResult = false;
     int nRetCode = 0;
@@ -107,6 +107,41 @@ Exit0:
     return bResult;
 }
 
+static bool _Send(SOCKET Socket, void* pbyData, size_t uDataLen)
+{
+    bool bResult = false;
+    int nRetCode = 0;
+    char* pOffset = (char*)pbyData;
+
+    JYLOG_PROCESS_ERROR(pbyData);
+
+    while (uDataLen > 0)
+    {
+        nRetCode = _CanSend(Socket);
+        JYLOG_PROCESS_ERROR(nRetCode != 0);
+        if (nRetCode < 0)
+        {
+            JY_TRUE_CONTINUE(_SocketCanRestore());
+            goto Exit0;
+        }
+
+        nRetCode = send(Socket, pOffset, uDataLen, 0);
+        JYLOG_PROCESS_ERROR(nRetCode != 0);
+
+        if (nRetCode < 0)
+        {
+            JY_TRUE_CONTINUE(_SocketCanRestore());
+            goto Exit0;
+        }
+
+        pOffset += nRetCode;
+        uDataLen -= nRetCode;
+    }
+
+    bResult = true;
+Exit0:
+    return bResult;
+}
 // Recv
 // return -1: error, 0: timeout, 1: success
 static inline int _CanRecv(SOCKET Socket)
@@ -173,6 +208,7 @@ struct RecvFD
 struct KCPRecvFD
 {
 	int nConnIndex;
+
 	bool bHaveProtoSize;
 	size_t uProtoSize;
 	time_t nActiveTime;
@@ -237,4 +273,35 @@ Exit0:
     return bResult;
 }
 
+static bool _GetFullPackage(KCPRecvFD* pRecvFD, char* pszRecvBuffer)
+{
+    bool bResult = false;
+    bool bRetCode = false;
+
+    JYLOG_PROCESS_ERROR(pRecvFD);
+    JYLOG_PROCESS_ERROR(pszRecvBuffer);
+
+    if (!pRecvFD->bHaveProtoSize)
+    {
+        JY_PROCESS_ERROR(pRecvFD->RecvQueue.size() >= 2);
+        pRecvFD->bHaveProtoSize = true;
+
+        bRetCode = pRecvFD->RecvQueue.pop(2, pszRecvBuffer);
+        JYLOG_PROCESS_ERROR(bRetCode);
+
+        pRecvFD->uProtoSize = *(WORD*)pszRecvBuffer;
+    }
+
+    JY_PROCESS_ERROR(pRecvFD->bHaveProtoSize);
+    JY_PROCESS_ERROR(pRecvFD->RecvQueue.size() >= pRecvFD->uProtoSize);
+
+    bRetCode = pRecvFD->RecvQueue.pop(pRecvFD->uProtoSize, pszRecvBuffer);
+    JYLOG_PROCESS_ERROR(bRetCode);
+
+    pRecvFD->bHaveProtoSize = false;
+
+    bResult = true;
+Exit0:
+    return bResult;
+}
 #endif

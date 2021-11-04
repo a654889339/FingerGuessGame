@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "KCPServer.h"
 
+
 KCPServer::KCPServer()
 {
   
@@ -45,63 +46,36 @@ void KCPServer::ProcessNetwork()
 	bool bResult = false;
 	bool bRetCode = false;
 	int nRetCode = 0;
-	RecvFD* pszRecvFD = NULL;
+
+	KCPRecvFD* pszRecvFD = NULL;
 	timeval timeout{ 0,0 };
 	time_t nTimeNow = time(NULL);
 	FD_SET CheckFD;
-
+	sockaddr_in AddrClient;
+	int nAddrClientLen = sizeof(sockaddr_in);
 	JY_PROCESS_SUCCESS(!m_bRunFlag);
 
 	while (1)
 	{
-		nRetCode = recvfrom(m_Socket, m_szRecvBuffer, sizeof(m_szRecvBuffer), 0, (SOCKADDR*)&m_RecvAddr, &nRecvLength);
-		JYLOG_PROCESS_CONTINUE(nRetCode != SOCKET_ERROR);
-		if (ClientSocket == m_Socket)
+		nRetCode = recvfrom(m_Socket, m_szRecvBuffer, sizeof(m_szRecvBuffer), 0, (SOCKADDR*)&AddrClient, &nAddrClientLen);
+		JYLOG_PROCESS_CONTINUE(nRetCode > 0);
+
+		pszRecvFD = AcceptConnection();
+		JYLOG_PROCESS_CONTINUE(pszRecvFD);
+
+		if (pszRecvFD->nActiveTime + CONNECTION_TIME_OUT < nTimeNow)
 		{
-			JYLOG_PROCESS_CONTINUE(m_SocketReadSet.fd_count < MAX_ACCEPT_CONNECTION);
-
-			AcceptConnection();
+			printf("[ProcessNetwork] Timeout:%d.\n", pszRecvFD->nConnIndex);
+			Shutdown(pszRecvFD->nConnIndex);
+			continue;
 		}
-		else
-		{
-			pszRecvFD = m_ClientManager.find(ClientSocket);
-			JYLOG_PROCESS_CONTINUE(pszRecvFD);
 
-			if (pszRecvFD->nActiveTime + CONNECTION_TIME_OUT < nTimeNow)
-			{
-				printf("[ProcessNetwork] Timeout:%d.\n", pszRecvFD->nConnIndex);
-				Shutdown(pszRecvFD->nConnIndex);
-				continue;
-			}
-
-			nRetCode = _CanRecv(ClientSocket);
-			JY_TRUE_CONTINUE(nRetCode == 0);
-			if (nRetCode < 0)
-			{
-				JY_TRUE_CONTINUE(_SocketCanRestore());
-
-				Shutdown(pszRecvFD->nConnIndex);
-				continue;
-			}
-
-			nRetCode = recv(ClientSocket, m_szRecvBuffer, sizeof(m_szRecvBuffer), 0);
-			JY_TRUE_CONTINUE(nRetCode == 0);
-
-			if (nRetCode < 0)
-			{
-				JY_TRUE_CONTINUE(_SocketCanRestore());
-
-				Shutdown(pszRecvFD->nConnIndex);
-				continue;
-			}
-
-			pszRecvFD->nActiveTime = nTimeNow;
-			bRetCode = pszRecvFD->RecvQueue.push(m_szRecvBuffer, (size_t)nRetCode);
-			if (!bRetCode)
-				Shutdown(pszRecvFD->nConnIndex);
-			else if (_GetFullPackage(pszRecvFD, m_szRecvBuffer))
-				ProcessPackage(pszRecvFD->nConnIndex, (byte*)m_szRecvBuffer, pszRecvFD->uProtoSize);
-		}
+		pszRecvFD->nActiveTime = nTimeNow;
+		bRetCode = pszRecvFD->RecvQueue.push(m_szRecvBuffer, (size_t)nRetCode);
+		if (!bRetCode)
+			Shutdown(pszRecvFD->nConnIndex);
+		else if (_GetFullPackage(pszRecvFD, m_szRecvBuffer))
+			ProcessPackage(pszRecvFD->nConnIndex, (byte*)m_szRecvBuffer, pszRecvFD->uProtoSize);
 	}
 
 Exit1:
@@ -112,4 +86,52 @@ Exit0:
 		Quit();
 	}
 	return;
+}
+
+bool KCPServer::Send(int nConnIndex, void* pbyData, size_t uDataLen)
+{
+	bool bResult = false;
+	bool bRetCode = false;
+	ClientAddr* pClientAddr;
+
+	JY_PROCESS_ERROR(m_bRunFlag);
+	JYLOG_PROCESS_ERROR(IsAlive(nConnIndex));
+	JYLOG_PROCESS_ERROR(pbyData);
+
+	pClientAddr = GetClientSocket(nConnIndex);
+	JY_PROCESS_ERROR(pClientAddr->bValid);
+
+	// Async + encrypt + Compress
+	JYLOG_PROCESS_ERROR(uDataLen + 2 < sizeof(m_szSendBuffer));
+
+	*(WORD*)m_szSendBuffer = (WORD)uDataLen;
+	memcpy(m_szSendBuffer + 2, pbyData, uDataLen);
+
+	bRetCode = _Send(ClientSocket, m_szSendBuffer, uDataLen + 2);
+	JYLOG_PROCESS_ERROR(bRetCode);
+
+	bResult = true;
+Exit0:
+	if (!bResult && m_bRunFlag)
+	{
+		Shutdown(nConnIndex);
+	}
+	return bResult;
+}
+
+bool KCPServer::IsAlive(int nConnIndex)
+{
+	ClientAddr* pClientAddr = GetClientSocket(nConnIndex);
+	return pClientAddr && pClientAddr->bValid;
+}
+
+ClientAddr* KCPServer::GetClientSocket(int nConnIndex)
+{
+	ClientAddr* Result = NULL;
+
+	JYLOG_PROCESS_ERROR(nConnIndex >= 0 && nConnIndex < MAX_ACCEPT_CONNECTION);
+
+	Result = &m_nConnecFlag[nConnIndex];
+Exit0:
+	return Result;
 }

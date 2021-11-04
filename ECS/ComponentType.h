@@ -11,4 +11,20 @@ enum ComponentType
     ect_end
 };
 
+struct MoveComponent
+{
+    int nControl;
+    int nX, nY;
+    int nSpeed;
+    int nFace;
+};
+
+struct FightComponent
+{
+    int nControl;
+    int nX, nY;
+    int nSpeed;
+    int nFace;
+};
+
 #endif

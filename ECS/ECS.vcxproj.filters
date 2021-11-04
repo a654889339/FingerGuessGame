@@ -34,4 +34,9 @@
       <Filter>System</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ComponentList.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+  </ItemGroup>
 </Project>

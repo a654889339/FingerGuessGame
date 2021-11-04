@@ -72,6 +72,9 @@
     <ClInclude Include="KCPClient.h">
       <Filter>Network\KCPClient</Filter>
     </ClInclude>
+    <ClInclude Include="JYVector.h">
+      <Filter>STL</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
