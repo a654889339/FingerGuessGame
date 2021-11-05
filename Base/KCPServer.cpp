@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "KCPServer.h"
 
-
+#ifdef _SERVER
 KCPServer::KCPServer()
 {
   
@@ -35,7 +35,6 @@ bool KCPServer::Bind(const char szIP[], int nPort)
 	nRetCode = bind(m_Socket, (LPSOCKADDR)&sin, sizeof(sin));
 	JYLOG_PROCESS_ERROR(nRetCode != SOCKET_ERROR);
 
-
 	m_bRunFlag = true;
 
 	JY_STD_BOOL_END
@@ -60,7 +59,7 @@ void KCPServer::ProcessNetwork()
 		nRetCode = recvfrom(m_Socket, m_szRecvBuffer, sizeof(m_szRecvBuffer), 0, (SOCKADDR*)&AddrClient, &nAddrClientLen);
 		JYLOG_PROCESS_CONTINUE(nRetCode > 0);
 
-		pszRecvFD = AcceptConnection();
+		pszRecvFD = AcceptConnection(AddrClient);
 		JYLOG_PROCESS_CONTINUE(pszRecvFD);
 
 		if (pszRecvFD->nActiveTime + CONNECTION_TIME_OUT < nTimeNow)
@@ -92,14 +91,14 @@ bool KCPServer::Send(int nConnIndex, void* pbyData, size_t uDataLen)
 {
 	bool bResult = false;
 	bool bRetCode = false;
-	ClientAddr* pClientAddr;
+	KCPRecvFD* pKcpFD;
 
 	JY_PROCESS_ERROR(m_bRunFlag);
 	JYLOG_PROCESS_ERROR(IsAlive(nConnIndex));
 	JYLOG_PROCESS_ERROR(pbyData);
 
-	pClientAddr = GetClientSocket(nConnIndex);
-	JY_PROCESS_ERROR(pClientAddr->bValid);
+	pKcpFD = GetClientSocket(nConnIndex);
+	JY_PROCESS_ERROR(pKcpFD->bConnFlag);
 
 	// Async + encrypt + Compress
 	JYLOG_PROCESS_ERROR(uDataLen + 2 < sizeof(m_szSendBuffer));
@@ -107,7 +106,7 @@ bool KCPServer::Send(int nConnIndex, void* pbyData, size_t uDataLen)
 	*(WORD*)m_szSendBuffer = (WORD)uDataLen;
 	memcpy(m_szSendBuffer + 2, pbyData, uDataLen);
 
-	bRetCode = _Send(ClientSocket, m_szSendBuffer, uDataLen + 2);
+	bRetCode = _Send(m_Socket, pKcpFD, m_szSendBuffer, uDataLen + 2);
 	JYLOG_PROCESS_ERROR(bRetCode);
 
 	bResult = true;
@@ -121,17 +120,85 @@ Exit0:
 
 bool KCPServer::IsAlive(int nConnIndex)
 {
-	ClientAddr* pClientAddr = GetClientSocket(nConnIndex);
-	return pClientAddr && pClientAddr->bValid;
+	KCPRecvFD* pKcpFD = GetClientSocket(nConnIndex);
+	return pKcpFD && pKcpFD->bConnFlag;
 }
 
-ClientAddr* KCPServer::GetClientSocket(int nConnIndex)
+KCPRecvFD* KCPServer::GetClientSocket(int nConnIndex)
 {
-	ClientAddr* Result = NULL;
+	KCPRecvFD* pKcpFD = NULL;
 
 	JYLOG_PROCESS_ERROR(nConnIndex >= 0 && nConnIndex < MAX_ACCEPT_CONNECTION);
 
-	Result = &m_nConnecFlag[nConnIndex];
+	pKcpFD = &m_nConnecFlag[nConnIndex];
 Exit0:
-	return Result;
+	return pKcpFD;
 }
+
+bool KCPServer::IsEnable()
+{
+	return m_bRunFlag;
+}
+
+void KCPServer::Quit()
+{
+	JY_PROCESS_ERROR(m_bRunFlag);
+
+	m_bRunFlag = false;
+
+	m_ClientManager.clear();
+
+	for (int i = 0; i < MAX_ACCEPT_CONNECTION; i++)
+		m_nConnecFlag[i].bConnFlag = false;
+
+	closesocket(m_Socket);
+	JY_STD_VOID_END
+}
+
+KCPRecvFD* KCPServer::AcceptConnection(sockaddr_in& RemoteAddr)
+{
+	int nConnIndex = INVALID_CONNINDEX;
+	int nAddrlen = 0;
+	KCPRecvFD* pszKCPRecvFD = NULL;
+
+	for (int i = 0; i < MAX_ACCEPT_CONNECTION; i++)
+	{
+		if (!m_nConnecFlag[i].bConnFlag)
+		{
+			nConnIndex = i;
+
+			break;
+		}
+	}
+	JYLOG_PROCESS_ERROR(nConnIndex != INVALID_CONNINDEX);
+
+	pszKCPRecvFD = &m_nConnecFlag[nConnIndex];
+	pszKCPRecvFD->Connect(RemoteAddr, nConnIndex);
+
+	nAddrlen = sizeof(RemoteAddr);
+
+	m_ClientManager[RemoteAddr] = pszKCPRecvFD;
+
+	NewConnection(nConnIndex, inet_ntoa(RemoteAddr.sin_addr), RemoteAddr.sin_port);
+Exit0:
+	return pszKCPRecvFD;
+}
+
+void KCPServer::Shutdown(int nConnIndex)
+{
+	KCPRecvFD* pszKCPRecvFD = NULL;
+
+	JY_PROCESS_ERROR(m_bRunFlag);
+
+	pszKCPRecvFD = GetClientSocket(nConnIndex);
+	JY_PROCESS_ERROR(pszKCPRecvFD);
+
+	m_ClientManager.erase(pszKCPRecvFD->Addr);
+
+	m_nConnecFlag[nConnIndex].bConnFlag = false;
+
+	DisConnection(nConnIndex);
+
+	JY_STD_VOID_END
+}
+#endif

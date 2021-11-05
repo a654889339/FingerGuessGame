@@ -35,7 +35,7 @@ Exit0:
 bool KCPClient::Send(void* pbyData, size_t uDataLen)
 {
 	bool bResult = false;
-	bool bRetCode = false;
+	int nRetCode = 0;
 
 	JY_PROCESS_SUCCESS(!m_bRunFlag);
 	JYLOG_PROCESS_ERROR(pbyData);
@@ -45,8 +45,8 @@ bool KCPClient::Send(void* pbyData, size_t uDataLen)
 
 	*(WORD*)m_szSendBuffer = (WORD)uDataLen;
 	memcpy(m_szSendBuffer + 2, pbyData, uDataLen);
-	bRetCode = sendto(m_Socket, m_szSendBuffer, uDataLen + 2, 0, (SOCKADDR*)&m_SerAddr, sizeof(m_SerAddr));
-	JYLOG_PROCESS_ERROR(bRetCode);
+	nRetCode = sendto(m_Socket, m_szSendBuffer, uDataLen + 2, 0, (SOCKADDR*)&m_SerAddr, sizeof(m_SerAddr));
+	JYLOG_PROCESS_ERROR(nRetCode);
 Exit1:
 	bResult = true;
 Exit0:

@@ -42,6 +42,41 @@ static void _UnInitNetwork()
     }
 }
 
+struct KCPRecvFD
+{
+    int nConnIndex;
+    sockaddr_in Addr;
+    bool bHaveProtoSize;
+    size_t uProtoSize;
+    time_t nActiveTime;
+    bool bConnFlag;
+    RECV_QUEUE RecvQueue;
+    KCPRecvFD()
+    {
+        Clear();
+        RecvQueue.init(MAX_RECV_BUFFER_SIZE);
+    }
+
+    void Clear()
+    {
+        nConnIndex = INVALID_CONNINDEX;
+        bHaveProtoSize = false;
+        uProtoSize = 0;
+        nActiveTime = 0;
+        bConnFlag = false;
+        RecvQueue.clear();
+    }
+
+    void Connect(sockaddr_in& Addr_in, int _nConnIndex)
+    {
+        Clear();
+        Addr = Addr_in;
+        nConnIndex = _nConnIndex;
+        nActiveTime = time(NULL);
+        bConnFlag = true;
+    }
+};
+
 static inline int _SocketCanRestore()
 {
     return (WSAGetLastError() == EINTR);
@@ -71,7 +106,7 @@ static inline int _CanSend(SOCKET Socket)
     return -1;
 }
 
-static bool _Send(SOCKET& Socket, sockaddr_in& DestAddr, KCPRecvFD* pKCP, void* pbyData, size_t uDataLen)
+static bool _Send(SOCKET Socket, KCPRecvFD* pKCP, void* pbyData, size_t uDataLen)
 {
     bool bResult = false;
     int nRetCode = 0;
@@ -81,15 +116,7 @@ static bool _Send(SOCKET& Socket, sockaddr_in& DestAddr, KCPRecvFD* pKCP, void* 
 
     while (uDataLen > 0)
     {
-        nRetCode = _CanSend(Socket);
-        JYLOG_PROCESS_ERROR(nRetCode != 0);
-        if (nRetCode < 0)
-        {
-            JY_TRUE_CONTINUE(_SocketCanRestore());
-            goto Exit0;
-        }
-
-        nRetCode = send(Socket, pOffset, uDataLen, 0);
+        nRetCode = sendto(Socket, pOffset, uDataLen, 0, (SOCKADDR*)&pKCP->Addr, sizeof(pKCP->Addr));
         JYLOG_PROCESS_ERROR(nRetCode != 0);
 
         if (nRetCode < 0)
@@ -204,42 +231,6 @@ struct RecvFD
         bConnFlag = true;
     }
 };
-
-struct KCPRecvFD
-{
-	int nConnIndex;
-
-	bool bHaveProtoSize;
-	size_t uProtoSize;
-	time_t nActiveTime;
-	bool bConnFlag;
-	RECV_QUEUE RecvQueue;
-
-    KCPRecvFD()
-	{
-		Clear();
-		RecvQueue.init(MAX_RECV_BUFFER_SIZE);
-	}
-
-	void Clear()
-	{
-		nConnIndex = INVALID_CONNINDEX;
-		bHaveProtoSize = false;
-		uProtoSize = 0;
-		nActiveTime = 0;
-		bConnFlag = false;
-		RecvQueue.clear();
-	}
-
-	void Connect(int _nConnIndex)
-	{
-		Clear();
-		nConnIndex = _nConnIndex;
-		nActiveTime = time(NULL);
-		bConnFlag = true;
-	}
-};
-
 
 static bool _GetFullPackage(RecvFD* pRecvFD, char* pszRecvBuffer)
 {

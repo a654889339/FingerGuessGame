@@ -1,20 +1,19 @@
 #ifndef _KCP_SERVER_H_
 #define _KCP_SERVER_H_
 
+
 #include "NetworkBase.h"
-
-
+#include <map>
+#ifdef _SERVER
 #if defined (_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
 #endif
 
-struct ClientAddr 
+struct AddrCmp 
 {
-	sockaddr_in addr_in;
-	bool bValid;
-	bool operator < (const ClientAddr& clientAdrr) const
+	bool operator()(const sockaddr_in& Addr_A, const sockaddr_in& Addr_B) const
 	{
-		return  addr_in.sin_addr.S_un.S_addr < clientAdrr.addr_in.sin_addr.S_un.S_addr || addr_in.sin_addr.S_un.S_addr == clientAdrr.addr_in.sin_addr.S_un.S_addr && addr_in.sin_port < clientAdrr.addr_in.sin_port;
+		return  Addr_A.sin_addr.S_un.S_addr < Addr_B.sin_addr.S_un.S_addr || Addr_A.sin_addr.S_un.S_addr == Addr_B.sin_addr.S_un.S_addr && Addr_A.sin_port < Addr_B.sin_port;
 	}
 };
 
@@ -35,19 +34,19 @@ public:
 	virtual void NewConnection(int nConnIndex, const char szIP[], int nPort) = 0;
 	virtual void DisConnection(int nConnIndex) = 0;
 private:
-	KCPRecvFD* AcceptConnection();
+	KCPRecvFD* AcceptConnection(sockaddr_in&);
 	bool IsAlive(int nConnIndex);
-	ClientAddr* GetClientSocket(int nConnIndex);
+	KCPRecvFD* GetClientSocket(int nConnIndex);
 private:
 	SOCKET m_Socket;
 	bool m_bRunFlag;
-	ClientAddr m_nConnecFlag[MAX_ACCEPT_CONNECTION];
+	KCPRecvFD m_nConnecFlag[MAX_ACCEPT_CONNECTION];
 
 	char m_szRecvBuffer[MAX_RECV_BUFFER_SIZE];
 	char m_szSendBuffer[MAX_RECV_BUFFER_SIZE];
 
-	typedef SplayTree<ClientAddr, KCPRecvFD> CLIENT_INDEX_MANAGER;
-	CLIENT_INDEX_MANAGER m_ClientManager;
+	std::map<sockaddr_in, KCPRecvFD*, AddrCmp> m_ClientManager;
 };
   
+#endif
 #endif
