@@ -4,7 +4,6 @@
 class SystemBase
 {
 public:
-
     virtual void Update();
     virtual void Clear();
 };

@@ -17,14 +17,13 @@ class ComponentList
     //}
 public:
     int_eid Add(Component* pComponent);
+    bool    Del(int_eid nID);
 
-    Component* GetNewOne();
-    Component* GetComponent(int_eid nEntityID);
+    Component* Create(int_eid& nID);
+    Component* Get(int_eid nID);
 
 private:
-    std::vector<Component> m_Manager;
-    std::vector<int_eid>   m_EnableFlag; // Enable = 0; Disenable = Next enable Component in m_Manager's index, last disenable = -1.
-    std::queue<int_eid>    m_UnuseID;
+    JYVector<Component, int_eid> m_Manager;
 };
 
 #endif
