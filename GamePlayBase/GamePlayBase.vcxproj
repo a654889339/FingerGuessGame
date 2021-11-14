@@ -83,6 +83,7 @@
     <ClInclude Include="..\Base\MoveConfig.h" />
     <ClInclude Include="..\Base\PlayerConfig.h" />
     <ClInclude Include="..\Server\MoveSystem.h" />
+    <ClInclude Include="GamePlayECSConfig.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />

@@ -24,6 +24,9 @@
     <ClInclude Include="..\Server\MoveSystem.h">
       <Filter>Move</Filter>
     </ClInclude>
+    <ClInclude Include="GamePlayECSConfig.h">
+      <Filter>Main</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md">
