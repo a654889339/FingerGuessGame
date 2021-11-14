@@ -6,7 +6,10 @@
 class MoveSystem : SystemBase
 {
 public:
+    MoveSystem();
+    virtual ~MoveSystem();
 
+    void Update(int nUpdateTime);
 
 private:
 };

@@ -31,11 +31,11 @@
     <Filter Include="Doc">
       <UniqueIdentifier>{90092e50-e0f0-4740-bd2e-bc145525cd36}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Config">
+      <UniqueIdentifier>{cd539f49-4706-465d-a355-96a56e8d6a1f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GlobalDef.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
     <ClInclude Include="stdafx.h">
       <Filter>Engine</Filter>
     </ClInclude>
@@ -75,6 +75,9 @@
     <ClInclude Include="JYVector.h">
       <Filter>STL</Filter>
     </ClInclude>
+    <ClInclude Include="GlobalDef.h">
+      <Filter>Config</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -109,5 +112,6 @@
     <None Include="..\Doc\GateFrame.drawio">
       <Filter>Doc</Filter>
     </None>
+    <None Include="README.md" />
   </ItemGroup>
 </Project>

@@ -16,7 +16,7 @@ public:
     bool IsUpdateTime(uint8_t uUpdateTime) { return (m_uUpdateFlag >> uUpdateTime) & 1; }
     void SetUpdateTime(bool bEnableFlag) {}
 
-private:
+protected:
     bool    m_bEnable;
     uint8_t m_uUpdateFlag; // 表示Update1,2,3中哪几个是生效的
 };

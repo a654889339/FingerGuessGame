@@ -42,9 +42,6 @@
     <ClCompile Include="DBBase.cpp">
       <Filter>DB</Filter>
     </ClCompile>
-    <ClCompile Include="MoveSystem.cpp">
-      <Filter>Move</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ServerWorld.h">
@@ -64,9 +61,6 @@
     </ClInclude>
     <ClInclude Include="DBBase.h">
       <Filter>DB</Filter>
-    </ClInclude>
-    <ClInclude Include="MoveSystem.h">
-      <Filter>Move</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
