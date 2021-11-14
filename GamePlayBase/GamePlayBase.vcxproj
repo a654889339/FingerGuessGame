@@ -80,11 +80,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\Base\MoveConfig.h" />
-    <ClInclude Include="..\Base\PlayerConfig.h" />
     <ClInclude Include="GamePlayECSConfig.h" />
+    <ClInclude Include="MoveConfig.h" />
     <ClInclude Include="MoveSystem.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerConfig.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />

@@ -1,6 +1,8 @@
 #ifndef _GAMEPLAY_BASE_ECS_CONFIG_H_
 #define _GAMEPLAY_BASE_ECS_CONFIG_H_
 
+#include <ComponentList.h>
+
 enum ComponentType
 {
     ect_begin = 0,
@@ -24,5 +26,5 @@ struct MoveComponent
 #pragma pack()
 
 
-typedef ComponentList<MoveComponent, uint32_t> MoveComponentList;
+typedef ComponentList<MoveComponent> MoveComponentList;
 #endif

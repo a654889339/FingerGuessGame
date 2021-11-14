@@ -12,6 +12,7 @@ public:
     void Update(int nUpdateTime);
 
 private:
+
 };
 
 #endif
