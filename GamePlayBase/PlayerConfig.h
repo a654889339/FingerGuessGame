@@ -1,5 +1,5 @@
-#ifndef _BASE_PLAYER_CONFIG_H_
-#define _BASE_PLAYER_CONFIG_H_
+#ifndef _GAMEPLAYER_PLAYER_CONFIG_H_
+#define _GAMEPLAYER_PLAYER_CONFIG_H_
 
 
 enum GameState

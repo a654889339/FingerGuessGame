@@ -83,7 +83,6 @@
     <ClInclude Include="MathStd.h" />
     <ClInclude Include="CycleQueue.h" />
     <ClInclude Include="NetworkBase.h" />
-    <ClInclude Include="Player.h" />
     <ClInclude Include="Protocol.h" />
     <ClInclude Include="SplayTree.h" />
     <ClInclude Include="stdafx.h" />

@@ -82,14 +82,15 @@
   <ItemGroup>
     <ClInclude Include="..\Base\MoveConfig.h" />
     <ClInclude Include="..\Base\PlayerConfig.h" />
-    <ClInclude Include="..\Server\MoveSystem.h" />
     <ClInclude Include="GamePlayECSConfig.h" />
+    <ClInclude Include="MoveSystem.h" />
+    <ClInclude Include="Player.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Server\MoveSystem.cpp" />
+    <ClCompile Include="MoveSystem.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
