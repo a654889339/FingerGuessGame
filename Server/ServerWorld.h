@@ -1,6 +1,8 @@
 #ifndef _SERVER_WORLD_H_
 #define _SERVER_WORLD_H_
 
+#include "SystemManager.h"
+
 #include "PlayerManager.h"
 #include "ServerConnection.h"
 #include "DBManager.h"
@@ -25,6 +27,7 @@ public:
     PlayerManager    m_PlayerManager;
     ServerConnection m_Connection;
     DBManager        m_DB;
+    SystemManager    m_SystemManager;
 
 private:
     char m_szIP[_NAME_LEN];

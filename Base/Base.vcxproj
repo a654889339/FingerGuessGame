@@ -83,7 +83,6 @@
     <ClInclude Include="MathStd.h" />
     <ClInclude Include="CycleQueue.h" />
     <ClInclude Include="NetworkBase.h" />
-    <ClInclude Include="Player.h" />
     <ClInclude Include="Protocol.h" />
     <ClInclude Include="SplayTree.h" />
     <ClInclude Include="stdafx.h" />
@@ -103,6 +102,7 @@
     <None Include="..\Doc\GameCenterFrame.drawio" />
     <None Include="..\Doc\GameServerFrame.drawio" />
     <None Include="..\Doc\GateFrame.drawio" />
+    <None Include="README.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -19,6 +19,9 @@
     <Filter Include="Include">
       <UniqueIdentifier>{7480cf50-5a7f-47dc-955a-d343c6f5b24c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Move">
+      <UniqueIdentifier>{674c6820-c193-46c5-8166-cbfa597d0594}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">

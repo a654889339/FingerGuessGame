@@ -1,6 +1,9 @@
 #ifndef _BASE_JYVECTOR_H_
 #define _BASE_JYVECTOR_H_
 
+#include <vector>
+#include <queue>
+
 #define JYVECTOR_ERROR_INDEX -1
 
 // 适合高频遍历，增删行为不多的数据结构
@@ -54,6 +57,31 @@ public:
 
         JY_PROCESS_ERROR(nID < m_Manager.size() && nID >= 0);
         JY_PROCESS_ERROR(m_EnableFlag[nID]);
+
+        pResult = &m_Manager[nID];
+    Exit0:
+        return pResult;
+    }
+
+    T* create(ID_TYPE& nID)
+    {
+        T* pResult = NULL;
+
+        if (!m_UnuseID.empty())
+        {
+            nID = m_UnuseID.top();
+            m_UnuseID.pop();
+        }
+        else
+        {
+            m_Manager.push_back(T()); // 这里有一次拷贝构造，要小心
+            m_EnableFlag.push_back(true);
+            m_NextIndex.push_back(JYVECTOR_ERROR_INDEX);
+
+            nID = m_Manager.size() - 1;
+        }
+
+        m_bAddOrDelFlag = true;
 
         pResult = &m_Manager[nID];
     Exit0:
@@ -121,7 +149,7 @@ private:
     std::vector<T>                                                      m_Manager;
     std::vector<ID_TYPE>                                                m_NextIndex; // 下一个可用的组件下标，只维护m_EnableFlag[i]为true的格子
     std::vector<bool>                                                   m_EnableFlag;
-    std::priority_queue<ID_TYPE, vector<ID_TYPE>, greater<ID_TYPE> >    m_UnuseID;
+    std::priority_queue<ID_TYPE, std::vector<ID_TYPE>, std::greater<ID_TYPE> >    m_UnuseID;
     bool                                                                m_bAddOrDelFlag; // 产生增删为true，为true时，m_NextIndex和m_nFirstID都不可信
     ID_TYPE                                                             m_nFirstID;
 };
