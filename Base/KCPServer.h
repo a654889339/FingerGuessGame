@@ -2,7 +2,7 @@
 #define _KCP_SERVER_H_
 
 
-#include "NetworkBase.h"
+#include "KCPBase.h"
 #include <map>
 #ifdef _SERVER
 #if defined (_MSC_VER) && (_MSC_VER >= 1020)

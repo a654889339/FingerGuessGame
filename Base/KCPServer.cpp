@@ -106,7 +106,7 @@ bool KCPServer::Send(int nConnIndex, void* pbyData, size_t uDataLen)
 	*(WORD*)m_szSendBuffer = (WORD)uDataLen;
 	memcpy(m_szSendBuffer + 2, pbyData, uDataLen);
 
-	bRetCode = _Send(m_Socket, pKcpFD, m_szSendBuffer, uDataLen + 2);
+	bRetCode = _KCPSend(m_Socket, pKcpFD, m_szSendBuffer, uDataLen + 2);
 	JYLOG_PROCESS_ERROR(bRetCode);
 
 	bResult = true;
