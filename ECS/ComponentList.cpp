@@ -24,3 +24,15 @@ Component* ComponentList<Component>::Get(int_eid nID)
 {
     return m_Manager.get(nID);
 }
+
+template <typename Component>
+void* ComponentList<Component>::TrasverNextComponent()
+{
+    void* pResult = NULL;
+
+    JY_PROCESS_ERROR(m_nTrasverIndex < m_Manager.size());
+
+    pResult = &m_Manager[m_nTrasverIndex++];
+Exit0:
+    return pResult;
+}

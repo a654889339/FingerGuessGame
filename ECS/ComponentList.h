@@ -2,11 +2,12 @@
 #define _ECS_COMPONENT_LIST_H_
 
 #include "ECSDef.h"
+#include "ComponentListBase.h"
 
 #include <vector>
 
 template <typename Component>
-class ComponentList
+class ComponentList : ComponentListBase
 {
     //template<class _Child, class ... Args>
     //_Child* const Create(Args ... args) const
@@ -21,6 +22,8 @@ public:
 
     Component* Create(int_eid& nID);
     Component* Get(int_eid nID);
+
+    void* TrasverNextComponent();
 
 private:
     JYVector<Component, int_eid> m_Manager;
