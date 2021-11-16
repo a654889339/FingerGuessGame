@@ -1,14 +1,15 @@
 #ifndef _ECS_SYSTEM_BASE_H_
 #define _ECS_SYSTEM_BASE_H_
 
-#include "ComponentListBase.h"
+#include "ComponentList.h"
+#include "SystemObj.h"
 
-#define ECS_SYSTEM_UPDATE_FUNC_COUNT 3
-
-class SystemBase
+template <typename Component>
+class SystemBase : public SystemObj
 {
 private:
     typedef void (SystemBase::* PROCESS_UPDATE_FUNC)(void* pComponent);
+    typedef ComponentList<Component> ComponentManager;
 
 public:
     SystemBase();
@@ -17,19 +18,14 @@ public:
     bool NeedUpdate(uint8_t uPriorLevel); // 判断这个优先级的更新函数是否注册过
     bool Update(uint8_t uPriorLevel);
 
-    bool SetComponentList(ComponentListBase* pComponentList);
-
-    bool IsEnable() { return m_bEnable; }
-    void Enable()   { m_bEnable = true; }
-    void Disable()  { m_bEnable = false; }
+    bool SetComponentList(ComponentManager* pComponentManager);
 
 protected:
-    bool    m_bEnable;     // 系统开关
 
 private:
     PROCESS_UPDATE_FUNC   m_ProcessUpdateFuns[ECS_SYSTEM_UPDATE_FUNC_COUNT];
 
-    ComponentListBase*    m_pComponentList;
+    ComponentManager*     m_pComponentList;
 };
 
 #endif

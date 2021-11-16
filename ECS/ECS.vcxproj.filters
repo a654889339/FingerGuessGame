@@ -21,9 +21,6 @@
     <ClInclude Include="ComponentList.h">
       <Filter>Component</Filter>
     </ClInclude>
-    <ClInclude Include="ComponentType.h">
-      <Filter>Component</Filter>
-    </ClInclude>
     <ClInclude Include="EntityManager.h">
       <Filter>Entity</Filter>
     </ClInclude>
@@ -36,8 +33,8 @@
     <ClInclude Include="SystemManager.h">
       <Filter>System</Filter>
     </ClInclude>
-    <ClInclude Include="ComponentListBase.h">
-      <Filter>Component</Filter>
+    <ClInclude Include="SystemObj.h">
+      <Filter>System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

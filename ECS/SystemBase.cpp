@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "SystemBase.h"
 
-SystemBase::SystemBase()
+template <typename Component>
+SystemBase<Component>::SystemBase()
 {
     m_bEnable        = true;
     m_pComponentList = NULL;
@@ -9,7 +10,8 @@ SystemBase::SystemBase()
     memset(m_ProcessUpdateFuns, 0, sizeof(m_ProcessUpdateFuns));
 }
 
-bool SystemBase::RegisterUpdatePriorLevel(uint8_t uPriorLevel, PROCESS_UPDATE_FUNC Func)
+template <typename Component>
+bool SystemBase<Component>::RegisterUpdatePriorLevel(uint8_t uPriorLevel, PROCESS_UPDATE_FUNC Func)
 {
     bool bResult = false;
 
@@ -21,7 +23,8 @@ bool SystemBase::RegisterUpdatePriorLevel(uint8_t uPriorLevel, PROCESS_UPDATE_FU
     JY_STD_BOOL_END
 }
 
-bool SystemBase::NeedUpdate(uint8_t uPriorLevel)
+template <typename Component>
+bool SystemBase<Component>::NeedUpdate(uint8_t uPriorLevel)
 {
     bool bResult = false;
 
@@ -31,10 +34,11 @@ bool SystemBase::NeedUpdate(uint8_t uPriorLevel)
     JY_STD_BOOL_END
 }
 
-bool SystemBase::Update(uint8_t uPriorLevel)
+template <typename Component>
+bool SystemBase<Component>::Update(uint8_t uPriorLevel)
 {
-    bool                bResult    = false;
-    void*               pComponent = NULL;
+    bool                bResult  = false;
+    bool                bRetCode = false;
     PROCESS_UPDATE_FUNC Func;
 
     JYLOG_PROCESS_ERROR(uPriorLevel < ECS_SYSTEM_UPDATE_FUNC_COUNT);
@@ -43,20 +47,14 @@ bool SystemBase::Update(uint8_t uPriorLevel)
     Func = m_ProcessUpdateFuns[uPriorLevel];
     JYLOG_PROCESS_ERROR(Func);
 
-    m_pComponentList->BeginTraversal();
-
-    while (true)
-    {
-        pComponent = m_pComponentList->TraversalNextComponent();
-        JY_PROCESS_SUCCESS(!pComponent);
-
-        (this->*Func)(pComponent);
-    }
+    bRetCode = m_pComponentList->TraversalNextComponent(Func);
+    JY_PROCESS_ERROR(bRetCode);
 
     JY_STD_BOOL_SUCCESS_END
 }
 
-bool SystemBase::SetComponentList(ComponentListBase* pComponentList)
+template <typename Component>
+bool SystemBase<Component>::SetComponentList(ComponentManager* pComponentList)
 {
     bool bResult = false;
 

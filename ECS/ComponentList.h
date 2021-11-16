@@ -2,12 +2,11 @@
 #define _ECS_COMPONENT_LIST_H_
 
 #include "ECSDef.h"
-#include "ComponentListBase.h"
 
 #include <vector>
 
 template <typename Component>
-class ComponentList : ComponentListBase
+class ComponentList
 {
     //template<class _Child, class ... Args>
     //_Child* const Create(Args ... args) const
@@ -23,7 +22,17 @@ public:
     Component* Create(int_eid& nID);
     Component* Get(int_eid nID);
 
-    void* TraversalNextComponent();
+    template <typename TraversalFunc>
+    bool TraversalNextComponent(TraversalFunc Func)
+    {
+        bool bResult  = false;
+        bool bRetCode = false;
+
+        bRetCode = m_Manager.traversal<TraversalFunc>(Func);
+        JY_PROCESS_ERROR(bRetCode);
+
+        JY_STD_BOOL_END
+    }
 
 private:
     JYVector<Component, int_eid> m_Manager;

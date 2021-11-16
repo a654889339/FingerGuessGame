@@ -81,12 +81,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="ComponentList.h" />
-    <ClInclude Include="ComponentListBase.h" />
-    <ClInclude Include="ComponentType.h" />
     <ClInclude Include="ECSDef.h" />
     <ClInclude Include="EntityManager.h" />
     <ClInclude Include="SystemBase.h" />
     <ClInclude Include="SystemManager.h" />
+    <ClInclude Include="SystemObj.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ComponentList.cpp" />
