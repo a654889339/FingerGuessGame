@@ -26,7 +26,7 @@ Component* ComponentList<Component>::Get(int_eid nID)
 }
 
 template <typename Component>
-void* ComponentList<Component>::TrasverNextComponent()
+void* ComponentList<Component>::TraversalNextComponent()
 {
     void* pResult = NULL;
 

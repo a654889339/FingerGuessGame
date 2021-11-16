@@ -1,4 +1,4 @@
-#ifndef _ECS_COMPONENT_LIS T_H_
+#ifndef _ECS_COMPONENT_LIST_H_
 #define _ECS_COMPONENT_LIST_H_
 
 #include "ECSDef.h"
@@ -23,7 +23,7 @@ public:
     Component* Create(int_eid& nID);
     Component* Get(int_eid nID);
 
-    void* TrasverNextComponent();
+    void* TraversalNextComponent();
 
 private:
     JYVector<Component, int_eid> m_Manager;

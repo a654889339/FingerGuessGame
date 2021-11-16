@@ -7,25 +7,29 @@
 
 class SystemBase
 {
+private:
+    typedef void (SystemBase::* PROCESS_UPDATE_FUNC)(void* pComponent);
+
 public:
-    SystemBase() {m_bEnable = true; m_uUpdateFlag = 0;}
+    SystemBase();
 
-    virtual void Update(int nUpdateTime) = 0;
-
-    bool IsEnable() {return m_bEnable;}
-    void SetEnable(bool bEnableFlag) {m_bEnable = bEnableFlag;}
-
-    bool IsUpdateTime(uint8_t uUpdateTime) { return (m_uUpdateFlag >> uUpdateTime) & 1; }
-    void SetUpdateTime(bool bEnableFlag) {}
+    bool RegisterUpdatePriorLevel(uint8_t uPriorLevel, PROCESS_UPDATE_FUNC Func); // 程序初始化时需要 注册更新函数
+    bool NeedUpdate(uint8_t uPriorLevel); // 判断这个优先级的更新函数是否注册过
+    bool Update(uint8_t uPriorLevel);
 
     bool SetComponentList(ComponentListBase* pComponentList);
 
+    bool IsEnable() { return m_bEnable; }
+    void Enable()   { m_bEnable = true; }
+    void Disable()  { m_bEnable = false; }
+
 protected:
-    bool    m_bEnable;
-    uint8_t m_uUpdateFlag; // 表示Update1,2,3中哪几个是生效的
+    bool    m_bEnable;     // 系统开关
 
 private:
-    ComponentListBase* m_pComponentList;
+    PROCESS_UPDATE_FUNC   m_ProcessUpdateFuns[ECS_SYSTEM_UPDATE_FUNC_COUNT];
+
+    ComponentListBase*    m_pComponentList;
 };
 
 #endif

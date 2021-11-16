@@ -1,6 +1,8 @@
 #ifndef _BASE_JYVECTOR_H_
 #define _BASE_JYVECTOR_H_
 
+#include "CodeStd.h"
+
 #include <vector>
 #include <queue>
 
@@ -99,7 +101,7 @@ public:
     template <typename JYVectorFunc>
     bool traversal(JYVectorFunc& Func)
     {
-        bool bResult  = false;
+        bool bResult = false;
         bool bRetCode = false;
 
         if (!m_bAddOrDelFlag)

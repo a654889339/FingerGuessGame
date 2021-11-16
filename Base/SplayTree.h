@@ -2,6 +2,7 @@
 #define _SPLAY_TREE_H_
 
 #include <cassert>
+#include <cstring>
 
 struct STString
 {
