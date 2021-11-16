@@ -24,6 +24,21 @@ bool SystemBase<Component>::RegisterUpdatePriorLevel(uint8_t uPriorLevel, PROCES
 }
 
 template <typename Component>
+bool SystemBase<Component>::SetComponentList(ComponentManager* pComponentList)
+{
+    bool bResult = false;
+
+    JYLOG_PROCESS_ERROR(pComponentList);
+    JYLOG_PROCESS_ERROR(!m_pComponentList);
+
+    m_pComponentList = pComponentList;
+
+    JY_STD_BOOL_END
+}
+
+//////////////////////////////////////////////////////////////////////////
+
+template <typename Component>
 bool SystemBase<Component>::NeedUpdate(uint8_t uPriorLevel)
 {
     bool bResult = false;
@@ -51,17 +66,4 @@ bool SystemBase<Component>::Update(uint8_t uPriorLevel)
     JY_PROCESS_ERROR(bRetCode);
 
     JY_STD_BOOL_SUCCESS_END
-}
-
-template <typename Component>
-bool SystemBase<Component>::SetComponentList(ComponentManager* pComponentList)
-{
-    bool bResult = false;
-
-    JYLOG_PROCESS_ERROR(pComponentList);
-    JYLOG_PROCESS_ERROR(!m_pComponentList);
-
-    m_pComponentList = pComponentList;
-
-    JY_STD_BOOL_END
 }
