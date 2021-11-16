@@ -13,10 +13,18 @@ template <typename T, typename ID_TYPE>
 class JYVector
 {
 public:
+    JYVector()
+    {
+        m_bAddOrDelFlag = false;
+        m_nFirstID = JYVECTOR_ERROR_INDEX;
+        m_bLock = false;
+    }
+
     ID_TYPE add(T* pT)
     {
         ID_TYPE nResult = JYVECTOR_ERROR_INDEX;
 
+        JYLOG_PROCESS_ERROR(!m_bLock);
         JYLOG_PROCESS_ERROR(pT);
 
         if (!m_UnuseID.empty())
@@ -43,6 +51,7 @@ public:
     {
         bool bResult = false;
 
+        JYLOG_PROCESS_ERROR(!m_bLock);
         JY_PROCESS_ERROR(nID < m_Manager.size() && nID >= 0);
         JY_PROCESS_ERROR(m_EnableFlag[nID]);
 
@@ -69,6 +78,8 @@ public:
     {
         T* pResult = NULL;
 
+        JYLOG_PROCESS_ERROR(!m_bLock);
+
         if (!m_UnuseID.empty())
         {
             nID = m_UnuseID.top();
@@ -92,17 +103,25 @@ public:
 
     void clear()
     {
+        JYLOG_PROCESS_ERROR(!m_bLock);
+
         m_Manager.clear();
         m_NextIndex.clear();
         m_EnableFlag.clear();
         m_bAddOrDelFlag = false;
+
+        JY_STD_VOID_END
     }
 
+    // 有个问题，如果Func的过程中，还add了新的元素，就会导致错乱。
+    // 因此 要有个锁，在traversal时无法添加。
     template <typename JYVectorFunc>
     bool traversal(JYVectorFunc& Func)
     {
         bool bResult = false;
         bool bRetCode = false;
+
+        m_bLock = true;
 
         if (!m_bAddOrDelFlag)
         {
@@ -144,7 +163,10 @@ public:
                 m_NextIndex[nPre] = JYVECTOR_ERROR_INDEX;
         }
 
-        JY_STD_BOOL_END
+        bResult = true;
+    Exit0:
+        m_bLock = false;
+        return bResult;
     }
 
 private:
@@ -154,6 +176,7 @@ private:
     std::priority_queue<ID_TYPE, std::vector<ID_TYPE>, std::greater<ID_TYPE> >    m_UnuseID;
     bool                                                                m_bAddOrDelFlag; // 产生增删为true，为true时，m_NextIndex和m_nFirstID都不可信
     ID_TYPE                                                             m_nFirstID;
+    bool                                                                m_bLock;
 };
 
 
