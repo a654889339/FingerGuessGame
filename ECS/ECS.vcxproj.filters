@@ -36,6 +36,9 @@
     <ClInclude Include="SystemManager.h">
       <Filter>System</Filter>
     </ClInclude>
+    <ClInclude Include="ComponentListBase.h">
+      <Filter>Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ComponentList.cpp">
