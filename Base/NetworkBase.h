@@ -3,6 +3,7 @@
 
 #include "stdafx.h"
 #include<ctime>
+
 #define MAX_ACCEPT_CONNECTION 105
 #define MAX_RECV_BUFFER_SIZE 65536
 #define INVALID_CONNINDEX - 1

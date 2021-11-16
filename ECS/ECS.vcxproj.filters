@@ -47,5 +47,8 @@
     <ClCompile Include="SystemManager.cpp">
       <Filter>System</Filter>
     </ClCompile>
+    <ClCompile Include="SystemBase.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

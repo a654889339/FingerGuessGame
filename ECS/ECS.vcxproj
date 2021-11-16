@@ -90,6 +90,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ComponentList.cpp" />
+    <ClCompile Include="SystemBase.cpp" />
     <ClCompile Include="SystemManager.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

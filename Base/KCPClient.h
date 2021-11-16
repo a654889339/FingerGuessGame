@@ -2,7 +2,6 @@
 #define _KCP_CLIENT_H_
 
 #include "NetworkBase.h"
-#include<WINSOCK2.H>
 class KCPClient
 {
 public:
