@@ -1,6 +1,9 @@
 #ifndef _CODE_STD_H_
 #define _CODE_STD_H_
 
+// 
+typedef unsigned char BYTE;
+
 // Function std
 #define JY_STD_BOOL_END \
     bResult = true; \

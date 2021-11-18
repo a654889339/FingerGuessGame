@@ -2,6 +2,7 @@
 #define _PLAYER_H_
 
 #include "stdafx.h"
+#include "PlayerConfig.h"
 
 class Player
 {

@@ -77,8 +77,9 @@ void ServerWorld::Run()
 
         //m_DB.Active();
         m_Connection.Active();
+        m_SystemManager.Active();
 
-        Sleep(10);
+        Sleep(10); // TODO:¿ØÖÆÖ¡¼ä¸ô
     }
 
     JY_STD_VOID_END

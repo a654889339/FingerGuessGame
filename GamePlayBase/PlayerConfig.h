@@ -1,7 +1,6 @@
 #ifndef _GAMEPLAYER_PLAYER_CONFIG_H_
 #define _GAMEPLAYER_PLAYER_CONFIG_H_
 
-
 enum GameState
 {
     egame_state_begin = 0,
