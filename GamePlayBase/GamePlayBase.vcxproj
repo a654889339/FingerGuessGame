@@ -80,18 +80,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="GamePlay.h" />
     <ClInclude Include="GamePlayECSConfig.h" />
     <ClInclude Include="MoveConfig.h" />
+    <ClInclude Include="MoveCtrlSystem.h" />
     <ClInclude Include="MoveSystem.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerConfig.h" />
+    <ClInclude Include="PlayerManager.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="GamePlay.cpp" />
+    <ClCompile Include="MoveCtrlSystem.cpp" />
     <ClCompile Include="MoveSystem.cpp" />
+    <ClCompile Include="PlayerManager.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

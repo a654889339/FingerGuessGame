@@ -1,5 +1,5 @@
-#ifndef _GAMESERVER_MOVE_SYSTEM_H_
-#define _GAMESERVER_MOVE_SYSTEM_H_
+#ifndef _GAMEPLAYER_MOVE_SYSTEM_H_
+#define _GAMEPLAYER_MOVE_SYSTEM_H_
 
 #include "SystemBase.h"
 #include "GamePlayECSConfig.h"

@@ -3,7 +3,7 @@
 
 MoveSystem::MoveSystem()
 {
-    RegisterUpdatePriorLevel(0, &SystemBase::Update0);
+    RegisterUpdatePriorLevel(0, SystemBase::Update0);
 }
 
 MoveSystem::~MoveSystem()
@@ -14,5 +14,13 @@ MoveSystem::~MoveSystem()
 // 再将加速度作用到速度上
 bool MoveSystem::Update0(MoveComponent* pComponent)
 {
+    if (pComponent->nAccXY)
+    {
+        pComponent->nAccDirXY = 0;
+    }
 
+    if (pComponent->nAccZ)
+    {
+        pComponent->nAccZ = 0;
+    }
 }

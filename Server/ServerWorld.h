@@ -1,9 +1,7 @@
 #ifndef _SERVER_WORLD_H_
 #define _SERVER_WORLD_H_
 
-#include "SystemManager.h"
-
-#include "PlayerManager.h"
+#include "GamePlay.h"
 #include "ServerConnection.h"
 #include "DBManager.h"
 
@@ -24,10 +22,9 @@ private:
     bool LoadConfig();
 
 public:
-    PlayerManager    m_PlayerManager;
+    GamePlay         m_GamePlay;
     ServerConnection m_Connection;
     DBManager        m_DB;
-    SystemManager    m_SystemManager;
 
 private:
     char m_szIP[_NAME_LEN];

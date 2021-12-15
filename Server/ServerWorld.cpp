@@ -16,18 +16,18 @@ ServerWorld::~ServerWorld()
 
 bool ServerWorld::Init()
 {
-    bool bResult = false;
-    bool bRetCode = false;
-    bool bPlayerManagerInitFlag = false;
-    bool bDBInitFlag = false;
-    bool bConnInitFlag = false;
+    bool bResult           = false;
+    bool bRetCode          = false;
+    bool bGamePlayInitFlag = false;
+    bool bDBInitFlag       = false;
+    bool bConnInitFlag     = false;
 
     bRetCode = LoadConfig();
     JYLOG_PROCESS_ERROR(bRetCode);
 
-    bRetCode = m_PlayerManager.Init();
+    bGamePlayInitFlag = m_GamePlay.Init();
     JYLOG_PROCESS_ERROR(bRetCode);
-    bPlayerManagerInitFlag = true;
+    bGamePlayInitFlag = true;
 
     bRetCode = m_DB.Init(m_szDBIP, m_nPort, m_szDBAccount, m_szDBPassward, m_szDBName);
     JYLOG_PROCESS_ERROR(bRetCode);
@@ -41,10 +41,10 @@ bool ServerWorld::Init()
 Exit0:
     if (!bResult)
     {
-        if (bPlayerManagerInitFlag)
+        if (bGamePlayInitFlag)
         {
-            bPlayerManagerInitFlag = false;
-            m_PlayerManager.UnInit();
+            bGamePlayInitFlag = false;
+            m_GamePlay.UnInit();
         }
 
         if (bConnInitFlag)
@@ -64,7 +64,7 @@ Exit0:
 
 void ServerWorld::UnInit()
 {
-    m_PlayerManager.UnInit();
+    m_GamePlay.UnInit();
     m_Connection.UnInit();
     m_DB.UnInit();
 }
@@ -77,7 +77,7 @@ void ServerWorld::Run()
 
         //m_DB.Active();
         m_Connection.Active();
-        m_SystemManager.Active();
+        m_GamePlay.Active();
 
         Sleep(10); // TODO:¿ØÖÆÖ¡¼ä¸ô
     }
