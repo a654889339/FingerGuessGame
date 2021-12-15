@@ -8,6 +8,7 @@ SystemBase<Component>::SystemBase()
     m_pComponentList = NULL;
 
     memset(m_ProcessUpdateFuns, 0, sizeof(m_ProcessUpdateFuns));
+    RegisterUpdatePriorLevel(0, &SystemBase::Update0);
 }
 
 template <typename Component>

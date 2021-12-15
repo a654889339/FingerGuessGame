@@ -17,9 +17,9 @@ public:
     bool RegisterUpdatePriorLevel(uint8_t uPriorLevel, PROCESS_UPDATE_FUNC Func); // 程序初始化时需要 注册更新函数
     bool SetComponentList(ComponentManager* pComponentManager);
 
-    virtual bool Update0(void* pComponent) = 0;
-    virtual bool Update1(void* pComponent) = 0;
-    virtual bool Update2(void* pComponent) = 0;
+    virtual bool Update0(void* pComponent) {};
+    virtual bool Update1(void* pComponent) {};
+    virtual bool Update2(void* pComponent) {};
 
 private:
     bool NeedUpdate(uint8_t uPriorLevel); // 判断这个优先级的更新函数是否注册过
