@@ -9,10 +9,6 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="PlayerManager">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="DB">
       <UniqueIdentifier>{61819c88-a172-472d-825f-3417b4c06d2e}</UniqueIdentifier>
     </Filter>
@@ -30,9 +26,6 @@
     <ClCompile Include="ServerConnection.cpp">
       <Filter>Network</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerManager.cpp">
-      <Filter>PlayerManager</Filter>
-    </ClCompile>
     <ClCompile Include="DBManager.cpp">
       <Filter>DB</Filter>
     </ClCompile>
@@ -46,9 +39,6 @@
     </ClInclude>
     <ClInclude Include="ServerConnection.h">
       <Filter>Network</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerManager.h">
-      <Filter>PlayerManager</Filter>
     </ClInclude>
     <ClInclude Include="DBManager.h">
       <Filter>DB</Filter>

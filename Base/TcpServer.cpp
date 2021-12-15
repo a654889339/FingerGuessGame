@@ -109,7 +109,7 @@ void TcpServer::ProcessNetwork()
             bRetCode = pszRecvFD->RecvQueue.push(m_szRecvBuffer, (size_t)nRetCode);
             if (!bRetCode)
                 Shutdown(pszRecvFD->nConnIndex);
-            else if (_GetFullPackage(pszRecvFD, m_szRecvBuffer))
+            else if (_TCPGetFullPackage(pszRecvFD, m_szRecvBuffer))
                 ProcessPackage(pszRecvFD->nConnIndex, (byte*)m_szRecvBuffer, pszRecvFD->uProtoSize);
         }
     }
@@ -143,7 +143,7 @@ bool TcpServer::Send(int nConnIndex, void* pbyData, size_t uDataLen)
     *(WORD*)m_szSendBuffer = (WORD)uDataLen;
     memcpy(m_szSendBuffer + 2, pbyData, uDataLen);
 
-    bRetCode = _Send(ClientSocket, m_szSendBuffer, uDataLen + 2);
+    bRetCode = _TCPSend(ClientSocket, m_szSendBuffer, uDataLen + 2);
     JYLOG_PROCESS_ERROR(bRetCode);
 
     bResult = true;

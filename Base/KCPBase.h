@@ -64,4 +64,9 @@ Exit0:
     return bResult;
 }
 
+static bool _KCPGetFullPackage(KCPRecvFD* pRecvFD, char* pszRecvBuffer)
+{
+
+    return true;
+}
 #endif

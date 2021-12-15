@@ -54,7 +54,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;WIN32;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;WIN32;_CONSOLE;_SERVER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -66,7 +66,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;WIN32;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;WIN32;_CONSOLE;_CLIENT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -78,6 +78,7 @@
     <ClInclude Include="CodeStd.h" />
     <ClInclude Include="GlobalDef.h" />
     <ClInclude Include="JYVector.h" />
+    <ClInclude Include="KCPBase.h" />
     <ClInclude Include="KCPClient.h" />
     <ClInclude Include="KCPServer.h" />
     <ClInclude Include="MathStd.h" />
@@ -86,6 +87,7 @@
     <ClInclude Include="Protocol.h" />
     <ClInclude Include="SplayTree.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="TCPBase.h" />
     <ClInclude Include="TcpClient.h" />
     <ClInclude Include="TcpServer.h" />
   </ItemGroup>

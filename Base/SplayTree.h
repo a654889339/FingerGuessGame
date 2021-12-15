@@ -123,7 +123,7 @@ public:
 
     Exit1:
         bResult = true;
-    Exit0:
+    //Exit0:
         return bResult;
     }
 

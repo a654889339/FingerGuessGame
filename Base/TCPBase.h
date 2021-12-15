@@ -56,7 +56,7 @@ static bool _TCPSend(SOCKET Socket, void* pbyData, size_t uDataLen)
             goto Exit0;
         }
 
-        nRetCode = send(Socket, pOffset, uDataLen, 0);
+        nRetCode = send(Socket, pOffset, (int)uDataLen, 0);
         JYLOG_PROCESS_ERROR(nRetCode != 0);
 
         if (nRetCode < 0)

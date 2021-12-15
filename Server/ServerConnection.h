@@ -19,20 +19,11 @@ public:
 
     bool DoS2CPingRespond(int nConnIndex);
     bool DoS2CLoginRespond(int nConnIndex, int nRetCode);
-    bool DoS2CApplyAllPlayerRespond(int nConnIndex);
-    bool DoS2CCreateGameRespond(int nConnIndex, int nRetCode);
-    bool DoS2CJoinGameRespond(int nConnIndex, int nRetCode);
-    bool DoS2CPlayerJoinGameRespond(int nConnIndex, const char szName[]);
-    bool DoS2CGameResultNotify(int nConnIndex, int nScore, GameResultCode eGameResult);
 
 private:
     void OnC2SPingRequest(int nConnIndex, byte* pbyData, size_t uDataLen);
     void OnC2SQuitNotify(int nConnIndex, byte* pbyData, size_t uDataLen);
     void OnC2SLoginRequest(int nConnIndex, byte* pbyData, size_t uDataLen);
-    void OnC2SApplyAllPlayerRequest(int nConnIndex, byte* pbyData, size_t uDataLen);
-    void OnC2SCreateGameRequest(int nConnIndex, byte* pbyData, size_t uDataLen);
-    void OnC2SJoinGameRequest(int nConnIndex, byte* pbyData, size_t uDataLen);
-    void OnC2SPlayGameNotify(int nConnIndex, byte* pbyData, size_t uDataLen);
 
     void ProcessPackage(int nConnIndex, byte* pbyData, size_t uDataLen);
     void NewConnection(int nConnIndex, const char szIP[], int nPort);

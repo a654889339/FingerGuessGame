@@ -2,7 +2,18 @@
 #define _CODE_STD_H_
 
 // 
-typedef unsigned char BYTE;
+typedef unsigned char      BYTE;
+typedef unsigned char      uint8;
+typedef unsigned int       uint32;
+typedef unsigned long long uint64;
+
+typedef char               int8;
+typedef int                int32;
+#ifdef _WIN32
+typedef long long          int64;
+#else
+typedef long long int      int64;
+#endif
 
 // Function std
 #define JY_STD_BOOL_END \

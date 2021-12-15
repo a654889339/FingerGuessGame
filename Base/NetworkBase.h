@@ -63,7 +63,7 @@ static inline int _CanSend(SOCKET Socket)
     FD_ZERO(&FDSet);
     FD_SET(Socket, &FDSet);
 
-    int nRetCode = select(Socket + 1, NULL, &FDSet, NULL, &timeout);
+    int nRetCode = select((int)Socket + 1, NULL, &FDSet, NULL, &timeout);
 
     if (nRetCode == 0)
         return 0;
@@ -87,7 +87,7 @@ static inline int _CanRecv(SOCKET Socket)
     FD_ZERO(&FDSet);
     FD_SET(Socket, &FDSet);
 
-    int nRetCode = select(Socket + 1, &FDSet, NULL, NULL, &timeout);
+    int nRetCode = select((int)Socket + 1, &FDSet, NULL, NULL, &timeout);
 
     if (nRetCode == 0)
         return 0;

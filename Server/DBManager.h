@@ -28,7 +28,7 @@ private:
     BOOL DoQuery(const char cszSQL[], bool bSilentMode = false);
 
 private:
-    MYSQL*  m_pDBHandle;
+    //MYSQL*  m_pDBHandle;
     bool m_bRunFlag;
     char m_szSQL[1024];
 };

@@ -73,7 +73,7 @@ void KCPServer::ProcessNetwork()
 		bRetCode = pszRecvFD->RecvQueue.push(m_szRecvBuffer, (size_t)nRetCode);
 		if (!bRetCode)
 			Shutdown(pszRecvFD->nConnIndex);
-		else if (_GetFullPackage(pszRecvFD, m_szRecvBuffer))
+		else if (_KCPGetFullPackage(pszRecvFD, m_szRecvBuffer))
 			ProcessPackage(pszRecvFD->nConnIndex, (byte*)m_szRecvBuffer, pszRecvFD->uProtoSize);
 	}
 

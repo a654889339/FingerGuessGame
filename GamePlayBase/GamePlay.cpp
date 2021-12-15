@@ -24,9 +24,7 @@ bool GamePlay::Init()
     REGISTER_SYSTEM_COMPONENT(m_MoveSystem,     m_MoveCList);
 
 
-    bResult = true;
-Exit0:
-    return bResult;
+    JY_STD_BOOL_END
 }
 
 void GamePlay::UnInit()

@@ -29,9 +29,12 @@ void SystemManager::Active()
 
 bool SystemManager::AddSystem(SystemObj* pSystem)
 {
+    bool bResult = false;
     for (int i = 0; i < ECS_SYSTEM_UPDATE_FUNC_COUNT; i++)
         if (pSystem->NeedUpdate(i))
             m_SystemList[i].push_back(pSystem);
+
+    JY_STD_BOOL_END
 }
 
 //////////////////////////////////////////////////////////////////////////

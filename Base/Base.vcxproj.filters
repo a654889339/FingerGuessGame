@@ -72,6 +72,12 @@
     <ClInclude Include="GlobalDef.h">
       <Filter>Config</Filter>
     </ClInclude>
+    <ClInclude Include="KCPBase.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="TCPBase.h">
+      <Filter>Network</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

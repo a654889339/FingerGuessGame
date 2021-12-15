@@ -3,7 +3,7 @@
 
 MoveSystem::MoveSystem()
 {
-    RegisterUpdatePriorLevel(0, SystemBase::Update0);
+    RegisterUpdatePriorLevel(0, &SystemBase::Update0);
 }
 
 MoveSystem::~MoveSystem()
@@ -23,4 +23,5 @@ bool MoveSystem::Update0(MoveComponent* pComponent)
     {
         pComponent->nAccZ = 0;
     }
+    return true;
 }

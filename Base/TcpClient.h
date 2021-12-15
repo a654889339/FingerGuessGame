@@ -1,7 +1,7 @@
 #ifndef _TCP_CLIENT_H_
 #define _TCP_CLIENT_H_
 
-#include "NetworkBase.h"
+#include "TCPBase.h"
 
 #ifdef _CLIENT
 

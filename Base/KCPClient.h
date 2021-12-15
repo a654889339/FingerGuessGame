@@ -2,6 +2,8 @@
 #define _KCP_CLIENT_H_
 
 #include "NetworkBase.h"
+#include "KCPBase.h"
+
 class KCPClient
 {
 public:
