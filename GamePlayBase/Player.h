@@ -33,15 +33,15 @@ public:
     int32 m_dwPlayerID;
     char m_szName[_NAME_LEN];
 };
-
-class PLAYER_STATE_TRIGGER
-{
-public:
-    virtual void Enter(GameState eState, Player* pPlayer) {};
-    virtual void Leave(GameState eState, Player* pPlayer) {};
-
-    GameState m_eState;
-};
+//
+//class PLAYER_STATE_TRIGGER
+//{
+//public:
+//    virtual void Enter(GameState eState, Player* pPlayer) {};
+//    virtual void Leave(GameState eState, Player* pPlayer) {};
+//
+//    GameState m_eState;
+//};
 
 //class PLAYER_STATE_MANAGER
 //{

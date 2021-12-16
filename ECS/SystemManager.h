@@ -25,7 +25,7 @@ public:
 private:
     void UpdateAll();
 
-    std::vector<SystemObj*> m_SystemList[ECS_SYSTEM_UPDATE_FUNC_COUNT];
+    std::vector<SystemObj*> m_SystemList;
     // 为什么这里不是一个std::vector<SystemObj*> m_SystemList，而是一个数组？
     // 每帧做一次Update 如果每个系统只是调用一次，是不够的
     // 比如有的系统，需要调用两次，并且有先后顺序，比如Move系统需要在战斗系统开始前，先对输入预处理，在战斗系统结束后把位置发给客户端。

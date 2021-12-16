@@ -11,7 +11,7 @@ public:
     virtual ~MoveSystem();
 
 private:
-    bool Update0(MoveComponent* pComponent);
+    bool Update(MoveComponent* pComponent);
 
 };
 

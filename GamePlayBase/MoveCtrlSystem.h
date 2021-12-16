@@ -11,7 +11,7 @@ public:
     virtual ~MoveCtrlSystem();
 
 private:
-    bool Update0(MoveCtrlComponent* pComponent);
+    bool Update(MoveCtrlComponent* pComponent);
 
 };
 

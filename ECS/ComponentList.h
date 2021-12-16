@@ -22,6 +22,11 @@ public:
     Component* Create(int_eid& nID);
     Component* Get(int_eid nID);
 
+    void TraversalInit()
+    {
+        m_Manager.traversal_init();
+    }
+
     template <class TraversalFunc>
     bool TraversalNextComponent(TraversalFunc Func)
     {
@@ -32,6 +37,11 @@ public:
         JY_PROCESS_ERROR(bRetCode);
 
         JY_STD_BOOL_END
+    }
+
+    Component* TraversalGetNext()
+    {
+        return NULL;
     }
 
 private:

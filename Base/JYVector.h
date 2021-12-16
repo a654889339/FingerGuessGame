@@ -113,6 +113,11 @@ public:
         JY_STD_VOID_END
     }
 
+    void traversal_init()
+    {
+
+    }
+
     // 有个问题，如果Func的过程中，还add了新的元素，就会导致错乱。
     // 因此 要有个锁，在traversal时无法添加。
     template <class TFunc>

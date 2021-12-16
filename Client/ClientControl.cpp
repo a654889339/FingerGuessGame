@@ -13,14 +13,14 @@ ClientControl::ClientControl()
     memset(m_ProcessProtocolFuns, 0, sizeof(m_ProcessProtocolFuns));
 
 
-    REGISTER_EXTERNAL_FUNC(cipc_show, &ClientControl::OnShow);
-    REGISTER_EXTERNAL_FUNC(cipc_create, &ClientControl::OnCreate);
-    REGISTER_EXTERNAL_FUNC(cipc_join, &ClientControl::OnJoin);
-    REGISTER_EXTERNAL_FUNC(cipc_join_input_name, &ClientControl::OnJoinInputName);
-    REGISTER_EXTERNAL_FUNC(cipc_game_rock, &ClientControl::OnRock);
-    REGISTER_EXTERNAL_FUNC(cipc_game_scissors, &ClientControl::OnScissors);
-    REGISTER_EXTERNAL_FUNC(cipc_game_paper, &ClientControl::OnPaper);
-    REGISTER_EXTERNAL_FUNC(cipc_quit, &ClientControl::OnQuit);
+    //REGISTER_EXTERNAL_FUNC(cipc_show, &ClientControl::OnShow);
+    //REGISTER_EXTERNAL_FUNC(cipc_create, &ClientControl::OnCreate);
+    //REGISTER_EXTERNAL_FUNC(cipc_join, &ClientControl::OnJoin);
+    //REGISTER_EXTERNAL_FUNC(cipc_join_input_name, &ClientControl::OnJoinInputName);
+    //REGISTER_EXTERNAL_FUNC(cipc_game_rock, &ClientControl::OnRock);
+    //REGISTER_EXTERNAL_FUNC(cipc_game_scissors, &ClientControl::OnScissors);
+    //REGISTER_EXTERNAL_FUNC(cipc_game_paper, &ClientControl::OnPaper);
+    //REGISTER_EXTERNAL_FUNC(cipc_quit, &ClientControl::OnQuit);
 }
 
 ClientControl::~ClientControl()

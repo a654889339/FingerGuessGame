@@ -3,7 +3,6 @@
 
 MoveCtrlSystem::MoveCtrlSystem()
 {
-    RegisterUpdatePriorLevel(0, &SystemBase<MoveCtrlComponent>::Update0);
 }
 
 MoveCtrlSystem::~MoveCtrlSystem()
@@ -11,7 +10,7 @@ MoveCtrlSystem::~MoveCtrlSystem()
 
 }
 
-bool MoveCtrlSystem::Update0(MoveCtrlComponent* pComponent)
+bool MoveCtrlSystem::Update(MoveCtrlComponent* pComponent)
 {
     return true;
 }

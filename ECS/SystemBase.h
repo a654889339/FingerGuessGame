@@ -8,29 +8,30 @@ template <typename Component>
 class SystemBase : public SystemObj
 {
 private:
-    typedef bool (SystemBase::* PROCESS_UPDATE_FUNC)(void* pComponent);
     typedef ComponentList<Component> ComponentManager;
 
 public:
     SystemBase()
     {
-        m_bEnable = true;
         m_pComponentList = NULL;
-
-        memset(m_ProcessUpdateFuns, 0, sizeof(m_ProcessUpdateFuns));
-        RegisterUpdatePriorLevel(0, &SystemBase::Update0);
     }
 
-    bool RegisterUpdatePriorLevel(uint8_t uPriorLevel, PROCESS_UPDATE_FUNC Func) // 程序初始化时需要 注册更新函数
+    virtual void Active()
     {
-        bool bResult = false;
+        Component* pComponent = NULL;
 
-        JYLOG_PROCESS_ERROR(uPriorLevel < ECS_SYSTEM_UPDATE_FUNC_COUNT);
-        JYLOG_PROCESS_ERROR(!m_ProcessUpdateFuns[uPriorLevel]);
+        m_pComponentList->TraversalInit();
 
-        m_ProcessUpdateFuns[uPriorLevel] = Func;
+        do 
+        {
+            pComponent = m_pComponentList->TraversalGetNext();
+            JY_PROCESS_ERROR(pComponent);
 
-        JY_STD_BOOL_END
+            Update(pComponent);
+        }
+        while (true);
+
+        JY_STD_VOID_END
     }
 
     bool SetComponentList(ComponentManager* pComponentManager)
@@ -45,42 +46,15 @@ public:
         JY_STD_BOOL_END
     }
 
-    virtual bool Update0(void* pComponent) {return true;};
-    virtual bool Update1(void* pComponent) {return true;};
-    virtual bool Update2(void* pComponent) {return true;};
+    virtual bool Update(Component* pComponent) = 0;
 
 private:
-    bool NeedUpdate(uint8_t uPriorLevel) // 判断这个优先级的更新函数是否注册过
+    bool operator()(Component* pComponent)
     {
-        bool bResult = false;
-
-        JYLOG_PROCESS_ERROR(uPriorLevel < ECS_SYSTEM_UPDATE_FUNC_COUNT);
-        JY_PROCESS_ERROR(m_ProcessUpdateFuns[uPriorLevel]);
-
-        JY_STD_BOOL_END
-    }
-
-    bool Update(uint8_t uPriorLevel)
-    {
-        bool                bResult = false;
-        bool                bRetCode = false;
-        PROCESS_UPDATE_FUNC Func;
-
-        JYLOG_PROCESS_ERROR(uPriorLevel < ECS_SYSTEM_UPDATE_FUNC_COUNT);
-        JYLOG_PROCESS_ERROR(m_pComponentList);
-
-        Func = m_ProcessUpdateFuns[uPriorLevel];
-        JYLOG_PROCESS_ERROR(Func);
-
-        bRetCode = m_pComponentList->TraversalNextComponent(Func);
-        JY_PROCESS_ERROR(bRetCode);
-
-        JY_STD_BOOL_SUCCESS_END
+        return Update(pComponent);
     }
 
 private:
-    PROCESS_UPDATE_FUNC   m_ProcessUpdateFuns[ECS_SYSTEM_UPDATE_FUNC_COUNT];
-
     ComponentManager*     m_pComponentList;
 };
 
