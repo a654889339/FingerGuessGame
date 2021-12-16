@@ -135,8 +135,8 @@ public:
         return NULL;
     }
 
-    template <typename STFunc>
-    bool traversal(STFunc& Func)
+    template <class TFunc>
+    bool traversal(TFunc& Func)
     {
         return DFS_Traversal(m_pRoot, Func);
     }
@@ -374,8 +374,8 @@ private:
         delete pNode;
     }
 
-    template <typename STFunc>
-    bool DFS_Traversal(Node* pNode, STFunc& Func)
+    template <class TFunc>
+    bool DFS_Traversal(Node* pNode, TFunc& Func)
     {
         bool bResult = false;
         bool bRetCode = false;

@@ -30,6 +30,9 @@
     <ClCompile Include="ClientControl.cpp">
       <Filter>ClientControl</Filter>
     </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ClientWorld.h">
@@ -46,6 +49,9 @@
     </ClInclude>
     <ClInclude Include="ClientBase.h">
       <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Main</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

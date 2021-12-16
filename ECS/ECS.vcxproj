@@ -45,18 +45,23 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>copy $(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)X64D.lib $(SolutionDir)$(Platform)\Debug_Server
+copy $(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)X64D.lib $(SolutionDir)$(Platform)\Debug_Client</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="ComponentList.h" />
     <ClInclude Include="ECSDef.h" />
     <ClInclude Include="EntityManager.h" />
+    <ClInclude Include="stdafx.h" />
     <ClInclude Include="SystemBase.h" />
     <ClInclude Include="SystemManager.h" />
     <ClInclude Include="SystemObj.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ComponentList.cpp" />
-    <ClCompile Include="SystemBase.cpp" />
+    <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="SystemManager.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

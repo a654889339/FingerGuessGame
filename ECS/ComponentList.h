@@ -22,7 +22,7 @@ public:
     Component* Create(int_eid& nID);
     Component* Get(int_eid nID);
 
-    template <typename TraversalFunc>
+    template <class TraversalFunc>
     bool TraversalNextComponent(TraversalFunc Func)
     {
         bool bResult  = false;

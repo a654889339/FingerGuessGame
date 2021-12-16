@@ -16,8 +16,6 @@ public:
     void Active();
 
 private:
-    bool CheckState(GameState eGameState);
-
     void OnShow();
     void OnCreate();
     void OnJoin();

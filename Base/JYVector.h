@@ -115,8 +115,8 @@ public:
 
     // 有个问题，如果Func的过程中，还add了新的元素，就会导致错乱。
     // 因此 要有个锁，在traversal时无法添加。
-    template <typename JYVectorFunc>
-    bool traversal(JYVectorFunc& Func)
+    template <class TFunc>
+    bool traversal(TFunc& Func)
     {
         bool bResult = false;
         bool bRetCode = false;

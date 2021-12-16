@@ -1,5 +1,5 @@
-#ifndef _KCP_BASE_H_
-#define _KCP_BASE_H_
+#ifndef _TCP_BASE_H_
+#define _TCP_BASE_H_
 #include "NetworkBase.h"
 struct RecvFD
 {

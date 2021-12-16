@@ -16,11 +16,6 @@ ClientConnection::ClientConnection()
 
     REGISTER_EXTERNAL_FUNC(s2c_ping_respond, &ClientConnection::OnS2CPingRespond, sizeof(S2C_PING_RESPOND));
     REGISTER_EXTERNAL_FUNC(s2c_login_respond, &ClientConnection::OnS2CLoginRespond, sizeof(S2C_LOGIN_RESPOND));
-    REGISTER_EXTERNAL_FUNC(s2c_apply_all_player_respond, &ClientConnection::OnS2CApplyAllPlayerRespond, UNDEFINED_PROTOCOL_SIZE);
-    REGISTER_EXTERNAL_FUNC(s2c_create_game_respond, &ClientConnection::OnS2CCreateGameRespond, sizeof(S2C_CREATE_GAME_RESPOND));
-    REGISTER_EXTERNAL_FUNC(s2c_join_game_respond, &ClientConnection::OnS2CJoinGameRespond, sizeof(S2C_JOIN_GAME_RESPOND));
-    REGISTER_EXTERNAL_FUNC(s2c_player_join_game_respond, &ClientConnection::OnS2CPlayerJoinGameRespond, sizeof(S2C_PLAYER_JOIN_GAME_RESPOND));
-    REGISTER_EXTERNAL_FUNC(s2c_game_result_notify, &ClientConnection::OnS2CGameResultNotify, sizeof(S2C_GAME_RESULT_NOTIFY));
 }
 
 ClientConnection::~ClientConnection()

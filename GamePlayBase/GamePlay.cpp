@@ -20,8 +20,8 @@ bool GamePlay::Init()
     REGISTER_SYSTEM(m_MoveCtrlSystem);
     REGISTER_SYSTEM(m_MoveSystem);
 
-    REGISTER_SYSTEM_COMPONENT(m_MoveCtrlSystem, m_MoveCtrlCList);
-    REGISTER_SYSTEM_COMPONENT(m_MoveSystem,     m_MoveCList);
+ /*   REGISTER_SYSTEM_COMPONENT(m_MoveCtrlSystem, m_MoveCtrlCList);
+    REGISTER_SYSTEM_COMPONENT(m_MoveSystem,     m_MoveCList);*/
 
 
     JY_STD_BOOL_END

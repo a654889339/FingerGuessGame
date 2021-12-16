@@ -1,41 +1,11 @@
 #include "stdafx.h"
 #include "ClientWorld.h"
 
-void PLAYER_STATE_IDLE::Enter(GameState eState, Player* pPlayer)
-{
-    puts(szStateContent[m_eState]);
-}
-
-void PLAYER_STATE_WAITING::Enter(GameState eState, Player* pPlayer)
-{
-    puts(szStateContent[m_eState]);
-}
-
-void PLAYER_STATE_WAITING::Leave(GameState eState, Player* pPlayer)
-{
-    puts(eState == egame_state_playing ? "匹配成功" : "回到大厅");
-}
-
-void PLAYER_STATE_PLAYING::Enter(GameState eState, Player* pPlayer)
-{
-    puts(szStateContent[m_eState]);
-}
-
-void PLAYER_STATE_PLAYING::Leave(GameState eState, Player* pPlayer)
-{
-    if (eState == egame_state_idle)
-        puts("回到大厅");
-}
-
 ClientWorld::ClientWorld()
 {
     m_nPort = 0;
     m_bQuitFlag = false;
     m_nTimeNow = 0;
-
-    m_PlayerState[egame_state_idle] = &m_PlayerStateIdle;
-    m_PlayerState[egame_state_waiting] = &m_PlayerStateWaiting;
-    m_PlayerState[egame_state_playing] = &m_PlayerStatePlaying;
 
     memset(m_szIP, 0, sizeof(m_szIP));
 }
@@ -115,7 +85,7 @@ void ClientWorld::Quit()
 
 void ClientWorld::SetState(GameState eState)
 {
-    SetPlayerState(&m_Player, eState);
+    //SetPlayerState(&m_Player, eState);
 }
 
 // Private

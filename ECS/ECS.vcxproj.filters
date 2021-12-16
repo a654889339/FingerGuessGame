@@ -16,6 +16,9 @@
     <Filter Include="Include">
       <UniqueIdentifier>{34c5d5ee-baae-49c8-9561-be33c7260954}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Main">
+      <UniqueIdentifier>{82e11907-14e2-4ad5-8827-4de413926ebd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ComponentList.h">
@@ -36,6 +39,9 @@
     <ClInclude Include="SystemObj.h">
       <Filter>System</Filter>
     </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Main</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ComponentList.cpp">
@@ -44,8 +50,8 @@
     <ClCompile Include="SystemManager.cpp">
       <Filter>System</Filter>
     </ClCompile>
-    <ClCompile Include="SystemBase.cpp">
-      <Filter>System</Filter>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Main</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

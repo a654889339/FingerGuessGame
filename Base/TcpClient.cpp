@@ -85,7 +85,7 @@ void TcpClient::ProcessNetwork()
     bRetCode = m_RecvFD.RecvQueue.push(m_szRecvBuffer, nRetCode);
     JYLOG_PROCESS_ERROR(bRetCode);
 
-    bRetCode = _GetFullPackage(&m_RecvFD, m_szRecvBuffer);
+    bRetCode = _TCPGetFullPackage(&m_RecvFD, m_szRecvBuffer);
     JY_PROCESS_SUCCESS(!bRetCode);
 
     ProcessPackage((byte*)m_szRecvBuffer, m_RecvFD.uProtoSize);
@@ -115,7 +115,7 @@ bool TcpClient::Send(void* pbyData, size_t uDataLen)
     *(WORD*)m_szSendBuffer = (WORD)uDataLen;
     memcpy(m_szSendBuffer + 2, pbyData, uDataLen);
 
-    bRetCode = _Send(m_Socket, m_szSendBuffer, uDataLen + 2);
+    bRetCode = _TCPSend(m_Socket, m_szSendBuffer, uDataLen + 2);
     JYLOG_PROCESS_ERROR(bRetCode);
 
 Exit1:

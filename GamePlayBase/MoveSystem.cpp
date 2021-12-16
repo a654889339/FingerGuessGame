@@ -3,7 +3,7 @@
 
 MoveSystem::MoveSystem()
 {
-    RegisterUpdatePriorLevel(0, &SystemBase::Update0);
+    RegisterUpdatePriorLevel(0, &SystemBase<MoveComponent>::Update0);
 }
 
 MoveSystem::~MoveSystem()
