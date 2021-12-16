@@ -2,7 +2,6 @@
 #include "GamePlay.h"
 
 #define REGISTER_SYSTEM(Sys) m_SystemManager.AddSystem((SystemObj*)&Sys)
-#define REGISTER_SYSTEM_COMPONENT(Sys, CList) Sys.SetComponentList(&CList)
 
 GamePlay::GamePlay()
 {

@@ -5,6 +5,8 @@
 #include "ServerConnection.h"
 #include "DBManager.h"
 
+#include "ConnectionSystem.h"
+
 class ServerWorld
 {
 public:
@@ -25,6 +27,8 @@ public:
     GamePlay         m_GamePlay;
     ServerConnection m_Connection;
     DBManager        m_DB;
+
+private:
 
 private:
     char m_szIP[_NAME_LEN];

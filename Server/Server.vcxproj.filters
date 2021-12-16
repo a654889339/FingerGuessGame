@@ -15,6 +15,9 @@
     <Filter Include="Include">
       <UniqueIdentifier>{7480cf50-5a7f-47dc-955a-d343c6f5b24c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Component">
+      <UniqueIdentifier>{1ebddea5-386f-4264-a5b3-2637ebe6490f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -32,6 +35,9 @@
     <ClCompile Include="DBBase.cpp">
       <Filter>DB</Filter>
     </ClCompile>
+    <ClCompile Include="ConnectionSystem.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ServerWorld.h">
@@ -48,6 +54,12 @@
     </ClInclude>
     <ClInclude Include="DBBase.h">
       <Filter>DB</Filter>
+    </ClInclude>
+    <ClInclude Include="ConnectionSystem.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerECSConfig.h">
+      <Filter>Component</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

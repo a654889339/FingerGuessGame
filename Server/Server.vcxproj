@@ -48,6 +48,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ConnectionSystem.cpp" />
     <ClCompile Include="DBBase.cpp" />
     <ClCompile Include="DBManager.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -55,10 +56,12 @@
     <ClCompile Include="ServerWorld.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ConnectionSystem.h" />
     <ClInclude Include="DBBase.h" />
     <ClInclude Include="DBManager.h" />
     <ClInclude Include="ServerBase.h" />
     <ClInclude Include="ServerConnection.h" />
+    <ClInclude Include="ServerECSConfig.h" />
     <ClInclude Include="ServerWorld.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

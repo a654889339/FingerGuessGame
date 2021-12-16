@@ -20,13 +20,15 @@ public:
 
     void Active();
 
+public:
+    SystemManager         m_SystemManager;
+
 private:
     // Component
     MoveComponentList     m_MoveCList;
     MoveCtrlComponentList m_MoveCtrlCList;
 
     // System
-    SystemManager         m_SystemManager;
     MoveCtrlSystem        m_MoveCtrlSystem;
     MoveSystem            m_MoveSystem;
 };

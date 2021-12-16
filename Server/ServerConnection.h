@@ -1,9 +1,12 @@
 #ifndef _SERVER_CONNECTION_H_
 #define _SERVER_CONNECTION_H_
 
-#include "ServerBase.h"
 #include "TcpServer.h"
 #include "Protocol.h"
+
+#include "ConnectionSystem.h"
+
+#include "ServerBase.h"
 #include "Player.h"
 
 class ServerConnection : public TcpServer
@@ -36,6 +39,8 @@ private:
 
     char                    m_szTempBuffer[MAX_RECV_BUFFER_SIZE];
 
+    ComponentList<ConnectionComponent> m_ConnectionCList;
+    ConnectionSystem                   m_ConnectionSystem;
 };
 
 #endif

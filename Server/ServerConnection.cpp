@@ -23,8 +23,13 @@ ServerConnection::~ServerConnection()
 
 bool ServerConnection::Init(const char szIP[], int nPort)
 {
-    bool bResult = false;
+    bool bResult  = false;
     bool bRetCode = false;
+
+    bRetCode = g_pServer->m_GamePlay.m_SystemManager.AddSystem((SystemObj*)&m_ConnectionSystem);
+    JYLOG_PROCESS_ERROR(bRetCode);
+
+    REGISTER_SYSTEM_COMPONENT(m_ConnectionSystem, m_ConnectionCList);
 
     bRetCode = Bind(szIP, nPort);
     JYLOG_PROCESS_ERROR(bRetCode);
