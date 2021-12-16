@@ -46,7 +46,9 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)X64D.lib $(SolutionDir)$(Platform)\Debug_Server
+      <Command>md  $(SolutionDir)$(Platform)\Debug_Server
+md  $(SolutionDir)$(Platform)\Debug_Client
+copy $(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)X64D.lib $(SolutionDir)$(Platform)\Debug_Server
 copy $(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)X64D.lib $(SolutionDir)$(Platform)\Debug_Client</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
