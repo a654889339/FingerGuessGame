@@ -38,6 +38,9 @@
     <ClCompile Include="ConnectionSystem.cpp">
       <Filter>Network</Filter>
     </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ServerWorld.h">
@@ -60,6 +63,9 @@
     </ClInclude>
     <ClInclude Include="ServerECSConfig.h">
       <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Main</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

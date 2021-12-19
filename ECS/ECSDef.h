@@ -7,5 +7,6 @@
 typedef int32_t int_eid;
 
 #define ERROR_EID -1
+#define REGISTER_SYSTEM_COMPONENT(Sys, CList) Sys.SetComponentList(&CList)
 
 #endif

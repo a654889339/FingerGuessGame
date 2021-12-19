@@ -18,8 +18,8 @@ BOOL WINAPI ConsoleHandlerRoutine(DWORD dwCtrlType)
 int main(int argc, char* argv[])
 {
     bool    bResult = false;
-    BOOL    bRetCode = false;
-    BOOL    bClientInitFlag = false;
+    bool    bRetCode = false;
+    bool    bClientInitFlag = false;
 
     g_pServer = new ServerWorld();
     JYLOG_PROCESS_ERROR(g_pServer);

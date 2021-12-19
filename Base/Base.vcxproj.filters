@@ -97,19 +97,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Doc\BaseFrame.drawio">
-      <Filter>Doc</Filter>
-    </None>
-    <None Include="..\Doc\ECSFrame.drawio">
-      <Filter>Doc</Filter>
-    </None>
-    <None Include="..\Doc\GameCenterFrame.drawio">
-      <Filter>Doc</Filter>
-    </None>
     <None Include="..\Doc\GameServerFrame.drawio">
-      <Filter>Doc</Filter>
-    </None>
-    <None Include="..\Doc\GateFrame.drawio">
       <Filter>Doc</Filter>
     </None>
     <None Include="README.md" />

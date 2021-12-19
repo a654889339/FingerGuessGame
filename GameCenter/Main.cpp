@@ -1,15 +1,15 @@
 #include "stdafx.h"
-#include "ClientWorld.h"
+#include "GameCenter.h"
 
-ClientWorld* g_pClient = NULL;
+GameCenter* g_pGameCenter = NULL;
 
 #ifdef WIN32
 BOOL WINAPI ConsoleHandlerRoutine(DWORD dwCtrlType)
 {
-    if (g_pClient)
+    if (g_pGameCenter)
     {
         printf("Receive quit signal from console !\n");
-        g_pClient->Quit();
+        g_pGameCenter->Quit();
     }
     return true;
 }
@@ -21,27 +21,27 @@ int main(int argc, char* argv[])
     bool    bRetCode  = false;
     bool    bInitFlag = false;
 
-    g_pClient = new ClientWorld();
-    JYLOG_PROCESS_ERROR(g_pClient);
+    g_pGameCenter = new GameCenter();
+    JYLOG_PROCESS_ERROR(g_pGameCenter);
 
-    bRetCode = g_pClient->Init();
+    bRetCode = g_pGameCenter->Init();
     JYLOG_PROCESS_ERROR(bRetCode);
     bInitFlag = true;
 
-    g_pClient->Run();
+    g_pGameCenter->Run();
 
     bResult = true;
 Exit0:
     if (bInitFlag)
     {
-        g_pClient->UnInit();
+        g_pGameCenter->UnInit();
         bInitFlag = false;
     }
 
-    if (g_pClient)
+    if (g_pGameCenter)
     {
-        delete g_pClient;
-        g_pClient = NULL;
+        delete g_pGameCenter;
+        g_pGameCenter = NULL;
     }
 
     return 0;

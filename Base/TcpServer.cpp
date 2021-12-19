@@ -1,8 +1,6 @@
 #include "stdafx.h"
 #include "TcpServer.h"
 
-#ifdef _SERVER
-
 TcpServer::TcpServer()
 {
     m_Socket = INVALID_SOCKET;
@@ -261,5 +259,3 @@ bool TcpServer::IsAlive(int nConnIndex)
 {
     return GetClientSocket(nConnIndex) != INVALID_SOCKET;
 }
-
-#endif

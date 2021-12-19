@@ -3,8 +3,6 @@
 
 #include "TCPBase.h"
 
-#ifdef _CLIENT
-
 class TcpClient
 {
 public:
@@ -31,5 +29,4 @@ private:
     char m_szSendBuffer[MAX_RECV_BUFFER_SIZE];
 };
 
-#endif
 #endif

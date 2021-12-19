@@ -64,5 +64,8 @@
     <ClCompile Include="PlayerManager.cpp">
       <Filter>Player</Filter>
     </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

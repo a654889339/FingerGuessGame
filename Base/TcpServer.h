@@ -2,7 +2,6 @@
 #define _TCP_SERVER_H_
 #include "TCPBase.h"
 
-#ifdef _SERVER
 #if defined (_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
 #endif
@@ -43,5 +42,4 @@ private:
     typedef SplayTree<SOCKET, RecvFD> CLIENT_INDEX_MANAGER;
     CLIENT_INDEX_MANAGER m_ClientManager;
 };
-#endif
 #endif

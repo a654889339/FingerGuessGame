@@ -1,15 +1,15 @@
 #include "stdafx.h"
-#include "ClientWorld.h"
+#include "GateServer.h"
 
-ClientWorld* g_pClient = NULL;
+GateServer* g_pGateServer = NULL;
 
 #ifdef WIN32
 BOOL WINAPI ConsoleHandlerRoutine(DWORD dwCtrlType)
 {
-    if (g_pClient)
+    if (g_pGateServer)
     {
         printf("Receive quit signal from console !\n");
-        g_pClient->Quit();
+        g_pGateServer->Quit();
     }
     return true;
 }
@@ -21,27 +21,27 @@ int main(int argc, char* argv[])
     bool    bRetCode  = false;
     bool    bInitFlag = false;
 
-    g_pClient = new ClientWorld();
-    JYLOG_PROCESS_ERROR(g_pClient);
+    g_pGateServer = new GateServer();
+    JYLOG_PROCESS_ERROR(g_pGateServer);
 
-    bRetCode = g_pClient->Init();
+    bRetCode = g_pGateServer->Init();
     JYLOG_PROCESS_ERROR(bRetCode);
     bInitFlag = true;
 
-    g_pClient->Run();
+    g_pGateServer->Run();
 
     bResult = true;
 Exit0:
     if (bInitFlag)
     {
-        g_pClient->UnInit();
+        g_pGateServer->UnInit();
         bInitFlag = false;
     }
 
-    if (g_pClient)
+    if (g_pGateServer)
     {
-        delete g_pClient;
-        g_pClient = NULL;
+        delete g_pGateServer;
+        g_pGateServer = NULL;
     }
 
     return 0;
