@@ -1,15 +1,15 @@
 #include "stdafx.h"
-#include "ServerWorld.h"
+#include "RouterServer.h"
 
-ServerWorld* g_pServer = NULL;
+RouterServer* g_pRouterServer = NULL;
 
 #ifdef WIN32
 BOOL WINAPI ConsoleHandlerRoutine(DWORD dwCtrlType)
 {
-    if (g_pServer)
+    if (g_pRouterServer)
     {
         printf("Receive quit signal from console !\n");
-        g_pServer->Quit();
+        g_pRouterServer->Quit();
     }
     return true;
 }
@@ -21,27 +21,27 @@ int main(int argc, char* argv[])
     bool    bRetCode  = false;
     bool    bInitFlag = false;
 
-    g_pServer = new ServerWorld();
-    JYLOG_PROCESS_ERROR(g_pServer);
+    g_pRouterServer = new RouterServer();
+    JYLOG_PROCESS_ERROR(g_pRouterServer);
 
-    bRetCode = g_pServer->Init();
+    bRetCode = g_pRouterServer->Init();
     JYLOG_PROCESS_ERROR(bRetCode);
     bInitFlag = true;
 
-    g_pServer->Run();
+    g_pRouterServer->Run();
 
     bResult = true;
 Exit0:
     if (bInitFlag)
     {
-        g_pServer->UnInit();
+        g_pRouterServer->UnInit();
         bInitFlag = false;
     }
 
-    if (g_pServer)
+    if (g_pRouterServer)
     {
-        delete g_pServer;
-        g_pServer = NULL;
+        delete g_pRouterServer;
+        g_pRouterServer = NULL;
     }
 
     return 0;

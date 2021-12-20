@@ -42,6 +42,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameCenter", "GameCenter\Ga
 		{D56C5BEC-45A8-4B3C-8F2F-F24D721DDF88} = {D56C5BEC-45A8-4B3C-8F2F-F24D721DDF88}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RouterServer", "RouterServer\RouterServer.vcxproj", "{6AF5C287-13FF-44FA-B273-7C1112EF804E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug_Client|x64 = Debug_Client|x64
@@ -152,6 +154,20 @@ Global
 		{FBCF65CC-7B5F-4714-955A-4BFECDF310E5}.Debug|x86.Build.0 = Debug_Server|Win32
 		{FBCF65CC-7B5F-4714-955A-4BFECDF310E5}.Release|x64.ActiveCfg = Debug_Server|x64
 		{FBCF65CC-7B5F-4714-955A-4BFECDF310E5}.Release|x86.ActiveCfg = Debug_Server|Win32
+		{6AF5C287-13FF-44FA-B273-7C1112EF804E}.Debug_Client|x64.ActiveCfg = Debug_Server|x64
+		{6AF5C287-13FF-44FA-B273-7C1112EF804E}.Debug_Client|x64.Build.0 = Debug_Server|x64
+		{6AF5C287-13FF-44FA-B273-7C1112EF804E}.Debug_Client|x86.ActiveCfg = Debug_Server|Win32
+		{6AF5C287-13FF-44FA-B273-7C1112EF804E}.Debug_Client|x86.Build.0 = Debug_Server|Win32
+		{6AF5C287-13FF-44FA-B273-7C1112EF804E}.Debug_Server|x64.ActiveCfg = Debug_Server|x64
+		{6AF5C287-13FF-44FA-B273-7C1112EF804E}.Debug_Server|x64.Build.0 = Debug_Server|x64
+		{6AF5C287-13FF-44FA-B273-7C1112EF804E}.Debug_Server|x86.ActiveCfg = Debug_Server|Win32
+		{6AF5C287-13FF-44FA-B273-7C1112EF804E}.Debug_Server|x86.Build.0 = Debug_Server|Win32
+		{6AF5C287-13FF-44FA-B273-7C1112EF804E}.Debug|x64.ActiveCfg = Debug_Server|x64
+		{6AF5C287-13FF-44FA-B273-7C1112EF804E}.Debug|x64.Build.0 = Debug_Server|x64
+		{6AF5C287-13FF-44FA-B273-7C1112EF804E}.Debug|x86.ActiveCfg = Debug_Server|Win32
+		{6AF5C287-13FF-44FA-B273-7C1112EF804E}.Debug|x86.Build.0 = Debug_Server|Win32
+		{6AF5C287-13FF-44FA-B273-7C1112EF804E}.Release|x64.ActiveCfg = Debug_Server|x64
+		{6AF5C287-13FF-44FA-B273-7C1112EF804E}.Release|x86.ActiveCfg = Debug_Server|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
