@@ -43,6 +43,12 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameCenter", "GameCenter\Ga
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RouterServer", "RouterServer\RouterServer.vcxproj", "{6AF5C287-13FF-44FA-B273-7C1112EF804E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4751BA22-D1CA-4100-BE94-A05F906456FF} = {4751BA22-D1CA-4100-BE94-A05F906456FF}
+		{D56C5BEC-45A8-4B3C-8F2F-F24D721DDF88} = {D56C5BEC-45A8-4B3C-8F2F-F24D721DDF88}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AccountServer", "AccountServer\AccountServer.vcxproj", "{0A9C6A1F-90A9-40B8-98BB-0E1CAD429B65}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -168,6 +174,20 @@ Global
 		{6AF5C287-13FF-44FA-B273-7C1112EF804E}.Debug|x86.Build.0 = Debug_Server|Win32
 		{6AF5C287-13FF-44FA-B273-7C1112EF804E}.Release|x64.ActiveCfg = Debug_Server|x64
 		{6AF5C287-13FF-44FA-B273-7C1112EF804E}.Release|x86.ActiveCfg = Debug_Server|Win32
+		{0A9C6A1F-90A9-40B8-98BB-0E1CAD429B65}.Debug_Client|x64.ActiveCfg = Debug_Server|x64
+		{0A9C6A1F-90A9-40B8-98BB-0E1CAD429B65}.Debug_Client|x64.Build.0 = Debug_Server|x64
+		{0A9C6A1F-90A9-40B8-98BB-0E1CAD429B65}.Debug_Client|x86.ActiveCfg = Debug_Server|Win32
+		{0A9C6A1F-90A9-40B8-98BB-0E1CAD429B65}.Debug_Client|x86.Build.0 = Debug_Server|Win32
+		{0A9C6A1F-90A9-40B8-98BB-0E1CAD429B65}.Debug_Server|x64.ActiveCfg = Debug_Server|x64
+		{0A9C6A1F-90A9-40B8-98BB-0E1CAD429B65}.Debug_Server|x64.Build.0 = Debug_Server|x64
+		{0A9C6A1F-90A9-40B8-98BB-0E1CAD429B65}.Debug_Server|x86.ActiveCfg = Debug_Server|Win32
+		{0A9C6A1F-90A9-40B8-98BB-0E1CAD429B65}.Debug_Server|x86.Build.0 = Debug_Server|Win32
+		{0A9C6A1F-90A9-40B8-98BB-0E1CAD429B65}.Debug|x64.ActiveCfg = Debug_Server|x64
+		{0A9C6A1F-90A9-40B8-98BB-0E1CAD429B65}.Debug|x64.Build.0 = Debug_Server|x64
+		{0A9C6A1F-90A9-40B8-98BB-0E1CAD429B65}.Debug|x86.ActiveCfg = Debug_Server|Win32
+		{0A9C6A1F-90A9-40B8-98BB-0E1CAD429B65}.Debug|x86.Build.0 = Debug_Server|Win32
+		{0A9C6A1F-90A9-40B8-98BB-0E1CAD429B65}.Release|x64.ActiveCfg = Debug_Server|x64
+		{0A9C6A1F-90A9-40B8-98BB-0E1CAD429B65}.Release|x86.ActiveCfg = Debug_Server|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
