@@ -41,7 +41,7 @@ void AccountServer::UnInit()
 
 void AccountServer::Run()
 {
-    m_ClientAgent.Run();
+    m_ClientAgent.Active();
 
     Sleep(10);
 }

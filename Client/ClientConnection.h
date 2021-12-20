@@ -10,7 +10,7 @@ public:
     ClientConnection();
     virtual ~ClientConnection();
 
-    bool Init(const char szIP[], int nPort);
+    bool Init();
     void UnInit();
 
     void Active();

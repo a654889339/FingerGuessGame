@@ -3,6 +3,7 @@
 
 #include "TcpServer.h"
 
+// 与客户端直连模块
 class ASClientAgent : public TcpServer
 {
 public:
@@ -12,7 +13,7 @@ public:
     bool Init();
     void UnInit();
 
-    void Run();
+    void Active();
 
     void ProcessPackage(int nConnIndex, byte* pbyData, size_t uDataLen);
     void NewConnection(int nConnIndex, const char szIP[], int nPort);

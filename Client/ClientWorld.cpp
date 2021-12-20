@@ -17,10 +17,11 @@ ClientWorld::~ClientWorld()
 
 bool ClientWorld::Init()
 {
-    bool bResult = false;
-    bool bRetCode = false;
+    bool bResult          = false;
+    bool bRetCode         = false;
     bool bControlInitFlag = false;
-    bool bConnInitFlag = false;
+    bool bConnInitFlag    = false;
+    bool bASAgentInitFlag = false;
 
     m_nTimeNow = time(NULL);
 
@@ -31,24 +32,34 @@ bool ClientWorld::Init()
     JYLOG_PROCESS_ERROR(bRetCode);
     bControlInitFlag = true;
 
-    bRetCode = m_Connection.Init(m_szIP, m_nPort);
+    bRetCode = m_Connection.Init();
     JYLOG_PROCESS_ERROR(bRetCode);
     bConnInitFlag = true;
+
+    bRetCode = m_ASAgent.Init();
+    JYLOG_PROCESS_ERROR(bRetCode);
+    bASAgentInitFlag = true;
 
     bResult = true;
 Exit0:
     if (!bResult)
     {
+        if (bASAgentInitFlag)
+        {
+            m_ASAgent.UnInit();
+            bASAgentInitFlag = false;
+        }
+
         if (bConnInitFlag)
         {
-            bConnInitFlag = false;
             m_Connection.UnInit();
+            bConnInitFlag = false;
         }
 
         if (bControlInitFlag)
         {
-            bControlInitFlag = false;
             m_Control.UnInit();
+            bControlInitFlag = false;
         }
     }
     return bResult;
@@ -56,6 +67,7 @@ Exit0:
 
 void ClientWorld::UnInit()
 {
+    m_ASAgent.UnInit();
     m_Connection.UnInit();
     m_Control.UnInit();
 }
@@ -68,6 +80,7 @@ void ClientWorld::Run()
 
         JY_PROCESS_ERROR(!CheckQuitComplete());
 
+        m_ASAgent.Active();
         m_Control.Active();
         m_Connection.Active();
 

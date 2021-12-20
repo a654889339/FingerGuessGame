@@ -23,20 +23,10 @@ ClientConnection::~ClientConnection()
 
 }
 
-bool ClientConnection::Init(const char szIP[], int nPort)
+bool ClientConnection::Init()
 {
-    bool bResult = false;
+    bool bResult  = false;
     bool bRetCode = false;
-
-    JYLOG_PROCESS_ERROR(szIP);
-
-    bRetCode = Connect(szIP, nPort);
-    JYLOG_PROCESS_ERROR(bRetCode);
-
-    g_pClient->SetState(egame_state_login);
-
-    bRetCode = DoC2SLoginRequest();
-    JYLOG_PROCESS_ERROR(bRetCode);
 
     JY_STD_BOOL_END
 }

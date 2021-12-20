@@ -50,6 +50,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ASAgent.cpp" />
     <ClCompile Include="ClientConnection.cpp" />
     <ClCompile Include="ClientControl.cpp" />
     <ClCompile Include="ClientWorld.cpp" />
@@ -59,6 +60,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ASAgent.h" />
     <ClInclude Include="ClientBase.h" />
     <ClInclude Include="ClientConnection.h" />
     <ClInclude Include="ClientControl.h" />

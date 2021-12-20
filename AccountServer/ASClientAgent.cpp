@@ -31,10 +31,9 @@ void ASClientAgent::UnInit()
 
 }
 
-void ASClientAgent::Run()
+void ASClientAgent::Active()
 {
-    if (IsEnable())
-        ProcessNetwork();
+    ProcessNetwork();
 }
 
 void ASClientAgent::ProcessPackage(int nConnIndex, byte* pbyData, size_t uDataLen)

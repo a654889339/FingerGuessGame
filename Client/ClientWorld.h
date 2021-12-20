@@ -5,6 +5,7 @@
 #include "ClientConnection.h"
 #include "Player.h"
 #include "ClientBase.h"
+#include "ASAgent.h"
 //
 //class PLAYER_STATE_IDLE : public PLAYER_STATE_TRIGGER
 //{
@@ -56,6 +57,7 @@ public:
     time_t m_nTimeNow;
     ClientControl    m_Control;
     ClientConnection m_Connection;
+    ASAgent          m_ASAgent;
 
 private:
     //PLAYER_STATE_IDLE    m_PlayerStateIdle;
