@@ -108,7 +108,7 @@ void TcpServer::ProcessNetwork()
             if (!bRetCode)
                 Shutdown(pszRecvFD->nConnIndex);
             else if (_TCPGetFullPackage(pszRecvFD, m_szRecvBuffer))
-                ProcessPackage(pszRecvFD->nConnIndex, (byte*)m_szRecvBuffer, pszRecvFD->uProtoSize);
+                ProcessPackage(pszRecvFD->nConnIndex, (BYTE*)m_szRecvBuffer, pszRecvFD->uProtoSize);
         }
     }
 

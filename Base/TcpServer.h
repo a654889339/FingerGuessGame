@@ -20,7 +20,7 @@ public:
     virtual void Quit() final;
     virtual void Shutdown(int nConnIndex) final;
 
-    virtual void ProcessPackage(int nConnIndex, byte* pbyData, size_t uDataLen) = 0;
+    virtual void ProcessPackage(int nConnIndex, BYTE* pbyData, size_t uDataLen) = 0;
     virtual void NewConnection(int nConnIndex, const char szIP[], int nPort) = 0;
     virtual void DisConnection(int nConnIndex) = 0;
 

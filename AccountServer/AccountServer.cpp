@@ -13,18 +13,29 @@ AccountServer::~AccountServer()
 
 bool AccountServer::Init()
 {
-    bool bResult              = false;
-    bool bRetCode             = false;
-    bool bClientAgentInitFlag = false;
+    bool bResult                = false;
+    bool bRetCode               = false;
+    bool bClientAgentInitFlag   = false;
+    bool bClientManagerInitFlag = false;
 
     bRetCode = m_ClientAgent.Init();
     JYLOG_PROCESS_ERROR(bRetCode);
     bClientAgentInitFlag = true;
 
+    bRetCode = m_ClientManager.Init();
+    JYLOG_PROCESS_ERROR(bRetCode);
+    bClientManagerInitFlag = true;
+
     bResult = true;
 Exit0:
     if (!bResult)
     {
+        if (bClientManagerInitFlag)
+        {
+            m_ClientManager.UnInit();
+            bClientManagerInitFlag = false;
+        }
+
         if (bClientAgentInitFlag)
         {
             m_ClientAgent.UnInit();
@@ -36,6 +47,7 @@ Exit0:
 
 void AccountServer::UnInit()
 {
+    m_ClientManager.UnInit();
     m_ClientAgent.UnInit();
 }
 

@@ -14,10 +14,10 @@ public:
     virtual void ProcessNetwork() final;
     virtual bool Send(void* pbyData, size_t uDataLen) final;
     virtual bool Init(const char szIP[], int nPort);
-	virtual bool IsEnable() final;
-	virtual void Quit() final;
+    virtual bool IsEnable() final;
+    virtual void Quit() final;
 private:
-    virtual void ProcessPackage(byte* pbyData, size_t uDataLen) = 0;
+    virtual void ProcessPackage(BYTE* pbyData, size_t uDataLen) = 0;
     virtual void ConnectionLost() = 0;
 private:
     //char    m_szIP[_NAME_LEN];

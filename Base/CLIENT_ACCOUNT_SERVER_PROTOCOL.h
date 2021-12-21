@@ -2,6 +2,7 @@
 #define _BASE_CLIENT_ACCOUNT_SERVER_PROTOCOL_H_
 
 #include "stdafx.h"
+#include "ProtocolBase.h"
 #include "AccountDef.h"
 
 #define CLIENT_ACCOUNT_SERVER_LISTEN_IP   "127.0.0.1"
@@ -40,7 +41,7 @@ struct C2AS_LOGIN_REQUEST
 
 struct AS2C_LOGIN_RESPOND
 {
-    uint32 uGateIP[32];
+    uint32 uGateIP;
     int    nGatePort;
     uint32 uMapID;
     int32  nMapIndex;

@@ -24,11 +24,11 @@ public:
     bool DoS2CLoginRespond(int nConnIndex, int nRetCode);
 
 private:
-    void OnC2SPingRequest(int nConnIndex, byte* pbyData, size_t uDataLen);
-    void OnC2SQuitNotify(int nConnIndex, byte* pbyData, size_t uDataLen);
-    void OnC2SLoginRequest(int nConnIndex, byte* pbyData, size_t uDataLen);
+    void OnC2SPingRequest(int nConnIndex, BYTE* pbyData, size_t uDataLen);
+    void OnC2SQuitNotify(int nConnIndex, BYTE* pbyData, size_t uDataLen);
+    void OnC2SLoginRequest(int nConnIndex, BYTE* pbyData, size_t uDataLen);
 
-    void ProcessPackage(int nConnIndex, byte* pbyData, size_t uDataLen);
+    void ProcessPackage(int nConnIndex, BYTE* pbyData, size_t uDataLen);
     void NewConnection(int nConnIndex, const char szIP[], int nPort);
     void DisConnection(int nConnIndex);
 

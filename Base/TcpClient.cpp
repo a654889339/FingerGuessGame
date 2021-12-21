@@ -87,7 +87,7 @@ void TcpClient::ProcessNetwork()
     bRetCode = _TCPGetFullPackage(&m_RecvFD, m_szRecvBuffer);
     JY_PROCESS_SUCCESS(!bRetCode);
 
-    ProcessPackage((byte*)m_szRecvBuffer, m_RecvFD.uProtoSize);
+    ProcessPackage((BYTE*)m_szRecvBuffer, m_RecvFD.uProtoSize);
 
 Exit1:
     bResult = true;

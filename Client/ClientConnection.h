@@ -24,7 +24,7 @@ private:
     void OnS2CPingRespond(BYTE* pbyData, size_t uSize);
     void OnS2CLoginRespond(BYTE* pbyData, size_t uSize);
 
-    void ProcessPackage(byte* pbyData, size_t uDataLen);
+    void ProcessPackage(BYTE* pbyData, size_t uDataLen);
     void ConnectionLost();
 
 private:

@@ -2,10 +2,6 @@
 #include "ServerConnection.h"
 #include "ServerWorld.h"
 
-#define REGISTER_EXTERNAL_FUNC(ProtocolID, FuncName, ProtocolSize)  \
-{m_ProcessProtocolFuns[ProtocolID] = FuncName;                  \
-    m_nProtocolSize[ProtocolID] = ProtocolSize;}
-
 ServerConnection::ServerConnection()
 {
 
@@ -78,17 +74,17 @@ bool ServerConnection::DoS2CLoginRespond(int nConnIndex, int nRetCode)
 
 //////////////////////////////////////////////////////////////////////////
 
-void ServerConnection::OnC2SPingRequest(int nConnIndex, byte* pbyData, size_t uDataLen)
+void ServerConnection::OnC2SPingRequest(int nConnIndex, BYTE* pbyData, size_t uDataLen)
 {
     DoS2CPingRespond(nConnIndex);
 }
 
-void ServerConnection::OnC2SQuitNotify(int nConnIndex, byte* pbyData, size_t uDataLen)
+void ServerConnection::OnC2SQuitNotify(int nConnIndex, BYTE* pbyData, size_t uDataLen)
 {
     Shutdown(nConnIndex);
 }
 
-void ServerConnection::OnC2SLoginRequest(int nConnIndex, byte* pbyData, size_t uDataLen)
+void ServerConnection::OnC2SLoginRequest(int nConnIndex, BYTE* pbyData, size_t uDataLen)
 {
     int                    nResult = pec_invalid;
     bool                   bRetCode = false;
@@ -113,7 +109,7 @@ void ServerConnection::OnC2SLoginRequest(int nConnIndex, byte* pbyData, size_t u
     return;
 }
 
-void ServerConnection::ProcessPackage(int nConnIndex, byte* pbyData, size_t uDataLen)
+void ServerConnection::ProcessPackage(int nConnIndex, BYTE* pbyData, size_t uDataLen)
 {
     PROTOCOL_HEADER* pHeader = (PROTOCOL_HEADER*)pbyData;
     PROCESS_PROTOCOL_FUNC Func = NULL;

@@ -1,10 +1,12 @@
 #include "stdafx.h"
 #include "ASClientAgent.h"
 
-
 ASClientAgent::ASClientAgent()
 {
+    memset(m_ProcessProtocolFuns, 0, sizeof(m_ProcessProtocolFuns));
+    memset(m_nProtocolSize, 0, sizeof(m_nProtocolSize));
 
+    REGISTER_EXTERNAL_FUNC(ec2as_login_request, &ASClientAgent::OnC2ASLoginRequest, sizeof(C2AS_LOGIN_REQUEST));
 }
 
 ASClientAgent::~ASClientAgent()
@@ -33,7 +35,9 @@ void ASClientAgent::Active()
     ProcessNetwork();
 }
 
-void ASClientAgent::ProcessPackage(int nConnIndex, byte* pbyData, size_t uDataLen)
+//////////////////////////////////////////////////////////////////////////
+
+void ASClientAgent::ProcessPackage(int nConnIndex, BYTE* pbyData, size_t uDataLen)
 {
 
 }
@@ -44,6 +48,11 @@ void ASClientAgent::NewConnection(int nConnIndex, const char szIP[], int nPort)
 }
 
 void ASClientAgent::DisConnection(int nConnIndex)
+{
+
+}
+
+void ASClientAgent::OnC2ASLoginRequest(int nConnIndex, BYTE* pbyData, size_t uDataLen)
 {
 
 }

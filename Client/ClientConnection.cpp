@@ -84,7 +84,7 @@ bool ClientConnection::DoC2SPingRequest()
 
     Request.wProtocolID = c2s_ping_request;
 
-    bRetCode = Send((byte*)&Request, sizeof(Request));
+    bRetCode = Send((BYTE*)&Request, sizeof(Request));
     JYLOG_PROCESS_ERROR(bRetCode);
 
     JY_STD_BOOL_END
@@ -98,7 +98,7 @@ bool ClientConnection::DoC2SQuitNotify()
 
     Notify.wProtocolID = c2s_quit_notify;
 
-    bRetCode = Send((byte*)&Notify, sizeof(Notify));
+    bRetCode = Send((BYTE*)&Notify, sizeof(Notify));
     JYLOG_PROCESS_ERROR(bRetCode);
 
     JY_STD_BOOL_END
@@ -113,7 +113,7 @@ bool ClientConnection::DoC2SLoginRequest()
     Request.wProtocolID = c2s_login_request;
     strncpy(Request.szName, g_pClient->m_szPlayerName, sizeof(Request.szName));
 
-    bRetCode = Send((byte*)&Request, sizeof(Request));
+    bRetCode = Send((BYTE*)&Request, sizeof(Request));
     JYLOG_PROCESS_ERROR(bRetCode);
 
     JY_STD_BOOL_END
@@ -152,7 +152,7 @@ void ClientConnection::OnS2CLoginRespond(BYTE* pbyData, size_t uSize)
     JY_STD_VOID_END
 }
 
-void ClientConnection::ProcessPackage(byte* pbyData, size_t uDataLen)
+void ClientConnection::ProcessPackage(BYTE* pbyData, size_t uDataLen)
 {
     PROTOCOL_HEADER* pHeader = (PROTOCOL_HEADER*)pbyData;
     PROCESS_PROTOCOL_FUNC Func = NULL;

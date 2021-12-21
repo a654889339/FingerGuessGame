@@ -2,6 +2,7 @@
 #define _ACCOUNT_SERVER_H_
 
 #include "ASClientAgent.h"
+#include "ClientManager.h"
 
 class AccountServer
 {
@@ -18,7 +19,7 @@ public:
 
 public:
     ASClientAgent m_ClientAgent;
-
+    ClientManager m_ClientManager;
 };
 
 extern AccountServer* g_pAccountServer;

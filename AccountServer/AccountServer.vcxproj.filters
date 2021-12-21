@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="ClientManager">
+      <UniqueIdentifier>{d3f87c3b-15c2-4561-9411-770d1713dc0e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -27,6 +30,9 @@
     <ClCompile Include="ASClientAgent.cpp">
       <Filter>Network</Filter>
     </ClCompile>
+    <ClCompile Include="ClientManager.cpp">
+      <Filter>ClientManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -40,6 +46,9 @@
     </ClInclude>
     <ClInclude Include="ASClientAgent.h">
       <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientManager.h">
+      <Filter>ClientManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

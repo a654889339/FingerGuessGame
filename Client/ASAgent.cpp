@@ -4,6 +4,11 @@
 ASAgent::ASAgent()
 {
     m_bLoginFlag = false;
+
+    memset(m_ProcessProtocolFuns, 0, sizeof(m_ProcessProtocolFuns));
+    memset(m_nProtocolSize, 0, sizeof(m_nProtocolSize));
+
+    REGISTER_EXTERNAL_FUNC(eas2c_login_respond, &ASAgent::OnAS2CLoginRespond, sizeof(AS2C_LOGIN_RESPOND));
 }
 
 ASAgent::~ASAgent()
@@ -50,12 +55,17 @@ void ASAgent::SetLogin(bool bLoginFlag)
 }
 
 //////////////////////////////////////////////////////////////////////////
-void ASAgent::ProcessPackage(byte* pbyData, size_t uDataLen)
+void ASAgent::ProcessPackage(BYTE* pbyData, size_t uDataLen)
 {
 
 }
 
 void ASAgent::ConnectionLost()
+{
+
+}
+
+void ASAgent::OnAS2CLoginRespond(BYTE* pbyData, size_t uDataLen)
 {
 
 }

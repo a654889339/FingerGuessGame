@@ -16,7 +16,7 @@ public:
     virtual void Quit() final;
 
 protected:
-    virtual void ProcessPackage(byte* pbyData, size_t uDataLen) = 0;
+    virtual void ProcessPackage(BYTE* pbyData, size_t uDataLen) = 0;
     virtual void ConnectionLost() = 0;
 
 private:
