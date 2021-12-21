@@ -18,8 +18,8 @@ TcpClient::~TcpClient()
 
 bool TcpClient::Connect(const char szIP[], int nPort)
 {
-    bool bResult = false;
-    int  nRetCode = 0;
+    bool bResult         = false;
+    int  nRetCode        = 0;
     bool bSocketInitFlag = false;
     sockaddr_in serAddr;
 
@@ -54,9 +54,9 @@ Exit0:
 
 void TcpClient::ProcessNetwork()
 {
-    bool bResult = false;
+    bool bResult  = false;
     bool bRetCode = false;
-    int nRetCode = 0;
+    int  nRetCode = 0;
 
     JY_PROCESS_SUCCESS(!m_bRunFlag);
 
@@ -102,7 +102,7 @@ Exit0:
 
 bool TcpClient::Send(void* pbyData, size_t uDataLen)
 {
-    bool bResult = false;
+    bool bResult  = false;
     bool bRetCode = false;
 
     JY_PROCESS_SUCCESS(!m_bRunFlag);

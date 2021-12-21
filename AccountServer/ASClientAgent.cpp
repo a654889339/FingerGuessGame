@@ -1,9 +1,6 @@
 #include "stdafx.h"
 #include "ASClientAgent.h"
 
-#define AS_CLIENT_LISTEN_IP "127.0.0.1"
-#define AS_CLIENT_LISTEN_PORT 11451
-
 
 ASClientAgent::ASClientAgent()
 {
@@ -20,7 +17,7 @@ bool ASClientAgent::Init()
     bool bResult  = false;
     bool bRetCode = false;
 
-    bRetCode = Bind(AS_CLIENT_LISTEN_IP, AS_CLIENT_LISTEN_PORT);
+    bRetCode = Bind(CLIENT_ACCOUNT_SERVER_LISTEN_IP, CLIENT_ACCOUNT_SERVER_LISTEN_PORT);
     JYLOG_PROCESS_ERROR(bRetCode);
 
     JY_STD_BOOL_END
@@ -28,7 +25,7 @@ bool ASClientAgent::Init()
 
 void ASClientAgent::UnInit()
 {
-
+    Quit();
 }
 
 void ASClientAgent::Active()

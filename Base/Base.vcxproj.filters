@@ -78,6 +78,12 @@
     <ClInclude Include="TCPBase.h">
       <Filter>Network</Filter>
     </ClInclude>
+    <ClInclude Include="CLIENT_ACCOUNT_SERVER_PROTOCOL.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="AccountDef.h">
+      <Filter>Config</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

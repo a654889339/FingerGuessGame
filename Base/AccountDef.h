@@ -1,0 +1,7 @@
+#ifndef _BASE_ACCOUNT_DEF_H_
+#define _BASE_ACCOUNT_DEF_H_
+
+#define MAX_ACCOUNT_NAME_LEN 128
+#define MAX_ACCOUNT_PASSWORD_LEN 128
+
+#endif
