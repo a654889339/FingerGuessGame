@@ -16,6 +16,9 @@
     <Filter Include="Include">
       <UniqueIdentifier>{e6bc9f78-aac8-417d-9097-5729eccd28f3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ClientState">
+      <UniqueIdentifier>{e5b1bdd3-4743-4689-8a92-ed55c6aad17f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -35,6 +38,12 @@
     </ClCompile>
     <ClCompile Include="ASAgent.cpp">
       <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientStateTriggerWaitToLogin.cpp">
+      <Filter>ClientState</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientStateManager.cpp">
+      <Filter>ClientState</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -61,6 +70,15 @@
     </ClInclude>
     <ClInclude Include="ClientTip.h">
       <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientStateTrigger.h">
+      <Filter>ClientState</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientStateTriggerWaitToLogin.h">
+      <Filter>ClientState</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientStateManager.h">
+      <Filter>ClientState</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

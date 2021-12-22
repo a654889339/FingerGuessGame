@@ -2,9 +2,6 @@
 #include "ClientControl.h"
 #include "ClientWorld.h"
 
-#define REGISTER_EXTERNAL_FUNC(ProtocolID, FuncName)  \
-{m_ProcessProtocolFuns[ProtocolID] = FuncName;}
-
 ClientControl::ClientControl()
 {
     m_bCheckInput = false;

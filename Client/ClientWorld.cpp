@@ -17,11 +17,10 @@ ClientWorld::~ClientWorld()
 
 bool ClientWorld::Init()
 {
-    bool bResult          = false;
-    bool bRetCode         = false;
-    bool bControlInitFlag = false;
-    bool bConnInitFlag    = false;
-    bool bASAgentInitFlag = false;
+    bool bResult           = false;
+    bool bRetCode          = false;
+    bool bControlInitFlag  = false;
+    bool bStateMgrInitFlag = false;
 
     m_nTimeNow = time(NULL);
 
@@ -32,28 +31,18 @@ bool ClientWorld::Init()
     JYLOG_PROCESS_ERROR(bRetCode);
     bControlInitFlag = true;
 
-    bRetCode = m_Connection.Init();
+    bRetCode = m_ClientStateManager.Init();
     JYLOG_PROCESS_ERROR(bRetCode);
-    bConnInitFlag = true;
-
-    bRetCode = m_ASAgent.Init();
-    JYLOG_PROCESS_ERROR(bRetCode);
-    bASAgentInitFlag = true;
+    bStateMgrInitFlag = true;
 
     bResult = true;
 Exit0:
     if (!bResult)
     {
-        if (bASAgentInitFlag)
+        if (bStateMgrInitFlag)
         {
-            m_ASAgent.UnInit();
-            bASAgentInitFlag = false;
-        }
-
-        if (bConnInitFlag)
-        {
-            m_Connection.UnInit();
-            bConnInitFlag = false;
+            m_ClientStateManager.Init();
+            bStateMgrInitFlag = false;
         }
 
         if (bControlInitFlag)
@@ -67,8 +56,7 @@ Exit0:
 
 void ClientWorld::UnInit()
 {
-    m_ASAgent.UnInit();
-    m_Connection.UnInit();
+    m_ClientStateManager.UnInit();
     m_Control.UnInit();
 }
 
@@ -80,9 +68,8 @@ void ClientWorld::Run()
 
         JY_PROCESS_ERROR(!CheckQuitComplete());
 
-        m_ASAgent.Active();
         m_Control.Active();
-        m_Connection.Active();
+        m_ClientStateManager.Active();
 
         Sleep(10);
     }
@@ -93,12 +80,7 @@ void ClientWorld::Run()
 void ClientWorld::Quit()
 {
     m_bQuitFlag = true;
-    m_Connection.DisConnect();
-}
-
-void ClientWorld::SetState(GameState eState)
-{
-    //SetPlayerState(&m_Player, eState);
+    m_ClientStateManager.UnInit();
 }
 
 // Private

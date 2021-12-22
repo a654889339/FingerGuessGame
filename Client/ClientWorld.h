@@ -6,29 +6,7 @@
 #include "Player.h"
 #include "ClientBase.h"
 #include "ASAgent.h"
-//
-//class PLAYER_STATE_IDLE : public PLAYER_STATE_TRIGGER
-//{
-//public:
-//    PLAYER_STATE_IDLE() {m_eState = egame_state_idle;}
-//    void Enter(GameState eState, Player* pPlayer);
-//};
-//
-//class PLAYER_STATE_WAITING : public PLAYER_STATE_TRIGGER
-//{
-//public:
-//    PLAYER_STATE_WAITING() { m_eState = egame_state_waiting; }
-//    void Enter(GameState eState, Player* pPlayer);
-//    void Leave(GameState eState, Player* pPlayer);
-//};
-//
-//class PLAYER_STATE_PLAYING : public PLAYER_STATE_TRIGGER
-//{
-//public:
-//    PLAYER_STATE_PLAYING() { m_eState = egame_state_playing; }
-//    void Enter(GameState eState, Player* pPlayer);
-//    void Leave(GameState eState, Player* pPlayer);
-//};
+#include "ClientStateManager.h"
 
 class ClientWorld
 {
@@ -42,8 +20,6 @@ public:
     void Run();
     void Quit();
 
-    void SetState(GameState eState);
-
 private:
     bool CheckQuitComplete();
     bool LoadConfig();
@@ -53,16 +29,14 @@ public:
     int  m_nPort;
     char m_szPlayerName[_NAME_LEN];
 
-    Player m_Player;
     time_t m_nTimeNow;
-    ClientControl    m_Control;
-    ClientConnection m_Connection;
-    ASAgent          m_ASAgent;
+    Player m_Player;
+    ClientStateManager m_ClientStateManager;
+    ClientControl      m_Control;
+    ClientConnection   m_Connection;
+    ASAgent            m_ASAgent;
 
 private:
-    //PLAYER_STATE_IDLE    m_PlayerStateIdle;
-    //PLAYER_STATE_WAITING m_PlayerStateWaiting;
-    //PLAYER_STATE_PLAYING m_PlayerStatePlaying;
     bool m_bQuitFlag;
 };
 

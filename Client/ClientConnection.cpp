@@ -59,8 +59,6 @@ void ClientConnection::Active()
             bRetCode = Connect(g_pClient->m_szIP, g_pClient->m_nPort);
             JYLOG_PROCESS_ERROR(bRetCode);
 
-            g_pClient->SetState(egame_state_login);
-
             bRetCode = DoC2SLoginRequest();
             JYLOG_PROCESS_ERROR(bRetCode);
         }
@@ -136,7 +134,7 @@ void ClientConnection::OnS2CLoginRespond(BYTE* pbyData, size_t uSize)
         printf("[ClientConnection] Login Server: %s:%d Success.\n",
             g_pClient->m_szIP, g_pClient->m_nPort
         );
-        g_pClient->SetState(egame_state_idle);
+        g_pClient->m_ClientStateManager.Set(ecst_playing);
         break;
 
     case pec_login_already_exist:
@@ -176,6 +174,6 @@ void ClientConnection::ProcessPackage(BYTE* pbyData, size_t uDataLen)
 
 void ClientConnection::ConnectionLost()
 {
-    g_pClient->SetState(egame_state_begin);
+    g_pClient->m_ClientStateManager.Set(ecst_invalid);
     g_pClient->Quit();
 }

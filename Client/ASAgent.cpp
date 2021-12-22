@@ -19,14 +19,18 @@ ASAgent::~ASAgent()
 
 bool ASAgent::Init()
 {
-    bool bResult = false;
+    bool bResult  = false;
+    bool bRetCode = false;
+
+    bRetCode = Connect(CLIENT_ACCOUNT_SERVER_LISTEN_IP, CLIENT_ACCOUNT_SERVER_LISTEN_PORT);
+    JYLOG_PROCESS_ERROR(bRetCode);
 
     JY_STD_BOOL_END
 }
 
 void ASAgent::UnInit()
 {
-
+    Quit();
 }
 
 void ASAgent::Active()
@@ -40,9 +44,6 @@ void ASAgent::Login(char* pszAccountName, char* pszPassword)
 
     JYLOG_PROCESS_ERROR(pszAccountName);
     JYLOG_PROCESS_ERROR(pszPassword);
-
-    bRetCode = Connect(CLIENT_ACCOUNT_SERVER_LISTEN_IP, CLIENT_ACCOUNT_SERVER_LISTEN_PORT);
-    JYLOG_PROCESS_ERROR(bRetCode);
 
     bRetCode = DoC2ASLoginRequest(pszAccountName, pszPassword);
     JYLOG_PROCESS_ERROR(bRetCode);
