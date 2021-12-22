@@ -12,7 +12,7 @@
 
 enum CLIENT_ACCOUNT_SERVER_PROTOCOL_ID
 {
-    ec2as_being = 0,
+    ec2as_begin = 0,
 
     ec2as_login_request,
 
@@ -21,7 +21,7 @@ enum CLIENT_ACCOUNT_SERVER_PROTOCOL_ID
 
 enum ACCOUNT_SERVER_CLIENT_PROTOCOL_ID
 {
-    eas2c_being = 0,
+    eas2c_begin = 0,
 
     eas2c_login_respond,
 
@@ -30,7 +30,7 @@ enum ACCOUNT_SERVER_CLIENT_PROTOCOL_ID
 
 //////////////////////////////////////////////////////////////////////////
 
-struct C2AS_LOGIN_REQUEST
+struct C2AS_LOGIN_REQUEST : PROTOCOL_HEADER
 {
     int  nAccountServerVersion;
     char szAccountName[MAX_ACCOUNT_NAME_LEN];
@@ -39,8 +39,9 @@ struct C2AS_LOGIN_REQUEST
 
 //////////////////////////////////////////////////////////////////////////
 
-struct AS2C_LOGIN_RESPOND
+struct AS2C_LOGIN_RESPOND : PROTOCOL_HEADER
 {
+    int    nResultCode;
     uint32 uGateIP;
     int    nGatePort;
     uint32 uMapID;

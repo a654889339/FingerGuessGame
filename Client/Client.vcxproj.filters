@@ -59,5 +59,8 @@
     <ClInclude Include="ASAgent.h">
       <Filter>Network</Filter>
     </ClInclude>
+    <ClInclude Include="ClientTip.h">
+      <Filter>Include</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

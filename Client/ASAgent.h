@@ -15,15 +15,15 @@ public:
 
     void Active();
 
-    void SetLogin(bool bLoginFlag);
+    void Login(char* pszAccountName, char* pszPassword);
+
+    bool DoC2ASLoginRequest(char* pszAccountName, char* pszPassword);
 
 private:
     void ProcessPackage(BYTE* pbyData, size_t uDataLen);
     void ConnectionLost();
 
     void OnAS2CLoginRespond(BYTE* pbyData, size_t uDataLen);
-
-
 
 private:
     typedef void (ASAgent::* PROCESS_PROTOCOL_FUNC)(BYTE* pbyData, size_t uSize);

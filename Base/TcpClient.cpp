@@ -16,6 +16,20 @@ TcpClient::~TcpClient()
     _UnInitNetwork();
 }
 
+bool TcpClient::IsEnable()
+{
+    return m_bRunFlag;
+}
+
+void TcpClient::Quit()
+{
+    if (m_bRunFlag)
+    {
+        m_bRunFlag = false;
+        closesocket(m_Socket);
+    }
+}
+//////////////////////////////////////////////////////////////////////////
 bool TcpClient::Connect(const char szIP[], int nPort)
 {
     bool bResult         = false;
@@ -128,16 +142,13 @@ Exit0:
     return bResult;
 }
 
-bool TcpClient::IsEnable()
+void* TcpClient::GetSendBuffer(size_t uDataLen)
 {
-    return m_bRunFlag;
-}
+    void* pResult = NULL;
 
-void TcpClient::Quit()
-{
-    if (m_bRunFlag)
-    {
-        m_bRunFlag = false;
-        closesocket(m_Socket);
-    }
+    JY_PROCESS_ERROR(uDataLen < sizeof(m_szAPIBuffer));
+
+    pResult = m_szAPIBuffer;
+Exit0:
+    return pResult;
 }

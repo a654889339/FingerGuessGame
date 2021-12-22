@@ -135,6 +135,35 @@ public:
         return NULL;
     }
 
+    // 需要增加一个 强制插入函数，代替查找+插入
+    STValue& operator[](STKey Key)
+    {
+        STValue* pResult = NULL;
+
+        pResult = find(Key);
+        JY_PROCESS_SUCCESS(pResult);
+
+        pResult = add(Key);
+        assert(pResult);
+
+    Exit1:
+        return *pResult;
+    }
+
+    STValue& operator[](STKey Key) const
+    {
+        STValue* pResult = NULL;
+
+        pResult = find(Key);
+        JY_PROCESS_SUCCESS(pResult);
+
+        pResult = add(Key);
+        assert(pResult);
+
+    Exit1:
+        return *pResult;
+    }
+
     template <class TFunc>
     bool traversal(TFunc& Func)
     {
@@ -271,7 +300,10 @@ private:
                     pResult = pIter;
             }
 
-            pIter = pIter->ch[pIter->Key <= Key];
+            if (pIter->Key < Key || pIter->Key == Key)
+                pIter = pIter->ch[1];
+            else
+                pIter = pIter->ch[0];
         }
 
         if (pIter)

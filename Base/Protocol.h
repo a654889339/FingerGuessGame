@@ -1,9 +1,10 @@
 #ifndef _PROTOCOL_H_
 #define _PROTOCOL_H_
 
+#include "ProtocolBase.h"
+
 #define PING_TIME_INTERVAL 1
 #define RECONNECT_TIME_INTERVAL 1
-#define UNDEFINED_PROTOCOL_SIZE -1
 
 enum CLIENT_SERVER_PROTOCOL_CODE
 {
@@ -35,13 +36,6 @@ enum PROTOCOL_ERROR_CODE
 };
 
 #pragma pack(1)
-//////////////////////////////////////////////////////////////////////////
-
-struct PROTOCOL_HEADER
-{
-    WORD wProtocolID;
-};
-
 //////////////////////////////////////////////////////////////////////////
 struct C2S_PING_REQUEST : PROTOCOL_HEADER
 {

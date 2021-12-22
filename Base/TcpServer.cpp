@@ -18,6 +18,31 @@ TcpServer::~TcpServer()
     _UnInitNetwork();
 }
 
+bool TcpServer::IsEnable()
+{
+    return m_bRunFlag;
+}
+
+void TcpServer::Quit()
+{
+    JY_PROCESS_ERROR(m_bRunFlag);
+
+    m_bRunFlag = false;
+
+    m_ClientManager.clear();
+
+    for (int i = 0; i < MAX_ACCEPT_CONNECTION; i++)
+        if (m_nConnecFlag[i] != INVALID_SOCKET)
+            closesocket(m_nConnecFlag[i]);
+
+    closesocket(m_Socket);
+    FD_ZERO(&m_SocketReadSet);
+
+    JY_STD_VOID_END
+}
+
+//////////////////////////////////////////////////////////////////////////
+
 bool TcpServer::Bind(const char szIP[], int nPort)
 {
     bool bResult = false;
@@ -153,29 +178,6 @@ Exit0:
     return bResult;
 }
 
-bool TcpServer::IsEnable()
-{
-    return m_bRunFlag;
-}
-
-void TcpServer::Quit()
-{
-    JY_PROCESS_ERROR(m_bRunFlag);
-
-    m_bRunFlag = false;
-
-    m_ClientManager.clear();
-
-    for (int i = 0; i < MAX_ACCEPT_CONNECTION; i++)
-        if (m_nConnecFlag[i] != INVALID_SOCKET)
-            closesocket(m_nConnecFlag[i]);
-
-    closesocket(m_Socket);
-    FD_ZERO(&m_SocketReadSet);
-
-    JY_STD_VOID_END
-}
-
 void TcpServer::Shutdown(int nConnIndex)
 {
     SOCKET ClientSocket = INVALID_SOCKET;
@@ -194,6 +196,18 @@ void TcpServer::Shutdown(int nConnIndex)
 
     JY_STD_VOID_END
 }
+
+void* TcpServer::GetSendBuffer(size_t uDataLen)
+{
+    void* pResult = NULL;
+
+    JY_PROCESS_ERROR(uDataLen < sizeof(m_szAPIBuffer));
+
+    pResult = m_szAPIBuffer;
+Exit0:
+    return pResult;
+}
+
 //////////////////////////////////////////////////////////////////////////
 void TcpServer::AcceptConnection()
 {
@@ -226,7 +240,7 @@ void TcpServer::AcceptConnection()
     m_nConnecFlag[nConnIndex] = NewClient;
     FD_SET(NewClient, &m_SocketReadSet);
 
-    NewConnection(nConnIndex, inet_ntoa(remoteAddr.sin_addr), remoteAddr.sin_port);
+    NewConnection(nConnIndex, (int *)&(remoteAddr.sin_addr), remoteAddr.sin_port);
 
     JY_STD_VOID_END
 }

@@ -5,4 +5,11 @@
 {m_ProcessProtocolFuns[ProtocolID] = FuncName;                  \
     m_nProtocolSize[ProtocolID] = ProtocolSize;}
 
+#define UNDEFINED_PROTOCOL_SIZE -1
+
+struct PROTOCOL_HEADER
+{
+    WORD wProtocolID;
+};
+
 #endif

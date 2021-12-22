@@ -65,6 +65,7 @@
     <ClInclude Include="ClientConnection.h" />
     <ClInclude Include="ClientControl.h" />
     <ClInclude Include="ClientInputDef.h" />
+    <ClInclude Include="ClientTip.h" />
     <ClInclude Include="ClientWorld.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
