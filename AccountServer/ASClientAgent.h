@@ -24,7 +24,6 @@ private:
     void NewConnection(int nConnIndex, int* pszIP, int nPort);
     void DisConnection(int nConnIndex);
 
-
     void OnC2ASLoginRequest(int nConnIndex, BYTE* pbyData, size_t uDataLen);
 
 private:

@@ -100,7 +100,7 @@ void ASAgent::ProcessPackage(BYTE* pbyData, size_t uDataLen)
 
 void ASAgent::ConnectionLost()
 {
-    printf("[ASAgent] Login failed, Connection lost.\n");
+    printf("[ASAgent] Connection lost.\n");
 }
 
 void ASAgent::OnAS2CLoginRespond(BYTE* pbyData, size_t uDataLen)

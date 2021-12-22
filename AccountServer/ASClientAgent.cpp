@@ -101,11 +101,13 @@ void ASClientAgent::OnC2ASLoginRequest(int nConnIndex, BYTE* pbyData, size_t uDa
     bRetCode = g_pAccountServer->m_ClientManager.Add(pRequest->szAccountName, nConnIndex);
     JY_PROCESS_ERROR_RET_CODE(bRetCode, elrc_account_repeat);
 
+    DoAS2CLoginRespond(nConnIndex, elrc_success);
+
     nResult = elrc_success;
 Exit0:
-    DoAS2CLoginRespond(nConnIndex, nResult);
-    if (!bRetCode || nResult != elrc_success)
+    if (nResult != elrc_success)
     {
+        DoAS2CLoginRespond(nConnIndex, nResult);
         Shutdown(nConnIndex);
     }
     return ;
