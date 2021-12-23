@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "ClientStateWaitToLogin.h"
-#include "ClientWorld.h"
+#include "ClientLogic.h"
 
 bool ClientStateWaitToLogin::Enter(ClientStateTrigger* pTrigger, ClientStateType eState)
 {

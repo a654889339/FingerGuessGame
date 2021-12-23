@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "ClientStateWaitToConnectGate.h"
-#include "ClientWorld.h"
+#include "ClientLogic.h"
 
 bool ClientStateWaitToConnectGate::Enter(ClientStateTrigger* pTrigger, ClientStateType eState)
 {

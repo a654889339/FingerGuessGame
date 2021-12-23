@@ -1,5 +1,5 @@
-#ifndef _CLIENT_WORLD_H_
-#define _CLIENT_WORLD_H_
+#ifndef _CLIENT_LOGIN_H_
+#define _CLIENT_LOGIN_H_
 
 #include "ClientControl.h"
 #include "ClientConnection.h"
@@ -7,11 +7,11 @@
 #include "ClientBase.h"
 #include "ClientStateManager.h"
 
-class ClientWorld
+class ClientLogic
 {
 public:
-    ClientWorld();
-    virtual ~ClientWorld();
+    ClientLogic();
+    virtual ~ClientLogic();
 
     bool Init();
     void UnInit();
@@ -38,5 +38,5 @@ private:
     bool m_bQuitFlag;
 };
 
-extern ClientWorld* g_pClient;
+extern ClientLogic* g_pClient;
 #endif

@@ -1,7 +1,7 @@
 #include "stdafx.h"
-#include "ClientWorld.h"
+#include "ClientLogic.h"
 
-ClientWorld* g_pClient = NULL;
+ClientLogic* g_pClient = NULL;
 
 #ifdef WIN32
 BOOL WINAPI ConsoleHandlerRoutine(DWORD dwCtrlType)
@@ -21,7 +21,7 @@ int main(int argc, char* argv[])
     bool    bRetCode  = false;
     bool    bInitFlag = false;
 
-    g_pClient = new ClientWorld();
+    g_pClient = new ClientLogic();
     JYLOG_PROCESS_ERROR(g_pClient);
 
     bRetCode = g_pClient->Init();

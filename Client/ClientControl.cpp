@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "ClientControl.h"
-#include "ClientWorld.h"
+#include "ClientLogic.h"
 
 ClientControl::ClientControl()
 {

@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "ASAgent.h"
 #include "ClientTip.h"
-#include "ClientWorld.h"
+#include "ClientLogic.h"
 
 ASAgent::ASAgent()
 {

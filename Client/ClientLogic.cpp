@@ -1,7 +1,7 @@
 #include "stdafx.h"
-#include "ClientWorld.h"
+#include "ClientLogic.h"
 
-ClientWorld::ClientWorld()
+ClientLogic::ClientLogic()
 {
     m_bQuitFlag = false;
     m_nTimeNow = 0;
@@ -10,12 +10,12 @@ ClientWorld::ClientWorld()
     memset(m_szGateIP, 0, sizeof(m_szGateIP));
 }
 
-ClientWorld::~ClientWorld()
+ClientLogic::~ClientLogic()
 {
 
 }
 
-bool ClientWorld::Init()
+bool ClientLogic::Init()
 {
     bool bResult           = false;
     bool bRetCode          = false;
@@ -54,13 +54,13 @@ Exit0:
     return bResult;
 }
 
-void ClientWorld::UnInit()
+void ClientLogic::UnInit()
 {
     m_ClientStateManager.UnInit();
     m_Control.UnInit();
 }
 
-void ClientWorld::Run()
+void ClientLogic::Run()
 {
     while (true)
     {
@@ -77,14 +77,14 @@ void ClientWorld::Run()
     JY_STD_VOID_END
 }
 
-void ClientWorld::Quit()
+void ClientLogic::Quit()
 {
     m_bQuitFlag = true;
     m_ClientStateManager.UnInit();
 }
 
 // Private
-bool ClientWorld::CheckQuitComplete()
+bool ClientLogic::CheckQuitComplete()
 {
     bool bResult = false;
 
@@ -94,7 +94,7 @@ bool ClientWorld::CheckQuitComplete()
     JY_STD_BOOL_END;
 }
 
-bool ClientWorld::LoadConfig()
+bool ClientLogic::LoadConfig()
 {
     bool bResult = false;
     bool bRetCode = false;

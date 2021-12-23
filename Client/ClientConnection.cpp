@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "ClientConnection.h"
-#include "ClientWorld.h"
+#include "ClientLogic.h"
 
 #define REGISTER_EXTERNAL_FUNC(ProtocolID, FuncName, ProtocolSize)  \
 {m_ProcessProtocolFuns[ProtocolID] = FuncName;                  \

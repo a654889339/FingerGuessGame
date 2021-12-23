@@ -24,9 +24,6 @@
     <ClCompile Include="Main.cpp">
       <Filter>Main</Filter>
     </ClCompile>
-    <ClCompile Include="ClientWorld.cpp">
-      <Filter>Main</Filter>
-    </ClCompile>
     <ClCompile Include="ClientConnection.cpp">
       <Filter>Network</Filter>
     </ClCompile>
@@ -51,11 +48,11 @@
     <ClCompile Include="ClientStateWaitToLogin.cpp">
       <Filter>ClientState</Filter>
     </ClCompile>
+    <ClCompile Include="ClientLogic.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ClientWorld.h">
-      <Filter>Main</Filter>
-    </ClInclude>
     <ClInclude Include="ClientConnection.h">
       <Filter>Network</Filter>
     </ClInclude>
@@ -91,6 +88,9 @@
     </ClInclude>
     <ClInclude Include="ClientStateWaitToLogin.h">
       <Filter>ClientState</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientLogic.h">
+      <Filter>Main</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
