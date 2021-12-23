@@ -5,7 +5,6 @@
 #include "ClientConnection.h"
 #include "Player.h"
 #include "ClientBase.h"
-#include "ASAgent.h"
 #include "ClientStateManager.h"
 
 class ClientWorld
@@ -25,16 +24,15 @@ private:
     bool LoadConfig();
 
 public:
-    char m_szIP[_NAME_LEN];
-    int  m_nPort;
+    char m_szGateIP[_NAME_LEN];
+    int  m_nGatePort;
     char m_szPlayerName[_NAME_LEN];
 
-    time_t m_nTimeNow;
-    Player m_Player;
+    time_t             m_nTimeNow;
+    Player             m_Player;
     ClientStateManager m_ClientStateManager;
     ClientControl      m_Control;
     ClientConnection   m_Connection;
-    ASAgent            m_ASAgent;
 
 private:
     bool m_bQuitFlag;

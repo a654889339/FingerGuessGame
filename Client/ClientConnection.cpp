@@ -28,49 +28,34 @@ bool ClientConnection::Init()
     bool bResult  = false;
     bool bRetCode = false;
 
+    JYLOG_PROCESS_ERROR(!IsEnable());
+
+    bRetCode = Connect(g_pClient->m_szGateIP, g_pClient->m_nGatePort);
+    JYLOG_PROCESS_ERROR(bRetCode);
+
+    bRetCode = DoC2SLoginRequest();
+    JYLOG_PROCESS_ERROR(bRetCode);
+
     JY_STD_BOOL_END
 }
 
 void ClientConnection::UnInit()
 {
-
+    Quit();
 }
 
 void ClientConnection::Active()
 {
-    bool bRetCode = false;
-
     ProcessNetwork();
-
-    if(IsEnable())
-    {
-        if (m_nNextPingTime < g_pClient->m_nTimeNow)
-        {
-            m_nNextPingTime = g_pClient->m_nTimeNow + PING_TIME_INTERVAL;
-            DoC2SPingRequest();
-        }
-    }
-    else
-    {
-        if (m_nNextReconnectTime < g_pClient->m_nTimeNow)
-        {
-            m_nNextReconnectTime = g_pClient->m_nTimeNow + RECONNECT_TIME_INTERVAL;
-
-            bRetCode = Connect(g_pClient->m_szIP, g_pClient->m_nPort);
-            JYLOG_PROCESS_ERROR(bRetCode);
-
-            bRetCode = DoC2SLoginRequest();
-            JYLOG_PROCESS_ERROR(bRetCode);
-        }
-    }
-
-    JY_STD_VOID_END
 }
 
 void ClientConnection::DisConnect()
 {
-    DoC2SQuitNotify();
-    Sleep(100);
+    if (IsEnable())
+    {
+        DoC2SQuitNotify();
+        Sleep(100);
+    }
     Quit();
 }
 
@@ -132,7 +117,7 @@ void ClientConnection::OnS2CLoginRespond(BYTE* pbyData, size_t uSize)
     {
     case pec_login_succeed:
         printf("[ClientConnection] Login Server: %s:%d Success.\n",
-            g_pClient->m_szIP, g_pClient->m_nPort
+            g_pClient->m_szGateIP, g_pClient->m_nGatePort
         );
         g_pClient->m_ClientStateManager.Set(ecst_playing);
         break;
@@ -174,6 +159,6 @@ void ClientConnection::ProcessPackage(BYTE* pbyData, size_t uDataLen)
 
 void ClientConnection::ConnectionLost()
 {
-    g_pClient->m_ClientStateManager.Set(ecst_invalid);
+    g_pClient->m_ClientStateManager.Set(ecst_init_client);
     g_pClient->Quit();
 }

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "ASAgent.h"
 #include "ClientTip.h"
+#include "ClientWorld.h"
 
 ASAgent::ASAgent()
 {
@@ -111,6 +112,16 @@ void ASAgent::OnAS2CLoginRespond(BYTE* pbyData, size_t uDataLen)
     JYLOG_PROCESS_ERROR(pRespond->nResultCode > eas2c_begin && pRespond->nResultCode < eas2c_end);
 
     printf("[ASAgent] Login Result: %s\n", szLoginResult[pRespond->nResultCode]);
+
+    if (pRespond->nResultCode == elrc_success)
+    {
+        strncpy(g_pClient->m_szGateIP, inet_ntoa(*(IN_ADDR*)&pRespond->uGateIP), sizeof(g_pClient->m_szGateIP));
+        g_pClient->m_nGatePort = pRespond->nGatePort;
+
+        g_pClient->m_ClientStateManager.Set(ecst_wait_to_connect_gate);
+    }
+    else
+        g_pClient->m_ClientStateManager.Set(ecst_init_client);
 
     JY_STD_VOID_END
 }

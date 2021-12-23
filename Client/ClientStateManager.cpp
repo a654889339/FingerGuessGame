@@ -10,7 +10,7 @@ ClientStateManager::ClientStateManager()
     }
 
     m_pszState[ecst_wait_to_login] = &m_WaitToLogin;
-    m_State.m_eState = ecst_invalid;
+    m_State.m_eState = ecst_init_client;
 }
 
 ClientStateManager::~ClientStateManager()
@@ -28,7 +28,7 @@ bool ClientStateManager::Init()
 
 void ClientStateManager::UnInit()
 {
-    Set(ecst_invalid);
+    Set(ecst_init_client);
 }
 
 void ClientStateManager::Active()

@@ -39,10 +39,16 @@
     <ClCompile Include="ASAgent.cpp">
       <Filter>Network</Filter>
     </ClCompile>
-    <ClCompile Include="ClientStateTriggerWaitToLogin.cpp">
+    <ClCompile Include="ClientStateManager.cpp">
       <Filter>ClientState</Filter>
     </ClCompile>
-    <ClCompile Include="ClientStateManager.cpp">
+    <ClCompile Include="ClientStatePlaying.cpp">
+      <Filter>ClientState</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientStateWaitToConnectGate.cpp">
+      <Filter>ClientState</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientStateWaitToLogin.cpp">
       <Filter>ClientState</Filter>
     </ClCompile>
   </ItemGroup>
@@ -74,10 +80,16 @@
     <ClInclude Include="ClientStateTrigger.h">
       <Filter>ClientState</Filter>
     </ClInclude>
-    <ClInclude Include="ClientStateTriggerWaitToLogin.h">
+    <ClInclude Include="ClientStateManager.h">
       <Filter>ClientState</Filter>
     </ClInclude>
-    <ClInclude Include="ClientStateManager.h">
+    <ClInclude Include="ClientStatePlaying.h">
+      <Filter>ClientState</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientStateWaitToConnectGate.h">
+      <Filter>ClientState</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientStateWaitToLogin.h">
       <Filter>ClientState</Filter>
     </ClInclude>
   </ItemGroup>

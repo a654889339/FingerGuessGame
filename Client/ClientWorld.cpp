@@ -3,11 +3,11 @@
 
 ClientWorld::ClientWorld()
 {
-    m_nPort = 0;
     m_bQuitFlag = false;
     m_nTimeNow = 0;
+    m_nGatePort = 0;
 
-    memset(m_szIP, 0, sizeof(m_szIP));
+    memset(m_szGateIP, 0, sizeof(m_szGateIP));
 }
 
 ClientWorld::~ClientWorld()
@@ -98,9 +98,6 @@ bool ClientWorld::LoadConfig()
 {
     bool bResult = false;
     bool bRetCode = false;
-
-    strcpy(m_szIP, "127.0.0.1");
-    m_nPort = 5566;
 
     printf("[ClientWorld] Input your name:\n");
     while (true)
