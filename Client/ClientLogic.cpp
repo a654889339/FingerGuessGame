@@ -70,8 +70,6 @@ void ClientLogic::Run()
 
         m_Control.Active();
         m_ClientStateManager.Active();
-
-        Sleep(10);
     }
 
     JY_STD_VOID_END
