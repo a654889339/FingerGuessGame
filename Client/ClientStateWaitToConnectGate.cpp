@@ -18,4 +18,5 @@ bool ClientStateWaitToConnectGate::Enter(ClientStateTrigger* pTrigger, ClientSta
 void ClientStateWaitToConnectGate::Active()
 {
     g_pClient->m_Connection.Active();
+    Sleep(10);
 }

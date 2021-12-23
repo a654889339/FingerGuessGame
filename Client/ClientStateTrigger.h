@@ -22,7 +22,7 @@ public:
 
     // eState->m_eState
     virtual bool Leave(ClientStateTrigger* pTrigger, ClientStateType eState) {return true;}
-    virtual void Active() {}
+    virtual void Active() { Sleep(10); }
 
     ClientStateType m_eState;
 };

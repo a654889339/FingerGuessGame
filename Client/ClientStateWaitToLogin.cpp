@@ -29,4 +29,5 @@ bool ClientStateWaitToLogin::Leave(ClientStateTrigger* pTrigger, ClientStateType
 void ClientStateWaitToLogin::Active()
 {
     m_ASAgent.Active();
+    Sleep(10);
 }

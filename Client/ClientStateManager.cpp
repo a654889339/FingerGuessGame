@@ -41,7 +41,7 @@ void ClientStateManager::Active()
 
 bool ClientStateManager::Set(ClientStateType eState)
 {
-    bool                bResult = false;
+    bool                bResult  = false;
     bool                bRetCode = false;
     ClientStateTrigger* pTrigger = NULL;
 
