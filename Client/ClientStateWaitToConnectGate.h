@@ -3,7 +3,7 @@
 
 #include "ClientStateTrigger.h"
 
-class ClientStateWaitToConnectGate : ClientStateTrigger
+class ClientStateWaitToConnectGate : public ClientStateTrigger
 {
 public:
     ClientStateWaitToConnectGate() {m_eState = ecst_wait_to_connect_gate;}

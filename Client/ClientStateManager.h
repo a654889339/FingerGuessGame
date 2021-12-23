@@ -3,6 +3,8 @@
 
 #include "ClientStateTrigger.h"
 #include "ClientStateWaitToLogin.h"
+#include "ClientStateWaitToConnectGate.h"
+#include "ClientStatePlaying.h"
 
 class ClientStateManager
 {
@@ -22,7 +24,10 @@ private:
     ClientStateTrigger            m_State; // 客户端状态
     ClientStateTrigger*           m_pszState[ecst_end];
     ClientStateTrigger            m_BaseState[ecst_end]; // 避免状态的指针为空
-    ClientStateWaitToLogin m_WaitToLogin;
+
+    ClientStateWaitToLogin        m_WaitToLogin;
+    ClientStateWaitToConnectGate  m_WaitToConnectGate;
+    ClientStatePlaying            m_Playing;
 };
 
 

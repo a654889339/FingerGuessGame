@@ -3,7 +3,6 @@
 
 #include "ClientControl.h"
 #include "ClientGateAgent.h"
-#include "Player.h"
 #include "ClientBase.h"
 #include "ClientStateManager.h"
 
@@ -29,10 +28,9 @@ public:
     char m_szPlayerName[_NAME_LEN];
 
     time_t             m_nTimeNow;
-    Player             m_Player;
     ClientStateManager m_ClientStateManager;
     ClientControl      m_Control;
-    ClientGateAgent   m_Connection;
+    ClientGateAgent    m_Connection;
 
 private:
     bool m_bQuitFlag;

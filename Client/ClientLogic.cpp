@@ -41,7 +41,7 @@ Exit0:
     {
         if (bStateMgrInitFlag)
         {
-            m_ClientStateManager.Init();
+            m_ClientStateManager.UnInit();
             bStateMgrInitFlag = false;
         }
 
