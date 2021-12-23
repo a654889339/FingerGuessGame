@@ -2,7 +2,7 @@
 #define _CLIENT_STATE_WAIT_TO_LOGIN_H_
 
 #include "ClientStateTrigger.h"
-#include "ASAgent.h"
+#include "ClientASAgent.h"
 
 // 进入此状态就启用与AS的连接，并等到登录回包，修改状态(ASAgent::OnAS2CLoginRespond)
 class ClientStateWaitToLogin : public ClientStateTrigger
@@ -15,7 +15,7 @@ public:
     void Active();
 
 private:
-    ASAgent            m_ASAgent;
+    ClientASAgent            m_ASAgent;
 };
 
 

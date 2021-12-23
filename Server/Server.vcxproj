@@ -54,7 +54,7 @@
     <ClCompile Include="DBBase.cpp" />
     <ClCompile Include="DBManager.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="ServerConnection.cpp" />
+    <ClCompile Include="GateGSServer.cpp" />
     <ClCompile Include="ServerWorld.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug_Server|x64'">Create</PrecompiledHeader>
@@ -65,7 +65,7 @@
     <ClInclude Include="DBBase.h" />
     <ClInclude Include="DBManager.h" />
     <ClInclude Include="ServerBase.h" />
-    <ClInclude Include="ServerConnection.h" />
+    <ClInclude Include="GateGSServer.h" />
     <ClInclude Include="ServerECSConfig.h" />
     <ClInclude Include="ServerWorld.h" />
     <ClInclude Include="stdafx.h" />

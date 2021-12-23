@@ -2,7 +2,7 @@
 #define _SERVER_WORLD_H_
 
 #include "GamePlay.h"
-#include "ServerConnection.h"
+#include "GateGSServer.h"
 #include "DBManager.h"
 
 #include "ConnectionSystem.h"
@@ -25,7 +25,7 @@ private:
 
 public:
     GamePlay         m_GamePlay;
-    ServerConnection m_Connection;
+    GateGSServer     m_Connection;
     DBManager        m_DB;
 
 private:

@@ -78,12 +78,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ClientGateServer.h" />
     <ClInclude Include="GateGSAgent.h" />
     <ClInclude Include="GateServer.h" />
     <ClInclude Include="GateServerBase.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ClientGateServer.cpp" />
     <ClCompile Include="GateGSAgent.cpp" />
     <ClCompile Include="GateServer.cpp" />
     <ClCompile Include="Main.cpp" />

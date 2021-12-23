@@ -50,8 +50,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ASAgent.cpp" />
-    <ClCompile Include="ClientConnection.cpp" />
+    <ClCompile Include="ClientASAgent.cpp" />
+    <ClCompile Include="ClientGateAgent.cpp" />
     <ClCompile Include="ClientControl.cpp" />
     <ClCompile Include="ClientStateManager.cpp" />
     <ClCompile Include="ClientStatePlaying.cpp" />
@@ -64,9 +64,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ASAgent.h" />
+    <ClInclude Include="ClientASAgent.h" />
     <ClInclude Include="ClientBase.h" />
-    <ClInclude Include="ClientConnection.h" />
+    <ClInclude Include="ClientGateAgent.h" />
     <ClInclude Include="ClientControl.h" />
     <ClInclude Include="ClientInputDef.h" />
     <ClInclude Include="ClientStateManager.h" />

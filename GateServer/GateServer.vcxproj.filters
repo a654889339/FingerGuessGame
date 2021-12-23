@@ -30,6 +30,9 @@
     <ClInclude Include="GateGSAgent.h">
       <Filter>Network</Filter>
     </ClInclude>
+    <ClInclude Include="ClientGateServer.h">
+      <Filter>Network</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -42,6 +45,9 @@
       <Filter>Main</Filter>
     </ClCompile>
     <ClCompile Include="GateGSAgent.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientGateServer.cpp">
       <Filter>Network</Filter>
     </ClCompile>
   </ItemGroup>

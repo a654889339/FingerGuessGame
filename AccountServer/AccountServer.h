@@ -1,7 +1,7 @@
 #ifndef _ACCOUNT_SERVER_H_
 #define _ACCOUNT_SERVER_H_
 
-#include "ASClientAgent.h"
+#include "ClientASServer.h"
 #include "ClientManager.h"
 
 class AccountServer
@@ -18,7 +18,7 @@ public:
 
 
 public:
-    ASClientAgent m_ClientAgent;
+    ClientASServer m_ClientAgent;
     ClientManager m_ClientManager;
 };
 

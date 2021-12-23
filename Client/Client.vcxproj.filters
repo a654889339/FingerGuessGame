@@ -24,17 +24,11 @@
     <ClCompile Include="Main.cpp">
       <Filter>Main</Filter>
     </ClCompile>
-    <ClCompile Include="ClientConnection.cpp">
-      <Filter>Network</Filter>
-    </ClCompile>
     <ClCompile Include="ClientControl.cpp">
       <Filter>ClientControl</Filter>
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>Main</Filter>
-    </ClCompile>
-    <ClCompile Include="ASAgent.cpp">
-      <Filter>Network</Filter>
     </ClCompile>
     <ClCompile Include="ClientStateManager.cpp">
       <Filter>ClientState</Filter>
@@ -51,11 +45,14 @@
     <ClCompile Include="ClientLogic.cpp">
       <Filter>Main</Filter>
     </ClCompile>
+    <ClCompile Include="ClientGateAgent.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientASAgent.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ClientConnection.h">
-      <Filter>Network</Filter>
-    </ClInclude>
     <ClInclude Include="ClientControl.h">
       <Filter>ClientControl</Filter>
     </ClInclude>
@@ -67,9 +64,6 @@
     </ClInclude>
     <ClInclude Include="stdafx.h">
       <Filter>Main</Filter>
-    </ClInclude>
-    <ClInclude Include="ASAgent.h">
-      <Filter>Network</Filter>
     </ClInclude>
     <ClInclude Include="ClientTip.h">
       <Filter>Include</Filter>
@@ -91,6 +85,12 @@
     </ClInclude>
     <ClInclude Include="ClientLogic.h">
       <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientGateAgent.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientASAgent.h">
+      <Filter>Network</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

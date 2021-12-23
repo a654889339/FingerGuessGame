@@ -1,21 +1,21 @@
 #include "stdafx.h"
-#include "ASClientAgent.h"
+#include "ClientASServer.h"
 #include "AccountServer.h"
 
-ASClientAgent::ASClientAgent()
+ClientASServer::ClientASServer()
 {
     memset(m_ProcessProtocolFuns, 0, sizeof(m_ProcessProtocolFuns));
     memset(m_nProtocolSize, 0, sizeof(m_nProtocolSize));
 
-    REGISTER_EXTERNAL_FUNC(ec2as_login_request, &ASClientAgent::OnC2ASLoginRequest, sizeof(C2AS_LOGIN_REQUEST));
+    REGISTER_EXTERNAL_FUNC(ec2as_login_request, &ClientASServer::OnC2ASLoginRequest, sizeof(C2AS_LOGIN_REQUEST));
 }
 
-ASClientAgent::~ASClientAgent()
+ClientASServer::~ClientASServer()
 {
 
 }
 
-bool ASClientAgent::Init()
+bool ClientASServer::Init()
 {
     bool bResult  = false;
     bool bRetCode = false;
@@ -26,17 +26,17 @@ bool ASClientAgent::Init()
     JY_STD_BOOL_END
 }
 
-void ASClientAgent::UnInit()
+void ClientASServer::UnInit()
 {
     Quit();
 }
 
-void ASClientAgent::Active()
+void ClientASServer::Active()
 {
     ProcessNetwork();
 }
 
-bool ASClientAgent::DoAS2CLoginRespond(int nConnIndex, int nRetCode)
+bool ClientASServer::DoAS2CLoginRespond(int nConnIndex, int nRetCode)
 {
     bool                bResult  = false;
     bool                bRetCode = false;
@@ -55,7 +55,7 @@ bool ASClientAgent::DoAS2CLoginRespond(int nConnIndex, int nRetCode)
 
 //////////////////////////////////////////////////////////////////////////
 
-void ASClientAgent::ProcessPackage(int nConnIndex, BYTE* pbyData, size_t uDataLen)
+void ClientASServer::ProcessPackage(int nConnIndex, BYTE* pbyData, size_t uDataLen)
 {
     PROTOCOL_HEADER*      pHeader = (PROTOCOL_HEADER*)pbyData;
     PROCESS_PROTOCOL_FUNC Func    = NULL;
@@ -77,20 +77,20 @@ void ASClientAgent::ProcessPackage(int nConnIndex, BYTE* pbyData, size_t uDataLe
     JY_STD_VOID_END;
 }
 
-void ASClientAgent::NewConnection(int nConnIndex, int* pszIP, int nPort)
+void ClientASServer::NewConnection(int nConnIndex, int* pnIP, int nPort)
 {
-    printf("[ASClientAgent] NewConnection %d, IP: %s, Port: %d\n", nConnIndex, inet_ntoa(*(in_addr*)pszIP), nPort);
-    m_ConnManager[nConnIndex] = ConnectionInfo(*pszIP, nPort);
+    printf("[ASClientAgent] NewConnection %d, IP: %s, Port: %d\n", nConnIndex, inet_ntoa(*(in_addr*)pnIP), nPort);
+    m_ConnManager[nConnIndex] = ConnectionInfo(*pnIP, nPort);
 }
 
-void ASClientAgent::DisConnection(int nConnIndex)
+void ClientASServer::DisConnection(int nConnIndex)
 {
     printf("[ASClientAgent] DisConnection %d, IP: %d, Port: %d\n", nConnIndex, m_ConnManager[nConnIndex].nIP, m_ConnManager[nConnIndex].nPort);
     g_pAccountServer->m_ClientManager.Del(nConnIndex);
     m_ConnManager.remove(nConnIndex);
 }
 
-void ASClientAgent::OnC2ASLoginRequest(int nConnIndex, BYTE* pbyData, size_t uDataLen)
+void ClientASServer::OnC2ASLoginRequest(int nConnIndex, BYTE* pbyData, size_t uDataLen)
 {
     int                 nResult  = elrc_invalid;
     bool                bRetCode = false;

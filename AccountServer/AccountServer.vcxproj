@@ -78,7 +78,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AccountServer.cpp" />
-    <ClCompile Include="ASClientAgent.cpp" />
+    <ClCompile Include="ClientASServer.cpp" />
     <ClCompile Include="ClientManager.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -88,7 +88,7 @@
   <ItemGroup>
     <ClInclude Include="AccountServer.h" />
     <ClInclude Include="AccountServerBase.h" />
-    <ClInclude Include="ASClientAgent.h" />
+    <ClInclude Include="ClientASServer.h" />
     <ClInclude Include="ClientManager.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>

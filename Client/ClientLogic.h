@@ -2,7 +2,7 @@
 #define _CLIENT_LOGIN_H_
 
 #include "ClientControl.h"
-#include "ClientConnection.h"
+#include "ClientGateAgent.h"
 #include "Player.h"
 #include "ClientBase.h"
 #include "ClientStateManager.h"
@@ -32,7 +32,7 @@ public:
     Player             m_Player;
     ClientStateManager m_ClientStateManager;
     ClientControl      m_Control;
-    ClientConnection   m_Connection;
+    ClientGateAgent   m_Connection;
 
 private:
     bool m_bQuitFlag;
