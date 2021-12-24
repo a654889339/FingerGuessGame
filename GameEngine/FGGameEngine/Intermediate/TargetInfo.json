@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "FGGameEngine",
+			"Path": "C:\\Users\\a6548\\source\\repos\\FingerGuessGame\\GameEngine\\FGGameEngine\\Source\\FGGameEngine.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "FGGameEngineEditor",
+			"Path": "C:\\Users\\a6548\\source\\repos\\FingerGuessGame\\GameEngine\\FGGameEngine\\Source\\FGGameEngineEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}
