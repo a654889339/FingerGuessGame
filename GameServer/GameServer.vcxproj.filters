@@ -5,67 +5,65 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Network">
+    <Filter Include="Include">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="Network">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
     <Filter Include="DB">
-      <UniqueIdentifier>{61819c88-a172-472d-825f-3417b4c06d2e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Include">
-      <UniqueIdentifier>{7480cf50-5a7f-47dc-955a-d343c6f5b24c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Component">
-      <UniqueIdentifier>{1ebddea5-386f-4264-a5b3-2637ebe6490f}</UniqueIdentifier>
+      <UniqueIdentifier>{0fa6b703-569c-4507-8274-610fbb1c808a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ConnectionSystem.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="GateGSServer.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Main</Filter>
     </ClCompile>
     <ClCompile Include="ServerWorld.cpp">
       <Filter>Main</Filter>
     </ClCompile>
-    <ClCompile Include="DBManager.cpp">
-      <Filter>DB</Filter>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Main</Filter>
     </ClCompile>
     <ClCompile Include="DBBase.cpp">
       <Filter>DB</Filter>
     </ClCompile>
-    <ClCompile Include="ConnectionSystem.cpp">
-      <Filter>Network</Filter>
-    </ClCompile>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>Main</Filter>
-    </ClCompile>
-    <ClCompile Include="GateGSServer.cpp">
-      <Filter>Network</Filter>
+    <ClCompile Include="DBManager.cpp">
+      <Filter>DB</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ConnectionSystem.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="GateGSServer.h">
+      <Filter>Network</Filter>
+    </ClInclude>
     <ClInclude Include="ServerWorld.h">
       <Filter>Main</Filter>
     </ClInclude>
-    <ClInclude Include="DBManager.h">
-      <Filter>DB</Filter>
+    <ClInclude Include="stdafx.h">
+      <Filter>Main</Filter>
     </ClInclude>
     <ClInclude Include="ServerBase.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerECSConfig.h">
       <Filter>Include</Filter>
     </ClInclude>
     <ClInclude Include="DBBase.h">
       <Filter>DB</Filter>
     </ClInclude>
-    <ClInclude Include="ConnectionSystem.h">
-      <Filter>Network</Filter>
-    </ClInclude>
-    <ClInclude Include="ServerECSConfig.h">
-      <Filter>Component</Filter>
-    </ClInclude>
-    <ClInclude Include="stdafx.h">
-      <Filter>Main</Filter>
-    </ClInclude>
-    <ClInclude Include="GateGSServer.h">
-      <Filter>Network</Filter>
+    <ClInclude Include="DBManager.h">
+      <Filter>DB</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
