@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="..\..\GameEngine.uproject" />
+    <Filter Include="Source">
+      <UniqueIdentifier>{A3451C5E-C92D-4789-A287-C1A282530347}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\GameEngine.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\Source\GameEngineEditor.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <Filter Include="Config">
+      <UniqueIdentifier>{A1CD71A3-2457-4903-B009-02E9FF93DAAE}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Config\DefaultEditor.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEngine.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultGame.ini">
+      <Filter>Config</Filter>
+    </None>
+    <Filter Include="Source\GameEngine">
+      <UniqueIdentifier>{15918615-F89E-4185-B506-312B1AFBFC74}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\GameEngine\GameEngine.Build.cs">
+      <Filter>Source\GameEngine</Filter>
+    </None>
+    <ClCompile Include="..\..\Source\GameEngine\GameEngine.cpp">
+      <Filter>Source\GameEngine</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\GameEngine\GameEngine.h">
+      <Filter>Source\GameEngine</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\GameEngine\GameEngineGameModeBase.cpp">
+      <Filter>Source\GameEngine</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\GameEngine\GameEngineGameModeBase.h">
+      <Filter>Source\GameEngine</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\GameEngine\Main.cpp">
+      <Filter>Source\GameEngine</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\GameEngine\Main.h">
+      <Filter>Source\GameEngine</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
