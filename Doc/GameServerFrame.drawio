@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-12-19T16:16:52.057Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36" etag="J2qYWjI5hJ1yaXSLub_r" version="15.8.7" type="github" pages="5">
+<mxfile host="app.diagrams.net" modified="2021-12-24T15:46:16.010Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36" etag="tG_OP4ayg9JdDzmjxOdc" version="16.0.0" type="github" pages="5">
   <diagram id="YohwLOSvh4ewAdbJvnKw" name="Base">
     <mxGraphModel dx="3648" dy="2363" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -130,7 +130,7 @@
         <mxCell id="RaBOwgKpOiwF3AHPLdu5-1" value="传统TCP" style="ellipse;whiteSpace=wrap;html=1;fontSize=25;" parent="I8S6XLJ3EVu2pg4-RtFR-1" vertex="1">
           <mxGeometry x="280" y="460" width="160" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="RaBOwgKpOiwF3AHPLdu5-2" value="账号服务器选择角色，注册角色等&lt;br&gt;（不实现）" style="rounded=0;whiteSpace=wrap;html=1;fontSize=25;" parent="I8S6XLJ3EVu2pg4-RtFR-1" vertex="1">
+        <mxCell id="RaBOwgKpOiwF3AHPLdu5-2" value="账号服务器(AccountServer)选择角色，注册角色等&lt;br&gt;（不实现）" style="rounded=0;whiteSpace=wrap;html=1;fontSize=25;" parent="I8S6XLJ3EVu2pg4-RtFR-1" vertex="1">
           <mxGeometry x="-360" y="360" width="370" height="200" as="geometry" />
         </mxCell>
         <mxCell id="RaBOwgKpOiwF3AHPLdu5-4" value="" style="endArrow=none;html=1;rounded=0;fontSize=25;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0.586;exitY=-0.012;exitDx=0;exitDy=0;exitPerimeter=0;" parent="I8S6XLJ3EVu2pg4-RtFR-1" source="RaBOwgKpOiwF3AHPLdu5-2" target="wwZEKSx0Um3Efaa3MtAr-0" edge="1">
