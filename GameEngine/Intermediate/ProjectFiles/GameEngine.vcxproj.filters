@@ -3,7 +3,7 @@
   <ItemGroup>
     <None Include="..\..\GameEngine.uproject" />
     <Filter Include="Source">
-      <UniqueIdentifier>{A3451C5E-C92D-4789-A287-C1A282530347}</UniqueIdentifier>
+      <UniqueIdentifier>{F0BE225E-A79C-4655-9E62-A71AAE73897D}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Source\GameEngine.Target.cs">
       <Filter>Source</Filter>
@@ -12,7 +12,7 @@
       <Filter>Source</Filter>
     </None>
     <Filter Include="Config">
-      <UniqueIdentifier>{A1CD71A3-2457-4903-B009-02E9FF93DAAE}</UniqueIdentifier>
+      <UniqueIdentifier>{D4F999B4-62F7-4E4B-8418-8ED069634163}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Config\DefaultEditor.ini">
       <Filter>Config</Filter>
@@ -24,7 +24,7 @@
       <Filter>Config</Filter>
     </None>
     <Filter Include="Source\GameEngine">
-      <UniqueIdentifier>{15918615-F89E-4185-B506-312B1AFBFC74}</UniqueIdentifier>
+      <UniqueIdentifier>{1BEF4530-944F-4891-9BB1-82C9379D9474}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Source\GameEngine\GameEngine.Build.cs">
       <Filter>Source\GameEngine</Filter>
@@ -46,6 +46,48 @@
     </ClCompile>
     <ClInclude Include="..\..\Source\GameEngine\Main.h">
       <Filter>Source\GameEngine</Filter>
+    </ClInclude>
+    <Filter Include="Source\GameEngine\Private">
+      <UniqueIdentifier>{9E55A955-CF4B-40CD-A7FE-5E7645A296D0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\GameEngine\Private\GamePlay">
+      <UniqueIdentifier>{7C0FA6C4-D0E7-4E21-B462-00BF07977AC1}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\GameEngine\Private\GamePlay\FGPlayerController.cpp">
+      <Filter>Source\GameEngine\Private\GamePlay</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\GameEngine\Private\GamePlay\GamePlay.cpp">
+      <Filter>Source\GameEngine\Private\GamePlay</Filter>
+    </ClCompile>
+    <Filter Include="Source\GameEngine\Private\UI">
+      <UniqueIdentifier>{F917B102-5C3A-4652-9E6E-57CEFDA98D73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\GameEngine\Private\UI\Init">
+      <UniqueIdentifier>{EAEE1D99-21EF-44EB-AF61-DF72977D503B}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\GameEngine\Private\UI\Init\InitHUBBase.cpp">
+      <Filter>Source\GameEngine\Private\UI\Init</Filter>
+    </ClCompile>
+    <Filter Include="Source\GameEngine\Public">
+      <UniqueIdentifier>{D59F0A73-D0E9-486E-AB00-FC4A8B74B1EF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\GameEngine\Public\GamePlay">
+      <UniqueIdentifier>{357EAE18-3168-4314-AD9F-1F4413402F98}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Source\GameEngine\Public\GamePlay\FGPlayerController.h">
+      <Filter>Source\GameEngine\Public\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\GameEngine\Public\GamePlay\GamePlay.h">
+      <Filter>Source\GameEngine\Public\GamePlay</Filter>
+    </ClInclude>
+    <Filter Include="Source\GameEngine\Public\UI">
+      <UniqueIdentifier>{793B5DFB-5E8F-403B-8D6A-DC65CC375397}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\GameEngine\Public\UI\Init">
+      <UniqueIdentifier>{D69DCE0F-B36D-4956-BEF6-CECBBB82853F}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Source\GameEngine\Public\UI\Init\InitHUBBase.h">
+      <Filter>Source\GameEngine\Public\UI\Init</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

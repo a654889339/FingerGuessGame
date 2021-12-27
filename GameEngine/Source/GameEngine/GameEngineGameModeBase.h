@@ -14,4 +14,6 @@ class GAMEENGINE_API AGameEngineGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
 	
+public:
+    AGameEngineGameModeBase();
 };
