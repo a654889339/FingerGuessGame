@@ -12,8 +12,10 @@ public class GameEngine : ModuleRules
         { 
             "Core", 
             "CoreUObject", 
-            "Engine", 
+            "Engine",
             "InputCore",
+            "Slate",
+            "SlateCore",
         });
 
 		PrivateDependencyModuleNames.AddRange(new string[] { });

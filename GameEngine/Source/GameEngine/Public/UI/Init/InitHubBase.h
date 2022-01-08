@@ -10,11 +10,11 @@
  * 
  */
 UCLASS()
-class GAMEENGINE_API AInitHubBase : public AHUD
+class GAMEENGINE_API AInitHUBBase : public AHUD
 {
 	GENERATED_BODY()
 
 public:
-    AInitHubBase();
-    TSharedPtr<class SInitHUBWidget> MenuHUDWidget;
+    AInitHUBBase();
+    TSharedPtr<class SInitMenuHUBWidget> MenuHUDWidget;
 };

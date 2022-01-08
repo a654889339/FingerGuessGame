@@ -2,10 +2,10 @@
 
 
 #include "UI/Init/InitHubBase.h"
-#include "UI/Init/SInitHUBWidget.h"
+#include "UI/Init/Widget/SInitMenuHUBWidget.h"
 #include "SlateBasics.h"
 
-AInitHubBase::AInitHubBase()
+AInitHUBBase::AInitHUBBase()
 {
     //创建 MenuHUDWidget，并把他AddViewport
     if (GEngine && GEngine->GameViewport)
@@ -17,7 +17,7 @@ AInitHubBase::AInitHubBase()
         SAssignNew(共享指针，指针对应的类) 不返回共享指针，一般用在把创建的widget保存在一个指针里面的时候用这个
         这两个只能创建继承于SlateWidget的类
         */
-        SAssignNew(MenuHUDWidget, SInitHUBWidget);
+        SAssignNew(MenuHUDWidget, SInitMenuHUBWidget);
 
         GEngine->GameViewport->AddViewportWidgetContent(SNew(SWeakWidget).PossiblyNullContent(MenuHUDWidget.ToSharedRef()));
     }

@@ -6,9 +6,6 @@
 #include "GameFramework/PlayerController.h"
 #include "FGPlayerController.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class GAMEENGINE_API AFGPlayerController : public APlayerController
 {
