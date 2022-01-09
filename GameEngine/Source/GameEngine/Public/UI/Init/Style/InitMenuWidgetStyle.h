@@ -20,8 +20,16 @@ struct GAMEENGINE_API FInitMenuStyle : public FSlateWidgetStyle
 	virtual const FName GetTypeName() const override { return TypeName; };
 	static const FInitMenuStyle& GetDefault();
 
+    // ±≥æ∞Õº∆¨
     UPROPERTY(EditAnywhere, Category = MenuHUD)
         FSlateBrush MenuHUDBackgroundBrush;
+
+    // ±ÍÃ‚
+    UPROPERTY(EditAnywhere, Category = Appearance)
+        FTextBlockStyle MenuTitleStyle;
+
+    UPROPERTY(EditAnywhere, Category = Appearance)
+        FButtonStyle MenuButtonStyle;
 };
 
 /**

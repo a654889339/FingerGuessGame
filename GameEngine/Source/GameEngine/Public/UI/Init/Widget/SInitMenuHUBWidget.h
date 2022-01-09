@@ -19,6 +19,10 @@ public:
 	/** Constructs this widget with InArgs */
 	void Construct(const FArguments& InArgs);
 
+    // 界面事件
+private:
+    FReply Login();
+
 private:
     TWeakObjectPtr<class AInitMenuHUB> InitMenuHUB;
     const struct FInitMenuStyle* MenuStyle;
