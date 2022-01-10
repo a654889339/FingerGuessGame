@@ -1,14 +1,27 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 using UnrealBuildTool;
+using System.IO;
 
 public class GameEngine : ModuleRules
 {
-	public GameEngine(ReadOnlyTargetRules Target) : base(Target)
-	{
-		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
-	
-		PublicDependencyModuleNames.AddRange(new string[] 
+    private string ThirdPartyPath
+    {
+        get
+        {
+//#if (UE_BUILD_DEBUG) || (UE_BUILD_DEVELOPMENT) || (UE_GAME)
+            return Path.Combine(Path.Combine(ModuleDirectory, "../../ThirdParty/lib/Debug_X64"));
+//#else
+//            return Path.Combine(Path.Combine(ModuleDirectory, "../../ThirdParty/lib/Release_X64"));
+//#endif
+        }
+    }
+
+    public GameEngine(ReadOnlyTargetRules Target) : base(Target)
+    {
+        PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
+    
+        PublicDependencyModuleNames.AddRange(new string[] 
         { 
             "Core", 
             "CoreUObject", 
@@ -18,14 +31,14 @@ public class GameEngine : ModuleRules
             "SlateCore",
         });
 
-		PrivateDependencyModuleNames.AddRange(new string[] { });
+        PrivateDependencyModuleNames.AddRange(new string[] { });
 
-		// Uncomment if you are using Slate UI
-		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
-		
-		// Uncomment if you are using online features
-		// PrivateDependencyModuleNames.Add("OnlineSubsystem");
+        PublicIncludePaths.Add(Path.Combine(ThirdPartyPath, "Include"));
+//#if (UE_BUILD_DEBUG) || (UE_BUILD_DEVELOPMENT) || (UE_GAME)
+        PublicAdditionalLibraries.Add(Path.Combine(ThirdPartyPath, "ClientX64D.lib"));
+//#else
+//        PublicAdditionalLibraries.Add(Path.Combine(ThirdPartyPath, "ClientX64.lib"));
+//#endif
 
-		// To include OnlineSubsystemSteam, add it to the plugins section in your uproject file with the Enabled attribute set to true
-	}
+    }
 }

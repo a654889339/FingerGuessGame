@@ -74,6 +74,12 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>md  $(SolutionDir)GameEngine\ThirdParty\
+md  $(SolutionDir)GameEngine\ThirdParty\lib\
+md  $(SolutionDir)GameEngine\ThirdParty\lib\Debug_X64
+copy $(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)X64D.lib $(SolutionDir)GameEngine\ThirdParty\lib\Debug_X64</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AccountDef.h" />

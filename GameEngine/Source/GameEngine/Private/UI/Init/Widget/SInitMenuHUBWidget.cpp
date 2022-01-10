@@ -1,11 +1,9 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
+#include "UI/Init/Widget/SInitMenuHUBWidget.h"
 
 #include "SlateOptMacros.h"
 #include "Widgets/Input/SButton.h"
 #include "Widgets/Images/SImage.h"
 
-#include "UI/Init/Widget/SInitMenuHUBWidget.h"
 #include "UI/Init/Style/InitStyle.h"
 #include "UI/Init/Style/InitMenuWidgetStyle.h"
 
@@ -18,9 +16,8 @@ void SInitMenuHUBWidget::Construct(const FArguments& InArgs)
     [
         SNew(SOverlay)
 
-        // ±³¾°Í¼
-        + SOverlay::Slot()   //Slot Ìí¼Ó²å²Û
-        .HAlign(HAlign_Fill) //*_Fill Ìî³ä
+        + SOverlay::Slot()
+        .HAlign(HAlign_Fill)
         .VAlign(VAlign_Fill)
         [
             SNew(SImage).Image(&MenuStyle->MenuHUDBackgroundBrush)

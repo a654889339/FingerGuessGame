@@ -112,10 +112,27 @@
     <ClInclude Include="..\..\Source\GameEngine\Public\UI\Init\Style\InitMenuWidgetStyle.h">
       <Filter>Source\GameEngine\Public\UI\Init\Style</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\ThirdParty\Include\ClientLibExport.h">
+      <Filter>ThirdParty\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\GameEngine\Public\GamePlay\ClientLib.h">
+      <Filter>Source\GameEngine\Public\GamePlay</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\GameEngine\Private\UI\Init\Style\InitMenuWidgetStyle.cpp">
       <Filter>Source\GameEngine\Private\UI\Init\Style</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\GameEngine\Private\GamePlay\ClientLib.cpp">
+      <Filter>Source\GameEngine\Private\GamePlay</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="ThirdParty">
+      <UniqueIdentifier>{46e48820-89c3-45fd-a14c-9ddd165245f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\Include">
+      <UniqueIdentifier>{0f80b709-da74-444b-8b82-f131593eb3b1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

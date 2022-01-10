@@ -389,6 +389,8 @@
     <AdditionalOptions>/std:c++14</AdditionalOptions>
   </PropertyGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\GameEngine\Public\GamePlay\ClientLib.h" />
+    <ClInclude Include="..\..\ThirdParty\Include\ClientLibExport.h" />
     <None Include="..\..\GameEngine.uproject" />
     <None Include="..\..\Source\GameEngine.Target.cs" />
     <None Include="..\..\Source\GameEngineEditor.Target.cs" />
@@ -401,6 +403,7 @@
       <ForcedIncludeFiles>$(NMakeForcedIncludes);$(SolutionDir)Intermediate\Build\Win64\UE4Editor\Development\GameEngine\Definitions.GameEngine.h;$(SolutionDir)Intermediate\Build\Win64\GameEngineEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h</ForcedIncludeFiles>
     </ClCompile>
     <ClInclude Include="..\..\Source\GameEngine\GameEngine.h" />
+    <ClCompile Include="..\..\Source\GameEngine\Private\GamePlay\ClientLib.cpp" />
     <ClCompile Include="..\..\Source\GameEngine\Private\GamePlay\FGPlayerController.cpp">
       <AdditionalIncludeDirectories>$(NMakeIncludeSearchPath);D:\Unreal\UE_4.26\Engine\Source\ThirdParty\PhysX3\PxShared\include;D:\Unreal\UE_4.26\Engine\Source\ThirdParty\PhysX3\PxShared\include\cudamanager;D:\Unreal\UE_4.26\Engine\Source\ThirdParty\PhysX3\PxShared\include\filebuf;D:\Unreal\UE_4.26\Engine\Source\ThirdParty\PhysX3\PxShared\include\foundation;D:\Unreal\UE_4.26\Engine\Source\ThirdParty\PhysX3\PxShared\include\pvd;D:\Unreal\UE_4.26\Engine\Source\ThirdParty\PhysX3\PxShared\include\task;D:\Unreal\UE_4.26\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include;D:\Unreal\UE_4.26\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\cooking;D:\Unreal\UE_4.26\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\common;D:\Unreal\UE_4.26\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\extensions;D:\Unreal\UE_4.26\Engine\Source\ThirdParty\PhysX3\PhysX_3.4\Include\geometry;D:\Unreal\UE_4.26\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include;D:\Unreal\UE_4.26\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\clothing;D:\Unreal\UE_4.26\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\nvparameterized;D:\Unreal\UE_4.26\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\legacy;D:\Unreal\UE_4.26\Engine\Source\ThirdParty\PhysX3\APEX_1.4\include\PhysX3;D:\Unreal\UE_4.26\Engine\Source\ThirdParty\PhysX3\APEX_1.4\common\include;D:\Unreal\UE_4.26\Engine\Source\ThirdParty\PhysX3\APEX_1.4\common\include\autogen;D:\Unreal\UE_4.26\Engine\Source\ThirdParty\PhysX3\APEX_1.4\framework\include;D:\Unreal\UE_4.26\Engine\Source\ThirdParty\PhysX3\APEX_1.4\framework\include\autogen;D:\Unreal\UE_4.26\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\general\RenderDebug\public;D:\Unreal\UE_4.26\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\general\PairFilter\include;D:\Unreal\UE_4.26\Engine\Source\ThirdParty\PhysX3\APEX_1.4\shared\internal\include;</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(NMakeForcedIncludes);$(SolutionDir)Intermediate\Build\Win64\UE4Editor\Development\GameEngine\Definitions.GameEngine.h;$(SolutionDir)Intermediate\Build\Win64\GameEngineEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h</ForcedIncludeFiles>

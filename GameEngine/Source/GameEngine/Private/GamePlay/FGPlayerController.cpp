@@ -5,17 +5,17 @@
 
 AFGPlayerController::AFGPlayerController()
 {
-    bShowMouseCursor = true;        //ÏÔÊ¾Êó±ê
+    bShowMouseCursor = true;        //ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½
 }
 
 void AFGPlayerController::BeginPlay()
 {
-    //ÓÃÓÚÉèÖÃ½öÔÊĞíUIÏìÓ¦ÓÃ»§ÊäÈëµÄÊäÈëÄ£Ê½µÄÊı¾İ½á¹¹
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã½ï¿½ï¿½ï¿½ï¿½ï¿½UIï¿½ï¿½Ó¦ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£Ê½ï¿½ï¿½ï¿½ï¿½ï¿½İ½á¹¹
     FInputModeUIOnly InputMode;
 
-    //ÉèÖÃÊó±êµÄÏÔÊ¾£¬½«Êó±êËøÔÚ½çÃæÖĞ
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú½ï¿½ï¿½ï¿½ï¿½ï¿½
     InputMode.SetLockMouseToViewportBehavior(EMouseLockMode::LockAlways);
 
-    //½«InputModeÌí¼Óµ½ SetInputMode
+    //ï¿½ï¿½InputModeï¿½ï¿½Óµï¿½ SetInputMode
     SetInputMode(InputMode);
 }

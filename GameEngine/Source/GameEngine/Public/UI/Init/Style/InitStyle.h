@@ -10,19 +10,19 @@ class GAMEENGINE_API InitStyle
 public:
     static void Initialze();
 
-    //ÓÎÏ·×¢²áµÄÃû×Ö
+    //ï¿½ï¿½Ï·×¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     static FName GetStyleSetName();
 
-    //ÓÎÏ·¹Ø±ÕµÄÊ±ºòÈ¡Ïû×¢²á
+    //ï¿½ï¿½Ï·ï¿½Ø±Õµï¿½Ê±ï¿½ï¿½È¡ï¿½ï¿½×¢ï¿½ï¿½
     static void ShutDown();
 
-    //¸øÍâ²¿µ÷ÓÃ£¬»ñÈ¡µ¥Àý
+    //ï¿½ï¿½ï¿½â²¿ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½
     static const ISlateStyle& Get();
 
 private:
-    //FSlateStyleSetÀàÄ£°å£¬ÓÃÀ´×¢²áÑùÊ½
+    //FSlateStyleSetï¿½ï¿½Ä£ï¿½å£¬ï¿½ï¿½ï¿½ï¿½×¢ï¿½ï¿½ï¿½ï¿½Ê½
     static TSharedRef<class FSlateStyleSet> Create();
 
-    //×÷Îªµ¥ÀýÄ£Ê½£¬Õâ¸ö±äÁ¿Ò»¶¨²»ÄÜ·Åµ½¹¹Ôìº¯ÊýÀïÈ¡ÊµÏÖ
+    //ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½Ä£Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Ü·Åµï¿½ï¿½ï¿½ï¿½ìº¯ï¿½ï¿½ï¿½ï¿½È¡Êµï¿½ï¿½
     static TSharedPtr<FSlateStyleSet> InitStyleInstance;
 };

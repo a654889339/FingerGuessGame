@@ -7,7 +7,7 @@
 
 AInitHUBBase::AInitHUBBase()
 {
-    //´´½¨ MenuHUDWidget£¬²¢°ÑËûAddViewport
+    //ï¿½ï¿½ï¿½ï¿½ MenuHUDWidgetï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½AddViewport
     if (GEngine && GEngine->GameViewport)
     {
         SAssignNew(MenuHUDWidget, SInitMenuHUBWidget);

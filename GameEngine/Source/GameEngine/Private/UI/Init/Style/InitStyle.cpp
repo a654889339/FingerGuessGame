@@ -8,7 +8,7 @@ TSharedPtr<FSlateStyleSet> InitStyle::InitStyleInstance = NULL;
 
 void InitStyle::Initialze()
 {
-    //×¢²á InitStyleInstance ¾ßÌåÎªÉ¶ÐèÒª¿´ÏÂÔ´Âë
+    //×¢ï¿½ï¿½ InitStyleInstance ï¿½ï¿½ï¿½ï¿½ÎªÉ¶ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½
     if (!InitStyleInstance.IsValid())
     {
         InitStyleInstance = Create();
@@ -24,13 +24,13 @@ FName InitStyle::GetStyleSetName()
 
 void InitStyle::ShutDown()
 {
-    //È¡Ïû×¢²á
+    //È¡ï¿½ï¿½×¢ï¿½ï¿½
     FSlateStyleRegistry::UnRegisterSlateStyle(*InitStyleInstance);
 
-    //È·±£ÊÇÎ¨Ò»µÄ
+    //È·ï¿½ï¿½ï¿½ï¿½Î¨Ò»ï¿½ï¿½
     ensure(InitStyleInstance.IsUnique());
 
-    //ÖØÖÃ
+    //ï¿½ï¿½ï¿½ï¿½
     InitStyleInstance.Reset();
 }
 
@@ -41,7 +41,7 @@ const ISlateStyle& InitStyle::Get()
 
 TSharedRef<class FSlateStyleSet> InitStyle::Create()
 {
-    //BPInitMenuStyleÀ¶Í¼Ëù´æ·ÅµÄÂ·¾¶
+    //BPInitMenuStyleï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½Åµï¿½Â·ï¿½ï¿½
     TSharedRef<FSlateStyleSet> StyleRef = FSlateGameResources::New(InitStyle::GetStyleSetName(), "/Game/Levels/Init/Style", "/Game/Levels/Init/Style");
 
     return StyleRef;

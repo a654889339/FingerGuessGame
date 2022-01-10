@@ -12,9 +12,9 @@ class GAMEENGINE_API AFGPlayerController : public APlayerController
 	GENERATED_BODY()
 
 public:
-    AFGPlayerController();        //ÏÔÊ¾Êó±ê
+    AFGPlayerController();        //ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½
 
 protected:
-    virtual void BeginPlay() override;        //ÊäÈëÄ£Ê½£¬UE4ÓĞ4ÖÖÊäÈëÄ£Ê½£¬ÊäÈëÄ£Ê½²»ÄÜÔÙ¹¹Ôìº¯ÊıÀïĞ´
+    virtual void BeginPlay() override;        //ï¿½ï¿½ï¿½ï¿½Ä£Ê½ï¿½ï¿½UE4ï¿½ï¿½4ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£Ê½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¹ï¿½ï¿½ìº¯ï¿½ï¿½ï¿½ï¿½Ğ´
 
 };

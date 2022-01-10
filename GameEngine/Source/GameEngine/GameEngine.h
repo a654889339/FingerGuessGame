@@ -7,9 +7,9 @@
 class FGameEngineModule : public FDefaultGameModuleImpl
 {
 public:
-    //Ä£×é¼ÓÔØÊ±µÄ·½·¨
+    //Ä£ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½Ä·ï¿½ï¿½ï¿½
     virtual void StartupModule() override;
 
-    //Ä£×éÐ¶ÔØÊ±µÄ·½·¨
+    //Ä£ï¿½ï¿½Ð¶ï¿½ï¿½Ê±ï¿½Ä·ï¿½ï¿½ï¿½
     virtual void ShutdownModule() override;
 };

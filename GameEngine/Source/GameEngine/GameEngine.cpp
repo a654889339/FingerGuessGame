@@ -3,18 +3,21 @@
 #include "GameEngine.h"
 #include "Modules/ModuleManager.h"
 #include "UI/Init/Style/InitStyle.h"
+#include "GamePlay/ClientLib.h"
 
 IMPLEMENT_PRIMARY_GAME_MODULE(FGameEngineModule, GameEngine, "GameEngine");
 
 void FGameEngineModule::StartupModule()
 {
-    //³õÊ¼»¯ÑùÊ½
-    FSlateStyleRegistry::UnRegisterSlateStyle(InitStyle::GetStyleSetName());        //ÏÈÈ¡Ïû×¢²á
-    InitStyle::Initialze();        //³õÊ¼»¯
+    //ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Ê½
+    FSlateStyleRegistry::UnRegisterSlateStyle(InitStyle::GetStyleSetName());        //ï¿½ï¿½È¡ï¿½ï¿½×¢ï¿½ï¿½
+    InitStyle::Initialze();        //ï¿½ï¿½Ê¼ï¿½ï¿½
+    ClientLib::Initialze();
 }
 
 void FGameEngineModule::ShutdownModule()
 {
-    //×¢Ïú
+    //×¢ï¿½ï¿½
     InitStyle::ShutDown();
+    ClientLib::ShutDown();
 }

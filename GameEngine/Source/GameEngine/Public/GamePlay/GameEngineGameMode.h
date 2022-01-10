@@ -13,4 +13,5 @@ class GAMEENGINE_API AGameEngineGameMode : public AGameModeBase
 
 public:
     AGameEngineGameMode();
+
 };
