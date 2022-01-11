@@ -9,11 +9,7 @@ public class GameEngine : ModuleRules
     {
         get
         {
-//#if (UE_BUILD_DEBUG) || (UE_BUILD_DEVELOPMENT) || (UE_GAME)
-            return Path.Combine(Path.Combine(ModuleDirectory, "../../ThirdParty/lib/Debug_X64"));
-//#else
-//            return Path.Combine(Path.Combine(ModuleDirectory, "../../ThirdParty/lib/Release_X64"));
-//#endif
+            return Path.Combine(Path.Combine(ModuleDirectory, "../../ThirdParty"));
         }
     }
 
@@ -34,11 +30,5 @@ public class GameEngine : ModuleRules
         PrivateDependencyModuleNames.AddRange(new string[] { });
 
         PublicIncludePaths.Add(Path.Combine(ThirdPartyPath, "Include"));
-//#if (UE_BUILD_DEBUG) || (UE_BUILD_DEVELOPMENT) || (UE_GAME)
-        PublicAdditionalLibraries.Add(Path.Combine(ThirdPartyPath, "ClientX64D.lib"));
-//#else
-//        PublicAdditionalLibraries.Add(Path.Combine(ThirdPartyPath, "ClientX64.lib"));
-//#endif
-
     }
 }

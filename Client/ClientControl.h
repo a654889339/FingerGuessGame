@@ -25,9 +25,6 @@ private:
     void OnPaper();
     void OnQuit();
 
-    void Input();
-    void ProcessInput();
-
 private:
     typedef void (ClientControl::*PROCESS_PROTOCOL_FUNC)();
     PROCESS_PROTOCOL_FUNC   m_ProcessProtocolFuns[cipc_total];

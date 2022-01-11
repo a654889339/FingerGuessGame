@@ -14,11 +14,11 @@ enum GameState
 
 const char szGameState[egame_state_end][_NAME_LEN] =
 {
-    "失效",
-    "登录中",
-    "空闲",
-    "等待加入",
-    "正在游戏",
+    "egame_state_begin",
+    "egame_state_login",
+    "egame_state_idle",
+    "egame_state_waiting",
+    "egame_state_playing",
 };
 
 

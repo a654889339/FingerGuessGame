@@ -36,5 +36,5 @@ private:
     bool m_bQuitFlag;
 };
 
-extern ClientLogic* g_pClient;
+static ClientLogic* g_pClient;
 #endif

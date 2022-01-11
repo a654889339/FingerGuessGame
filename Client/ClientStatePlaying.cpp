@@ -30,6 +30,6 @@ void ClientStatePlaying::Active()
 {
     g_pClient->m_Connection.Active();
     m_GamePlay.Active();
-    // Ö¡¿ØÖÆ
+
     Sleep(10);
 }

@@ -3,21 +3,33 @@
 #include "GameEngine.h"
 #include "Modules/ModuleManager.h"
 #include "UI/Init/Style/InitStyle.h"
-#include "GamePlay/ClientLib.h"
 
 IMPLEMENT_PRIMARY_GAME_MODULE(FGameEngineModule, GameEngine, "GameEngine");
 
 void FGameEngineModule::StartupModule()
 {
-    //��ʼ����ʽ
-    FSlateStyleRegistry::UnRegisterSlateStyle(InitStyle::GetStyleSetName());        //��ȡ��ע��
-    InitStyle::Initialze();        //��ʼ��
-    ClientLib::Initialze();
+    FSlateStyleRegistry::UnRegisterSlateStyle(InitStyle::GetStyleSetName());
+    InitStyle::Initialze();
+
+    FString ClientLogicDllName = TEXT("ClientX64D.dll");
+
+    FString DllPath = "../../ThirdParty/Debug_X64/" + ClientLogicDllName;
+    m_pClientLogic = FPlatformProcess::GetDllHandle(*DllPath);
+
+    if (!m_pClientLogic)
+    {
+    }
+
+
 }
 
 void FGameEngineModule::ShutdownModule()
 {
-    //ע��
+    if (m_pClientLogic)
+    {
+        FPlatformProcess::FreeDllHandle(m_pClientLogic);
+        m_pClientLogic = NULL;
+    }
+
     InitStyle::ShutDown();
-    ClientLib::ShutDown();
 }

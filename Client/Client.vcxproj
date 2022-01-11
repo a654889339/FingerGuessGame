@@ -15,7 +15,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Client|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
@@ -49,10 +49,12 @@
       <AdditionalLibraryDirectories>../x64/Debug_Client</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>md  $(SolutionDir)GameEngine\ThirdParty\
-md  $(SolutionDir)GameEngine\ThirdParty\lib\
-md  $(SolutionDir)GameEngine\ThirdParty\lib\Debug_X64
-copy $(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)X64D.lib $(SolutionDir)GameEngine\ThirdParty\lib\Debug_X64</Command>
+      <Command>IF NOT EXIST "$(SolutionDir)GameEngine\ThirdParty\Debug_X64" (
+md  "$(SolutionDir)GameEngine\ThirdParty\Debug_X64"
+)
+
+copy $(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)X64D$(TargetExt) $(SolutionDir)GameEngine\ThirdParty\Debug_X64
+copy $(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)X64D.pdb $(SolutionDir)GameEngine\ThirdParty\Debug_X64</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -64,7 +66,6 @@ copy $(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)X64D.lib $(Solutio
     <ClCompile Include="ClientStateWaitToConnectGate.cpp" />
     <ClCompile Include="ClientStateWaitToLogin.cpp" />
     <ClCompile Include="ClientLogic.cpp" />
-    <ClCompile Include="Main.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug_Client|x64'">Create</PrecompiledHeader>
     </ClCompile>
@@ -72,6 +73,7 @@ copy $(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)X64D.lib $(Solutio
   <ItemGroup>
     <ClInclude Include="ClientASAgent.h" />
     <ClInclude Include="ClientBase.h" />
+    <ClInclude Include="ClientDLLExport.h" />
     <ClInclude Include="ClientGateAgent.h" />
     <ClInclude Include="ClientControl.h" />
     <ClInclude Include="ClientInputDef.h" />

@@ -48,13 +48,8 @@
     <PostBuildEvent>
       <Command>md  $(SolutionDir)$(Platform)\Debug_Server
 md  $(SolutionDir)$(Platform)\Debug_Client
-copy $(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)X64D.lib $(SolutionDir)$(Platform)\Debug_Server
-copy $(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)X64D.lib $(SolutionDir)$(Platform)\Debug_Client
-
-md  $(SolutionDir)GameEngine\ThirdParty\
-md  $(SolutionDir)GameEngine\ThirdParty\lib\
-md  $(SolutionDir)GameEngine\ThirdParty\lib\Debug_X64
-copy $(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)X64D.lib $(SolutionDir)GameEngine\ThirdParty\lib\Debug_X64</Command>
+copy $(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)X64D$(TargetExt) $(SolutionDir)$(Platform)\Debug_Server
+copy $(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)X64D$(TargetExt) $(SolutionDir)$(Platform)\Debug_Client</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

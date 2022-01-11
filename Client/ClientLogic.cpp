@@ -95,21 +95,7 @@ bool ClientLogic::CheckQuitComplete()
 bool ClientLogic::LoadConfig()
 {
     bool bResult = false;
-    bool bRetCode = false;
 
-    printf("[ClientWorld] Input your name:\n");
-    while (true)
-    {
-        scanf("%s", m_szPlayerName);
-        m_szPlayerName[sizeof(m_szPlayerName) - 1] = '\0';
-        bRetCode = CheckNickName(m_szPlayerName);
-        if (bRetCode)
-        {
-            break;
-        }
-        else
-            puts("含有非法字符，请重新输入.");
-    }
 
     JY_STD_BOOL_END
 }

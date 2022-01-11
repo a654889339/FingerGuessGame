@@ -2,6 +2,7 @@
 #define _CLIENT_ACCOUNT_SERVER_AGENT_H_
 
 #include "TcpClient.h"
+#include "ClientBase.h"
 #include "CLIENT_ACCOUNT_SERVER_PROTOCOL.h"
 
 class ClientASAgent : public TcpClient

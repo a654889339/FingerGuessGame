@@ -1,13 +1,15 @@
 #ifndef _CLIENT_STATE_TRIGGER_H_
 #define _CLIENT_STATE_TRIGGER_H_
 
+#include "ClientBase.h"
+
 enum ClientStateType
 {
     ecst_begin = 0,
     ecst_init_client = ecst_begin,
 
-    ecst_wait_to_login, // 登录界面
-    ecst_wait_to_connect_gate, // 登录成功，开始连接Gate
+    ecst_wait_to_login,
+    ecst_wait_to_connect_gate,
 
     ecst_playing,
 

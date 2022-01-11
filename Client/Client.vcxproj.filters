@@ -21,9 +21,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>Main</Filter>
-    </ClCompile>
     <ClCompile Include="ClientControl.cpp">
       <Filter>ClientControl</Filter>
     </ClCompile>
@@ -91,6 +88,9 @@
     </ClInclude>
     <ClInclude Include="ClientASAgent.h">
       <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientDLLExport.h">
+      <Filter>Main</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

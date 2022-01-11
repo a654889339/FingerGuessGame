@@ -7,7 +7,6 @@
 
 AInitHUBBase::AInitHUBBase()
 {
-    //���� MenuHUDWidget��������AddViewport
     if (GEngine && GEngine->GameViewport)
     {
         SAssignNew(MenuHUDWidget, SInitMenuHUBWidget);

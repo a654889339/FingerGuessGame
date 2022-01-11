@@ -8,7 +8,6 @@ TSharedPtr<FSlateStyleSet> InitStyle::InitStyleInstance = NULL;
 
 void InitStyle::Initialze()
 {
-    //ע�� InitStyleInstance ����Ϊɶ��Ҫ����Դ��
     if (!InitStyleInstance.IsValid())
     {
         InitStyleInstance = Create();
@@ -24,13 +23,10 @@ FName InitStyle::GetStyleSetName()
 
 void InitStyle::ShutDown()
 {
-    //ȡ��ע��
     FSlateStyleRegistry::UnRegisterSlateStyle(*InitStyleInstance);
 
-    //ȷ����Ψһ��
     ensure(InitStyleInstance.IsUnique());
 
-    //����
     InitStyleInstance.Reset();
 }
 
@@ -41,7 +37,6 @@ const ISlateStyle& InitStyle::Get()
 
 TSharedRef<class FSlateStyleSet> InitStyle::Create()
 {
-    //BPInitMenuStyle��ͼ����ŵ�·��
     TSharedRef<FSlateStyleSet> StyleRef = FSlateGameResources::New(InitStyle::GetStyleSetName(), "/Game/Levels/Init/Style", "/Game/Levels/Init/Style");
 
     return StyleRef;

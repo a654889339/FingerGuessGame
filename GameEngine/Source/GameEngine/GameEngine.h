@@ -7,9 +7,10 @@
 class FGameEngineModule : public FDefaultGameModuleImpl
 {
 public:
-    //ģ�����ʱ�ķ���
     virtual void StartupModule() override;
 
-    //ģ��ж��ʱ�ķ���
     virtual void ShutdownModule() override;
+
+public:
+    void* m_pClientLogic = nullptr;
 };

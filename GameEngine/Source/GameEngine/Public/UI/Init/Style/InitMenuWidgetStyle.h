@@ -20,11 +20,9 @@ struct GAMEENGINE_API FInitMenuStyle : public FSlateWidgetStyle
 	virtual const FName GetTypeName() const override { return TypeName; };
 	static const FInitMenuStyle& GetDefault();
 
-    // ����ͼƬ
     UPROPERTY(EditAnywhere, Category = MenuHUD)
         FSlateBrush MenuHUDBackgroundBrush;
 
-    // ����
     UPROPERTY(EditAnywhere, Category = Appearance)
         FTextBlockStyle MenuTitleStyle;
 
@@ -32,8 +30,6 @@ struct GAMEENGINE_API FInitMenuStyle : public FSlateWidgetStyle
         FButtonStyle MenuButtonStyle;
 };
 
-/**
- */
 UCLASS(hidecategories=Object, MinimalAPI)
 class UInitMenuWidgetStyle : public USlateWidgetStyleContainerBase
 {

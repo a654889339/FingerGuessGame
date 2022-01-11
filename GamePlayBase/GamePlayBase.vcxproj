@@ -77,10 +77,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>md  $(SolutionDir)GameEngine\ThirdParty\
-md  $(SolutionDir)GameEngine\ThirdParty\lib\
-md  $(SolutionDir)GameEngine\ThirdParty\lib\Debug_X64
-copy $(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)X64D.lib $(SolutionDir)GameEngine\ThirdParty\lib\Debug_X64</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

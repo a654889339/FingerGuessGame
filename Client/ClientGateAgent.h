@@ -2,6 +2,7 @@
 #define _CLIENT_CONNECTION_H_
 
 #include "TcpClient.h"
+#include "ClientBase.h"
 #include "Protocol.h"
 
 class ClientGateAgent : public TcpClient

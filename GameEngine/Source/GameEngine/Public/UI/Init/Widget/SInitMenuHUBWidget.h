@@ -19,7 +19,6 @@ public:
 	/** Constructs this widget with InArgs */
 	void Construct(const FArguments& InArgs);
 
-    // �����¼�
 private:
     FReply Login();
 

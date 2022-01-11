@@ -12,9 +12,9 @@ class GAMEENGINE_API AFGPlayerController : public APlayerController
 	GENERATED_BODY()
 
 public:
-    AFGPlayerController();        //��ʾ���
+    AFGPlayerController();
 
 protected:
-    virtual void BeginPlay() override;        //����ģʽ��UE4��4������ģʽ������ģʽ�����ٹ��캯����д
+    virtual void BeginPlay() override;
 
 };

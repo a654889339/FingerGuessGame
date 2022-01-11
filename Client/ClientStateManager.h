@@ -21,9 +21,9 @@ public:
     ClientStateType Get(){return m_State.m_eState;}
 
 private:
-    ClientStateTrigger            m_State; // ¿Í»§¶Ë×´Ì¬
+    ClientStateTrigger            m_State;
     ClientStateTrigger*           m_pszState[ecst_end];
-    ClientStateTrigger            m_BaseState[ecst_end]; // ±ÜÃâ×´Ì¬µÄÖ¸ÕëÎª¿Õ
+    ClientStateTrigger            m_BaseState[ecst_end];
 
     ClientStateWaitToLogin        m_WaitToLogin;
     ClientStateWaitToConnectGate  m_WaitToConnectGate;

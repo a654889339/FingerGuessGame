@@ -68,9 +68,6 @@
     <ClCompile Include="..\..\Source\GameEngine\Private\UI\Init\Widget\SInitMenuHUBWidget.cpp">
       <Filter>Source\GameEngine\Private\UI\Init\Widget</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\GameEngine\Private\UI\Init\Widget\SInitMenuWidget.cpp">
-      <Filter>Source\GameEngine\Private\UI\Init\Widget</Filter>
-    </ClCompile>
     <Filter Include="Source\GameEngine\Public">
       <UniqueIdentifier>{D87BF409-F1F7-4295-908B-50A074F358B0}</UniqueIdentifier>
     </Filter>
@@ -104,9 +101,6 @@
     <ClInclude Include="..\..\Source\GameEngine\Public\UI\Init\Widget\SInitMenuHUBWidget.h">
       <Filter>Source\GameEngine\Public\UI\Init\Widget</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\GameEngine\Public\UI\Init\Widget\SInitMenuWidget.h">
-      <Filter>Source\GameEngine\Public\UI\Init\Widget</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\GameEngine\Public\UI\Init\Style\InitMenuWidgetStyle.h">
@@ -115,16 +109,10 @@
     <ClInclude Include="..\..\ThirdParty\Include\ClientLibExport.h">
       <Filter>ThirdParty\Include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\GameEngine\Public\GamePlay\ClientLib.h">
-      <Filter>Source\GameEngine\Public\GamePlay</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\GameEngine\Private\UI\Init\Style\InitMenuWidgetStyle.cpp">
       <Filter>Source\GameEngine\Private\UI\Init\Style</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\GameEngine\Private\GamePlay\ClientLib.cpp">
-      <Filter>Source\GameEngine\Private\GamePlay</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

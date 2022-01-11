@@ -16,7 +16,7 @@ protected:
     virtual bool Connect(const char szIP[], int nPort) final;
     virtual void ProcessNetwork() final;
     virtual bool Send(void* pbyData, size_t uDataLen) final;
-    virtual void* GetSendBuffer(size_t uDataLen) final; // 给继承的子类发包时用，将待发送数据写进APIBuffer内。
+    virtual void* GetSendBuffer(size_t uDataLen) final;
 
     virtual void ProcessPackage(BYTE* pbyData, size_t uDataLen) = 0;
     virtual void ConnectionLost() = 0;
