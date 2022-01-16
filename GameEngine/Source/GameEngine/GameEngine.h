@@ -12,5 +12,5 @@ public:
     virtual void ShutdownModule() override;
 
 public:
-    void* m_pClientLogic = nullptr;
+    void* m_pClientLogicDLL_Handle = nullptr;
 };

@@ -1,6 +1,42 @@
 #include "stdafx.h"
 #include "ClientLogic.h"
 
+CLIENT_LOGIC_DLL_API IClientLogic* CreateClientLogic()
+{
+    IClientLogic* pResult = NULL;
+    bool          bRetCode = false;
+
+#ifdef _CLIENT
+    pResult = (IClientLogic*)new ClientLogic();
+#else
+    pResult = new IClientLogic();
+#endif
+    JYLOG_PROCESS_ERROR(pResult);
+
+    bRetCode = pResult->Init();
+    if (!bRetCode)
+    {
+        delete pResult;
+        pResult = NULL;
+        JYLOG_PROCESS_ERROR(false);
+    }
+
+Exit0:
+    return pResult;
+}
+
+CLIENT_LOGIC_DLL_API void DestroyClientLogic(IClientLogic* pClientLogic)
+{
+    JYLOG_PROCESS_ERROR(pClientLogic);
+
+    pClientLogic->UnInit();
+
+    delete pClientLogic;
+    pClientLogic = NULL;
+
+    JY_STD_VOID_END
+}
+
 ClientLogic::ClientLogic()
 {
     m_bQuitFlag = false;

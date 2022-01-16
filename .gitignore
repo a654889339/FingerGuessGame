@@ -43,3 +43,4 @@
 /GameEngine/Saved
 /GameEngine/Binaries
 /GameEngine/Intermediate/Config/CoalescedSourceConfigs/Lightmass.ini
+*.pdb

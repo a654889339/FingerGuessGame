@@ -1,6 +1,7 @@
-#ifndef _CLIENT_LOGIN_H_
-#define _CLIENT_LOGIN_H_
+#ifndef _CLIENT_LOGIC_H_
+#define _CLIENT_LOGIC_H_
 
+#include "IClientLogic.h"
 #include "ClientControl.h"
 #include "ClientGateAgent.h"
 #include "ClientBase.h"
@@ -35,6 +36,11 @@ public:
 private:
     bool m_bQuitFlag;
 };
-
+#ifdef CLIENT_LOGIC_DLL_API // .dll
 static ClientLogic* g_pClient;
+#else // .exe
+extern ClientLogic* g_pClient;
+#endif
+
+
 #endif

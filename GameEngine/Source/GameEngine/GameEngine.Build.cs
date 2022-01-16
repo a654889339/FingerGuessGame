@@ -5,14 +5,6 @@ using System.IO;
 
 public class GameEngine : ModuleRules
 {
-    private string ThirdPartyPath
-    {
-        get
-        {
-            return Path.Combine(Path.Combine(ModuleDirectory, "../../ThirdParty"));
-        }
-    }
-
     public GameEngine(ReadOnlyTargetRules Target) : base(Target)
     {
         PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
@@ -27,8 +19,5 @@ public class GameEngine : ModuleRules
             "SlateCore",
         });
 
-        PrivateDependencyModuleNames.AddRange(new string[] { });
-
-        PublicIncludePaths.Add(Path.Combine(ThirdPartyPath, "Include"));
     }
 }

@@ -19,6 +19,9 @@
     <Filter Include="ClientState">
       <UniqueIdentifier>{e5b1bdd3-4743-4689-8a92-ed55c6aad17f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DLL">
+      <UniqueIdentifier>{99b31568-0c8a-400b-b63e-093310532867}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ClientControl.cpp">
@@ -89,8 +92,8 @@
     <ClInclude Include="ClientASAgent.h">
       <Filter>Network</Filter>
     </ClInclude>
-    <ClInclude Include="ClientDLLExport.h">
-      <Filter>Main</Filter>
+    <ClInclude Include="IClientLogic.h">
+      <Filter>DLL</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -73,7 +73,6 @@ copy $(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)X64D.pdb $(Solutio
   <ItemGroup>
     <ClInclude Include="ClientASAgent.h" />
     <ClInclude Include="ClientBase.h" />
-    <ClInclude Include="ClientDLLExport.h" />
     <ClInclude Include="ClientGateAgent.h" />
     <ClInclude Include="ClientControl.h" />
     <ClInclude Include="ClientInputDef.h" />
@@ -84,6 +83,7 @@ copy $(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)X64D.pdb $(Solutio
     <ClInclude Include="ClientStateWaitToLogin.h" />
     <ClInclude Include="ClientTip.h" />
     <ClInclude Include="ClientLogic.h" />
+    <ClInclude Include="IClientLogic.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
