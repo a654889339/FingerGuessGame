@@ -2,12 +2,12 @@
 	"Targets": [
 		{
 			"Name": "GameEngine",
-			"Path": "C:\\Users\\a6548\\source\\repos\\FingerGuessGame\\GameEngine\\Source\\GameEngine.Target.cs",
+			"Path": "C:\\Jiuye\\GameEngine\\Source\\GameEngine.Target.cs",
 			"Type": "Game"
 		},
 		{
 			"Name": "GameEngineEditor",
-			"Path": "C:\\Users\\a6548\\source\\repos\\FingerGuessGame\\GameEngine\\Source\\GameEngineEditor.Target.cs",
+			"Path": "C:\\Jiuye\\GameEngine\\Source\\GameEngineEditor.Target.cs",
 			"Type": "Editor"
 		}
 	]

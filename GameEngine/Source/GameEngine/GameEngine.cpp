@@ -21,7 +21,9 @@ void FGameEngineModule::StartupModule()
     {
         typedef IClientLogic* (*CREAT_CLIENT_LOGIC_FUNC)();
 
-        CREAT_CLIENT_LOGIC_FUNC CreateClientLogicFunc = (CREAT_CLIENT_LOGIC_FUNC)FPlatformProcess::GetDLLExport(m_pClientLogicDLL_Handle, "CreateClientLogic");
+        FString FuncName = "CreateClientLogic";
+
+        CREAT_CLIENT_LOGIC_FUNC CreateClientLogicFunc = (CREAT_CLIENT_LOGIC_FUNC)FPlatformProcess::GetDllExport(m_pClientLogicDLL_Handle, *FuncName);
         if (CreateClientLogicFunc)
         {
             IClientLogic* m_pClientLogic = CreateClientLogicFunc();
