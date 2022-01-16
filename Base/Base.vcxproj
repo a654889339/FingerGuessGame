@@ -84,6 +84,7 @@
     <ClInclude Include="CLIENT_ACCOUNT_SERVER_PROTOCOL.h" />
     <ClInclude Include="CodeStd.h" />
     <ClInclude Include="GlobalDef.h" />
+    <ClInclude Include="Include\IClientLogic.h" />
     <ClInclude Include="JYVector.h" />
     <ClInclude Include="KCPBase.h" />
     <ClInclude Include="KCPClient.h" />

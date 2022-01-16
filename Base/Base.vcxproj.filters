@@ -31,6 +31,9 @@
     <Filter Include="Config">
       <UniqueIdentifier>{cd539f49-4706-465d-a355-96a56e8d6a1f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DLL">
+      <UniqueIdentifier>{5deb948b-9c06-4c71-ad12-6374ec7fbda7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -86,6 +89,9 @@
     </ClInclude>
     <ClInclude Include="ProtocolBase.h">
       <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\IClientLogic.h">
+      <Filter>DLL</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
