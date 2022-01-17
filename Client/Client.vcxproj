@@ -49,12 +49,9 @@
       <AdditionalLibraryDirectories>../x64/Debug_Client</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>IF NOT EXIST "$(SolutionDir)GameEngine\ThirdParty\Debug_X64" (
-md  "$(SolutionDir)GameEngine\ThirdParty\Debug_X64"
-)
-
-copy $(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)X64D$(TargetExt) $(SolutionDir)GameEngine\ThirdParty\Debug_X64
-copy $(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)X64D.pdb $(SolutionDir)GameEngine\ThirdParty\Debug_X64</Command>
+      <Command>md $(SolutionDir)GameEngine\ThirdParty\Win64
+copy $(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)X64D$(TargetExt) $(SolutionDir)GameEngine\ThirdParty\Win64
+copy $(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)X64D.pdb $(SolutionDir)GameEngine\ThirdParty\Win64</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -83,7 +80,7 @@ copy $(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)X64D.pdb $(Solutio
     <ClInclude Include="ClientStateWaitToLogin.h" />
     <ClInclude Include="ClientTip.h" />
     <ClInclude Include="ClientLogic.h" />
-    <ClInclude Include="IClientLogic.h" />
+    <ClInclude Include="DLL\IClientLogic.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

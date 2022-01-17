@@ -92,7 +92,7 @@
     <ClInclude Include="ClientASAgent.h">
       <Filter>Network</Filter>
     </ClInclude>
-    <ClInclude Include="IClientLogic.h">
+    <ClInclude Include="DLL\IClientLogic.h">
       <Filter>DLL</Filter>
     </ClInclude>
   </ItemGroup>

@@ -47,21 +47,18 @@ bool ClientStateManager::Set(ClientStateType eState)
 
     JYLOG_PROCESS_ERROR(eState >= ecst_begin && eState < ecst_end);
 
-    // 调用旧状态的Leave
     pTrigger = m_pszState[m_State.m_eState];
     JYLOG_PROCESS_ERROR(pTrigger);
 
     bRetCode = pTrigger->Leave(&m_State, eState);
     JYLOG_PROCESS_ERROR(bRetCode);
 
-    // 调用新状态的Enter
     pTrigger = m_pszState[eState];
     JYLOG_PROCESS_ERROR(pTrigger);
 
     bRetCode = pTrigger->Enter(&m_State, m_State.m_eState);
     JYLOG_PROCESS_ERROR(bRetCode);
 
-    // 设置新状态
     m_State.m_eState = eState;
 
     JY_STD_BOOL_END

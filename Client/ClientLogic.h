@@ -1,13 +1,13 @@
 #ifndef _CLIENT_LOGIC_H_
 #define _CLIENT_LOGIC_H_
 
-#include "IClientLogic.h"
+#include "DLL\IClientLogic.h"
 #include "ClientControl.h"
 #include "ClientGateAgent.h"
 #include "ClientBase.h"
 #include "ClientStateManager.h"
 
-class ClientLogic
+class ClientLogic : public IClientLogic
 {
 public:
     ClientLogic();
