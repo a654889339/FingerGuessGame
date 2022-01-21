@@ -36,11 +36,8 @@
 /x64
 /.vs/
 /*/x64
-/GameEngine/Intermediate/AssetRegistryCache
-/GameEngine/Intermediate/Build
-/GameEngine/Intermediate/ReimportCache
-/GameEngine/Intermediate/*.bin
+/GameEngine/Intermediate
 /GameEngine/Saved
 /GameEngine/Binaries
-/GameEngine/Intermediate/Config/CoalescedSourceConfigs/Lightmass.ini
 *.pdb
+/GameEngine/Source/Base/ClientLogic

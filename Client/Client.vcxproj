@@ -50,8 +50,10 @@
     </Link>
     <PostBuildEvent>
       <Command>md $(SolutionDir)GameEngine\ThirdParty\Win64
+md $(SolutionDir)GameEngine\Source\Base\ClientLogic\
 copy $(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)X64D$(TargetExt) $(SolutionDir)GameEngine\ThirdParty\Win64
-copy $(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)X64D.pdb $(SolutionDir)GameEngine\ThirdParty\Win64</Command>
+copy $(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)X64D.pdb $(SolutionDir)GameEngine\ThirdParty\Win64
+copy $(ProjectDir)DLL $(SolutionDir)GameEngine\Source\Base\ClientLogic\</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

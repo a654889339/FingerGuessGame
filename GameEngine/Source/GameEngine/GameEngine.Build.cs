@@ -18,6 +18,7 @@ public class GameEngine : ModuleRules
             "Slate",
             "SlateCore",
         });
-
+        
+        RuntimeDependencies.Add(Path.Combine("/ThirdParty/Win64/ClientX64D.dll"));
     }
 }
