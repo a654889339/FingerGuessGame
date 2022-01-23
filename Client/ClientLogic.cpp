@@ -1,16 +1,14 @@
 #include "stdafx.h"
 #include "ClientLogic.h"
+#include <mutex>
 
+// -------------------------------------------- DLL Export Begin --------------------------------------------
 CLIENT_LOGIC_DLL_API IClientLogic* CreateClientLogic()
 {
     IClientLogic* pResult = NULL;
     bool          bRetCode = false;
 
-#ifdef _CLIENT
     pResult = (IClientLogic*)new ClientLogic();
-#else
-    pResult = new IClientLogic();
-#endif
     JYLOG_PROCESS_ERROR(pResult);
 
     bRetCode = pResult->Init();
@@ -36,6 +34,28 @@ CLIENT_LOGIC_DLL_API void DestroyClientLogic(IClientLogic* pClientLogic)
 
     JY_STD_VOID_END
 }
+
+CLIENT_LOGIC_DLL_API bool Send(BYTE* pbyData, size_t uDataLen)
+{
+    bool bResult = false;
+
+    bool bRetCode = g_pClient->PushE2C(pbyData, uDataLen);
+    JYLOG_PROCESS_ERROR(bRetCode);
+
+    JY_STD_BOOL_END
+}
+
+CLIENT_LOGIC_DLL_API bool Recv(size_t uLimitSize, BYTE* pbyData, size_t* puDataLen)
+{
+    bool bResult = false;
+
+    bool bRetCode = g_pClient->PopC2E(uLimitSize, pbyData, puDataLen);
+    JYLOG_PROCESS_ERROR(bRetCode);
+
+    JY_STD_BOOL_END
+}
+
+// -------------------------------------------- DLL Export End --------------------------------------------
 
 ClientLogic::ClientLogic()
 {
@@ -104,7 +124,7 @@ void ClientLogic::Run()
 
         JY_PROCESS_ERROR(!CheckQuitComplete());
 
-        m_Control.Active();
+        ProcessEngineMsg();
         m_ClientStateManager.Active();
     }
 
@@ -117,7 +137,66 @@ void ClientLogic::Quit()
     m_ClientStateManager.UnInit();
 }
 
+
+bool ClientLogic::PushE2C(BYTE* pbyData, size_t uDataLen)
+{
+    bool bResult  = false;
+    bool bRetCode = false;
+
+    JYLOG_PROCESS_ERROR(pbyData);
+
+    bRetCode = m_E2CQueue.Push(pbyData, uDataLen);
+    JYLOG_PROCESS_ERROR(bRetCode);
+
+    JY_STD_BOOL_END
+}
+
+bool ClientLogic::PopC2E(size_t uLimitSize, BYTE* pbyData, size_t* puDataLen)
+{
+    bool bResult  = false;
+    bool bRetCode = false;
+
+    JYLOG_PROCESS_ERROR(pbyData);
+
+    bRetCode = m_C2EQueue.Pop(uLimitSize, pbyData, puDataLen);
+    JYLOG_PROCESS_ERROR(bRetCode);
+
+    JY_STD_BOOL_END
+}
+
 // Private
+bool ClientLogic::PushC2E(BYTE* pbyData, size_t uDataLen)
+{
+    bool bResult  = false;
+    bool bRetCode = false;
+
+    JYLOG_PROCESS_ERROR(pbyData);
+
+    bRetCode = m_C2EQueue.Push(pbyData, uDataLen);
+    JYLOG_PROCESS_ERROR(bRetCode);
+
+    JY_STD_BOOL_END
+
+}
+
+bool ClientLogic::PopE2C(size_t uLimitSize, BYTE* pbyData, size_t* puDataLen)
+{
+    bool bResult  = false;
+    bool bRetCode = false;
+
+    JYLOG_PROCESS_ERROR(pbyData);
+
+    bRetCode = m_E2CQueue.Pop(uLimitSize, pbyData, puDataLen);
+    JYLOG_PROCESS_ERROR(bRetCode);
+
+    JY_STD_BOOL_END
+}
+
+void ClientLogic::ProcessEngineMsg()
+{
+
+}
+
 bool ClientLogic::CheckQuitComplete()
 {
     bool bResult = false;

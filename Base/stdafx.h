@@ -31,5 +31,6 @@
 #include "GlobalDef.h"
 #include "CycleQueue.h"
 #include "SplayTree.h"
+#include "IJYBuffer.h"
 
 #endif  //_STD_AFX_H_

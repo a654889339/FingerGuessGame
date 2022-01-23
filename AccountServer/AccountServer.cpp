@@ -53,9 +53,12 @@ void AccountServer::UnInit()
 
 void AccountServer::Run()
 {
-    m_ClientAgent.Active();
+    while (true)
+    {
+        m_ClientAgent.Active();
 
-    Sleep(10);
+        Sleep(10);
+    }
 }
 
 void AccountServer::Quit()

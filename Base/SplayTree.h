@@ -135,7 +135,6 @@ public:
         return NULL;
     }
 
-    // 需要增加一个 强制插入函数，代替查找+插入
     STValue& operator[](STKey Key)
     {
         STValue* pResult = NULL;

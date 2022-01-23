@@ -31,6 +31,9 @@
     <Filter Include="Config">
       <UniqueIdentifier>{cd539f49-4706-465d-a355-96a56e8d6a1f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Memory">
+      <UniqueIdentifier>{e7f156dd-8199-450d-a214-7573163118bd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -86,6 +89,12 @@
     </ClInclude>
     <ClInclude Include="ProtocolBase.h">
       <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="LockQueue.h">
+      <Filter>STL</Filter>
+    </ClInclude>
+    <ClInclude Include="IJYBuffer.h">
+      <Filter>Memory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

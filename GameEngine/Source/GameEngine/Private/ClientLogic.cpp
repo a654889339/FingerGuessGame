@@ -27,7 +27,7 @@ bool ClientLogic::Init()
     m_pFuncDestroyClientLogic = (DESTROY_CLIENT_LOGIC_FUNC)FPlatformProcess::GetDllExport(m_pClientLogicDLL_Handle, *FuncNameDestroyClientLogic);
     JYLOG_PROCESS_ERROR(m_pFuncDestroyClientLogic);
 
-    m_pClientLogic = m_pFuncCreateClientLogic();
+    m_piClientLogic = m_pFuncCreateClientLogic();
 
     JY_STD_BOOL_END
 }
@@ -36,10 +36,25 @@ void ClientLogic::UnInit()
 {
     if (m_pClientLogicDLL_Handle)
     {
-        if (m_pFuncDestroyClientLogic && m_pClientLogic)
-            m_pFuncDestroyClientLogic(m_pClientLogic);
+        if (m_pFuncDestroyClientLogic && m_piClientLogic)
+            m_pFuncDestroyClientLogic(m_piClientLogic);
 
         FPlatformProcess::FreeDllHandle(m_pClientLogicDLL_Handle);
         m_pClientLogicDLL_Handle = NULL;
     }
+}
+
+bool ClientLogic::DoLoginRequest(int nTestNum)
+{
+    bool               bResult  = false;
+    bool               bRetCode = false;
+    GE2C_LOGIN_REQUEST Request;
+
+    Request.wProtocolID = ec2ge_login_request;
+    Request.nTestNum    = nTestNum;
+
+    bRetCode = m_piClientLogic->PushE2C((BYTE*)&Request, sizeof(Request));
+    JYLOG_PROCESS_ERROR(bRetCode);
+
+    JY_STD_BOOL_END
 }

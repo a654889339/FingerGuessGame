@@ -39,7 +39,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;WIN32;_CONSOLE;_CLIENT; _WINSOCK_DEPRECATED_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../Base;../ECS;../GamePlayBase</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../Base;../ECS;../GamePlayBase;../Common/DLL/ClientLogic;../Common/Protocol/Client2GameEngine</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
     <Link>
@@ -49,11 +49,12 @@
       <AdditionalLibraryDirectories>../x64/Debug_Client</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>md $(SolutionDir)GameEngine\ThirdParty\Win64
-md $(SolutionDir)GameEngine\Source\Base\ClientLogic\
+      <Command>if not exist $(SolutionDir)GameEngine\ThirdParty\Win64 {md $(SolutionDir)GameEngine\ThirdParty\Win64}
+if not exist $(SolutionDir)GameEngine\Source\Base\ClientLogic{md $(SolutionDir)GameEngine\Source\Base\ClientLogic}
 copy $(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)X64D$(TargetExt) $(SolutionDir)GameEngine\ThirdParty\Win64
 copy $(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)X64D.pdb $(SolutionDir)GameEngine\ThirdParty\Win64
-copy $(ProjectDir)DLL $(SolutionDir)GameEngine\Source\Base\ClientLogic\</Command>
+copy $(SolutionDir)Common\DLL\ClientLogic\ $(SolutionDir)GameEngine\Source\Base\ClientLogic\
+copy $(SolutionDir)Common\Protocol\Client2GameEngine\ $(SolutionDir)GameEngine\Source\Base\ClientLogic\</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -70,6 +71,8 @@ copy $(ProjectDir)DLL $(SolutionDir)GameEngine\Source\Base\ClientLogic\</Command
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Common\DLL\ClientLogic\IClientLogic.h" />
+    <ClInclude Include="..\Common\Protocol\Client2GameEngine\CLIENT_GAME_ENGINE_PROTOCOL.h" />
     <ClInclude Include="ClientASAgent.h" />
     <ClInclude Include="ClientBase.h" />
     <ClInclude Include="ClientGateAgent.h" />
@@ -82,7 +85,6 @@ copy $(ProjectDir)DLL $(SolutionDir)GameEngine\Source\Base\ClientLogic\</Command
     <ClInclude Include="ClientStateWaitToLogin.h" />
     <ClInclude Include="ClientTip.h" />
     <ClInclude Include="ClientLogic.h" />
-    <ClInclude Include="DLL\IClientLogic.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -3,7 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "../../Base/IClientLogic.h"
+#include "../../Base/ClientLogic/IClientLogic.h"
+#include "../../Base/ClientLogic/CLIENT_GAME_ENGINE_PROTOCOL.h"
 
 class ClientLogic
 {
@@ -15,15 +16,16 @@ public:
     void UnInit();
 
 public:
-    typedef IClientLogic* (*CREAT_CLIENT_LOGIC_FUNC)();
-    typedef void (*DESTROY_CLIENT_LOGIC_FUNC)(IClientLogic* pClientLogic);
-
-    CREAT_CLIENT_LOGIC_FUNC   m_pFuncCreateClientLogic;
-    DESTROY_CLIENT_LOGIC_FUNC m_pFuncDestroyClientLogic;
+    bool DoLoginRequest(int nTestNum);
 
 private:
     void*                     m_pClientLogicDLL_Handle;
-    IClientLogic*             m_pClientLogic;
+    IClientLogic*             m_piClientLogic;
+
+    typedef IClientLogic* (*CREAT_CLIENT_LOGIC_FUNC)();
+    typedef void (*DESTROY_CLIENT_LOGIC_FUNC)(IClientLogic* pClientLogic);
+    CREAT_CLIENT_LOGIC_FUNC   m_pFuncCreateClientLogic;
+    DESTROY_CLIENT_LOGIC_FUNC m_pFuncDestroyClientLogic;
 };
 
-static ClientLogic* g_pClientLogic;
+static ClientLogic* g_pClient;

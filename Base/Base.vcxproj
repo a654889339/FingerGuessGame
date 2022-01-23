@@ -84,10 +84,12 @@
     <ClInclude Include="CLIENT_ACCOUNT_SERVER_PROTOCOL.h" />
     <ClInclude Include="CodeStd.h" />
     <ClInclude Include="GlobalDef.h" />
+    <ClInclude Include="IJYBuffer.h" />
     <ClInclude Include="JYVector.h" />
     <ClInclude Include="KCPBase.h" />
     <ClInclude Include="KCPClient.h" />
     <ClInclude Include="KCPServer.h" />
+    <ClInclude Include="LockQueue.h" />
     <ClInclude Include="MathStd.h" />
     <ClInclude Include="CycleQueue.h" />
     <ClInclude Include="NetworkBase.h" />

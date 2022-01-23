@@ -46,7 +46,7 @@ FReply SInitMenuHUBWidget::Login()
     if (GEngine)
     {
         GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, TEXT("Click Login"));
-        g_pClientLogic->m_pFuncCreateClientLogic();
+        g_pClient->DoLoginRequest(114514);
     }
 
     return FReply::Handled();

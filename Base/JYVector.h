@@ -8,7 +8,6 @@
 
 #define JYVECTOR_ERROR_INDEX -1
 
-// 适合高频遍历，增删行为不多的数据结构
 template <typename T, typename ID_TYPE>
 class JYVector
 {
@@ -34,7 +33,7 @@ public:
         }
         else
         {
-            m_Manager.push_back(*pT); // 这里有一次拷贝构造，要小心
+            m_Manager.push_back(*pT);
             m_EnableFlag.push_back(true);
             m_NextIndex.push_back(JYVECTOR_ERROR_INDEX);
 
@@ -87,7 +86,7 @@ public:
         }
         else
         {
-            m_Manager.push_back(T()); // 这里有一次拷贝构造，要小心
+            m_Manager.push_back(T());
             m_EnableFlag.push_back(true);
             m_NextIndex.push_back(JYVECTOR_ERROR_INDEX);
 
@@ -118,8 +117,6 @@ public:
 
     }
 
-    // 有个问题，如果Func的过程中，还add了新的元素，就会导致错乱。
-    // 因此 要有个锁，在traversal时无法添加。
     template <class TFunc>
     bool traversal(TFunc& Func)
     {
@@ -176,10 +173,10 @@ public:
 
 private:
     std::vector<T>                                                      m_Manager;
-    std::vector<ID_TYPE>                                                m_NextIndex; // 下一个可用的组件下标，只维护m_EnableFlag[i]为true的格子
+    std::vector<ID_TYPE>                                                m_NextIndex; // 锟斤拷一锟斤拷锟斤拷锟矫碉拷锟斤拷锟斤拷卤辏晃拷锟絤_EnableFlag[i]为true锟侥革拷锟斤拷
     std::vector<bool>                                                   m_EnableFlag;
     std::priority_queue<ID_TYPE, std::vector<ID_TYPE>, std::greater<ID_TYPE> >    m_UnuseID;
-    bool                                                                m_bAddOrDelFlag; // 产生增删为true，为true时，m_NextIndex和m_nFirstID都不可信
+    bool                                                                m_bAddOrDelFlag; // 锟斤拷锟斤拷锟斤拷删为true锟斤拷为true时锟斤拷m_NextIndex锟斤拷m_nFirstID锟斤拷锟斤拷锟斤拷锟斤拷
     ID_TYPE                                                             m_nFirstID;
     bool                                                                m_bLock;
 };

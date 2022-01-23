@@ -16,14 +16,14 @@ void FGameEngineModule::StartupModule()
     bRetCode = m_ClientLogic.Init();
     JYLOG_PROCESS_ERROR(bRetCode);
 
-    g_pClientLogic = &m_ClientLogic;
+    g_pClient = &m_ClientLogic;
 
     JY_STD_VOID_END
 }
 
 void FGameEngineModule::ShutdownModule()
 {
-    g_pClientLogic = NULL;
+    g_pClient = NULL;
     m_ClientLogic.UnInit();
     InitStyle::ShutDown();
 }

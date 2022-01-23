@@ -19,7 +19,7 @@
     <Filter Include="ClientState">
       <UniqueIdentifier>{e5b1bdd3-4743-4689-8a92-ed55c6aad17f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="DLL">
+    <Filter Include="GameEngine">
       <UniqueIdentifier>{99b31568-0c8a-400b-b63e-093310532867}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -92,8 +92,11 @@
     <ClInclude Include="ClientASAgent.h">
       <Filter>Network</Filter>
     </ClInclude>
-    <ClInclude Include="DLL\IClientLogic.h">
-      <Filter>DLL</Filter>
+    <ClInclude Include="..\Common\DLL\ClientLogic\IClientLogic.h">
+      <Filter>GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Protocol\Client2GameEngine\CLIENT_GAME_ENGINE_PROTOCOL.h">
+      <Filter>GameEngine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
