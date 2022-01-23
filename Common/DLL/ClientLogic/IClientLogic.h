@@ -6,7 +6,6 @@ class IClientLogic
 public:
     virtual bool Init() { return true; };
     virtual void UnInit() {};
-    virtual void Run() {};
     virtual bool PushE2C(BYTE* pbyData, size_t uDataLen) { return true; }
     virtual bool PopC2E(size_t uLimitSize, BYTE* pbyData, size_t* puDataLen) { return true; }
 };
