@@ -52,8 +52,14 @@ public:
 
         memcpy(pbyData, piBuffer->GetData(), piBuffer->GetSize());
         *puDataLen = piBuffer->GetSize();
-
-        JY_STD_BOOL_END
+        
+        bResult = true;
+    Exit0:
+        if (!bResult)
+        {
+            JYMemoryDelete(piBuffer);
+        }
+        return bResult;
     }
 
 private:
