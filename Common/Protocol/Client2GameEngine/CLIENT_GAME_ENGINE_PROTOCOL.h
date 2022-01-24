@@ -10,7 +10,7 @@ enum CLIENT_GAME_ENGINE_PROTOCOL_ID
 {
     ec2ge_begin = 0,
 
-    ec2ge_login_request,
+    ec2ge_login_respond,
 
     ec2ge_end
 };
@@ -19,7 +19,7 @@ enum GAME_ENGINE_CLIENT_PROTOCOL_ID
 {
     ege2c_begin = 0,
 
-    ege2c_login_respond,
+    ege2c_login_request,
 
     ege2c_end
 };

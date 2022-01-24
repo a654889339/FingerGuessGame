@@ -34,6 +34,9 @@
     <Filter Include="Memory">
       <UniqueIdentifier>{e7f156dd-8199-450d-a214-7573163118bd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Thread">
+      <UniqueIdentifier>{0d1dc5f6-7e56-4bd2-9411-af54f35bd361}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -96,6 +99,9 @@
     <ClInclude Include="IJYBuffer.h">
       <Filter>Memory</Filter>
     </ClInclude>
+    <ClInclude Include="JYThread.h">
+      <Filter>Thread</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -112,6 +118,9 @@
     </ClCompile>
     <ClCompile Include="KCPClient.cpp">
       <Filter>Network\KCPClient</Filter>
+    </ClCompile>
+    <ClCompile Include="JYThread.cpp">
+      <Filter>Thread</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

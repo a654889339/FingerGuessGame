@@ -50,7 +50,7 @@ bool ClientLogic::DoLoginRequest(int nTestNum)
     bool               bRetCode = false;
     GE2C_LOGIN_REQUEST Request;
 
-    Request.wProtocolID = ec2ge_login_request;
+    Request.wProtocolID = ege2c_login_request;
     Request.nTestNum    = nTestNum;
 
     bRetCode = m_piClientLogic->PushE2C((BYTE*)&Request, sizeof(Request));

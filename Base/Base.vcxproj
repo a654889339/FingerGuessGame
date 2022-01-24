@@ -85,6 +85,7 @@
     <ClInclude Include="CodeStd.h" />
     <ClInclude Include="GlobalDef.h" />
     <ClInclude Include="IJYBuffer.h" />
+    <ClInclude Include="JYThread.h" />
     <ClInclude Include="JYVector.h" />
     <ClInclude Include="KCPBase.h" />
     <ClInclude Include="KCPClient.h" />
@@ -102,6 +103,7 @@
     <ClInclude Include="TcpServer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="JYThread.cpp" />
     <ClCompile Include="KCPClient.cpp" />
     <ClCompile Include="KCPServer.cpp" />
     <ClCompile Include="stdafx.cpp">
