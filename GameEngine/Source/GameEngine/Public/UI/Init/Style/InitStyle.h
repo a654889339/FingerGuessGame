@@ -9,10 +9,9 @@ class GAMEENGINE_API InitStyle
 {
 public:
     static void Initialze();
+    static void ShutDown();
 
     static FName GetStyleSetName();
-
-    static void ShutDown();
 
     static const ISlateStyle& Get();
 

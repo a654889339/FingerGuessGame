@@ -82,6 +82,7 @@ bool ClientLogic::Init()
     bool        bControlInitFlag  = false;
     bool        bStateMgrInitFlag = false;
     bool        bThreadCreate     = false;
+    GE2C_LOGIN_REQUEST Request;
 
     m_nTimeNow = time(NULL);
 
@@ -101,6 +102,12 @@ bool ClientLogic::Init()
     JYLOG_PROCESS_ERROR(bRetCode);
     bThreadCreate = true;
 #endif
+
+    Sleep(1000);
+
+    Request.wProtocolID = ege2c_login_request;
+    Request.nTestNum = 11451;
+    PushE2C((BYTE*)&Request, sizeof(Request));
 
     bResult = true;
 Exit0:
@@ -157,6 +164,8 @@ void ClientLogic::Run()
 
         ProcessEngineMsg();
         m_ClientStateManager.Active();
+
+        Sleep(10);
     }
 
     JY_STD_VOID_END
@@ -202,7 +211,7 @@ void ClientLogic::OnLoginRequest(BYTE* pbyData, size_t uSize)
 
     JYLOG_PROCESS_ERROR(pRequest);
 
-    printf("[ClientLogic] OnLoginRequest: %d.", pRequest->nTestNum);
+    printf("[ClientLogic] OnLoginRequest: %d", pRequest->nTestNum);
 
     JY_STD_VOID_END
 }

@@ -39,5 +39,6 @@
 /GameEngine/Intermediate
 /GameEngine/Saved
 /GameEngine/Binaries
+/GameEngine/Build
 *.pdb
 /GameEngine/Source/Base/ClientLogic

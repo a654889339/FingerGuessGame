@@ -20,11 +20,9 @@ public:
 
         memcpy(piBuffer->GetData(), pbyData, uDataLen);
 
-        while (m_Mutex.try_lock())
-        {
-            m_Queue.push_back(piBuffer);
-            m_Mutex.unlock();
-        }
+        m_Mutex.lock();
+        m_Queue.push_back(piBuffer);
+        m_Mutex.unlock();
 
         JY_STD_BOOL_END
     }
@@ -36,19 +34,19 @@ public:
 
         JYLOG_PROCESS_ERROR(pbyData);
 
-        while (m_Mutex.try_lock())
-        {
-            if (!m_Queue.empty())
-            {
-                piBuffer = m_Queue.front();
-                m_Queue.pop_front();
-            }
+        m_Mutex.lock();
 
-            m_Mutex.unlock();
+        if (!m_Queue.empty())
+        {
+            piBuffer = m_Queue.front();
+            m_Queue.pop_front();
         }
+
+        m_Mutex.unlock();
+
         JY_PROCESS_ERROR(piBuffer);
 
-        JYLOG_PROCESS_ERROR(uLimitSize <= piBuffer->GetSize());
+        JYLOG_PROCESS_ERROR(piBuffer->GetSize() <= uLimitSize);
 
         memcpy(pbyData, piBuffer->GetData(), piBuffer->GetSize());
         *puDataLen = piBuffer->GetSize();
@@ -59,6 +57,17 @@ public:
         {
             JYMemoryDelete(piBuffer);
         }
+        return bResult;
+    }
+
+    bool IsEmpty()
+    {
+        bool bResult = false;
+
+        m_Mutex.lock();
+        bResult = m_Queue.empty();
+        m_Mutex.unlock();
+
         return bResult;
     }
 

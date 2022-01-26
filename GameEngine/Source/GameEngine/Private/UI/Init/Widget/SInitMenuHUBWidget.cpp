@@ -6,7 +6,7 @@
 
 #include "UI/Init/Style/InitStyle.h"
 #include "UI/Init/Style/InitMenuWidgetStyle.h"
-#include "ClientLogic.h"
+#include "InitClientLogic.h"
 
 BEGIN_SLATE_FUNCTION_BUILD_OPTIMIZATION
 void SInitMenuHUBWidget::Construct(const FArguments& InArgs)
@@ -43,10 +43,12 @@ END_SLATE_FUNCTION_BUILD_OPTIMIZATION
 
 FReply SInitMenuHUBWidget::Login()
 {
+    auto ClientLogic = InitClientLogic::Get();
+
     if (GEngine)
     {
         GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, TEXT("Click Login"));
-        g_pClient->DoLoginRequest(114514);
+        ClientLogic.DoLoginRequest(114514);
     }
 
     return FReply::Handled();

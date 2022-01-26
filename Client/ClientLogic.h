@@ -74,10 +74,7 @@ private:
 #endif
 };
 
-#ifdef CLIENT_LOGIC_DLL_API // .dll
-static ClientLogic* g_pClient;
-#else
-extern ClientLogic* g_pClient;
-#endif
+static ClientLogic* g_pClient; // .dll
+//.exe : extern ClientLogic* g_pClient;
 
 #endif

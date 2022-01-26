@@ -4,19 +4,10 @@
 
 ClientLogic::ClientLogic()
 {
-}
-
-ClientLogic::~ClientLogic()
-{
-}
-
-bool ClientLogic::Init()
-{
-    bool    bResult                    = false;
-    FString ClientLogicDllName         = TEXT("ClientX64D.dll");
-    FString FuncNameCreateClientLogic  = TEXT("CreateClientLogic");
+    FString ClientLogicDllName = TEXT("ClientX64D.dll");
+    FString FuncNameCreateClientLogic = TEXT("CreateClientLogic");
     FString FuncNameDestroyClientLogic = TEXT("DestroyClientLogic");
-    FString DllPath                    = "../../ThirdParty/Win64/" + ClientLogicDllName;
+    FString DllPath = "../../ThirdParty/Win64/" + ClientLogicDllName;
 
     m_pClientLogicDLL_Handle = FPlatformProcess::GetDllHandle(*DllPath);
     JYLOG_PROCESS_ERROR(m_pClientLogicDLL_Handle);
@@ -29,10 +20,10 @@ bool ClientLogic::Init()
 
     m_piClientLogic = m_pFuncCreateClientLogic();
 
-    JY_STD_BOOL_END
+    JY_STD_VOID_END
 }
 
-void ClientLogic::UnInit()
+ClientLogic::~ClientLogic()
 {
     if (m_pClientLogicDLL_Handle)
     {
