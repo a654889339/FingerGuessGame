@@ -11,7 +11,7 @@ public:
     static void Initialze();
     static void ShutDown();
 
-    static const ClientLogic& Get();
+    static ClientLogic& Get();
 
 private:
     static TSharedRef<class ClientLogic> Create();

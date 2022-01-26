@@ -43,12 +43,10 @@ END_SLATE_FUNCTION_BUILD_OPTIMIZATION
 
 FReply SInitMenuHUBWidget::Login()
 {
-    auto ClientLogic = InitClientLogic::Get();
-
     if (GEngine)
     {
         GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, TEXT("Click Login"));
-        ClientLogic.DoLoginRequest(114514);
+        InitClientLogic::Get().DoLoginRequest(114514);
     }
 
     return FReply::Handled();

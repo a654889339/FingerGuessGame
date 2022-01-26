@@ -16,10 +16,12 @@ void InitClientLogic::Initialze()
 
 void InitClientLogic::ShutDown()
 {
+    ensure(ClientLogicInstance.IsUnique());
 
+    ClientLogicInstance.Reset();
 }
 
-const ClientLogic& InitClientLogic::Get()
+ClientLogic& InitClientLogic::Get()
 {
     return *ClientLogicInstance;
 }
