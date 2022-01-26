@@ -49,8 +49,9 @@
       <AdditionalLibraryDirectories>../x64/Debug_Client</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>if not exist $(SolutionDir)GameEngine\ThirdParty\Win64 {md $(SolutionDir)GameEngine\ThirdParty\Win64}
-if not exist $(SolutionDir)GameEngine\Source\Base\ClientLogic{md $(SolutionDir)GameEngine\Source\Base\ClientLogic}
+      <Command>if not exist $(SolutionDir)GameEngine\ThirdParty md $(SolutionDir)GameEngine\ThirdParty
+if not exist $(SolutionDir)GameEngine\ThirdParty\Win64 md $(SolutionDir)GameEngine\ThirdParty\Win64
+if not exist $(SolutionDir)GameEngine\Source\Base\ClientLogic md $(SolutionDir)GameEngine\Source\Base\ClientLogic
 copy $(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)X64D$(TargetExt) $(SolutionDir)GameEngine\ThirdParty\Win64
 copy $(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)X64D.pdb $(SolutionDir)GameEngine\ThirdParty\Win64
 copy $(SolutionDir)Common\DLL\ClientLogic\ $(SolutionDir)GameEngine\Source\Base\ClientLogic\
