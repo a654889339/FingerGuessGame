@@ -24,6 +24,12 @@
     <ClInclude Include="RouterServerBase.h">
       <Filter>Include</Filter>
     </ClInclude>
+    <ClInclude Include="RouterModule.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="RouterModuleMgr.h">
+      <Filter>Network</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -34,6 +40,9 @@
     </ClCompile>
     <ClCompile Include="RouterServer.cpp">
       <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="RouterModule.cpp">
+      <Filter>Network</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

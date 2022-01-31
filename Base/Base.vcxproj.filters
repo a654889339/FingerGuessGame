@@ -37,6 +37,9 @@
     <Filter Include="Thread">
       <UniqueIdentifier>{0d1dc5f6-7e56-4bd2-9411-af54f35bd361}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Network\Router">
+      <UniqueIdentifier>{dfaf73d4-5f68-4e7c-b65e-cbf16c439575}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -101,6 +104,9 @@
     </ClInclude>
     <ClInclude Include="JYThread.h">
       <Filter>Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="RouterModuleBase.h">
+      <Filter>Network\Router</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

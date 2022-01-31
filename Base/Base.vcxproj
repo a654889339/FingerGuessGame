@@ -96,6 +96,7 @@
     <ClInclude Include="NetworkBase.h" />
     <ClInclude Include="Protocol.h" />
     <ClInclude Include="ProtocolBase.h" />
+    <ClInclude Include="RouterModuleBase.h" />
     <ClInclude Include="SplayTree.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="TCPBase.h" />
