@@ -4,7 +4,10 @@
 RouterModule::RouterModule()
 {
     m_eModuleType = ermt_begin;
+    m_nIndex      = -1;
     m_nConnIndex  = -1;
+    m_nPort       = 0;
+    m_szIP[0]     = '\0';
 }
 
 RouterModule::~RouterModule()
@@ -12,7 +15,7 @@ RouterModule::~RouterModule()
 
 };
 
-bool RouterModule::Init(RouterModuleType eType, int nConnIndex, const char szIP[], int nPort)
+bool RouterModule::Init(RouterModuleType eType, int nIndex, const char szIP[], int nPort)
 {
     bool bResult  = false;
     bool bRetCode = false;
@@ -21,10 +24,11 @@ bool RouterModule::Init(RouterModuleType eType, int nConnIndex, const char szIP[
     JYLOG_PROCESS_ERROR(szIP);
 
     m_eModuleType = eType;
-    m_nConnIndex  = nConnIndex;
+    m_nIndex      = nIndex;
     m_nPort       = nPort;
 
     strncpy(m_szIP, szIP, sizeof(m_szIP));
+    m_szIP[sizeof(m_szIP) - 1] = '\0';
 
     m_Thread.Create(&WorkThread, this);
     JYLOG_PROCESS_ERROR(bRetCode);
@@ -55,6 +59,7 @@ void RouterModule::Run()
         if (IsEnable())
         {
             ProcessNetwork();
+            SendFlush();
         }
         else
         {
@@ -67,15 +72,42 @@ void RouterModule::Run()
 
 void RouterModule::ProcessPackage(int nConnIndex, BYTE* pbyData, size_t uDataLen)
 {
+    bool                  bRetCode = false;
+    RouterProtocolHeader* pHeader  = (RouterProtocolHeader*)pbyData;
 
+    JYLOG_PROCESS_ERROR(pHeader);
+    JYLOG_PROCESS_ERROR(uDataLen >= sizeof(RouterProtocolHeader));
+    JYLOG_PROCESS_ERROR(uDataLen == sizeof(RouterProtocolHeader) + pHeader->uDataLen);
+
+    bRetCode = m_C2SQueue.Push(pbyData, uDataLen);
+    JYLOG_PROCESS_ERROR(bRetCode);
+
+    JY_STD_VOID_END
 }
 
 void RouterModule::NewConnection(int nConnIndex, int* pnIP, int nPort)
 {
-
+    m_nConnIndex = nConnIndex;
 }
 
 void RouterModule::DisConnection(int nConnIndex)
 {
+    m_nConnIndex = -1;
+}
 
+void RouterModule::SendFlush()
+{
+    bool   bRetCode = false;
+    size_t uDataLen = 0;
+
+    while (true)
+    {
+        bRetCode = m_S2CQueue.Pop(sizeof(m_byTempSize), m_byTempSize, &uDataLen);
+        JY_PROCESS_ERROR(bRetCode);
+
+        bRetCode = Send(m_nConnIndex, m_byTempSize, uDataLen);
+        JYLOG_PROCESS_ERROR(bRetCode);
+    }
+
+    JY_STD_VOID_END
 }

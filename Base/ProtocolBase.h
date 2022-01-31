@@ -6,6 +6,7 @@
     m_nProtocolSize[ProtocolID] = ProtocolSize;}
 
 #define UNDEFINED_PROTOCOL_SIZE -1
+#define MAX_INTERNAL_NETWORK_PROTOCOL_SIZE 9056
 
 struct PROTOCOL_HEADER
 {

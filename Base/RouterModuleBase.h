@@ -1,6 +1,8 @@
 #ifndef _BASE_ROUTER_MODULE_BASE_H_
 #define _BASE_ROUTER_MODULE_BASE_H_
 
+#include "ProtocolBase.h"
+
 enum RouterModuleType
 {
     ermt_begin,
@@ -17,6 +19,7 @@ enum RouterModuleType
 struct RouterProtocolHeader
 {
     BYTE     nModuleType;
+    int      nConnIndex;
     uint32_t uDataLen;
     BYTE     byData[0];
 };
