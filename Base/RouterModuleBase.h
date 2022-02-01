@@ -18,10 +18,29 @@ enum RouterModuleType
 
 struct RouterProtocolHeader
 {
-    BYTE     nModuleType;
-    int      nConnIndex;
+    BYTE     nModuleType; // In send module, it means dest; In recv module, it means origin. modified by routerserver.
     uint32_t uDataLen;
     BYTE     byData[0];
+};
+
+const char szRouterModuleIPConfig[ermt_end][MAX_IP_STRING_LEN] =
+{
+    "",
+    "127.0.0.1",
+    "127.0.0.1",
+    "127.0.0.1",
+    "127.0.0.1",
+    "127.0.0.1",
+};
+
+const int szRouterModulePortConfig[ermt_end] =
+{
+    0,
+    11452,
+    11453,
+    11454,
+    11455,
+    11456,
 };
 
 #endif

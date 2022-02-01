@@ -4,7 +4,6 @@
 RouterModule::RouterModule()
 {
     m_eModuleType = ermt_begin;
-    m_nIndex      = -1;
     m_nConnIndex  = -1;
     m_nPort       = 0;
     m_szIP[0]     = '\0';
@@ -15,7 +14,7 @@ RouterModule::~RouterModule()
 
 };
 
-bool RouterModule::Init(RouterModuleType eType, int nIndex, const char szIP[], int nPort)
+bool RouterModule::Init(RouterModuleType eType, const char szIP[], int nPort)
 {
     bool bResult  = false;
     bool bRetCode = false;
@@ -24,7 +23,6 @@ bool RouterModule::Init(RouterModuleType eType, int nIndex, const char szIP[], i
     JYLOG_PROCESS_ERROR(szIP);
 
     m_eModuleType = eType;
-    m_nIndex      = nIndex;
     m_nPort       = nPort;
 
     strncpy(m_szIP, szIP, sizeof(m_szIP));
@@ -70,6 +68,29 @@ void RouterModule::Run()
     }
 }
 
+
+bool RouterModule::Recv(size_t uLimitSize, BYTE* pbyData, size_t* puDataLen)
+{
+    bool bResult = false;
+
+    // it may always fail if module send message frequently.
+    JY_PROCESS_ERROR(m_C2SQueue.TryPop(uLimitSize, pbyData, puDataLen));
+
+    JY_STD_BOOL_END
+}
+
+bool RouterModule::SendToModule(BYTE* pbyData, size_t uDataLen)
+{
+    bool bResult = false;
+
+    JYLOG_PROCESS_ERROR(pbyData);
+
+    JYLOG_PROCESS_ERROR(m_S2CQueue.Push(pbyData, uDataLen));
+
+    JY_STD_BOOL_END
+}
+
+//// Private
 void RouterModule::ProcessPackage(int nConnIndex, BYTE* pbyData, size_t uDataLen)
 {
     bool                  bRetCode = false;

@@ -13,20 +13,37 @@ RouterServer::~RouterServer()
 
 bool RouterServer::Init()
 {
-    bool bResult = false;
+    bool bResult            = false;
+    bool bRetCode           = false;
+    bool bInitModuleMgrFlag = false;
 
+    bRetCode = m_ModuleMgr.Init();
+    JYLOG_PROCESS_ERROR(bRetCode);
+    bInitModuleMgrFlag = true;
 
-    JY_STD_BOOL_END
+    bResult = true;
+Exit0:
+    if (!bResult)
+    {
+        if (bInitModuleMgrFlag)
+        {
+            m_ModuleMgr.UnInit();
+            bInitModuleMgrFlag = false;
+        }
+    }
+    return bResult;
 }
 
 void RouterServer::UnInit()
 {
-
+    m_ModuleMgr.UnInit();
 }
 
 void RouterServer::Run()
 {
+    m_ModuleMgr.Run();
 
+    Sleep(1);
 }
 
 void RouterServer::Quit()

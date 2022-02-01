@@ -14,11 +14,16 @@ public:
     virtual ~RouterModule();
 
     // Chat0, Chat1, Chat2. Chat2:eType=Chat,nConnIndex=2
-    bool Init(RouterModuleType eType, int nIndex, const char szIP[], int nPort);
+    bool Init(RouterModuleType eType, const char szIP[], int nPort);
     void UnInit();
     static void WorkThread(void* pvParam);
 
     void Run();
+
+    bool Recv(size_t uLimitSize, BYTE* pbyData, size_t* puDataLen);
+    bool SendToModule(BYTE* pbyData, size_t uDataLen);
+
+    RouterModuleType GetType() { return m_eModuleType; }
 
 private:
     void ProcessPackage(int nConnIndex, BYTE* pbyData, size_t uDataLen);
@@ -28,7 +33,6 @@ private:
 
 private:
     RouterModuleType m_eModuleType;
-    int              m_nIndex;
     int              m_nConnIndex;
     char             m_szIP[64];
     int              m_nPort;
@@ -37,6 +41,5 @@ private:
     LockQueue        m_S2CQueue;
     byte             m_byTempSize[MAX_INTERNAL_NETWORK_PROTOCOL_SIZE];
 };
-
 
 #endif

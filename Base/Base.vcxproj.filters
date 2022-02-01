@@ -108,6 +108,9 @@
     <ClInclude Include="RouterModuleBase.h">
       <Filter>Network\Router</Filter>
     </ClInclude>
+    <ClInclude Include="RouterModuleAgent.h">
+      <Filter>Network\Router</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -127,6 +130,9 @@
     </ClCompile>
     <ClCompile Include="JYThread.cpp">
       <Filter>Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="RouterModuleAgent.cpp">
+      <Filter>Network\Router</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

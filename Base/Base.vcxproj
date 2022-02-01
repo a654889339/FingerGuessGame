@@ -96,6 +96,7 @@
     <ClInclude Include="NetworkBase.h" />
     <ClInclude Include="Protocol.h" />
     <ClInclude Include="ProtocolBase.h" />
+    <ClInclude Include="RouterModuleAgent.h" />
     <ClInclude Include="RouterModuleBase.h" />
     <ClInclude Include="SplayTree.h" />
     <ClInclude Include="stdafx.h" />
@@ -107,6 +108,7 @@
     <ClCompile Include="JYThread.cpp" />
     <ClCompile Include="KCPClient.cpp" />
     <ClCompile Include="KCPServer.cpp" />
+    <ClCompile Include="RouterModuleAgent.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug_Server|x64'">Create</PrecompiledHeader>
     </ClCompile>

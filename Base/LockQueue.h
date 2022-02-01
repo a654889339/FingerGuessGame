@@ -59,6 +59,40 @@ public:
         }
         return bResult;
     }
+    
+    bool TryPop(size_t uLimitSize, BYTE* pbyData, size_t* puDataLen)
+    {
+        bool       bResult = false;
+        IJYBuffer* piBuffer = NULL;
+
+        JYLOG_PROCESS_ERROR(pbyData);
+
+        JY_PROCESS_SUCCESS(!m_Mutex.try_lock());
+
+        if (!m_Queue.empty())
+        {
+            piBuffer = m_Queue.front();
+            m_Queue.pop_front();
+        }
+
+        m_Mutex.unlock();
+
+        JY_PROCESS_ERROR(piBuffer);
+
+        JYLOG_PROCESS_ERROR(piBuffer->GetSize() <= uLimitSize);
+
+        memcpy(pbyData, piBuffer->GetData(), piBuffer->GetSize());
+        *puDataLen = piBuffer->GetSize();
+
+    Exit1:
+        bResult = true;
+    Exit0:
+        if (!bResult)
+        {
+            JYMemoryDelete(piBuffer);
+        }
+        return bResult;
+    }
 
     bool IsEmpty()
     {

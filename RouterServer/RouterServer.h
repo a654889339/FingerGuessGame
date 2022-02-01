@@ -1,6 +1,8 @@
 #ifndef _ROUTER_SERVER_H_
 #define _ROUTER_SERVER_H_
 
+#include "RouterModuleMgr.h"
+
 class RouterServer
 {
 public:
@@ -13,6 +15,9 @@ public:
     void Run();
     void Quit();
 
+
+private:
+    RouterModuleMgr m_ModuleMgr;
 };
 
 extern RouterServer* g_pRouterServer;
