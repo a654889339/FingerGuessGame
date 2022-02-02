@@ -55,6 +55,29 @@ bool ClientASServer::DoAS2CLoginRespond(int nConnIndex, int nRetCode)
 
 //////////////////////////////////////////////////////////////////////////
 
+void ClientASServer::OnC2ASLoginRequest(int nConnIndex, BYTE* pbyData, size_t uDataLen)
+{
+    int                 nResult = elrc_invalid;
+    bool                bRetCode = false;
+    C2AS_LOGIN_REQUEST* pRequest = (C2AS_LOGIN_REQUEST*)pbyData;
+
+    JY_PROCESS_ERROR_RET_CODE(pRequest->nAccountServerVersion == ACCOUNT_SERVER_VERSION, elrc_version_error);
+
+    bRetCode = g_pAccountServer->m_ClientManager.Add(pRequest->szAccountName, nConnIndex);
+    JY_PROCESS_ERROR_RET_CODE(bRetCode, elrc_account_repeat);
+
+    DoAS2CLoginRespond(nConnIndex, elrc_success);
+
+    nResult = elrc_success;
+Exit0:
+    if (nResult != elrc_success)
+    {
+        DoAS2CLoginRespond(nConnIndex, nResult);
+        Shutdown(nConnIndex);
+    }
+    return;
+}
+
 void ClientASServer::ProcessPackage(int nConnIndex, BYTE* pbyData, size_t uDataLen)
 {
     PROTOCOL_HEADER*      pHeader = (PROTOCOL_HEADER*)pbyData;
@@ -88,27 +111,4 @@ void ClientASServer::DisConnection(int nConnIndex)
     printf("[ASClientAgent] DisConnection %d, IP: %d, Port: %d\n", nConnIndex, m_ConnManager[nConnIndex].nIP, m_ConnManager[nConnIndex].nPort);
     g_pAccountServer->m_ClientManager.Del(nConnIndex);
     m_ConnManager.remove(nConnIndex);
-}
-
-void ClientASServer::OnC2ASLoginRequest(int nConnIndex, BYTE* pbyData, size_t uDataLen)
-{
-    int                 nResult  = elrc_invalid;
-    bool                bRetCode = false;
-    C2AS_LOGIN_REQUEST* pRequest = (C2AS_LOGIN_REQUEST*)pbyData;
-
-    JY_PROCESS_ERROR_RET_CODE(pRequest->nAccountServerVersion == ACCOUNT_SERVER_VERSION, elrc_version_error);
-
-    bRetCode = g_pAccountServer->m_ClientManager.Add(pRequest->szAccountName, nConnIndex);
-    JY_PROCESS_ERROR_RET_CODE(bRetCode, elrc_account_repeat);
-
-    DoAS2CLoginRespond(nConnIndex, elrc_success);
-
-    nResult = elrc_success;
-Exit0:
-    if (nResult != elrc_success)
-    {
-        DoAS2CLoginRespond(nConnIndex, nResult);
-        Shutdown(nConnIndex);
-    }
-    return ;
 }

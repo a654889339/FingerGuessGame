@@ -111,6 +111,9 @@
     <ClInclude Include="RouterModuleAgent.h">
       <Filter>Network\Router</Filter>
     </ClInclude>
+    <ClInclude Include="ACCOUNT_SERVER_GAME_CENTER_PROTOCOL.h">
+      <Filter>Network\Router</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

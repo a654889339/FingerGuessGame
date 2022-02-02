@@ -28,21 +28,65 @@ bool RouterModuleAgent::Init(RouterModuleType eType)
 
 void RouterModuleAgent::UnInit()
 {
+    m_Thread.Destroy();
     Quit();
 }
 
-bool RouterModuleAgent::Recv(size_t uLimitSize, BYTE* pbyData, size_t* puDataLen)
+bool RouterModuleAgent::Recv(size_t uLimitSize, BYTE* pbyData, size_t* puDataLen, RouterModuleType* peType, uint16_t* pnProtocolID)
 {
-    bool bResult = false;
+    bool                  bResult  = false;
+    bool                  bRetCode = false;
+    RouterProtocolHeader* pHeader  = NULL;
 
+    JYLOG_PROCESS_ERROR(puDataLen);
+    JYLOG_PROCESS_ERROR(peType);
+    JYLOG_PROCESS_ERROR(pnProtocolID);
 
+    bRetCode = m_RecvQueue.Pop(uLimitSize, pbyData, puDataLen);
+    JY_PROCESS_ERROR(bRetCode);
+
+    pHeader = (RouterProtocolHeader*)pbyData;
+    JYLOG_PROCESS_ERROR(pHeader);
+    JYLOG_PROCESS_ERROR(*puDataLen >= sizeof(RouterProtocolHeader));
+    JYLOG_PROCESS_ERROR(pHeader->nModuleType > ermt_begin && pHeader->nModuleType < ermt_end);
+
+    *peType       = (RouterModuleType)pHeader->nModuleType;
+    *pnProtocolID = pHeader->nProtocolID;
+    pbyData       = pHeader->byData;
+    *puDataLen    -= sizeof(RouterProtocolHeader);
 
     JY_STD_BOOL_END
 }
 
-bool RouterModuleAgent::SendToModule(BYTE* pbyData, size_t uDataLen)
+bool RouterModuleAgent::SendToModule(RouterModuleType eType, uint16_t nProtocolID, BYTE* pbyData, size_t uDataLen)
 {
-    return m_SendQueue.Push(pbyData, uDataLen);
+    bool                  bResult  = false;
+    bool                  bRetCode = false;
+    IJYBuffer*            piBuffer = NULL;
+    RouterProtocolHeader* pHeader  = NULL;
+
+    JYLOG_PROCESS_ERROR(pbyData);
+    JYLOG_PROCESS_ERROR(uDataLen);
+
+    piBuffer = JYMemoryCreate(uDataLen + sizeof(RouterProtocolHeader));
+    JYLOG_PROCESS_ERROR(piBuffer);
+
+    pHeader = (RouterProtocolHeader*)piBuffer->GetData();
+    JYLOG_PROCESS_ERROR(pHeader);
+
+    pHeader->nModuleType = eType;
+    pHeader->nProtocolID = nProtocolID;
+    pHeader->uDataLen    = piBuffer->GetSize();
+
+    memcpy(pHeader->byData, pbyData, uDataLen);
+
+    bRetCode = m_SendQueue.Push(pbyData, uDataLen);
+    JYLOG_PROCESS_ERROR(bRetCode);
+
+    bResult = true;
+Exit0:
+    JYMemoryDelete(piBuffer);
+    return 0;
 }
 
 //// Private
@@ -98,12 +142,12 @@ void RouterModuleAgent::ConnectionLost()
 void RouterModuleAgent::SendFlush()
 {
     bool   bRetCode = false;
-    BYTE*  pbyData  = m_byTempBuffer;
+    BYTE*  pbyData  = m_byThreadBuffer;
     size_t uDataLen = 0;
 
     while (true)
     {
-        bRetCode = m_SendQueue.TryPop(sizeof(m_byTempBuffer), pbyData, &uDataLen);
+        bRetCode = m_SendQueue.TryPop(sizeof(m_byThreadBuffer), pbyData, &uDataLen);
         JY_PROCESS_ERROR(bRetCode);
 
         bRetCode = Send(pbyData, uDataLen);

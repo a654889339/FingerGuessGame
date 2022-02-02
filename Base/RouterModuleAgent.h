@@ -15,8 +15,8 @@ public:
     bool Init(RouterModuleType eType);
     void UnInit();
 
-    bool Recv(size_t uLimitSize, BYTE* pbyData, size_t* puDataLen);
-    bool SendToModule(BYTE* pbyData, size_t uDataLen);
+    bool Recv(size_t uLimitSize, BYTE* pbyData, size_t* puDataLen, RouterModuleType* peType, uint16_t* pnProtocolID);
+    bool SendToModule(RouterModuleType eType, uint16_t nProtocolID, BYTE* pbyData, size_t uDataLen);
 
 private:
     static void WorkThread(void* pvParam);
@@ -30,7 +30,8 @@ private:
     JYThread         m_Thread;
     LockQueue        m_RecvQueue; // routerserver --> agent
     LockQueue        m_SendQueue;
-    BYTE             m_byTempBuffer[MAX_INTERNAL_NETWORK_PROTOCOL_SIZE];
+    BYTE             m_byThreadBuffer[MAX_INTERNAL_NETWORK_PROTOCOL_SIZE];
+    BYTE             m_byMainBuffer[MAX_INTERNAL_NETWORK_PROTOCOL_SIZE];
 };
 
 #endif

@@ -81,6 +81,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AccountDef.h" />
+    <ClInclude Include="ACCOUNT_SERVER_GAME_CENTER_PROTOCOL.h" />
     <ClInclude Include="CLIENT_ACCOUNT_SERVER_PROTOCOL.h" />
     <ClInclude Include="CodeStd.h" />
     <ClInclude Include="GlobalDef.h" />

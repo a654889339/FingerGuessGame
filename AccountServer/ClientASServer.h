@@ -20,11 +20,11 @@ public:
     bool DoAS2CLoginRespond(int nConnIndex, int nRetCode);
 
 private:
+    void OnC2ASLoginRequest(int nConnIndex, BYTE* pbyData, size_t uDataLen);
+
     void ProcessPackage(int nConnIndex, BYTE* pbyData, size_t uDataLen);
     void NewConnection(int nConnIndex, int* pnIP, int nPort);
     void DisConnection(int nConnIndex);
-
-    void OnC2ASLoginRequest(int nConnIndex, BYTE* pbyData, size_t uDataLen);
 
 private:
     typedef void (ClientASServer::* PROCESS_PROTOCOL_FUNC)(int nConnIndex, BYTE* pbyData, size_t uSize);

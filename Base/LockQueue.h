@@ -27,6 +27,21 @@ public:
         JY_STD_BOOL_END
     }
 
+    bool Push(IJYBuffer* piBuffer)
+    {
+        bool bResult = false;
+
+        JYLOG_PROCESS_ERROR(piBuffer);
+
+        piBuffer->AddRef();
+
+        m_Mutex.lock();
+        m_Queue.push_back(piBuffer);
+        m_Mutex.unlock();
+
+        JY_STD_BOOL_END
+    }
+
     bool Pop(size_t uLimitSize, BYTE* pbyData, size_t* puDataLen)
     {
         bool       bResult = false;

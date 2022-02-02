@@ -1,6 +1,8 @@
 #ifndef _BASE_IJYBUFFER_H_
 #define _BASE_IJYBUFFER_H_
 
+#include <atomic>
+
 struct IJYBuffer
 {
     size_t GetSize() { return uDataLen; }
@@ -17,7 +19,7 @@ struct IJYBuffer
     uint16_t GetRef() { return uRef; }
 
 private:
-    uint16_t uRef;
+    std::atomic<uint16_t> uRef;
     size_t uDataLen;
     byte byData[];
 };
