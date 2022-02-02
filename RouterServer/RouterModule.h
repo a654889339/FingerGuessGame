@@ -16,7 +16,6 @@ public:
     // Chat0, Chat1, Chat2. Chat2:eType=Chat,nConnIndex=2
     bool Init(RouterModuleType eType, const char szIP[], int nPort);
     void UnInit();
-    static void WorkThread(void* pvParam);
 
     void Run();
 
@@ -26,6 +25,7 @@ public:
     RouterModuleType GetType() { return m_eModuleType; }
 
 private:
+    static void WorkThread(void* pvParam);
     void ProcessPackage(int nConnIndex, BYTE* pbyData, size_t uDataLen);
     void NewConnection(int nConnIndex, int* pnIP, int nPort);
     void DisConnection(int nConnIndex);
@@ -37,8 +37,8 @@ private:
     char             m_szIP[64];
     int              m_nPort;
     JYThread         m_Thread;
-    LockQueue        m_C2SQueue; // chat, gc, rank, account -> routerserver
-    LockQueue        m_S2CQueue;
+    LockQueue        m_RecvQueue; // chat, gc, rank, account -> routerserver
+    LockQueue        m_SendQueue;
     byte             m_byTempSize[MAX_INTERNAL_NETWORK_PROTOCOL_SIZE];
 };
 

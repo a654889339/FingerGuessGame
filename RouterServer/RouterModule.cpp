@@ -40,16 +40,6 @@ void RouterModule::UnInit()
     Quit();
 }
 
-
-void RouterModule::WorkThread(void* pvParam)
-{
-    RouterModule* pThis = (RouterModule*)pvParam;
-
-    assert(pvParam);
-
-    pThis->Run();
-}
-
 void RouterModule::Run()
 {
     while (true)
@@ -74,7 +64,7 @@ bool RouterModule::Recv(size_t uLimitSize, BYTE* pbyData, size_t* puDataLen)
     bool bResult = false;
 
     // it may always fail if module send message frequently.
-    JY_PROCESS_ERROR(m_C2SQueue.TryPop(uLimitSize, pbyData, puDataLen));
+    JY_PROCESS_ERROR(m_RecvQueue.TryPop(uLimitSize, pbyData, puDataLen));
 
     JY_STD_BOOL_END
 }
@@ -85,12 +75,21 @@ bool RouterModule::SendToModule(BYTE* pbyData, size_t uDataLen)
 
     JYLOG_PROCESS_ERROR(pbyData);
 
-    JYLOG_PROCESS_ERROR(m_S2CQueue.Push(pbyData, uDataLen));
+    JYLOG_PROCESS_ERROR(m_SendQueue.Push(pbyData, uDataLen));
 
     JY_STD_BOOL_END
 }
 
 //// Private
+void RouterModule::WorkThread(void* pvParam)
+{
+    RouterModule* pThis = (RouterModule*)pvParam;
+
+    assert(pvParam);
+
+    pThis->Run();
+}
+
 void RouterModule::ProcessPackage(int nConnIndex, BYTE* pbyData, size_t uDataLen)
 {
     bool                  bRetCode = false;
@@ -100,7 +99,7 @@ void RouterModule::ProcessPackage(int nConnIndex, BYTE* pbyData, size_t uDataLen
     JYLOG_PROCESS_ERROR(uDataLen >= sizeof(RouterProtocolHeader));
     JYLOG_PROCESS_ERROR(uDataLen == sizeof(RouterProtocolHeader) + pHeader->uDataLen);
 
-    bRetCode = m_C2SQueue.Push(pbyData, uDataLen);
+    bRetCode = m_RecvQueue.Push(pbyData, uDataLen);
     JYLOG_PROCESS_ERROR(bRetCode);
 
     JY_STD_VOID_END
@@ -123,7 +122,7 @@ void RouterModule::SendFlush()
 
     while (true)
     {
-        bRetCode = m_S2CQueue.Pop(sizeof(m_byTempSize), m_byTempSize, &uDataLen);
+        bRetCode = m_SendQueue.Pop(sizeof(m_byTempSize), m_byTempSize, &uDataLen);
         JY_PROCESS_ERROR(bRetCode);
 
         bRetCode = Send(m_nConnIndex, m_byTempSize, uDataLen);

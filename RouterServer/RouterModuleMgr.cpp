@@ -1,10 +1,9 @@
 #include "stdafx.h"
 #include "RouterModuleMgr.h"
 
-
 RouterModuleMgr::RouterModuleMgr()
 {
-
+    memset(m_byTempBuffer, 0, sizeof(m_byTempBuffer));
 }
 
 RouterModuleMgr::~RouterModuleMgr()

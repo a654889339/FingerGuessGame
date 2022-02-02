@@ -5,7 +5,7 @@
 
 enum RouterModuleType
 {
-    ermt_begin,
+    ermt_begin = 0,
 
     ermt_gamecenter,
     ermt_account,
