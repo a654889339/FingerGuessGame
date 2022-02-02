@@ -41,6 +41,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RouterServer", "RouterServe
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AccountServer", "AccountServer\AccountServer.vcxproj", "{0A9C6A1F-90A9-40B8-98BB-0E1CAD429B65}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4751BA22-D1CA-4100-BE94-A05F906456FF} = {4751BA22-D1CA-4100-BE94-A05F906456FF}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameServer", "GameServer\GameServer.vcxproj", "{502BFD2A-C2F2-4A95-942F-AD60044704EC}"
 	ProjectSection(ProjectDependencies) = postProject
