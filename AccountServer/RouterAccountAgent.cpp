@@ -41,7 +41,7 @@ void RouterAccountAgent::UnInit()
     m_Agent.UnInit();
 }
 
-void RouterAccountAgent::Run()
+void RouterAccountAgent::Active()
 {
     ProcessNetwork();
 }

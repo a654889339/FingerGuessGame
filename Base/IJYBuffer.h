@@ -31,6 +31,8 @@ static IJYBuffer* JYMemoryCreate(size_t uDataLen)
     pResult = (IJYBuffer*)malloc(uDataLen + sizeof(IJYBuffer));
     JYLOG_PROCESS_ERROR(pResult);
 
+    new (pResult) IJYBuffer();
+
     pResult->Init(uDataLen);
 
 Exit0:
@@ -47,6 +49,7 @@ static void JYMemoryDelete(IJYBuffer* piBuffer)
 
     if (piBuffer->GetData() == 0)
     {
+        piBuffer->~IJYBuffer();
         free(piBuffer);
     }
 

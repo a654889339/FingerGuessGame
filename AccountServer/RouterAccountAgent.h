@@ -13,14 +13,13 @@ public:
     bool Init();
     void UnInit();
 
-    void Run();
+    void Active();
 
     bool DoAS2GCPlayerLoginRequest(uint64_t uOpenId);
 
 private:
     void OnGC2ASPlayerLoginRespond(BYTE* pbyData, size_t uSize);
     void ProcessNetwork();
-
 
 private:
     typedef void (RouterAccountAgent::* PROCESS_PROTOCOL_FUNC)(BYTE* pbyData, size_t uSize);

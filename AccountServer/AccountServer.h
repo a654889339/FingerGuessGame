@@ -3,6 +3,7 @@
 
 #include "ClientASServer.h"
 #include "ClientManager.h"
+#include "RouterAccountAgent.h"
 
 class AccountServer
 {
@@ -18,8 +19,9 @@ public:
 
 
 public:
-    ClientASServer m_ClientAgent;
-    ClientManager m_ClientManager;
+    ClientASServer     m_ClientAgent;
+    ClientManager      m_ClientManager;
+    RouterAccountAgent m_RouterAgent;
 };
 
 extern AccountServer* g_pAccountServer;
