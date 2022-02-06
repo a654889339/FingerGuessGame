@@ -1,6 +1,8 @@
 #ifndef _GAME_CENTER_H_
 #define _GAME_CENTER_H_
 
+#include "RouterGameCenterAgent.h"
+
 class GameCenter
 {
 public:
@@ -12,6 +14,9 @@ public:
 
     void Run();
     void Quit();
+
+private:
+    RouterGameCenterAgent m_RouterAgent;
 };
 
 extern GameCenter* g_pGameCenter;

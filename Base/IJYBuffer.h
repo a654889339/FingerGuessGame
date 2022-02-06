@@ -47,7 +47,7 @@ static void JYMemoryDelete(IJYBuffer* piBuffer)
 
     piBuffer->DecRef();
 
-    if (piBuffer->GetData() == 0)
+    if (piBuffer->GetRef() == 0)
     {
         piBuffer->~IJYBuffer();
         free(piBuffer);

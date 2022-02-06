@@ -29,6 +29,9 @@
     <ClCompile Include="GameCenter.cpp">
       <Filter>Main</Filter>
     </ClCompile>
+    <ClCompile Include="RouterGameCenterAgent.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -36,6 +39,9 @@
     </ClInclude>
     <ClInclude Include="GameCenter.h">
       <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="RouterGameCenterAgent.h">
+      <Filter>Network</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Base", "Base\Base.vcxproj", "{4751BA22-D1CA-4100-BE94-A05F906456FF}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Client", "Client\Client.vcxproj", "{832DB8D1-4718-4861-9827-D877343ED2A4}"
 	ProjectSection(ProjectDependencies) = postProject
 		{4751BA22-D1CA-4100-BE94-A05F906456FF} = {4751BA22-D1CA-4100-BE94-A05F906456FF}
@@ -52,6 +50,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameServer", "GameServer\Ga
 		{D56C5BEC-45A8-4B3C-8F2F-F24D721DDF88} = {D56C5BEC-45A8-4B3C-8F2F-F24D721DDF88}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Base", "Base\Base.vcxproj", "{4751BA22-D1CA-4100-BE94-A05F906456FF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug_Client|x64 = Debug_Client|x64
@@ -64,19 +64,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4751BA22-D1CA-4100-BE94-A05F906456FF}.Debug_Client|x64.ActiveCfg = Debug_Client|x64
-		{4751BA22-D1CA-4100-BE94-A05F906456FF}.Debug_Client|x64.Build.0 = Debug_Client|x64
-		{4751BA22-D1CA-4100-BE94-A05F906456FF}.Debug_Client|x86.ActiveCfg = Debug_Client|x64
-		{4751BA22-D1CA-4100-BE94-A05F906456FF}.Debug_Server|x64.ActiveCfg = Debug_Server|x64
-		{4751BA22-D1CA-4100-BE94-A05F906456FF}.Debug_Server|x64.Build.0 = Debug_Server|x64
-		{4751BA22-D1CA-4100-BE94-A05F906456FF}.Debug_Server|x86.ActiveCfg = Debug_Server|x64
-		{4751BA22-D1CA-4100-BE94-A05F906456FF}.Debug|x64.ActiveCfg = Debug_Server|x64
-		{4751BA22-D1CA-4100-BE94-A05F906456FF}.Debug|x86.ActiveCfg = Debug_Server|x64
-		{4751BA22-D1CA-4100-BE94-A05F906456FF}.Debug|x86.Build.0 = Debug_Server|x64
-		{4751BA22-D1CA-4100-BE94-A05F906456FF}.Release|x64.ActiveCfg = Debug_Server|x64
-		{4751BA22-D1CA-4100-BE94-A05F906456FF}.Release|x64.Build.0 = Debug_Server|x64
-		{4751BA22-D1CA-4100-BE94-A05F906456FF}.Release|x86.ActiveCfg = Debug_Server|x64
-		{4751BA22-D1CA-4100-BE94-A05F906456FF}.Release|x86.Build.0 = Debug_Server|x64
 		{832DB8D1-4718-4861-9827-D877343ED2A4}.Debug_Client|x64.ActiveCfg = Debug_Client|x64
 		{832DB8D1-4718-4861-9827-D877343ED2A4}.Debug_Client|x64.Build.0 = Debug_Client|x64
 		{832DB8D1-4718-4861-9827-D877343ED2A4}.Debug_Client|x86.ActiveCfg = Debug_Client|x64
@@ -183,6 +170,20 @@ Global
 		{502BFD2A-C2F2-4A95-942F-AD60044704EC}.Debug|x86.Build.0 = Debug_Server|Win32
 		{502BFD2A-C2F2-4A95-942F-AD60044704EC}.Release|x64.ActiveCfg = Debug_Server|x64
 		{502BFD2A-C2F2-4A95-942F-AD60044704EC}.Release|x86.ActiveCfg = Debug_Server|Win32
+		{4751BA22-D1CA-4100-BE94-A05F906456FF}.Debug_Client|x64.ActiveCfg = Debug_Client|x64
+		{4751BA22-D1CA-4100-BE94-A05F906456FF}.Debug_Client|x64.Build.0 = Debug_Client|x64
+		{4751BA22-D1CA-4100-BE94-A05F906456FF}.Debug_Client|x86.ActiveCfg = Debug_Client|x64
+		{4751BA22-D1CA-4100-BE94-A05F906456FF}.Debug_Server|x64.ActiveCfg = Debug_Server|x64
+		{4751BA22-D1CA-4100-BE94-A05F906456FF}.Debug_Server|x64.Build.0 = Debug_Server|x64
+		{4751BA22-D1CA-4100-BE94-A05F906456FF}.Debug_Server|x86.ActiveCfg = Debug_Server|x64
+		{4751BA22-D1CA-4100-BE94-A05F906456FF}.Debug|x64.ActiveCfg = Debug_Client|x64
+		{4751BA22-D1CA-4100-BE94-A05F906456FF}.Debug|x64.Build.0 = Debug_Client|x64
+		{4751BA22-D1CA-4100-BE94-A05F906456FF}.Debug|x86.ActiveCfg = Debug_Client|x64
+		{4751BA22-D1CA-4100-BE94-A05F906456FF}.Debug|x86.Build.0 = Debug_Client|x64
+		{4751BA22-D1CA-4100-BE94-A05F906456FF}.Release|x64.ActiveCfg = Debug_Client|x64
+		{4751BA22-D1CA-4100-BE94-A05F906456FF}.Release|x64.Build.0 = Debug_Client|x64
+		{4751BA22-D1CA-4100-BE94-A05F906456FF}.Release|x86.ActiveCfg = Debug_Client|x64
+		{4751BA22-D1CA-4100-BE94-A05F906456FF}.Release|x86.Build.0 = Debug_Client|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

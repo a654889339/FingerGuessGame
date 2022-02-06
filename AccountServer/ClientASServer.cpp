@@ -66,6 +66,7 @@ void ClientASServer::OnC2ASLoginRequest(int nConnIndex, BYTE* pbyData, size_t uD
     bRetCode = g_pAccountServer->m_ClientManager.Add(pRequest->szAccountName, nConnIndex);
     JY_PROCESS_ERROR_RET_CODE(bRetCode, elrc_account_repeat);
 
+    g_pAccountServer->m_RouterAgent.DoAS2GCPlayerLoginRequest(666); // openid from db
     DoAS2CLoginRespond(nConnIndex, elrc_success);
 
     nResult = elrc_success;
