@@ -25,17 +25,6 @@ struct RouterProtocolHeader
     BYTE     byData[0];
 };
 
-#define REGISTER_ROUTER_FUNC(eModuleType, ProtocolID, FuncName, ProtocolSize)  \
-{ \
-    while (m_ProcessProtocolFuns[eModuleType].size() <= ProtocolID) \
-    { \
-        m_ProcessProtocolFuns[eModuleType].push_back(NULL); \
-        m_ProcessProtocolSize[eModuleType].push_back(0); \
-    } \
-    m_ProcessProtocolFuns[eModuleType][ProtocolID] = FuncName;                  \
-    m_ProcessProtocolSize[eModuleType][ProtocolID] = ProtocolSize; \
-}
-
 const char szRouterModuleIPConfig[ermt_end][MAX_IP_STRING_LEN] =
 {
     "",
