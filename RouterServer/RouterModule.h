@@ -17,8 +17,6 @@ public:
     bool Init(RouterModuleType eType, const char szIP[], int nPort);
     void UnInit();
 
-    void Run();
-
     IJYBuffer* Recv();
     bool SendToModule(IJYBuffer* piBuffer);
 
@@ -26,6 +24,7 @@ public:
 
 private:
     static void WorkThread(void* pvParam);
+    void Run();
     void ProcessPackage(int nConnIndex, BYTE* pbyData, size_t uDataLen);
     void NewConnection(int nConnIndex, int* pnIP, int nPort);
     void DisConnection(int nConnIndex);

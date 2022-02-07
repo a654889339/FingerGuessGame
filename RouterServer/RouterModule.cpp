@@ -40,25 +40,6 @@ void RouterModule::UnInit()
     Quit();
 }
 
-void RouterModule::Run()
-{
-    while (true)
-    {
-        if (IsEnable())
-        {
-            ProcessNetwork();
-            SendFlush();
-        }
-        else
-        {
-            Bind(m_szIP, m_nPort);
-            printf("[RouterModule] Bind %s:%d succeed.\n", m_szIP, m_nPort);
-        }
-
-        Sleep(1);
-    }
-}
-
 IJYBuffer* RouterModule::Recv()
 {
     // it may always fail if module send message frequently.
@@ -82,6 +63,25 @@ void RouterModule::WorkThread(void* pvParam)
     assert(pvParam);
 
     pThis->Run();
+}
+
+void RouterModule::Run()
+{
+    while (true)
+    {
+        if (IsEnable())
+        {
+            ProcessNetwork();
+            SendFlush();
+        }
+        else
+        {
+            Bind(m_szIP, m_nPort);
+            printf("[RouterModule] Bind %s:%d succeed.\n", m_szIP, m_nPort);
+        }
+
+        Sleep(1);
+    }
 }
 
 void RouterModule::ProcessPackage(int nConnIndex, BYTE* pbyData, size_t uDataLen)
