@@ -86,7 +86,7 @@ private:
 private:
     RouterModuleType m_eType;
     JYThread         m_Thread;
-    LockQueue        m_RecvQueue; // routerserver --> agent
+    LockQueue        m_RecvQueue; // agent received
     LockQueue        m_SendQueue;
     BYTE             m_byThreadBuffer[MAX_INTERNAL_NETWORK_PROTOCOL_SIZE];
     BYTE             m_byMainBuffer[MAX_INTERNAL_NETWORK_PROTOCOL_SIZE];

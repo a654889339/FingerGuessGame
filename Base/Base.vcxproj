@@ -95,7 +95,7 @@
     <ClInclude Include="MathStd.h" />
     <ClInclude Include="CycleQueue.h" />
     <ClInclude Include="NetworkBase.h" />
-    <ClInclude Include="Protocol.h" />
+    <ClInclude Include="CLIENT_GAME_SERVER_PROTOCOL.h" />
     <ClInclude Include="ProtocolBase.h" />
     <ClInclude Include="RouterModuleAgent.h" />
     <ClInclude Include="RouterModuleBase.h" />

@@ -40,6 +40,9 @@
     <Filter Include="Network\Router">
       <UniqueIdentifier>{dfaf73d4-5f68-4e7c-b65e-cbf16c439575}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Network\Protocol">
+      <UniqueIdentifier>{43d0688f-968a-4605-a4b7-1163ca009da1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -58,9 +61,6 @@
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="NetworkBase.h">
-      <Filter>Network</Filter>
-    </ClInclude>
-    <ClInclude Include="Protocol.h">
       <Filter>Network</Filter>
     </ClInclude>
     <ClInclude Include="CycleQueue.h">
@@ -87,14 +87,8 @@
     <ClInclude Include="TCPBase.h">
       <Filter>Network</Filter>
     </ClInclude>
-    <ClInclude Include="CLIENT_ACCOUNT_SERVER_PROTOCOL.h">
-      <Filter>Network</Filter>
-    </ClInclude>
     <ClInclude Include="AccountDef.h">
       <Filter>Config</Filter>
-    </ClInclude>
-    <ClInclude Include="ProtocolBase.h">
-      <Filter>Network</Filter>
     </ClInclude>
     <ClInclude Include="LockQueue.h">
       <Filter>STL</Filter>
@@ -111,8 +105,17 @@
     <ClInclude Include="RouterModuleAgent.h">
       <Filter>Network\Router</Filter>
     </ClInclude>
+    <ClInclude Include="CLIENT_ACCOUNT_SERVER_PROTOCOL.h">
+      <Filter>Network\Protocol</Filter>
+    </ClInclude>
     <ClInclude Include="ACCOUNT_SERVER_GAME_CENTER_PROTOCOL.h">
-      <Filter>Network\Router</Filter>
+      <Filter>Network\Protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="CLIENT_GAME_SERVER_PROTOCOL.h">
+      <Filter>Network\Protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="ProtocolBase.h">
+      <Filter>Network\Protocol</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -2,7 +2,7 @@
 #define _SERVER_CONNECTION_H_
 
 #include "TcpServer.h"
-#include "Protocol.h"
+#include "CLIENT_GAME_SERVER_PROTOCOL.h"
 
 #include "ConnectionSystem.h"
 

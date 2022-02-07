@@ -3,7 +3,7 @@
 
 #include "TcpClient.h"
 #include "ClientBase.h"
-#include "Protocol.h"
+#include "CLIENT_GAME_SERVER_PROTOCOL.h"
 
 class ClientGateAgent : public TcpClient
 {

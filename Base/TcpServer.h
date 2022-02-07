@@ -21,7 +21,7 @@ protected:
     virtual void ProcessNetwork() final;
     virtual bool Send(int nConnIndex, void* pbyData, size_t uDataLen) final;
     virtual void Shutdown(int nConnIndex) final;
-    virtual void* GetSendBuffer(size_t uDataLen) final; // 给继承的子类发包时用，将待发送数据写进APIBuffer内。
+    virtual void* GetSendBuffer(size_t uDataLen) final;
 
     virtual void ProcessPackage(int nConnIndex, BYTE* pbyData, size_t uDataLen) = 0;
     virtual void NewConnection(int nConnIndex, int* pnIP, int nPort) = 0;
