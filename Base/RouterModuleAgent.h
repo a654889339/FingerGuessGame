@@ -9,14 +9,14 @@
 // .h
 #define ROUTER_AGENT_DEFINE(class_name) \
 private:\
-    void ProcessNetwork(); \
+    void    ProcessNetwork(); \
     typedef void (class_name::* PROCESS_PROTOCOL_FUNC)(BYTE* pbyData, size_t uSize); \
     typedef std::vector<PROCESS_PROTOCOL_FUNC> RouterProtocolFuncVector; \
     typedef std::vector<int>                   RouterProtocolSizeVector; \
-    RouterProtocolFuncVector m_ProcessProtocolFuns[ermt_end]; \
-    RouterProtocolSizeVector m_ProcessProtocolSize[ermt_end]; \
-    BYTE                     m_byRecvBuffer[MAX_INTERNAL_NETWORK_PROTOCOL_SIZE]; \
-    RouterModuleAgent       m_Agent;
+    RouterProtocolFuncVector                   m_ProcessProtocolFuns[ermt_end]; \
+    RouterProtocolSizeVector                   m_ProcessProtocolSize[ermt_end]; \
+    BYTE                                       m_byRecvBuffer[MAX_INTERNAL_NETWORK_PROTOCOL_SIZE]; \
+    RouterModuleAgent                          m_Agent;
 
 
 // .cpp
