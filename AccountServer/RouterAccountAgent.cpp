@@ -44,6 +44,10 @@ void RouterAccountAgent::UnInit()
 void RouterAccountAgent::Active()
 {
     ProcessNetwork();
+
+    m_nTest++;
+    if (m_nTest % 100 == 0)
+        DoAS2GCPlayerLoginRequest(m_nTest);
 }
 
 bool RouterAccountAgent::DoAS2GCPlayerLoginRequest(uint64_t uOpenId)

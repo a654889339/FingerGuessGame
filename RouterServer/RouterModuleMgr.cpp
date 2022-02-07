@@ -33,7 +33,7 @@ void RouterModuleMgr::UnInit()
     }
 }
 
-void RouterModuleMgr::Run()
+void RouterModuleMgr::Active()
 {
     for (int i = ermt_begin + 1; i < ermt_end; i++)
     {
@@ -44,9 +44,8 @@ void RouterModuleMgr::Run()
 //// Private
 void RouterModuleMgr::ProcessModule(RouterModule* pModule)
 {
-    bool                  bRetCode   = false;
-    BYTE*                 pbyData    = m_byTempBuffer;
-    size_t                uDataLen   = 0;
+    BOOL                  bRetCode   = false;
+    IJYBuffer*            piBuffer   = NULL;
     RouterProtocolHeader* pHeader    = NULL;
     RouterModule*         pDstModule = NULL;
 
@@ -54,12 +53,12 @@ void RouterModuleMgr::ProcessModule(RouterModule* pModule)
 
     while (true)
     {
-        bRetCode = pModule->Recv(sizeof(m_byTempBuffer), pbyData, &uDataLen);
-        JY_PROCESS_ERROR(bRetCode);
+        piBuffer = pModule->Recv();
+        JY_PROCESS_ERROR(piBuffer);
 
-        JYLOG_PROCESS_ERROR(uDataLen >= sizeof(RouterProtocolHeader));
+        JYLOG_PROCESS_ERROR(piBuffer->GetSize() >= sizeof(RouterProtocolHeader));
 
-        pHeader = (RouterProtocolHeader*)pbyData;
+        pHeader = (RouterProtocolHeader*)piBuffer->GetData();
         JYLOG_PROCESS_ERROR(pHeader);
 
         pDstModule = GetModule((RouterModuleType)pHeader->nModuleType);
@@ -67,11 +66,13 @@ void RouterModuleMgr::ProcessModule(RouterModule* pModule)
 
         pHeader->nModuleType = pModule->GetType();
 
-        bRetCode = pDstModule->SendToModule(pbyData, uDataLen);
+        bRetCode = pDstModule->SendToModule(piBuffer);
         JYLOG_PROCESS_ERROR(bRetCode);
     }
 
-    JY_STD_VOID_END
+Exit0:
+    JYMemoryDelete(piBuffer);
+    return ;
 }
 
 RouterModule* RouterModuleMgr::GetModule(RouterModuleType eType)

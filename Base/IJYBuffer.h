@@ -39,7 +39,7 @@ Exit0:
     return pResult;
 }
 
-static void JYMemoryDelete(IJYBuffer* piBuffer)
+static void JYMemoryDelete(IJYBuffer* &piBuffer)
 {
     JY_PROCESS_ERROR(piBuffer);
 

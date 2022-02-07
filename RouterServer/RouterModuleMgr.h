@@ -12,7 +12,7 @@ public:
     bool Init();
     void UnInit();
 
-    void Run();
+    void Active();
 
 private:
     void ProcessModule(RouterModule* pModule);

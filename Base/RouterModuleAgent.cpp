@@ -20,7 +20,7 @@ bool RouterModuleAgent::Init(RouterModuleType eType)
 
     m_eType = eType;
 
-    m_Thread.Create(&WorkThread, this);
+    bRetCode = m_Thread.Create(&WorkThread, this);
     JYLOG_PROCESS_ERROR(bRetCode);
 
     JY_STD_BOOL_END
@@ -80,13 +80,13 @@ bool RouterModuleAgent::SendToModule(RouterModuleType eType, uint16_t nProtocolI
 
     memcpy(pHeader->byData, pbyData, uDataLen);
 
-    bRetCode = m_SendQueue.Push(pbyData, uDataLen);
+    bRetCode = m_SendQueue.Push(piBuffer);
     JYLOG_PROCESS_ERROR(bRetCode);
 
     bResult = true;
 Exit0:
     JYMemoryDelete(piBuffer);
-    return 0;
+    return bResult;
 }
 
 //// Private
@@ -114,6 +114,7 @@ void RouterModuleAgent::Run()
         else
         {
             Connect(szRouterModuleIPConfig[m_eType], szRouterModulePortConfig[m_eType]);
+            printf("[RouterModuleAgent] Connect to %s:%d succeed.\n", szRouterModuleIPConfig[m_eType], szRouterModulePortConfig[m_eType]);
         }
 
         Sleep(1);

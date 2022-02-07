@@ -28,7 +28,7 @@ bool RouterModule::Init(RouterModuleType eType, const char szIP[], int nPort)
     strncpy(m_szIP, szIP, sizeof(m_szIP));
     m_szIP[sizeof(m_szIP) - 1] = '\0';
 
-    m_Thread.Create(&WorkThread, this);
+    bRetCode = m_Thread.Create(&WorkThread, this);
     JYLOG_PROCESS_ERROR(bRetCode);
 
     JY_STD_BOOL_END
@@ -52,30 +52,24 @@ void RouterModule::Run()
         else
         {
             Bind(m_szIP, m_nPort);
+            printf("[RouterModule] Bind %s:%d succeed.\n", m_szIP, m_nPort);
         }
 
         Sleep(1);
     }
 }
 
-
-bool RouterModule::Recv(size_t uLimitSize, BYTE* pbyData, size_t* puDataLen)
+IJYBuffer* RouterModule::Recv()
 {
-    bool bResult = false;
-
     // it may always fail if module send message frequently.
-    JY_PROCESS_ERROR(m_RecvQueue.TryPop(uLimitSize, pbyData, puDataLen));
-
-    JY_STD_BOOL_END
+    return m_RecvQueue.TryPop();
 }
 
-bool RouterModule::SendToModule(BYTE* pbyData, size_t uDataLen)
+bool RouterModule::SendToModule(IJYBuffer* piBuffer)
 {
     bool bResult = false;
 
-    JYLOG_PROCESS_ERROR(pbyData);
-
-    JYLOG_PROCESS_ERROR(m_SendQueue.Push(pbyData, uDataLen));
+    JYLOG_PROCESS_ERROR(m_SendQueue.Push(piBuffer));
 
     JY_STD_BOOL_END
 }
@@ -97,7 +91,7 @@ void RouterModule::ProcessPackage(int nConnIndex, BYTE* pbyData, size_t uDataLen
 
     JYLOG_PROCESS_ERROR(pHeader);
     JYLOG_PROCESS_ERROR(uDataLen >= sizeof(RouterProtocolHeader));
-    JYLOG_PROCESS_ERROR(uDataLen == sizeof(RouterProtocolHeader) + pHeader->uDataLen);
+    JYLOG_PROCESS_ERROR(uDataLen == pHeader->uDataLen);
 
     bRetCode = m_RecvQueue.Push(pbyData, uDataLen);
     JYLOG_PROCESS_ERROR(bRetCode);

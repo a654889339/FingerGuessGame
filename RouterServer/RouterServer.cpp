@@ -41,9 +41,12 @@ void RouterServer::UnInit()
 
 void RouterServer::Run()
 {
-    m_ModuleMgr.Run();
+    while (true)
+    {
+        m_ModuleMgr.Active();
 
-    Sleep(1);
+        Sleep(1);
+    }
 }
 
 void RouterServer::Quit()

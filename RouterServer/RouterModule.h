@@ -19,8 +19,8 @@ public:
 
     void Run();
 
-    bool Recv(size_t uLimitSize, BYTE* pbyData, size_t* puDataLen);
-    bool SendToModule(BYTE* pbyData, size_t uDataLen);
+    IJYBuffer* Recv();
+    bool SendToModule(IJYBuffer* piBuffer);
 
     RouterModuleType GetType() { return m_eModuleType; }
 

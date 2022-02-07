@@ -109,6 +109,24 @@ public:
         return bResult;
     }
 
+    IJYBuffer* TryPop()
+    {
+        IJYBuffer* pResult = NULL;
+
+        JY_PROCESS_ERROR(m_Mutex.try_lock());
+
+        if (!m_Queue.empty())
+        {
+            pResult = m_Queue.front();
+            m_Queue.pop_front();
+        }
+
+        m_Mutex.unlock();
+
+    Exit0:
+        return pResult;
+    }
+
     bool IsEmpty()
     {
         bool bResult = false;
