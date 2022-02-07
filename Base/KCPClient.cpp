@@ -16,7 +16,7 @@ KCPClient::~KCPClient()
 
 bool KCPClient::Init(const char szIP[], int nPort)
 {
-    BOOL bResult = false;
+    bool bResult = false;
     int nResCode = 0;
     JYLOG_PROCESS_ERROR(szIP);
     JYLOG_PROCESS_ERROR(nPort);

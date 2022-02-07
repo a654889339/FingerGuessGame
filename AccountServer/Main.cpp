@@ -4,7 +4,7 @@
 AccountServer* g_pAccountServer = NULL;
 
 #ifdef WIN32
-BOOL WINAPI ConsoleHandlerRoutine(DWORD dwCtrlType)
+bool WINAPI ConsoleHandlerRoutine(DWORD dwCtrlType)
 {
     if (g_pAccountServer)
     {

@@ -4,7 +4,7 @@
 RouterServer* g_pRouterServer = NULL;
 
 #ifdef WIN32
-BOOL WINAPI ConsoleHandlerRoutine(DWORD dwCtrlType)
+bool WINAPI ConsoleHandlerRoutine(DWORD dwCtrlType)
 {
     if (g_pRouterServer)
     {

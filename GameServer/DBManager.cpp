@@ -115,9 +115,9 @@ Exit0:
     return bResult;
 }
 
-BOOL DBManager::DoQuery(const char cszSQL[], bool bSilentMode /*= false*/)
+bool DBManager::DoQuery(const char cszSQL[], bool bSilentMode /*= false*/)
 {
-    BOOL     bRetCode = false;
+    bool     bRetCode = false;
     unsigned ulMySQLErrorCode = 0;
 
     //assert(cszSQL);
@@ -129,7 +129,7 @@ BOOL DBManager::DoQuery(const char cszSQL[], bool bSilentMode /*= false*/)
     //{
     //    printf("[DBManager] MySQL_Query failed in DoQuery : %u", ulMySQLErrorCode);
 
-    //    if (ulMySQLErrorCode != 0 && ulMySQLErrorCode != ER_DUP_ENTRY) // Ö÷¼ü³åÍ»²»ÓÃ¶Ï¿ªÁ´½Ó
+    //    if (ulMySQLErrorCode != 0 && ulMySQLErrorCode != ER_DUP_ENTRY) // ï¿½ï¿½ï¿½ï¿½Í»ï¿½ï¿½ï¿½Ã¶Ï¿ï¿½ï¿½ï¿½
     //    {
     //        MySQL_Disconnect(m_pDBHandle);
     //        m_pDBHandle = NULL;

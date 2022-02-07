@@ -2,7 +2,6 @@
 #define _BASE_ACCOUNT_SERVER_GAME_CENTER_PROTOCOL_H_
 
 #include "ProtocolBase.h"
-#include "RouterModuleBase.h"
 
 enum ACCOUNT_GAMECENTER_PROTOCOL_ID
 {

@@ -25,7 +25,7 @@ public:
 
 private:
     bool CheckTable();
-    BOOL DoQuery(const char cszSQL[], bool bSilentMode = false);
+    bool DoQuery(const char cszSQL[], bool bSilentMode = false);
 
 private:
     //MYSQL*  m_pDBHandle;

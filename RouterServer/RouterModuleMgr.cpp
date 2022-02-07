@@ -44,7 +44,7 @@ void RouterModuleMgr::Active()
 //// Private
 void RouterModuleMgr::ProcessModule(RouterModule* pModule)
 {
-    BOOL                  bRetCode   = false;
+    bool                  bRetCode   = false;
     IJYBuffer*            piBuffer   = NULL;
     RouterProtocolHeader* pHeader    = NULL;
     RouterModule*         pDstModule = NULL;

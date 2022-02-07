@@ -77,9 +77,9 @@
 //#define CR_CONN_HOST_ERROR  2003
 //#define CR_SERVER_GONE_ERROR    2006
 //
-//BOOL MySQL_Query(MYSQL* pHandle, const char cszSQL[], unsigned* puRetMySQLErrorCode /*= NULL*/, bool bSilentMode /*= false*/)
+//bool MySQL_Query(MYSQL* pHandle, const char cszSQL[], unsigned* puRetMySQLErrorCode /*= NULL*/, bool bSilentMode /*= false*/)
 //{
-//    BOOL        bResult = false;
+//    bool        bResult = false;
 //    int         nRetCode = false;
 //    int         nReconnectTimes = 0;
 //    unsigned    uMySQLErrorCode = 0;
@@ -148,9 +148,9 @@
 //    return bResult;
 //}
 //
-//BOOL MYSQL_CheckError(MYSQL* pHandle)
+//bool MYSQL_CheckError(MYSQL* pHandle)
 //{
-//    BOOL        bResult = false;
+//    bool        bResult = false;
 //    unsigned    uMySQLErrorCode = 0;
 //
 //    assert(pHandle);
