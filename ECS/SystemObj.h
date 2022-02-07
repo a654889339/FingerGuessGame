@@ -12,7 +12,7 @@ public:
     virtual void Active() = 0;
 
 private:
-    bool    m_bEnable;     // 系统开关
+    bool    m_bEnable;
 };
 
 #endif
