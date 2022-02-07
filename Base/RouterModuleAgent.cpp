@@ -76,7 +76,7 @@ bool RouterModuleAgent::SendToModule(RouterModuleType eType, uint16_t nProtocolI
 
     pHeader->nModuleType = eType;
     pHeader->nProtocolID = nProtocolID;
-    pHeader->uDataLen    = piBuffer->GetSize();
+    pHeader->uDataLen    = (uint32_t)piBuffer->GetSize();
 
     memcpy(pHeader->byData, pbyData, uDataLen);
 

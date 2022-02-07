@@ -25,8 +25,6 @@ struct RouterProtocolHeader
     BYTE     byData[0];
 };
 
-typedef std::vector<int> RouterProtocolSizeVector;
-
 #define REGISTER_ROUTER_FUNC(eModuleType, ProtocolID, FuncName, ProtocolSize)  \
 { \
     while (m_ProcessProtocolFuns[eModuleType].size() <= ProtocolID) \
@@ -36,52 +34,6 @@ typedef std::vector<int> RouterProtocolSizeVector;
     } \
     m_ProcessProtocolFuns[eModuleType][ProtocolID] = FuncName;                  \
     m_ProcessProtocolSize[eModuleType][ProtocolID] = ProtocolSize; \
-}
-
-// .h
-#define ROUTER_AGENT_DEFINE(class_name) \
-private:\
-    void ProcessNetwork(); \
-    typedef void (class_name::* PROCESS_PROTOCOL_FUNC)(BYTE* pbyData, size_t uSize); \
-    typedef std::vector<PROCESS_PROTOCOL_FUNC> RouterProtocolFuncVector; \
-    RouterProtocolFuncVector m_ProcessProtocolFuns[ermt_end]; \
-    RouterProtocolSizeVector m_ProcessProtocolSize[ermt_end]; \
-    BYTE                     m_byRecvBuffer[MAX_INTERNAL_NETWORK_PROTOCOL_SIZE]; \
-    RouterModuleAgent       m_Agent;
-
-
-// .cpp
-#define ROUTER_AGENT_IMPLEMENT(class_name) \
-void class_name::ProcessNetwork() \
-{ \
-    bool                  bRetCode    = false; \
-    BYTE*                 pbyData     = NULL; \
-    size_t                uDataLen    = 0; \
-    RouterModuleType      eType       = ermt_begin; \
-    uint16_t              nProtocolID = 0; \
-    PROCESS_PROTOCOL_FUNC Func; \
- \
-    while (true) \
-    { \
-        pbyData = m_byRecvBuffer; \
- \
-        bRetCode = m_Agent.Recv(sizeof(m_byRecvBuffer), pbyData, &uDataLen, &eType, &nProtocolID); \
-        JY_PROCESS_ERROR(bRetCode); \
-        JYLOG_PROCESS_ERROR(nProtocolID < m_ProcessProtocolFuns[eType].size()); \
- \
-        if (m_ProcessProtocolSize[eType][nProtocolID] != UNDEFINED_PROTOCOL_SIZE) \
-        { \
-            JYLOG_PROCESS_ERROR(m_ProcessProtocolSize[eType][nProtocolID] == uDataLen); \
-        } \
- \
-        Func = m_ProcessProtocolFuns[eType][nProtocolID]; \
-        JYLOG_PROCESS_ERROR(Func); \
- \
-        (this->*Func)(pbyData, uDataLen); \
-    } \
- \
-Exit0: \
-    return; \
 }
 
 const char szRouterModuleIPConfig[ermt_end][MAX_IP_STRING_LEN] =
