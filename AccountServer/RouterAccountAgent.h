@@ -30,8 +30,6 @@ private:
     BYTE                     m_byRecvBuffer[MAX_INTERNAL_NETWORK_PROTOCOL_SIZE];
 
     RouterModuleAgent       m_Agent;
-
-    int m_nTest;
 };
 
 #endif

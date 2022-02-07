@@ -32,7 +32,7 @@ void RouterModuleAgent::UnInit()
     Quit();
 }
 
-bool RouterModuleAgent::Recv(size_t uLimitSize, BYTE* pbyData, size_t* puDataLen, RouterModuleType* peType, uint16_t* pnProtocolID)
+bool RouterModuleAgent::Recv(size_t uLimitSize, BYTE* &pbyData, size_t* puDataLen, RouterModuleType* peType, uint16_t* pnProtocolID)
 {
     bool                  bResult  = false;
     bool                  bRetCode = false;

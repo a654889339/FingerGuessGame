@@ -19,7 +19,7 @@ bool RouterGameCenterAgent::Init()
     bool bRetCode             = false;
     bool bInitRouterAgentFlag = false;
 
-    bRetCode = m_Agent.Init(ermt_account);
+    bRetCode = m_Agent.Init(ermt_gamecenter);
     JYLOG_PROCESS_ERROR(bRetCode);
     bInitRouterAgentFlag = true;
 

@@ -15,7 +15,7 @@ public:
     bool Init(RouterModuleType eType);
     void UnInit();
 
-    bool Recv(size_t uLimitSize, BYTE* pbyData, size_t* puDataLen, RouterModuleType* peType, uint16_t* pnProtocolID);
+    bool Recv(size_t uLimitSize, BYTE* &pbyData, size_t* puDataLen, RouterModuleType* peType, uint16_t* pnProtocolID);
     bool SendToModule(RouterModuleType eType, uint16_t nProtocolID, BYTE* pbyData, size_t uDataLen);
 
 private:
